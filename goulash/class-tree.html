@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class Hierarchy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="goulash-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >goulash</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">&nbsp;</td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="class-tree.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<center><b>
+ [ <a href="module-tree.html">Module Hierarchy</a>
+ | <a href="class-tree.html">Class Hierarchy</a> ]
+</b></center><br />
+<h1 class="epydoc">Class Hierarchy</h1>
+<ul class="nomargin-top">
+    <li> <strong class="uidlink"><a href="goulash.namespaces.NamespaceTests-class.html">goulash.namespaces.NamespaceTests</a></strong>:
+      <em class="summary">Various boolean tests over objects, packaged thus to be resuable 
+        TODO: NamespaceTests(StaticMethodsOnly)</em>
+    </li>
+    <li> <strong class="uidlink">markupbase.ParserBase</strong>:
+      <em class="summary">Parser base class which provides some common support methods used 
+        by the SGML/HTML and XHTML parsers.</em>
+    <ul>
+    <li> <strong class="uidlink">HTMLParser.HTMLParser</strong>:
+      <em class="summary">Find tags and other markup and call handler functions.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="goulash.parsing.MLStripper-class.html">goulash.parsing.MLStripper</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">object</strong>:
+      <em class="summary">The most base type</em>
+    <ul>
+    <li> <strong class="uidlink">ansi2html.converter.Ansi2HTMLConverter</strong>:
+      <em class="summary">Convert Ansi color codes to CSS+HTML</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="goulash.ansi.Ansi2HTMLConverter-class.html">goulash.ansi.Ansi2HTMLConverter</a></strong>:
+      <em class="summary">Subclassed from ansi2html.Ans2HTMLConverter to prevent every 
+        convert() call redundantly rendering the style</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">exceptions.BaseException</strong>:
+      <em class="summary">Common base class for all exceptions</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.Exception</strong>:
+      <em class="summary">Common base class for all non-exit exceptions.</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.StandardError</strong>:
+      <em class="summary">Base class for all standard Python exceptions that do not represent
+        interpreter exiting.</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.TypeError</strong>:
+      <em class="summary">Inappropriate argument type.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="goulash.decorators.arg_types.ArgTypeError-class.html">goulash.decorators.arg_types.ArgTypeError</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.namespaces.ValueNotFound-class.html">goulash.namespaces.ValueNotFound</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.wrappers.DumbWrapper-class.html">goulash.wrappers.DumbWrapper</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="goulash.heuristics.Answer-class.html">goulash.heuristics.Answer</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="goulash.heuristics.ExplainedAnswer-class.html">goulash.heuristics.ExplainedAnswer</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="goulash.heuristics.Affirmative-class.html">goulash.heuristics.Affirmative</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.heuristics.NegativeAnswer-class.html">goulash.heuristics.NegativeAnswer</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.heuristics.NotApplicable-class.html">goulash.heuristics.NotApplicable</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.wrappers.JSONWrapper-class.html">goulash.wrappers.JSONWrapper</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.mixin.Mixin-class.html">goulash.mixin.Mixin</a></strong>:
+      <em class="summary">TODO: inversion TODO: enumeration</em>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.namespaces.Namespace-class.html">goulash.namespaces.Namespace</a></strong>:
+      <em class="summary">NamespacePartion: introspective operations over dictionary-like objects</em>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.stdout.ThreadedStdout-class.html">goulash.stdout.ThreadedStdout</a></strong>:
+      <em class="summary">Replacement for sys.stdout where every thread gets it's own queue.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.decorators.arg_types-class.html">goulash.decorators.arg_types</a></strong>:
+      <em class="summary">A decorator which enforces the rule that all arguments must be
+of type .</em>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.decorators.memoized_property-class.html">goulash.decorators.memoized_property</a></strong>:
+      <em class="summary">A read-only @property that is only evaluated once.</em>
+    </li>
+    <li> <strong class="uidlink">property</strong>:
+      <em class="summary">property(fget=None, fset=None, fdel=None, doc=None) -&gt; property attribute</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="goulash.classproperty.classproperty-class.html">goulash.classproperty.classproperty</a></strong>:
+      <em class="summary">USAGE:...</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">type</strong>:
+      <em class="summary">type(object) -&gt; the object's type type(name, bases, dict) -&gt; 
+        a new type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="goulash.allstatic.AllStaticMethods-class.html">goulash.allstatic.AllStaticMethods</a></strong>:
+      <em class="summary">AllStaticMethods: set this class as your metaclass in order to 
+        build a module-like class..</em>
+    </li>
+    <li> <strong class="uidlink"><a href="goulash.metaclasses.META-class.html">goulash.metaclasses.META</a></strong>:
+      <em class="summary">the most generic metaclass.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="goulash.metaclasses.ClassAlgebra-class.html">goulash.metaclasses.ClassAlgebra</a></strong>:
+      <em class="summary">a metaclass that tracks it's subclasses.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+</ul>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="goulash-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >goulash</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Nov 10 08:30:38 2014
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
