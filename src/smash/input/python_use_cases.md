@@ -2,6 +2,11 @@ title: Use Cases: Python
 menu-position: 3
 ---
 
+Take a look at these relevant plugins:
+
+* [Python Tools Completion](#ptc) |
+* [Python Virtual Environments](#virtualenv) |
+
 <a id="smash-for-python-devs"></a>
 ####Smash is a python interpretter
 Smash is a fundamentally just a wrapper on top of IPython.  You can expect everything console IPython does to work from smash without any trouble.
@@ -9,18 +14,13 @@ Smash is a fundamentally just a wrapper on top of IPython.  You can expect every
 -------------------------------------------------------------------------------
 
 ####Python Virtualenv Support
-Smash has sophisticated virtualenv support which is useful particularly if you're working on multiple projects or working with multiple versions of the same requirements.  Activating/deactivating venvs is done with `venv_activate some_dir` and `venv_deactivate`, respectively.  This not only updates your $PATH, but updates the python runtime.  Modules from the new environment can now be imported directly, and side-effects from the old virtualenv are purged.  To activate and deactivate virtualenv's automatically, take a look at the [project manager documentation](/project_manager.html).
+Smash has sophisticated virtualenv support which is useful particularly if you're working on multiple projects or working with multiple versions of the same requirements.  Activating/deactivating venvs is done with `venv_activate some_dir` and `venv_deactivate`, respectively.  This not only updates your $PATH, but updates the python runtime.  Modules from the new environment can now be imported directly, and side-effects from the old virtualenv are purged.  For more details take a look at the [plugin documentation](#/plugins.html#virtualenv).  To activate and deactivate virtualenv's automatically, take a look at the [project manager documentation](/project_manager.html).
 
 -------------------------------------------------------------------------------
 
 ####Completion Support for Python Tools
 
-By default smash supports various completion options for common python tools like [Fabric](#), [IPython](#), [setup.py](#), [flake8](#)/[pyflakes](#) [tox](#), and other stuff you probably use on a daily basis.
-
-* fabric completion is over command line options, and fabfile task names.
-* tox completion is over CLI options, and -e completes with names for available environments in tox.ini
-* ipython completion is over CLI options, and --profile completes with names for available profiles
-* python/flake8/pyflakes completion is over command line options
+By default smash supports various completion options for common python tools like [Fabric](#), [IPython](#), [setup.py](#), [flake8](#)/[pyflakes](#) [tox](#), and other stuff you probably use on a daily basis.  Some of this is just option completion, but some is more interesting and dynamic (for example completion of task-names with fabric).  For a full description, take a look at the [plugin documentation](/plugins.html#python-tools-completion)
 
 -------------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ def check_mail(source):
     elif source=='work':
         do_other_stuff()
     else:
-        raise Exception("source not defined")
+        error()
 ~~~~
 
 Since smash is a python interpretter, there is already an obvious invocation: `check_mail(my_source)`.  However if the function is wrapped with a `@command_function` decorator, then we'll get a nice and more shell-like invocation where all the appropriate details of option parsing are determined automatically (see example below).  During the smash bootstrap, every python function declared in the file at `~/.smash/etc/commands.py` will automatically be wrapped as a command function, and use the config variable `load_commands_from` to specify any other files to load.

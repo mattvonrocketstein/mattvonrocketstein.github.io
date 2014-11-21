@@ -13,11 +13,11 @@ If you don't care anything about python, you can ignore that aspect of the shell
 
 <a id="prompts"></a>
 ####Prompt
-By default smash ships with the wonderfully dynamic [liquidprompt tool](#https://github.com/nojhan/liquidprompt).  Liquidprompt has rich options for configuration and it's recommended that you [configure it in the normal way](https://github.com/nojhan/liquidprompt#features-configuration), but, some of these options can be overridden from `~/.smash/config.py`.  (See the [liquidprompt plugin information](#TODO) for more details.)  The default liquidprompt configuration features a prompt that shows activated python virtual environments, as well as VCS branch and commit/stash status, etc.  Other options include everything from cpu/battery status to write-permissions for the current directory.  Take a look at how it updates below based on the context:
+By default smash ships with the wonderfully dynamic [liquidprompt tool](#https://github.com/nojhan/liquidprompt).  Liquidprompt has rich options for configuration and it's recommended that you [configure it in the normal way](https://github.com/nojhan/liquidprompt#features-configuration), but, some of these options can be overridden from `~/.smash/config.py`.  (See the [liquidprompt plugin information](/plugins.html#liquidprompt) for more details.)  The default liquidprompt configuration features a prompt that shows activated python virtual environments, as well as VCS branch and commit/stash status, etc.  Other options include everything from cpu/battery status to write-permissions for the current directory.  Take a look at how it updates below based on the context:
 
 ![screenshot1](/docs/screenshots/demo-liquidprompt.png?raw=true "screenshot1")
 
-This prompt can be turned off by disabling the liquid prompt plugin, and either setting `PS1`' as usual or ``prompt_manager.in_template`` Support for [powerline](#http://powerline.readthedocs.org/en/latest/usage/other.html?highlight=ipython#ipython-prompt) prompts isn't installed by default, but adding it should be easy.  If you can't live without that, make an issue of it and let's talk about it.
+The prompt can be turned off by disabling the liquid prompt plugin, and either setting `PS1`' as usual or ``prompt_manager.in_template`` Support for [powerline](#http://powerline.readthedocs.org/en/latest/usage/other.html?highlight=ipython#ipython-prompt) prompts isn't installed by default, but adding it should be easy.  If you can't live without that, [make an issue of it](https://github.com/mattvonrocketstein/smash/issues)!
 
 -------------------------------------------------------------------------------
 
