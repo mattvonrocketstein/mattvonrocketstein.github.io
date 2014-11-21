@@ -1,5 +1,5 @@
 title: Project Management
-menu-position: 2
+menu-position: 5
 ---
 
 Projects are natural abstractions for lots of kinds of work, and will be familiar to anyone who has used an IDE.  In smash, the concept is quite flexible and powerful for all sorts of automation.  **A project is defined by a nickname and associated with a directory.**  In the simplest case a project can function as merely a bookmark that can be jumped to, or for more involved projects you might want a set of command aliases and macros which other projects do not share.  Projects also have *types* and *operations*, which can either be specified or autodetected based on the contents of the project directory.

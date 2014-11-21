@@ -1050,15 +1050,16 @@ dl {
   font-size: 1em;
   line-height: 1.6;
   margin-bottom: 1.25em;
+  margin-left: 30px;
   list-style-position: outside;
   font-family: inherit; }
 
 /* Unordered Lists */
 ul li ul,
 ul li ol {
-  margin-left: 1.25em;
   margin-bottom: 0;
   font-size: 1em;
+  margin-left:30px;
   /* Override nested font-size change */ }
 ul.square li ul, ul.circle li ul, ul.disc li ul {
   list-style: inherit; }
@@ -1074,7 +1075,7 @@ ul.no-bullet {
 /* Ordered Lists */
 ol li ul,
 ol li ol {
-  margin-left: 1.25em;
+  margin-left: 30px;
   margin-bottom: 0; }
 
 /* Definition Lists */
