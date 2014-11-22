@@ -20,7 +20,7 @@ Smash has sophisticated virtualenv support which is useful particularly if you'r
 
 ####Completion Support for Python Tools
 
-By default smash supports various completion options for common python tools like [Fabric](#), [IPython](#), [setup.py](#), [flake8](#)/[pyflakes](#) [tox](#), and other stuff you probably use on a daily basis.  Some of this is just option completion, but some is more interesting and dynamic (for example completion of task-names with fabric).  For a full description, take a look at the [plugin documentation](/plugins.html#python-tools-completion)
+By default smash supports various completion options for common python tools like [Fabric](#), [IPython](#), [setup.py](#), [flake8](#)/[pyflakes](#) [tox](#), and other stuff you probably use on a daily basis.  Some of this is just option completion, but some is more interesting and dynamic (for example completion of task-names with fabric).  For a full description, take a look at the [plugin documentation](plugins.html#python-tools-completion)
 
 -------------------------------------------------------------------------------
 
