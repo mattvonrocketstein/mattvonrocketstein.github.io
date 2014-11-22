@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en" >
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" >
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Plugins</title>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/foundation.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+<link href='css/custom.css' rel='stylesheet' type='text/css'>
+  <script src="/js/vendor/custom.modernizr.js"></script>
+</head>
+<body>
+
+  <div id="wrap"> <!-- only purpose of this div: sticky footer -->
+
+    <!-- Navigation -->
+    <nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1>
+            <a href="#">Smash: a smarter shell</a>
+          </h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li class=""><a href="/index.html">Intro</a></li>
+<li class=""><a href="/features.html">Features</a></li>
+<li class=""><a href="/shell_use_cases.html">Use Cases: Shell</a></li>
+<li class=""><a href="/python_use_cases.html">Use Cases: Python</a></li>
+<li class="active"><a href="/plugins.html">Plugins</a></li>
+<li class=""><a href="/project_manager.html">Project Management</a></li>
+<li class=""><a href="/configuration.html">Configuration</a></li>
+          <li class="divider"></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+
+    <!-- Headline -->
+    <div class="row page-header">
+      <div class="large-12 columns">
+        <h1>Plugins</h1>
+      </div>
+      <hr />
+    </div>
+
+    <!-- Content -->
+    <div class="row">
+      <div class="large-12 columns"><p>Smash plugins are essentially IPython extensions which require smash.</p>
+<p><a id="list"></a></p>
+<p><a href="#liquidprompt">Liquidprompt</a> |
+<a href="#autojump">Autojump</a> |
+<a href="#dwim">Do What I Mean</a> |
+<a href="#cd-hooks">Change-dir Hooks</a> |
+<a href="#ptc">Python Tools Completion</a> |
+<a href="#virtualenv">Python Virtual Environments</a> |</p>
+<p><a id="ptc"></a></p>
+<h4>Python Tools Completion</h4>
+<p>This plugin provides completion options for common python tools like <a href="#">Fabric</a>, <a href="#">IPython</a>, <a href="#">setup.py</a>, <a href="#">flake8</a>/<a href="#">pyflakes</a> <a href="#">tox</a>, and other stuff you probably use on a daily basis.  Completion for each command is at least over command line options/flags, but in some cases there are other context clues that can be provided:</p>
+<ul>
+<li>fabric completion also works over task names.</li>
+<li>tox completion includes available environments according to tox.ini when using "tox -e"</li>
+<li>ipython completion includes available profiles when using --profile option</li>
+</ul>
+<h5>Configuration Options:</h5>
+<ul>
+<li>_.PythonTools.verbose: set True to see debug messages</li>
+</ul>
+<hr />
+<p><a id="autojump"></a></p>
+<h4>Autojump</h4>
+<p>Smash ships with an integrated version of the wonderful <a href="https://github.com/joelthelion/autojump">autojump</a> command line tool, which uses information from change-dir to maintain a ranked list of flexible short cuts.  In other words after you've cd'd into /foo/bar/baz/qux at least once, you can use <code>j qux</code> or <code>jump qux</code> to take you there afterwards.  Tab completion over jump-destinations is automatically enabled so that <code>j qu&lt;TAB&gt;</code> does what you'd expect.</p>
+<h5>Configuration Options:</h5>
+<ul>
+<li>_.AutoJump.verbose: set True to see debug messages</li>
+</ul>
+<hr />
+<p><a id="liquidprompt"></a></p>
+<h4>Liquidprompt</h4>
+<p>This plugin provides prompt rendering via the wonderfully dynamic <a href="#https://github.com/nojhan/liquidprompt">liquidprompt tool</a>.  Liquidprompt has rich options for configuration and it's recommended that you <a href="https://github.com/nojhan/liquidprompt#features-configuration">configure it in the normal way</a>, but, some of these options can be overridden from <code>~/.smash/config.py</code> (see below).</p>
+<h5>Configuration Options:</h5>
+<ul>
+<li><code>_.LiquidPrompt.verbose</code>: set True to see debug messages</li>
+<li><code>_.LiquidPrompt.float</code>: set True to insert more space around prompt</li>
+<li><code>_.LiquidPrompt.prompt_append</code>: set a suffix on the prompt ('\n&gt;' is a good one for legibility)</li>
+</ul>
+<hr />
+<p><a id="cd-hooks"></a></p>
+<h4>Change directory hooks</h4>
+<p>Lorem Ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ip</p>
+<h5>Configuration Options:</h5>
+<ul>
+<li><code>_.ChangeDirHooks.verbose</code>: set True to see debug messages</li>
+</ul>
+<hr />
+<p><a id="dwim"></a></p>
+<h4>Do What I mean</h4>
+<p>The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory changing, opening of urls, etc.  For a feature summary, see the input -&gt; action list below.</p>
+<table>
+<thead>
+<tr>
+<th>On Input</th>
+<th>Run test</th>
+<th>If test is true Action is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>http://foo/bar</td>
+<td><em>(none)</em></td>
+<td>open with browser</td>
+</tr>
+<tr>
+<td>foo.bar</td>
+<td>is foo.bar executable?</td>
+<td>run as usual</td>
+</tr>
+<tr>
+<td>foo.bar</td>
+<td>is bar a defined suffix_alias?</td>
+<td>open with specified opener</td>
+</tr>
+<tr>
+<td>foo/bar</td>
+<td>is bar a directory?</td>
+<td>change-dir to bar</td>
+</tr>
+</tbody>
+</table>
+<h5>Configuration Options:</h5>
+<ul>
+<li><code>DoWhatIMean.verbose</code>: set True to see debug messages</li>
+<li><code>DoWhatIMean.suffix_aliases</code>: map of <code>{file_extension -&gt; open_command}</code></li>
+</ul>
+<hr />
+<p><a id="virtualenv"></a></p>
+<h4>Virtual Environment</h4>
+<p>Smash has sophisticated virtualenv support which is useful particularly if you're working on multiple projects or working with multiple versions of the same requirements.  Activating/deactivating venvs is done with <code>venv_activate some_dir</code> and <code>venv_deactivate</code>, respectively.  This not only updates your $PATH, but updates the python runtime.  Modules from the new environment can now be imported directly, and side-effects from the old virtualenv are purged.  To activate and deactivate virtualenv's automatically, take a look at the <a href="/project_manager.html">project manager documentation</a>.</p>
+<h5>Commands:</h5>
+<ul>
+<li><code>venv_activate some_dir</code>: activate a specific virtual environment</li>
+<li><code>venv_deactivate some_dir</code>: deactivates the current virtual environment</li>
+</ul>
+<h5>Configuration Options:</h5>
+<ul>
+<li>VirtualEnv.verbose: set True to see debug messages</li>
+</ul>
+<hr />
+<p><a id="writing-new"></a></p>
+<h2>Writing new plugins</h2>
+<p>Writing new plugins is fairly easy, but may not be necessary for your application (see the <a href="#configuration">configuration summary</a> or the <a href="/configuration.html">main configuration documentation</a>). If you do need to write a plugin, read on, but first a bit of background.  Smash is built on top of <a href="http://ipython.org/">IPython</a> and is in fact itself an IPython extension.  <em>Smash plugins are essentially ipython extensions which require smash</em>, but it can be useful to differentiate the terminology.  Before going much further it's probably a good idea to check out the existing IPython docs on <a href="http://ipython.org/ipython-doc/dev/config/extensions/">writing extensions</a>.</p>
+<p>If you want to do simple stuff like just writing new commands then a tutorials for <a href="#http://catherinedevlin.blogspot.com/2013/07/ipython-helloworld-magic.html">writing IPython magic</a> will probably be all you need.</p>
+<p>If you want to get your hooks into smash-specific events like "directory change" or "virtual environment deactived" then read <a href="#TODO">this documentation</a> about the smash event system. For an example of writing new tab-completion stuff, check out <a href="#TODO">the code for the fabric completer</a>.  For an example of input preprocessing see the <a href="#TODO">currency converter code</a>.  Foran example of all-else-fails input processing (meaning input was neither bash nor python) see <a href="#TODO">the do-what-I-mean code</a>.</p>
+<hr /></div>
+    </div>
+
+    <div id="push"></div> <!-- push footer down -->
+  </div> <!-- wrap -->
+
+  <!-- Footer -->
+  <hr />
+  <footer class="row">
+    <div class="large-12 columns">
+      <div class="row">
+
+        <p class="text-center">
+          <small>
+          Built with <a href="http://bitbucket.org/obensonne/poole">Poole</a>
+          &middot;
+          Using <a href="http://jquery.com">jQuery</a> and
+          <a href="http://foundation.zurb.com/">Foundation</a>
+          &middot;
+          Licensed as <a href="http://creativecommons.org/licenses/by-sa/3.0">CC-SA</a>
+          &middot;
+          <a href="http://validator.w3.org/check?uri=referer">Validate me</a>
+          </small>
+        </p>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.write('<script src='
+        + ('__proto__' in {} ? 'js/vendor/zepto'
+            : 'js/vendor/jquery') + '.js><\/script>')
+  </script>
+  <script src="/js/foundation.min.js"></script>
+  <!-- foundation extras - uncomment as needed:
+  <script src="/js/foundation/foundation.js"></script>
+  <script src="/js/foundation/foundation.alerts.js"></script>
+  <script src="/js/foundation/foundation.clearing.js"></script>
+  <script src="/js/foundation/foundation.cookie.js"></script>
+  <script src="/js/foundation/foundation.dropdown.js"></script>
+  <script src="/js/foundation/foundation.forms.js"></script>
+  <script src="/js/foundation/foundation.joyride.js"></script>
+  <script src="/js/foundation/foundation.magellan.js"></script>
+  <script src="/js/foundation/foundation.orbit.js"></script>
+  <script src="/js/foundation/foundation.placeholder.js"></script>
+  <script src="/js/foundation/foundation.reveal.js"></script>
+  <script src="/js/foundation/foundation.section.js"></script>
+  <script src="/js/foundation/foundation.tooltips.js"></script>
+  <script src="/js/foundation/foundation.topbar.js"></script>
+  -->
+  <script>
+    $(document).foundation();
+    hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

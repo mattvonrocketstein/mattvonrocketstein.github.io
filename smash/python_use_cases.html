@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en" >
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" >
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Use Cases: Python</title>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/foundation.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+<link href='css/custom.css' rel='stylesheet' type='text/css'>
+  <script src="/js/vendor/custom.modernizr.js"></script>
+</head>
+<body>
+
+  <div id="wrap"> <!-- only purpose of this div: sticky footer -->
+
+    <!-- Navigation -->
+    <nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1>
+            <a href="#">Smash: a smarter shell</a>
+          </h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li class=""><a href="/index.html">Intro</a></li>
+<li class=""><a href="/features.html">Features</a></li>
+<li class=""><a href="/shell_use_cases.html">Use Cases: Shell</a></li>
+<li class="active"><a href="/python_use_cases.html">Use Cases: Python</a></li>
+<li class=""><a href="/plugins.html">Plugins</a></li>
+<li class=""><a href="/project_manager.html">Project Management</a></li>
+<li class=""><a href="/configuration.html">Configuration</a></li>
+          <li class="divider"></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+
+    <!-- Headline -->
+    <div class="row page-header">
+      <div class="large-12 columns">
+        <h1>Use Cases: Python</h1>
+      </div>
+      <hr />
+    </div>
+
+    <!-- Content -->
+    <div class="row">
+      <div class="large-12 columns"><p>Take a look at these relevant plugins:</p>
+<ul>
+<li><a href="#ptc">Python Tools Completion</a> |</li>
+<li><a href="#virtualenv">Python Virtual Environments</a> |</li>
+</ul>
+<p><a id="smash-for-python-devs"></a></p>
+<h4>Smash is a python interpretter</h4>
+<p>Smash is a fundamentally just a wrapper on top of IPython.  You can expect everything console IPython does to work from smash without any trouble.</p>
+<hr />
+<h4>Python Virtualenv Support</h4>
+<p>Smash has sophisticated virtualenv support which is useful particularly if you're working on multiple projects or working with multiple versions of the same requirements.  Activating/deactivating venvs is done with <code>venv_activate some_dir</code> and <code>venv_deactivate</code>, respectively.  This not only updates your $PATH, but updates the python runtime.  Modules from the new environment can now be imported directly, and side-effects from the old virtualenv are purged.  For more details take a look at the <a href="#/plugins.html#virtualenv">plugin documentation</a>.  To activate and deactivate virtualenv's automatically, take a look at the <a href="/project_manager.html">project manager documentation</a>.</p>
+<hr />
+<h4>Completion Support for Python Tools</h4>
+<p>By default smash supports various completion options for common python tools like <a href="#">Fabric</a>, <a href="#">IPython</a>, <a href="#">setup.py</a>, <a href="#">flake8</a>/<a href="#">pyflakes</a> <a href="#">tox</a>, and other stuff you probably use on a daily basis.  Some of this is just option completion, but some is more interesting and dynamic (for example completion of task-names with fabric).  For a full description, take a look at the <a href="/plugins.html#python-tools-completion">plugin documentation</a></p>
+<hr />
+<h4>Macros and command functions</h4>
+<p>Macros and command functions are similar to shell functions, meaning they are typically useful when you have in mind a piece of functionality that is: <em>(a)</em> more complex than an alias <em>(b)</em> interacting or sharing information with the shell itself, <em>(c)</em> too small or too idiosyncratic to merit it's own file in ~/bin.</p>
+<p><strong>Macros</strong> are an IPython concept, and simply correspond to a named array of input-lines (possibly python or possibly shell, anything that smash can take as input).  Macros run with no input and have no output, essentially they run on and may modify the current "environment", including python namespace, environment variables, whatever.  Macros can be built from a given sequence, a start-end range over the input history, or the contents of a file.  For more documentation on this, try typing <code>macro??</code> in your smash shell.</p>
+<p><strong>Command-functions</strong> are python functions which are parsed into something that's more conveniently called from the command line.  For instance suppose you have a python function like this:</p>
+<pre><code class="python">def check_mail(source):
+    if source=='gmail':
+        do_stuff()
+    elif source=='work':
+        do_other_stuff()
+    else:
+        error()
+</code></pre>
+
+<p>Since smash is a python interpretter, there is already an obvious invocation: <code>check_mail(my_source)</code>.  However if the function is wrapped with a <code>@command_function</code> decorator, then we'll get a nice and more shell-like invocation where all the appropriate details of option parsing are determined automatically (see example below).  During the smash bootstrap, every python function declared in the file at <code>~/.smash/etc/commands.py</code> will automatically be wrapped as a command function, and use the config variable <code>load_commands_from</code> to specify any other files to load.</p>
+<pre><code class="python">$ command_function(check_mail)
+$ check_mail --source=gmail
+</code></pre>
+
+<hr /></div>
+    </div>
+
+    <div id="push"></div> <!-- push footer down -->
+  </div> <!-- wrap -->
+
+  <!-- Footer -->
+  <hr />
+  <footer class="row">
+    <div class="large-12 columns">
+      <div class="row">
+
+        <p class="text-center">
+          <small>
+          Built with <a href="http://bitbucket.org/obensonne/poole">Poole</a>
+          &middot;
+          Using <a href="http://jquery.com">jQuery</a> and
+          <a href="http://foundation.zurb.com/">Foundation</a>
+          &middot;
+          Licensed as <a href="http://creativecommons.org/licenses/by-sa/3.0">CC-SA</a>
+          &middot;
+          <a href="http://validator.w3.org/check?uri=referer">Validate me</a>
+          </small>
+        </p>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.write('<script src='
+        + ('__proto__' in {} ? 'js/vendor/zepto'
+            : 'js/vendor/jquery') + '.js><\/script>')
+  </script>
+  <script src="/js/foundation.min.js"></script>
+  <!-- foundation extras - uncomment as needed:
+  <script src="/js/foundation/foundation.js"></script>
+  <script src="/js/foundation/foundation.alerts.js"></script>
+  <script src="/js/foundation/foundation.clearing.js"></script>
+  <script src="/js/foundation/foundation.cookie.js"></script>
+  <script src="/js/foundation/foundation.dropdown.js"></script>
+  <script src="/js/foundation/foundation.forms.js"></script>
+  <script src="/js/foundation/foundation.joyride.js"></script>
+  <script src="/js/foundation/foundation.magellan.js"></script>
+  <script src="/js/foundation/foundation.orbit.js"></script>
+  <script src="/js/foundation/foundation.placeholder.js"></script>
+  <script src="/js/foundation/foundation.reveal.js"></script>
+  <script src="/js/foundation/foundation.section.js"></script>
+  <script src="/js/foundation/foundation.tooltips.js"></script>
+  <script src="/js/foundation/foundation.topbar.js"></script>
+  -->
+  <script>
+    $(document).foundation();
+    hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

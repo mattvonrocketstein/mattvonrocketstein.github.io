@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en" >
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" >
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Features</title>
+  <link rel="stylesheet" href="/css/normalize.css" />
+  <link rel="stylesheet" href="/css/foundation.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+<link href='css/custom.css' rel='stylesheet' type='text/css'>
+  <script src="/js/vendor/custom.modernizr.js"></script>
+</head>
+<body>
+
+  <div id="wrap"> <!-- only purpose of this div: sticky footer -->
+
+    <!-- Navigation -->
+    <nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1>
+            <a href="#">Smash: a smarter shell</a>
+          </h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li class=""><a href="/index.html">Intro</a></li>
+<li class="active"><a href="/features.html">Features</a></li>
+<li class=""><a href="/shell_use_cases.html">Use Cases: Shell</a></li>
+<li class=""><a href="/python_use_cases.html">Use Cases: Python</a></li>
+<li class=""><a href="/plugins.html">Plugins</a></li>
+<li class=""><a href="/project_manager.html">Project Management</a></li>
+<li class=""><a href="/configuration.html">Configuration</a></li>
+          <li class="divider"></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+
+    <!-- Headline -->
+    <div class="row page-header">
+      <div class="large-12 columns">
+        <h1>Features</h1>
+      </div>
+      <hr />
+    </div>
+
+    <!-- Content -->
+    <div class="row">
+      <div class="large-12 columns"><h4>Standard System Shell + Python Support</h4>
+<p>Smash functions seamlessly as a normal system shell, but it also a full fledged python interpretter.  It does shell stuff in the shell places, and python stuff in the python places.  If you're a bash user or an ipython user, many aspects of your existing configuration efforts can also be <a href="/configuration.html#inheritance">inherited automatically</a>.</p>
+<p><img alt="screenshot1" src="/docs/screenshots/demo-python-bash.png?raw=true" title="screenshot1" /></p>
+<p>If you don't care anything about python, you can ignore that aspect of the shell completely.  If you <em>are</em> a python programmer, you probably spend as much time in a python interpretter as you do in shell.  You can trade those two windows for one to reduce screen clutter, as well as enjoy all the <a href="#smash-for-python-devs">other python friendly features of smash</a>.</p>
+<hr />
+<p><a id="prompts"></a></p>
+<h4>Prompt</h4>
+<p>By default smash ships with the wonderfully dynamic <a href="#https://github.com/nojhan/liquidprompt">liquidprompt tool</a>.  Liquidprompt has rich options for configuration and it's recommended that you <a href="https://github.com/nojhan/liquidprompt#features-configuration">configure it in the normal way</a>, but, some of these options can be overridden from <code>~/.smash/config.py</code>.  (See the <a href="/plugins.html#liquidprompt">liquidprompt plugin information</a> for more details.)  The default liquidprompt configuration features a prompt that shows activated python virtual environments, as well as VCS branch and commit/stash status, etc.  Other options include everything from cpu/battery status to write-permissions for the current directory.  Take a look at how it updates below based on the context:</p>
+<p><img alt="screenshot1" src="/docs/screenshots/demo-liquidprompt.png?raw=true" title="screenshot1" /></p>
+<p>The prompt can be turned off by disabling the liquid prompt plugin, and either setting <code>PS1</code>' as usual or <code>prompt_manager.in_template</code> Support for <a href="#http://powerline.readthedocs.org/en/latest/usage/other.html?highlight=ipython#ipython-prompt">powerline</a> prompts isn't installed by default, but adding it should be easy.  If you can't live without that, <a href="https://github.com/mattvonrocketstein/smash/issues">make an issue of it</a>!</p>
+<hr />
+<p><a id="tab-completion"></a></p>
+<h4>Tab-completion system</h4>
+<p>Depending on the context, tab completion information is derived either from ipython (for python namespaces, ipython aliases, etc) or directly from bash (for system commands / paths, hostnames, VCS subcommands, debian packages, whatever your system supports).  Thus if you now use bash exclusively<sup>**</sup> then this means that no effort at all goes into porting old completers into smash shell.  For building new completion mechanisms, you have the option of writing them inside or outside of smash, based on your preference.</p>
+<p><img alt="screenshot1" src="/docs/screenshots/demo-completion.png?raw=true" title="screenshot3" /></p>
+<p><sub>**: if you are a zsh wizard, please help fix <a href="https://github.com/mattvonrocketstein/smash/issues/11">issue 11</a>!</sub></p>
+<hr />
+<p><a id="configuration"></a></p>
+<h4>Configuration</h4>
+<p>The main documentation for configuration is <a href="/configuration.html">here</a>, this section is just a summary. Lorem Ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem</p>
+<hr />
+<p><a id="plugins"></a></p>
+<h4>Plugins / Extensions</h4>
+<p>Smash has lots of plugins that extend or modify the core behaviour.  Some plugins are turned on by default, some are complete but opt-in, and some are works in progress, demonstrations, or proof-of-concepts.  The smash core tries to be small and just includes the essential stuff, so it's safe to assume that most of the functionality described on this page is effected by plugins.  If you're interested in reading about or configuring individual plugins, see the <a href="/plugins.html#list">list of plugins</a>.  If you want to write a new plugin, check out the documentation <a href="#/plugins.html#writing-plugins">here</a></p></div>
+    </div>
+
+    <div id="push"></div> <!-- push footer down -->
+  </div> <!-- wrap -->
+
+  <!-- Footer -->
+  <hr />
+  <footer class="row">
+    <div class="large-12 columns">
+      <div class="row">
+
+        <p class="text-center">
+          <small>
+          Built with <a href="http://bitbucket.org/obensonne/poole">Poole</a>
+          &middot;
+          Using <a href="http://jquery.com">jQuery</a> and
+          <a href="http://foundation.zurb.com/">Foundation</a>
+          &middot;
+          Licensed as <a href="http://creativecommons.org/licenses/by-sa/3.0">CC-SA</a>
+          &middot;
+          <a href="http://validator.w3.org/check?uri=referer">Validate me</a>
+          </small>
+        </p>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.write('<script src='
+        + ('__proto__' in {} ? 'js/vendor/zepto'
+            : 'js/vendor/jquery') + '.js><\/script>')
+  </script>
+  <script src="/js/foundation.min.js"></script>
+  <!-- foundation extras - uncomment as needed:
+  <script src="/js/foundation/foundation.js"></script>
+  <script src="/js/foundation/foundation.alerts.js"></script>
+  <script src="/js/foundation/foundation.clearing.js"></script>
+  <script src="/js/foundation/foundation.cookie.js"></script>
+  <script src="/js/foundation/foundation.dropdown.js"></script>
+  <script src="/js/foundation/foundation.forms.js"></script>
+  <script src="/js/foundation/foundation.joyride.js"></script>
+  <script src="/js/foundation/foundation.magellan.js"></script>
+  <script src="/js/foundation/foundation.orbit.js"></script>
+  <script src="/js/foundation/foundation.placeholder.js"></script>
+  <script src="/js/foundation/foundation.reveal.js"></script>
+  <script src="/js/foundation/foundation.section.js"></script>
+  <script src="/js/foundation/foundation.tooltips.js"></script>
+  <script src="/js/foundation/foundation.topbar.js"></script>
+  -->
+  <script>
+    $(document).foundation();
+    hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>
