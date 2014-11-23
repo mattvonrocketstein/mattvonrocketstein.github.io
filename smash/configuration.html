@@ -58,7 +58,10 @@
 
     <!-- Content -->
     <div class="row">
-      <div class="large-12 columns"><p>Smash configuration, like libraries and executables, are stored in ~/.smash.  The main configuration file is <code>~/.smash/config.py</code>.</p>
+      <div class="large-12 columns"><p>Smash configuration, like libraries and executables, are stored in ~/.smash.  The main configuration file is <code>~/.smash/config.py</code>.  If your <a href="#editor">editor is configured</a>, you can open the configuration file at any time from typing <code>ed_config</code> inside of smash.</p>
+<p><a id="editor"></a></p>
+<h4>Editor configuration</h4>
+<p>It helps to let smash know about your editor, because in some circumstances it's useful to let it open files for you.  (See for example the zsh-style <a href="#suffix-aliases-and-openers">suffix aliases supported by the DWIM plugin</a>, or try <code>import webbrowser; ed webbrowser</code>.)  You can setup your preferred editor using <code>~/.smash/etc/editor.json</code>.  Afterwards, regardless of what editor you use, your edit command will be <code>ed</code> or <code>edit</code>. This edit command can take input in the form of filenames, "file:row:column" syntax, or python objects.</p>
 <p><a id="inheritance"></a></p>
 <h4>Bash confguration inheritance</h4>
 <ul>
