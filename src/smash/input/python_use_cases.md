@@ -4,8 +4,9 @@ menu-position: 3
 
 Take a look at these relevant plugins:
 
-* [Python Tools Completion](#ptc) |
-* [Python Virtual Environments](#virtualenv) |
+* [Python Tools Completion](plugins.html#ptc) |
+* [Python Virtual Environments](plugins.html#virtualenv) |
+* [Project Manager](project_manager.html) |
 
 <a id="smash-for-python-devs"></a>
 ####Smash is a python interpretter
@@ -14,7 +15,7 @@ Smash is a fundamentally just a wrapper on top of IPython.  You can expect every
 -------------------------------------------------------------------------------
 
 ####Python Virtualenv Support
-Smash has sophisticated virtualenv support which is useful particularly if you're working on multiple projects or working with multiple versions of the same requirements.  Activating/deactivating venvs is done with `venv_activate some_dir` and `venv_deactivate`, respectively.  This not only updates your $PATH, but updates the python runtime.  Modules from the new environment can now be imported directly, and side-effects from the old virtualenv are purged.  For more details take a look at the [plugin documentation](#/plugins.html#virtualenv).  To activate and deactivate virtualenv's automatically, take a look at the [project manager documentation](/project_manager.html).
+Smash has sophisticated virtualenv support which is useful particularly if you're working on multiple projects or working with multiple versions of the same requirements.  Activating/deactivating venvs is done with `venv_activate some_dir` and `venv_deactivate`, respectively.  This not only updates your $PATH, but updates the python runtime.  Modules from the new environment can now be imported directly, and side-effects from the old virtualenv are purged.  For more details take a look at the [plugin documentation](plugins.html#virtualenv).  To activate and deactivate virtualenv's automatically, take a look at the [project manager documentation](/project_manager.html).
 
 -------------------------------------------------------------------------------
 
@@ -24,11 +25,15 @@ By default smash supports various completion options for common python tools lik
 
 -------------------------------------------------------------------------------
 
-####Macros and command functions
+####Macros
 
 Macros and command functions are similar to shell functions, meaning they are typically useful when you have in mind a piece of functionality that is: *(a)* more complex than an alias *(b)* interacting or sharing information with the shell itself, *(c)* too small or too idiosyncratic to merit it's own file in ~/bin.
 
-**Macros** are an IPython concept, and simply correspond to a named array of input-lines (possibly python or possibly shell, anything that smash can take as input).  Macros run with no input and have no output, essentially they run on and may modify the current "environment", including python namespace, environment variables, whatever.  Macros can be built from a given sequence, a start-end range over the input history, or the contents of a file.  For more documentation on this, try typing `macro??` in your smash shell.
+Macros are an IPython concept, and simply correspond to a named array of input-lines (possibly python or possibly shell, anything that smash can take as input).  Macros run with no input and have no output, essentially they run on and may modify the current "environment", including python namespace, environment variables, whatever.  Macros can be built from a given sequence, a start-end range over the input history, or the contents of a file.  For more documentation on this, try typing `macro??` in your smash shell.
+
+-------------------------------------------------------------------------------
+
+####Command functions
 
 **Command-functions** are python functions which are parsed into something that's more conveniently called from the command line.  For instance suppose you have a python function like this:
 

@@ -4,7 +4,7 @@ menu-position: 0
 
 ##What is it?
 
-Smash is a smarter shell.  [Python developers](python_use_cases.html) will be particularly interested because it also happens to host a full-fledged python runtime via IPython and offers sophisticated support for python virtual environments, but non-python developers can safely ignore these features.  Smash leverages existing system [tab completion](#tab-completion) setup, apart from variable/keyword completion in python namespaces.  Additionally smash offers features for project management, a flexible plugin architecture that is easy to use, and simple configuration files that try to be as sane as possible.
+Smash is a smarter shell.  [Python developers](python_use_cases.html) will be particularly interested because it also happens to host a full-fledged python runtime (via IPython) and offers sophisticated support for python virtual environments, but non-python developers can safely ignore these features.  Smash leverages existing system [tab completion](#tab-completion) setup, apart from variable/keyword completion in python namespaces.  Additionally smash offers features for project management, a flexible plugin architecture that is easy to use, and simple configuration files that try to be as sane as possible.
 
 <a id="quickstart"></a>
 ##Quickstart
@@ -18,6 +18,19 @@ The smash installation happens in a sandbox, does not require root, and will not
   $ curl $bootstrap | bash
   $ ~/bin/smash
 ~~~~
+
+Don't like the idea of curling random instructions?  Well if the above installation method seems scary to you, here's another way to bootstrap:
+
+~~~~{.bash}
+  $ git clone https://github.com/mattvonrocketstein/smash.git
+  $ mv smash ~/.smash
+  $ cd ~/.smash
+  $ virtualenv . --no-site-packages
+  $ source bin/activate
+  $ pip install -r install_requirements.txt
+  $ python install.py
+~~~~
+
 
 <a id="dev-installation"></a>
 ##Installation for development
