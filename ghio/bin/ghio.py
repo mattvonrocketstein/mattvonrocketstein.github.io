@@ -49,8 +49,10 @@ def update(project):
     assert ope(output)
     cmd = "cp -rfv {0}/* {1}".format(output, opj(ghio_root,project))
     local(cmd)
-    local("cd {0} && git commit {1} -m \"{2}\" && git push ".format(
+    local("cd {0} && git commit {1} -m \"{2}\"".format(
         ghio_root, project,'update '+project))
+    local("git push")
+
 def main():
     opts,args = build_parser().parse_args()
     print opts,args
