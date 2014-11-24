@@ -41,6 +41,8 @@
 <li class="active"><a href="plugins.html">Plugins</a></li>
 <li class=""><a href="project_manager.html">Project Management</a></li>
 <li class=""><a href="configuration.html">Configuration</a></li>
+<li class=""><a href="http://github.com/mattvonrocketstein/smash/">Source</a></li>
+<li class=""><a href="http://github.com/mattvonrocketstein/smash/issues">Issues</a></li>
           <li class="divider"></li>
             </ul>
           </li>
@@ -58,14 +60,23 @@
 
     <!-- Content -->
     <div class="row">
-      <div class="large-12 columns"><p>Smash plugins are essentially IPython extensions which require smash.</p>
-<p><a id="list"></a></p>
+      <div class="large-12 columns"><p><a id="list"></a></p>
 <p><a href="#liquidprompt">Liquidprompt</a> |
 <a href="#autojump">Autojump</a> |
 <a href="#dwim">Do What I Mean</a> |
 <a href="#cd-hooks">Change-dir Hooks</a> |
 <a href="#ptc">Python Tools Completion</a> |
-<a href="#virtualenv">Python Virtual Environments</a> |</p>
+<a href="#virtualenv">Python Virtual Environments</a></p>
+<p>The smash core aims to be small and only include the essentials, so much of the behaviour of shell comes down to plugins.  In Smash, "plugins" are just IPython extensions which require smashlib, and possibly require the smash shell itself.  As a result many of the plugins may work in vanilla IPython.  If you don't care about the built in plugin options and only want to write new plugins, <a href="#writing-new">see this section</a>.  There are a few main things that plugins may potentially do.  Specifically, <strong>each plugin may</strong>:</p>
+<ol>
+<li>have configuration options</li>
+<li>publish commands or command aliases</li>
+<li>add completers or new input preprocessing</li>
+<li>receive messages from the IPython event subsystem</li>
+<li>receive messages from the smash-specific event subsystem</li>
+<li>send messages on the smash-specific event subsystem</li>
+</ol>
+<p>The rest of this page attempts to completely describe the plugins which ship with smash, although note that these plugins may not be enabled by default.</p>
 <p><a id="ptc"></a></p>
 <h4>Python Tools Completion</h4>
 <p>This plugin provides completion options for common python tools like <a href="#">Fabric</a>, <a href="#">IPython</a>, <a href="#">setup.py</a>, <a href="#">flake8</a>/<a href="#">pyflakes</a> <a href="#">tox</a>, and other stuff you probably use on a daily basis.  Completion for each command is at least over command line options/flags, but in some cases there are other context clues that can be provided:</p>
