@@ -2,14 +2,7 @@ title: Use Cases: Shell
 menu-position: 2
 ---
 
-<a id="smash-for-shell-stuff"></a>
-##SMASH FOR SHELL STUFF
-
-Take a look at these relevant plugins:
-* [Liquidprompt](#liquidprompt) |
-* [Autojump](#autojump) |
-* [Do What I Mean](#dwim) |
-* [Change-dir Hooks](#cd-hooks) |
+This section is just an overview.  You could also jump directly to the plugin documentation for the relevant plugins: [Liquidprompt](#liquidprompt), [Autojump](#autojump), [Do What I Mean](#dwim), or [Change-dir Hooks](#cd-hooks).
 
 
 -------------------------------------------------------------------------------

@@ -10,14 +10,14 @@ from fabric.api import local
 from report import report
 from goulash.python import dirname, opj, ope
 
-ghio_root = dirname(dirname(dirname(dirname(__file__))))
-src_root = opj(ghio_root,'src')
+ghio_root = dirname(dirname(dirname(__file__)))
+src_root  = opj(ghio_root, 'src')
 
 def _require_project_dir(fxn):
     def newf(*args, **kargs):
         project = args[0]
         proot = opj(src_root, project)
-        assert ope(proot)
+        assert ope(proot), "{0} does not exist".format(proot)
         return fxn(*args, **kargs)
     return newf
 
@@ -49,7 +49,8 @@ def update(project):
     assert ope(output)
     cmd = "cp -rfv {0}/* {1}".format(output, opj(ghio_root,project))
     local(cmd)
-
+    local("cd {0} && git commit {1} -m \"{2}\" && git push ".format(
+        ghio_root, project,'update '+project))
 def main():
     opts,args = build_parser().parse_args()
     print opts,args
