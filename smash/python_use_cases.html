@@ -58,16 +58,13 @@
 
     <!-- Content -->
     <div class="row">
-      <div class="large-12 columns"><p>This section is just an overview.  You could also jump directly to the plugin documentation for the relevant plugins: <a href="plugins.html#ptc">Python Tools Completion</a> | <a href="plugins.html#virtualenv">Python Virtual Environments</a> | <a href="project_manager.html">Project Manager</a></p>
+      <div class="large-12 columns"><p>This section is just an overview.  You could also jump directly to the plugin documentation for the relevant plugins: <a href="plugins.html#ptc">Python Tools Completion</a>, <a href="plugins.html#virtualenv">Python Virtual Environments</a>, <a href="project_manager.html">Project Manager</a></p>
 <p><a id="smash-for-python-devs"></a></p>
 <h4>Smash is a python interpretter</h4>
 <p>Smash is a fundamentally just a wrapper on top of IPython.  You can expect everything console IPython does to work from smash without any trouble.</p>
 <hr />
 <h4>Python Virtualenv Support</h4>
 <p>Smash has sophisticated virtualenv support which is useful particularly if you're working on multiple projects or working with multiple versions of the same requirements.  Activating/deactivating venvs is done with <code>venv_activate some_dir</code> and <code>venv_deactivate</code>, respectively.  This not only updates your $PATH, but updates the python runtime.  Modules from the new environment can now be imported directly, and side-effects from the old virtualenv are purged.  For more details take a look at the <a href="plugins.html#virtualenv">plugin documentation</a>.  To activate and deactivate virtualenv's automatically, take a look at the <a href="/project_manager.html">project manager documentation</a>.</p>
-<hr />
-<h4>Completion Support for Python Tools</h4>
-<p>By default smash supports various completion options for common python tools like <a href="#">Fabric</a>, <a href="#">IPython</a>, <a href="#">setup.py</a>, <a href="#">flake8</a>/<a href="#">pyflakes</a> <a href="#">tox</a>, and other stuff you probably use on a daily basis.  Some of this is just option completion, but some is more interesting and dynamic (for example completion of task-names with fabric).  For a full description, take a look at the <a href="plugins.html#python-tools-completion">plugin documentation</a></p>
 <hr />
 <h4>Macros</h4>
 <p>Macros and command functions are similar to shell functions, meaning they are typically useful when you have in mind a piece of functionality that is: <em>(a)</em> more complex than an alias <em>(b)</em> interacting or sharing information with the shell itself, <em>(c)</em> too small or too idiosyncratic to merit it's own file in ~/bin.</p>
@@ -89,6 +86,9 @@
 $ check_mail --source=gmail
 </code></pre>
 
+<hr />
+<h4>Completion Support for Python Tools</h4>
+<p>By default smash supports various completion options for common python tools like <a href="#">Fabric</a>, <a href="#">IPython</a>, <a href="#">setup.py</a>, <a href="#">flake8</a>/<a href="#">pyflakes</a> <a href="#">tox</a>, and other stuff you probably use on a daily basis.  Some of this is just option completion, but some is more interesting and dynamic (for example completion of task-names with fabric).  For a full description, take a look at the <a href="plugins.html#python-tools-completion">plugin documentation</a></p>
 <hr /></div>
     </div>
 

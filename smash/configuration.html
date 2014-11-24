@@ -58,10 +58,24 @@
 
     <!-- Content -->
     <div class="row">
-      <div class="large-12 columns"><p>Smash configuration, like libraries and executables, are stored in ~/.smash.  The main configuration file is <code>~/.smash/config.py</code>.  If your <a href="#editor">editor is configured</a>, you can open the configuration file at any time from typing <code>ed_config</code> inside of smash.</p>
+      <div class="large-12 columns"><p>Smash configuration, like smash libraries and executables, are stored in <code>~/.smash</code>.  The main configuration file is <code>~/.smash/etc/config.py</code>.  If your <a href="#editor">editor is configured</a>, you can open the main configuration file at any time from typing <code>ed_config</code> inside of smash.</p>
+<p><a id="inheritance-shell"></a></p>
+<h4>Inheriting existing shell configuration</h4>
+<p>If want your bash aliases migrated into Smash, add or ensure the <code>load_bash_aliases</code> setting.</p>
+<pre><code class="python">    Smash.load_bash_aliases = True
+</code></pre>
+
+<p><a id="inheritance-ipython"></a></p>
+<h4>Inheriting existing IPython configuration</h4>
+<p>If you are already using IPython and want to load aspects of existing profile configuration, add something like this to <code>~/.smash/config.py</code>:</p>
+<pre><code class="python">    load_subconfig('ipython_config.py', profile='default')
+</code></pre>
+
 <p><a id="editor"></a></p>
 <h4>Editor configuration</h4>
-<p>It helps to let smash know about your editor, because in some circumstances it's useful to let it open files for you.  (See for example the zsh-style <a href="#suffix-aliases-and-openers">suffix aliases supported by the DWIM plugin</a>, or try <code>import webbrowser; ed webbrowser</code>.)  You can setup your preferred editor using <code>~/.smash/etc/editor.json</code>.  Afterwards, regardless of what editor you use, your edit command will be <code>ed</code> or <code>edit</code>. This edit command can take input in the form of filenames, "file:row:column" syntax, or python objects.</p>
+<p>There are several reasons that it can be useful to let smash know about your editor.  For example smash, like IPython, can help you quickly open and edit the correct source file for any given python object.  (To test this out you can try typing <code>import webbrowser; ed webbrowser</code>).
+Also Zsh-style <a href="plugins.html#dwim-suffix">paired openers / suffix aliases</a> are supported by the <a href="plugins.html#dwim">DWIM plugin</a>.</p>
+<p>Editor settings are determined according to the following policy: <strong>1</strong> If <code>~/.smash/etc/editor.txt</code> exists, it should have one line that contains the editor invocation (unquoted).  For example: "vi" is an acceptable entry.  This line may also include flags, so 'nano --softwrap --quiet' is also fine.  <strong>2</strong> If no such file is found then the value of $EDITOR will be used if possible.  <strong>3</strong> Finally if no other options are found, a default editor will be assigned to you based on your operating system.</p>
 <p><a id="inheritance"></a></p>
 <h4>Bash confguration inheritance</h4>
 <ul>

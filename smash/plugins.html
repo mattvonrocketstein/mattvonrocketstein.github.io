@@ -107,7 +107,8 @@
 <hr />
 <p><a id="dwim"></a></p>
 <h4>Do What I mean</h4>
-<p>The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory changing, opening of urls, etc.  For a feature summary, see the input -&gt; action list below.</p>
+<p><a id="dwim-suffix"></a>
+The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory changing, opening of urls, etc.  For a feature summary, see the input -&gt; action list below.</p>
 <table>
 <thead>
 <tr>
@@ -155,14 +156,14 @@
 </ul>
 <h5>Configuration Options:</h5>
 <ul>
-<li>VirtualEnv.verbose: set True to see debug messages</li>
+<li><code>VirtualEnv.verbose</code>: set True to see debug messages</li>
 </ul>
 <hr />
 <p><a id="writing-new"></a></p>
 <h2>Writing new plugins</h2>
 <p>Writing new plugins is fairly easy, but may not be necessary for your application (see the <a href="#configuration">configuration summary</a> or the <a href="/configuration.html">main configuration documentation</a>). If you do need to write a plugin, read on, but first a bit of background.  Smash is built on top of <a href="http://ipython.org/">IPython</a> and is in fact itself an IPython extension.  <em>Smash plugins are essentially ipython extensions which require smash</em>, but it can be useful to differentiate the terminology.  Before going much further it's probably a good idea to check out the existing IPython docs on <a href="http://ipython.org/ipython-doc/dev/config/extensions/">writing extensions</a>.</p>
 <p>If you want to do simple stuff like just writing new commands then a tutorials for <a href="#http://catherinedevlin.blogspot.com/2013/07/ipython-helloworld-magic.html">writing IPython magic</a> will probably be all you need.</p>
-<p>If you want to get your hooks into smash-specific events like "directory change" or "virtual environment deactived" then read <a href="#TODO">this documentation</a> about the smash event system. For an example of writing new tab-completion stuff, check out <a href="#TODO">the code for the fabric completer</a>.  For an example of input preprocessing see the <a href="#TODO">currency converter code</a>.  Foran example of all-else-fails input processing (meaning input was neither bash nor python) see <a href="#TODO">the do-what-I-mean code</a>.</p>
+<p>If you want to get your hooks into smash-specific events like "directory change" or "virtual environment deactived" then read <a href="#TODO">this documentation</a> about the smash event system. For an example of writing new tab-completion stuff, check out <a href="https://raw.githubusercontent.com/mattvonrocketstein/smash/master/smashlib/plugins/fabric.py">the code for the fabric completer</a>.  For an example of input preprocessing see the <a href="#TODO">currency converter code</a>.  Foran example of all-else-fails input processing (meaning input was neither bash nor python) see <a href="https://raw.githubusercontent.com/mattvonrocketstein/smash/master/smashlib/plugins/dwim.py">the do-what-I-mean code</a>.</p>
 <hr /></div>
     </div>
 
