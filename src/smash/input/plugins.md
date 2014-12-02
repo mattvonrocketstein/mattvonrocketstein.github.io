@@ -1,9 +1,6 @@
 title: Plugins
 menu-position: 4
 ---
-
-Smash plugins are essentially IPython extensions which require smash.
-
 <a id="list"></a>
 
 [Liquidprompt](#liquidprompt) |
@@ -11,7 +8,19 @@ Smash plugins are essentially IPython extensions which require smash.
 [Do What I Mean](#dwim) |
 [Change-dir Hooks](#cd-hooks) |
 [Python Tools Completion](#ptc) |
-[Python Virtual Environments](#virtualenv) |
+[Python Virtual Environments](#virtualenv)
+
+The smash core aims to be small and only include the essentials, so much of the behaviour of shell comes down to plugins.  In Smash, "plugins" are just IPython extensions which require smashlib, and possibly require the smash shell itself.  As a result many of the plugins may work in vanilla IPython.  If you don't care about the built in plugin options and only want to write new plugins, [see this section](#writing-new).  There are a few main things that plugins may potentially do.  Specifically, **each plugin may**:
+
+1. have configuration options
+2. publish commands or command aliases
+3. add completers or new input preprocessing
+4. receive messages from the IPython event subsystem
+5. receive messages from the smash-specific event subsystem
+6. send messages on the smash-specific event subsystem
+
+The rest of this page attempts to completely describe the plugins which ship with smash, although note that these plugins may not be enabled by default.
+
 
 <a id="ptc"></a>
 ####Python Tools Completion
@@ -23,15 +32,18 @@ This plugin provides completion options for common python tools like [Fabric](#)
 * ipython completion includes available profiles when using --profile option
 
 #####Configuration Options:
-* _.PythonTools.verbose: set True to see debug messages
+* `PythonTools.verbose`: set True to see debug messages
 
 -------------------------------------------------------------------------------
 <a id="autojump"></a>
 ####Autojump
 Smash ships with an integrated version of the wonderful [autojump](https://github.com/joelthelion/autojump) command line tool, which uses information from change-dir to maintain a ranked list of flexible short cuts.  In other words after you've cd'd into /foo/bar/baz/qux at least once, you can use `j qux` or `jump qux` to take you there afterwards.  Tab completion over jump-destinations is automatically enabled so that `j qu<TAB>` does what you'd expect.
 
+#####Commands:
+* `j some_bookmark`: jump to a directory based on the weighted ratings in the current database
+
 #####Configuration Options:
-* _.AutoJump.verbose: set True to see debug messages
+* `_.AutoJump.verbose`: set True to see debug messages
 
 -------------------------------------------------------------------------------
 
@@ -39,6 +51,9 @@ Smash ships with an integrated version of the wonderful [autojump](https://githu
 ####Liquidprompt
 
 This plugin provides prompt rendering via the wonderfully dynamic [liquidprompt tool](#https://github.com/nojhan/liquidprompt).  Liquidprompt has rich options for configuration and it's recommended that you [configure it in the normal way](https://github.com/nojhan/liquidprompt#features-configuration), but, some of these options can be overridden from `~/.smash/config.py` (see below).
+
+#####Commands:
+* `prompt_tag "my tag"`: add a text prefix for the current prompt
 
 #####Configuration Options:
 * `_.LiquidPrompt.verbose`: set True to see debug messages
@@ -50,10 +65,17 @@ This plugin provides prompt rendering via the wonderfully dynamic [liquidprompt 
 <a id="cd-hooks"></a>
 ####Change directory hooks
 
-Lorem Ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ip
+The CD hooks feature is mostly a service for other plugins to use. It adds a "directory changed" event to smash, which is useful for building stuff like automatic-activation rules (see for example the [project manager](project_manager.html).  New plugins can build hooks and subscribe to CD events, or you can just register a callback without writing a new plugin.  Here's a minimal example of what a callback would look like:
+
+~~~~{.python}
+    def test_change_message(bus, new, old):
+        """ a demo for the CD hook """
+        print 'moved from old directory {0} to new one at {1}'.format(old, new)
+~~~~
 
 #####Configuration Options:
-* `_.ChangeDirHooks.verbose`: set True to see debug messages
+* `ChangeDirHooks.verbose`: set True to see debug messages
+* `ChangeDirHooks.change_dir_hooks.append('foo)`: add python dot-paths or shell commands as cd-hooks
 
 
 -------------------------------------------------------------------------------
@@ -61,6 +83,7 @@ Lorem Ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ip
 <a id="dwim"></a>
 ####Do What I mean
 
+<a id="dwim-suffix"></a>
 The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory changing, opening of urls, etc.  For a feature summary, see the input -> action list below.
 
 | On Input             | Run test                          | If test is true Action is  |
@@ -69,7 +92,6 @@ The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory ch
 | foo.bar              | is foo.bar executable?            | run as usual               |
 | foo.bar              | is bar a defined suffix_alias?    | open with specified opener |
 | foo/bar              | is bar a directory?               | change-dir to bar          |
-
 
 #####Configuration Options:
 * `DoWhatIMean.verbose`: set True to see debug messages
@@ -87,7 +109,7 @@ Smash has sophisticated virtualenv support which is useful particularly if you'r
 * `venv_deactivate some_dir`: deactivates the current virtual environment
 
 #####Configuration Options:
-* VirtualEnv.verbose: set True to see debug messages
+* `VirtualEnv.verbose`: set True to see debug messages
 
 --------------------------------------------------------------------------------
 
@@ -98,6 +120,6 @@ Writing new plugins is fairly easy, but may not be necessary for your applicatio
 
 If you want to do simple stuff like just writing new commands then a tutorials for [writing IPython magic](#http://catherinedevlin.blogspot.com/2013/07/ipython-helloworld-magic.html) will probably be all you need.
 
-If you want to get your hooks into smash-specific events like "directory change" or "virtual environment deactived" then read [this documentation](#TODO) about the smash event system. For an example of writing new tab-completion stuff, check out [the code for the fabric completer](#TODO).  For an example of input preprocessing see the [currency converter code](#TODO).  Foran example of all-else-fails input processing (meaning input was neither bash nor python) see [the do-what-I-mean code](#TODO).
+If you want to get your hooks into smash-specific events like "directory change" or "virtual environment deactived" then read [this documentation](#TODO) about the smash event system. For an example of writing new tab-completion stuff, check out [the code for the fabric completer](https://raw.githubusercontent.com/mattvonrocketstein/smash/master/smashlib/plugins/fabric.py).  For an example of input preprocessing see the [currency converter code](#TODO).  Foran example of all-else-fails input processing (meaning input was neither bash nor python) see [the do-what-I-mean code](https://raw.githubusercontent.com/mattvonrocketstein/smash/master/smashlib/plugins/dwim.py).
 
 -------------------------------------------------------------------------------

@@ -42,6 +42,8 @@
             for p in mpages:
                 style = p["title"] == page["title"] and "active" or ""
                 print(entry % (style, p["url"], hx(p["title"])))
+            print(entry % (style, "http://github.com/mattvonrocketstein/smash/", hx('Source')))
+            print(entry % (style, "http://github.com/mattvonrocketstein/smash/issues", hx('Issues')))
           %}
           <li class="divider"></li>
             </ul>

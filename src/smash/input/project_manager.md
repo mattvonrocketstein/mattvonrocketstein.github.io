@@ -26,6 +26,7 @@ In the sections below, you will find instructions on how to invoke operations an
 -------------------------------------------------------------------------------
 
 **Activating Projects** is done with a command like `proj.nickname`.  (Note: you can use tab-completion over project names).
+
 * Vagrant projects:
     * run "vagrant up"
 * Python projects:
@@ -36,9 +37,10 @@ In the sections below, you will find instructions on how to invoke operations an
 -------------------------------------------------------------------------------
 
 **Deactivating Projects** usually isn't necessary because activating a new project will automatically deactivate the previous project.  To manually deactivate the current project, type `proj._deactivate` or `deactivate_project`.
-* Vagrant projects:
+
+1. Vagrant projects:
     * run "vagrant halt"
-* Python projects:
+2. Python projects:
     * deactivate virtual environments associated with project
 
 -------------------------------------------------------------------------------
