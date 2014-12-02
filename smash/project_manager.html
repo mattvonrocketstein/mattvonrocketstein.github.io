@@ -76,19 +76,33 @@
 <hr />
 <p><strong>Adding Projects</strong> can be accomplished temporarily with <code>add_project nickname dir</code>, or new projects can be permanently added in <code>~/.smash/config.py</code>.  If you have a single directory like <em>~/code</em> that contains multiple projects, you can turn each subdirectory into a project by setting <code>project_search_dir</code> in the smash config file.</p>
 <hr />
-<p><strong>Activating Projects</strong> is done with a command like <code>proj.nickname</code>.  (Note: you can use tab-completion over project names).
-<em> Vagrant projects:
-    * run "vagrant up"
-</em> Python projects:
-    * jump to the project base directory
-    * if the project contains one or more virtualenvs, then
-        * the most recent will be activated (.tox is ignored)</p>
+<p><strong>Activating Projects</strong> is done with a command like <code>proj.nickname</code>.  (Note: you can use tab-completion over project names).</p>
+<ul>
+<li>Vagrant projects:<ul>
+<li>run "vagrant up"</li>
+</ul>
+</li>
+<li>Python projects:<ul>
+<li>jump to the project base directory</li>
+<li>if the project contains one or more virtualenvs, then<ul>
+<li>the most recent will be activated (.tox is ignored)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <hr />
-<p><strong>Deactivating Projects</strong> usually isn't necessary because activating a new project will automatically deactivate the previous project.  To manually deactivate the current project, type <code>proj._deactivate</code> or <code>deactivate_project</code>.
-<em> Vagrant projects:
-    * run "vagrant halt"
-</em> Python projects:
-    * deactivate virtual environments associated with project</p>
+<p><strong>Deactivating Projects</strong> usually isn't necessary because activating a new project will automatically deactivate the previous project.  To manually deactivate the current project, type <code>proj._deactivate</code> or <code>deactivate_project</code>.</p>
+<ol>
+<li>Vagrant projects:<ul>
+<li>run "vagrant halt"</li>
+</ul>
+</li>
+<li>Python projects:<ul>
+<li>deactivate virtual environments associated with project</li>
+</ul>
+</li>
+</ol>
 <hr />
 <p><strong>Building Projects</strong> is done for the current project using <code>proj._build</code>, or for an arbitrary project using <code>build_project nickname</code>.
 <em> Python projects:

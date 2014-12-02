@@ -61,10 +61,14 @@
     <!-- Content -->
     <div class="row">
       <div class="large-12 columns"><p>Smash configuration, like smash libraries and executables, are stored in <code>~/.smash</code>.  The main configuration file is <code>~/.smash/etc/config.py</code>.  If your <a href="#editor">editor is configured</a>, you can open the main configuration file at any time from typing <code>ed_config</code> inside of smash.</p>
-<p><a id="inheritance-shell"></a></p>
+<p><a id="inheritance-shell"></a><a id="inheritance"></a></p>
 <h4>Inheriting existing shell configuration</h4>
-<p>If want your bash aliases migrated into Smash, add or ensure the <code>load_bash_aliases</code> setting.</p>
-<pre><code class="python">    Smash.load_bash_aliases = True
+<p>By default smash will try to honor existing bash aliases and functions.  If you do not want your bash aliases migrated into Smash, ensure the <code>load_bash_aliases</code> settings is False.</p>
+<pre><code class="python">    Smash.load_bash_aliases = False
+</code></pre>
+
+<p>If you do not want to be able to run legacy bash functions from your shell, ensure the <code>load_bash_functions</code> setting is False.  Note that only bash functions mentioned in your profile, .bashrc, etc will be loaded.  (Loading bash functions from arbitrary files that you source is <a href="https://github.com/mattvonrocketstein/smash/issues">issue #15</a>)</p>
+<pre><code class="python">    Smash.load_bash_functions = False
 </code></pre>
 
 <p><a id="inheritance-ipython"></a></p>
@@ -77,12 +81,14 @@
 <h4>Editor configuration</h4>
 <p>There are several reasons that it can be useful to let smash know about your editor.  For example smash, like IPython, can help you quickly open and edit the correct source file for any given python object.  (To test this out you can try typing <code>import webbrowser; ed webbrowser</code>).
 Also Zsh-style <a href="plugins.html#dwim-suffix">paired openers / suffix aliases</a> are supported by the <a href="plugins.html#dwim">DWIM plugin</a>.</p>
-<p>Editor settings are determined according to the following policy: <strong>1</strong> If <code>~/.smash/etc/editor.txt</code> exists, it should have one line that contains the editor invocation (unquoted).  For example: "vi" is an acceptable entry.  This line may also include flags, so 'nano --softwrap --quiet' is also fine.  <strong>2</strong> If no such file is found then the value of $EDITOR will be used if possible.  <strong>3</strong> Finally if no other options are found, a default editor will be assigned to you based on your operating system.</p>
-<p><a id="inheritance"></a></p>
-<h4>Bash confguration inheritance</h4>
-<ul>
-<li>set <code>_.Smash.load_bash_aliases=True</code> in ~/.smash/config.py</li>
-</ul></div>
+<p>Editor settings are determined according to the following policy: <strong>1</strong> If <code>~/.smash/etc/editor.json</code> exists, it should have the form</p>
+<pre><code class="json"> {
+   &quot;console&quot;:&quot;some_editor_invocation&quot;,
+   &quot;window_env&quot;:&quot;some_editor_invocation&quot;
+ }
+</code></pre>
+
+<p>Note that invocation lines may include flags, for instance <em>emacsclient -n</em> or  <em>nano --softwrap --quiet</em> is fine.  If there is no <code>editor.json</code> file or it is not formatted correctly, then the value of the $EDITOR environment variable will be used.  Finally, if no other options are found, a default editor will be assigned to you based on your operating system.  You can always type <code>ed_editor</code> inside of smash to open <code>~/.smash/etc/editor.json</code>.</p></div>
     </div>
 
     <div id="push"></div> <!-- push footer down -->

@@ -20,5 +20,8 @@ body {
 
 nav a,
 .page-header h1 {
-	text-transform: capitalize;
+        text-transform: capitalize;
+}
+code {
+    margin-bottom:40px;
 }
