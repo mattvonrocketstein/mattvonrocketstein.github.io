@@ -62,6 +62,8 @@
     <div class="row">
       <div class="large-12 columns"><p>This section is just an overview.  You could also jump directly to the plugin documentation for the relevant plugins: <a href="#liquidprompt">Liquidprompt</a>, <a href="#autojump">Autojump</a>, <a href="#dwim">Do What I Mean</a>, or <a href="#cd-hooks">Change-dir Hooks</a>.</p>
 <hr />
+<h4>Considerations <a id="considerations"></a></h4>
+<p>To avoid conflicting with python namespaces, commands that involve period (<code>.</code>) will be translated to use an underscore (<code>_</code>) instead.  Any command invocations that use a hyphen (<code>-</code>) should work normally.</p>
 <h4>Shell-related Problems <a id="shell-problems"></a></h4>
 <p>Most shell stuff "just works", even when it looks like the grammar for shell vs. python might be ambiguous (for instance, try: <code>[ string ] &amp;&amp; echo its true || echo its false</code>).  In the event of name collisions, the python namespace typically has preference over the system commands, but this is easy to fix by just deleting the python shadow:</p>
 <pre><code class="bash">    smash$ ls

@@ -62,11 +62,16 @@
     <div class="row">
       <div class="large-12 columns"><h2>What is it?</h2>
 <p>Smash is a smarter shell.  <a href="python_use_cases.html">Python developers</a> will be particularly interested because it also happens to host a full-fledged python runtime (via IPython) and offers sophisticated support for python virtual environments, but non-python developers can safely ignore these features.  Smash leverages existing system tab completion setup as well as allowing variable/keyword completion in python namespaces.  Additionally smash offers features for <a href="project_manager.html">project management</a>, a flexible <a href="plugins.html">plugin architecture</a> that is easy to use, and simple <a href="configuration.html">configuration files</a> that try to be as sane as possible.</p>
+<p><a id="requirements"></a></p>
+<h2>Requirements</h2>
+<p>You'll need git in order for the smash bootstrap to clone the smash repo.  Also virtualenv, and the usual python development prerequisites.  You need to be able to compile at least fairly simple C code (this is due to smash's reliance on fabric).  In debian-based linux, the following one-liner should do the trick and for OSX you can probably homebrew something similar.</p>
+<pre><code class="bash">  $ sudo apt-get install git-core python-virtualenv python-dev build-essential
+</code></pre>
+
 <p><a id="quickstart"></a></p>
 <h2>Quickstart</h2>
 <p>The smash installation happens in a sandbox, does not require root, and will not interefere with existing versions of IPython.  The cost of this is that setup is a little bit nonstandard and <code>setup.py</code> should not be used directly unless you only want to develop against the support libraries (for that see: <a href="#dev-installation">dev installation</a>)</p>
-<pre><code class="bash">  $ sudo apt-get install git-core python-virtualenv python-dev
-  $ bootstrap=https://raw.githubusercontent.com/mattvonrocketstein/smash/master/bootstrap.sh
+<pre><code class="bash">  $ bootstrap=https://raw.githubusercontent.com/mattvonrocketstein/smash/master/bootstrap.sh
   $ curl $bootstrap | bash
   $ ~/bin/smash
 </code></pre>
@@ -92,7 +97,17 @@
 
 <p><a id="dev-installation"></a></p>
 <h2>Philosophy</h2>
-<p>So, <em>why build yet another shell?</em>  Put simply, shells still kind of suck.  The main problem is that classic shells are inflexible and difficult to extend.  If you do manage to extend them at all, then you probably had to do it with shell code and the result is something that's fragile and difficult to read and maintain.</p>
+<p><strong>Design goals</strong></p>
+<ol>
+<li>Installation should always be inside a virtualenvironment, and never require root</li>
+<li>Maintain backwards compatability with existing setup for zsh and bash.</li>
+<li>Everything is a plugin!  Core functionality should be small as hell and everything is optional</li>
+<li>Zero (initial) configuration and sane defaults. Everything is awesome OOB and only power users have to care about how configuration actually works</li>
+<li>Python developers should be able to have a stable and persistent shell.  No kill/restart to clean namespaces, etc, regardless of how many projects they work on at once.</li>
+<li>Eventually, non-python developers with an addiction to a particular REPL should be able co-host that REPL alongside their system shell.</li>
+</ol>
+<p><strong>But Why?</strong>
+So, <em>why build yet another shell?</em>  Put simply, shells still kind of suck.  The main problem is that classic shells are inflexible and difficult to extend.  If you do manage to extend them at all, then you probably had to do it with shell code and the result is something that's fragile and difficult to read and maintain.</p>
 <p>Just for the sake of an examples, let's consider the problem of a "do what I mean" extension for your shell, where if you type something that looks like a url then the url is opened automatically for you.  To effect a pre-exec style hook in bash, you'll have to do <a href="http://www.twistedmatrix.com/users/glyph/preexec.bash.txt">black magic</a> with the <code>DEBUG</code> trap (ugh).  Zsh is much better and has a built in pre-exec hook, but of course you'll still be writing (or at least invoking) your hooks in shell code.  This works at first, but things start to get messy when issues of code-reuse come up, or if you want to <a href="project_manager.html">invoke hooks conditionally</a>, etc.</p>
 <p>If you still think the do-what-i-mean puzzle sounds easy to solve in your shell, how about colorizing random structured data (maybe json or server logs) sent to stdout, regardless of whether that data comes from "cat" or "echo"?   What about the possibility of cohosting arbitrary foreign REPLs alongside your shell?  At least in theory Smash could allow simultaneous and unambiguous usage of tools for sql, ruby, mongo, lisp, whatever.  Or, what if embedding your whole system shell into <a href="http://ipython.org/videos.html#the-ipython-notebook">an interactive webpage was trivial?</a></p>
 <p>Eventually shells, like IDEs, get so complex they grow their own package managers, and why bother when a modern full-fledged programmingly language is bound to have package management options anyway?  Honestly there's a reason we don't usually write <a href="http://www.lainoox.com/bash-socket-programming/">socket code in shell script</a>, and a reason why system administration has moved so far away from it's roots in hacky shell scripts.  <em>But</em>, since you might have existing shell aliases or functions that you still depend on, smash tries to help you <a href="configuration.html#inheritance-shell">access your legacy junk</a> until you can port it.</p>
