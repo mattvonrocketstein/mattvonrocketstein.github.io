@@ -36,7 +36,7 @@ def show(project):
     proot = opj(src_root, project)
     report("serving "+proot)
     def f():
-        time.sleep(3)
+
         webbrowser.open('http://localhost:8080/')
     threading.Thread(target=f).start()
     local("cd {0} && poole --serve".format(proot))
@@ -59,7 +59,11 @@ def main():
     assert args
     cmd = args[0]
     project = args[1]
-    cmd=eval(cmd)
+    try:
+        cmd = eval(cmd)
+    except NameError:
+        raise SystemExit('subcommands are {0}'.format('update build show'.split()))
+
     cmd(project)
 
 if __name__=='__main__':
