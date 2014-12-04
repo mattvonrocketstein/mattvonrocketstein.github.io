@@ -1,3 +1,3 @@
-""" pkg_name.version
+""" ghio.version
 """
 __version__= 0.1
