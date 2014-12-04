@@ -7,7 +7,12 @@ This section is just an overview.  You could also jump directly to the plugin do
 
 -------------------------------------------------------------------------------
 
+####Considerations <a id="considerations"></a>
+
+To avoid conflicting with python namespaces, commands that involve period (`.`) will be translated to use an underscore (`_`) instead.  Any command invocations that use a hyphen (`-`) should work normally.
+
 ####Shell-related Problems <a id="shell-problems"></a>
+
 Most shell stuff "just works", even when it looks like the grammar for shell vs. python might be ambiguous (for instance, try: `[ string ] && echo its true || echo its false`).  In the event of name collisions, the python namespace typically has preference over the system commands, but this is easy to fix by just deleting the python shadow:
 
 ~~~~{.bash}
