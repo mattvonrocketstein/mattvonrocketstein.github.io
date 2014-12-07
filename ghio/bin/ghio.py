@@ -1,5 +1,6 @@
 """ ghio.bin.ghio
 """
+import os
 from optparse import OptionParser
 import threading
 import webbrowser
@@ -33,6 +34,7 @@ def build(project):
 
 @_require_project_dir
 def show(project):
+    build(project)
     proot = opj(src_root, project)
     report("serving "+proot)
     def f():
@@ -47,8 +49,12 @@ def update(project):
     output = opj(proot, 'output')
     prod_dir = opj(src_root)
     assert ope(output)
-    cmd = "cp -rfv {0}/* {1}".format(output, opj(ghio_root,project))
+    target = opj(ghio_root, project)
+    if not ope(target):
+        os.mkdir(target)
+    cmd = "cp -rfv {0}/* {1}".format(output, target)
     local(cmd)
+    local("git add -A {0}".format(target))
     local("cd {0} && git commit {1} -m \"{2}\"".format(
         ghio_root, project,'update '+project))
     local("git push")
