@@ -30,10 +30,14 @@ If you are already using IPython and want to load aspects of existing profile co
 
 <a id="editor"></a>
 ####Editor configuration
-There are several reasons that it can be useful to let smash know about your editor.  For example smash, like IPython, can help you quickly open and edit the correct source file for any given python object.  (To test this out you can try typing `import webbrowser; ed webbrowser`).
-Also Zsh-style [paired openers / suffix aliases](plugins.html#dwim-suffix) are supported by the [DWIM plugin](plugins.html#dwim).
+There are several reasons that it can be useful to let smash know about your editor.  Here are a few:
 
-Editor settings are determined according to the following policy: **1** If `~/.smash/etc/editor.json` exists, it should have the form
+* Smash, like IPython, helps you open and edit the code for any given object.  (try: `import webbrowser; ed webbrowser`).
+* Zsh-style [suffix aliases](plugins.html#dwim-suffix) are supported by the [DWIM plugin](plugins.html#dwim)
+* various shortcuts help you open smash configuration: `ed_editor`, `ed_aliases`, etc
+
+The editor configuration file (`~/.smash/etc/editor.json`) should have the following format, otherwise the json validator will complain:
+
 ~~~~{.json}
  {
    "console":"some_editor_invocation",
@@ -41,5 +45,30 @@ Editor settings are determined according to the following policy: **1** If `~/.s
  }
 ~~~~
 
+If this file does not exist, it will be created for you with default values.  Note that invocation lines may include flags, for instance *emacsclient -n* or  *nano --softwrap --quiet* is fine.
 
-Note that invocation lines may include flags, for instance *emacsclient -n* or  *nano --softwrap --quiet* is fine.  If there is no `editor.json` file or it is not formatted correctly, then the value of the $EDITOR environment variable will be used.  Finally, if no other options are found, a default editor will be assigned to you based on your operating system.  You can always type `ed_editor` inside of smash to open `~/.smash/etc/editor.json`.
+<a id="aliases"></a>
+####Alias configuration
+
+In smash aliases are essentially the same as ipython or bash aliases, except that these aliases are potentially project specific.  The alias configuration file (`~/.smash/etc/aliases.json`) will be created if it does not exist, and should have a format similar to the following example, or else the json validator will complain.
+
+~~~~{.json}
+{ "__smash__":
+    [ ["bunzip"," bunzip2"],
+      ["l", "ls -la --color"],
+      .....
+    ],
+  "my_first_project":
+    [ ["go", "start-daemon&"],
+      ["stop", "kill -KILL `cat daemon.pid`"]
+    ],
+  "other_project":
+    [ ["go", "sudo /etc/init.d/mongo start"],
+      ["stop", "sudo /etc/init.d/mongo stop"],
+      ...
+    ],
+  ...
+}
+~~~~
+
+**The aliases mentioned in the `__smash__` section are global and always-on, so this is most likely where you want to put your default aliases.**  The aliases mentioned in "my_first_project" and "other_project" would only be activated when that project was activated.  See the [project manager documentation](project_manager.html) for a more in-depth explanation of projects.
