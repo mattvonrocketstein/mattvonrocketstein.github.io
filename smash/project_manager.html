@@ -60,7 +60,9 @@
 
     <!-- Content -->
     <div class="row">
-      <div class="large-12 columns"><p>Projects are natural abstractions for lots of kinds of work, and will be familiar to anyone who has used an IDE.  In smash, the concept is quite flexible and powerful for all sorts of automation.  <strong>A project is defined by a nickname and associated with a directory.</strong>  In the simplest case a project can function as merely a bookmark that can be jumped to, or for more involved projects you might want a set of command aliases and macros which other projects do not share.  Projects also have <em>types</em> and <em>operations</em>, which can either be specified or autodetected based on the contents of the project directory.</p>
+      <div class="large-12 columns"><h2>What is it?</h2>
+<p><strong>The project manager is a smash plugin that helps out with all kinds of project automation.</strong>  Basically projects are natural abstractions for lots of kinds of work, and will be familiar to anyone who has used an IDE.  In smash, the concept is quite flexible and powerful for all sorts of automation.  <strong>A project is defined by a nickname and associated with a directory.</strong>  In the simplest case a project can function as merely a bookmark that can be jumped to, or for more involved projects you might want a set of command aliases and macros which other projects do not share.  Projects also have <em>types</em> and <em>operations</em>, which can either be specified or autodetected based on the contents of the project directory.</p>
+<h2>Important concepts</h2>
 <p><strong>Project Types</strong> are simply lists of strings, such as ["python"], or ["python", "puppet"].  The type of a project may be provided by the user or autodetected by smash.  New user-defined types are encouraged, but they won't have default operations (see below).</p>
 <p>The default operations and some examples of what they might involve for your project are described below:</p>
 <p><strong>Project Operations</strong> are things you can do to projects, where the builtin operations are <em>add</em>, <em>activate</em>, <em>build</em>, <em>check</em>, <em>test</em>, and <em>deactivate</em>.  The meaning of an operation varies based on project-type, for instance testing a python project will be different than testing a ruby project.  User defined operations are also possible.  The specific implementation for a given operation can be specified per project as a list, where the list contains a sequence of shell commands or python callables.  If a given operation is not defined for a given project, a reasonable default for that operation should be guessed based on the project type.  For each operation, here are some examples of the type of actions you might like to perform:</p>
@@ -73,10 +75,12 @@
 <li><em>Deactivate</em>: push finished code, stop project-specific database services or other system daemons.</li>
 </ul>
 <p>In the sections below, you will find instructions on how to invoke operations and what the default operations will involve for each project type.</p>
+<h2>Project-manager Commands</h2>
+<p><a id="cmd-add"></a>
+<strong>Adding Projects</strong> can be accomplished temporarily with <code>add_project nickname dir</code>, or new projects can be permanently added in <code>~/.smash/config.py</code>.  If you have a single directory like <em>~/code</em> that contains multiple projects, you can turn each subdirectory into a project by setting <code>project_search_dir</code> in the smash config file.</p>
 <hr />
-<p><strong>Adding Projects</strong> can be accomplished temporarily with <code>add_project nickname dir</code>, or new projects can be permanently added in <code>~/.smash/config.py</code>.  If you have a single directory like <em>~/code</em> that contains multiple projects, you can turn each subdirectory into a project by setting <code>project_search_dir</code> in the smash config file.</p>
-<hr />
-<p><strong>Activating Projects</strong> is done with a command like <code>proj.nickname</code>.  (Note: you can use tab-completion over project names).</p>
+<p><a id="cmd-activate"></a>
+<strong>Activating Projects</strong> is done with a command like <code>proj.nickname</code>.  (Note: you can use tab-completion over project names).</p>
 <ul>
 <li>Vagrant projects:<ul>
 <li>run "vagrant up"</li>
@@ -92,7 +96,8 @@
 </li>
 </ul>
 <hr />
-<p><strong>Deactivating Projects</strong> usually isn't necessary because activating a new project will automatically deactivate the previous project.  To manually deactivate the current project, type <code>proj._deactivate</code> or <code>deactivate_project</code>.</p>
+<p><a id="cmd-deactivate"></a>
+<strong>Deactivating Projects</strong> usually isn't necessary because activating a new project will automatically deactivate the previous project.  To manually deactivate the current project, type <code>proj._deactivate</code> or <code>deactivate_project</code>.</p>
 <ol>
 <li>Vagrant projects:<ul>
 <li>run "vagrant halt"</li>
@@ -104,7 +109,8 @@
 </li>
 </ol>
 <hr />
-<p><strong>Building Projects</strong> is done for the current project using <code>proj._build</code>, or for an arbitrary project using <code>build_project nickname</code>.
+<p><a id="cmd-build"></a>
+<strong>Building Projects</strong> is done for the current project using <code>.build</code>, or for an arbitrary project using <code>build_project nickname</code>.
 <em> Python projects:
     * if tox.ini is present
         * runs <code>tox $TOX_BUILD_ARGS</code> </em>(set this up in the activation rules)<em>
@@ -113,20 +119,29 @@
     * if there is a README.md markdown file, generate github style html
     * if there are other markdown files, generate html</p>
 <hr />
-<p><strong>Checking Projects</strong> is done on the current project using <code>proj._check</code>, or on an arbitrary project using <code>check_project nickname</code>.
+<p><a id="cmd-check"></a></p>
+<p><strong>Checking Projects</strong> is done on the current project using <code>.check</code>, or on an arbitrary project using <code>check_project nickname</code>.
 <em> Python projects:
     * run flake8 but ignore any venvs
 </em> Documentation projects:
     * got markdown?  if yes, then
        * <a href="https://pypi.python.org/pypi/grip/">grip</a> is started to view html</p>
 <hr />
-<p><strong>Testing Projects</strong> is done for the current project using <code>proj._test</code>, or on an arbitrary project <code>test_project nickname</code>.  It's difficult to guess in general how project tests should be run, but smash can detect or guess a few different patterns:
+<p><a id="cmd-test"></a></p>
+<p><strong>Testing Projects</strong> is done for the current project using <code>.test</code>, or on an arbitrary project <code>test_project nickname</code>.  It's difficult to guess in general how project tests should be run, but smash can detect or guess a few different patterns:
 <em> Python projects:
     * try using tox first if tox.ini found
         * runs <code>tox $TOX_TEST_ARGS</code> </em>(set this in the activation rules)*
     * if tox is not found, look for <code>tests/</code> or <code>*/tests</code> folder,
         * if found, collect and attempt to run with pytest</p>
-<hr /></div>
+<hr />
+<p><a id="cmd-search"></a></p>
+<p><strong>Searching inside a project</strong> is blah blah blah blah blah.
+<em> Python projects:
+    * try using tox first if tox.ini found
+        * runs <code>tox $TOX_TEST_ARGS</code> </em>(set this in the activation rules)*
+    * if tox is not found, look for <code>tests/</code> or <code>*/tests</code> folder,
+        * if found, collect and attempt to run with pytest</p></div>
     </div>
 
     <div id="push"></div> <!-- push footer down -->

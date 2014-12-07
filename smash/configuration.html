@@ -79,16 +79,42 @@
 
 <p><a id="editor"></a></p>
 <h4>Editor configuration</h4>
-<p>There are several reasons that it can be useful to let smash know about your editor.  For example smash, like IPython, can help you quickly open and edit the correct source file for any given python object.  (To test this out you can try typing <code>import webbrowser; ed webbrowser</code>).
-Also Zsh-style <a href="plugins.html#dwim-suffix">paired openers / suffix aliases</a> are supported by the <a href="plugins.html#dwim">DWIM plugin</a>.</p>
-<p>Editor settings are determined according to the following policy: <strong>1</strong> If <code>~/.smash/etc/editor.json</code> exists, it should have the form</p>
+<p>There are several reasons that it can be useful to let smash know about your editor.  Here are a few:</p>
+<ul>
+<li>Smash, like IPython, helps you open and edit the code for any given object.  (try: <code>import webbrowser; ed webbrowser</code>).</li>
+<li>Zsh-style <a href="plugins.html#dwim-suffix">suffix aliases</a> are supported by the <a href="plugins.html#dwim">DWIM plugin</a></li>
+<li>various shortcuts help you open smash configuration: <code>ed_editor</code>, <code>ed_aliases</code>, etc</li>
+</ul>
+<p>The editor configuration file (<code>~/.smash/etc/editor.json</code>) should have the following format, otherwise the json validator will complain:</p>
 <pre><code class="json"> {
    &quot;console&quot;:&quot;some_editor_invocation&quot;,
    &quot;window_env&quot;:&quot;some_editor_invocation&quot;
  }
 </code></pre>
 
-<p>Note that invocation lines may include flags, for instance <em>emacsclient -n</em> or  <em>nano --softwrap --quiet</em> is fine.  If there is no <code>editor.json</code> file or it is not formatted correctly, then the value of the $EDITOR environment variable will be used.  Finally, if no other options are found, a default editor will be assigned to you based on your operating system.  You can always type <code>ed_editor</code> inside of smash to open <code>~/.smash/etc/editor.json</code>.</p></div>
+<p>If this file does not exist, it will be created for you with default values.  Note that invocation lines may include flags, for instance <em>emacsclient -n</em> or  <em>nano --softwrap --quiet</em> is fine.</p>
+<p><a id="aliases"></a></p>
+<h4>Alias configuration</h4>
+<p>In smash aliases are essentially the same as ipython or bash aliases, except that these aliases are potentially project specific.  The alias configuration file (<code>~/.smash/etc/aliases.json</code>) will be created if it does not exist, and should have a format similar to the following example, or else the json validator will complain.</p>
+<pre><code class="json">{ &quot;__smash__&quot;:
+    [ [&quot;bunzip&quot;,&quot; bunzip2&quot;],
+      [&quot;l&quot;, &quot;ls -la --color&quot;],
+      .....
+    ],
+  &quot;my_first_project&quot;:
+    [ [&quot;go&quot;, &quot;start-daemon&amp;&quot;],
+      [&quot;stop&quot;, &quot;kill -KILL `cat daemon.pid`&quot;]
+    ],
+  &quot;other_project&quot;:
+    [ [&quot;go&quot;, &quot;sudo /etc/init.d/mongo start&quot;],
+      [&quot;stop&quot;, &quot;sudo /etc/init.d/mongo stop&quot;],
+      ...
+    ],
+  ...
+}
+</code></pre>
+
+<p><strong>The aliases mentioned in the <code>__smash__</code> section are global and always-on, so this is most likely where you want to put your default aliases.</strong>  The aliases mentioned in "my_first_project" and "other_project" would only be activated when that project was activated.  See the <a href="project_manager.html">project manager documentation</a> for a more in-depth explanation of projects.</p></div>
     </div>
 
     <div id="push"></div> <!-- push footer down -->
