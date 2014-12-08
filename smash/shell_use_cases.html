@@ -62,8 +62,113 @@
     <div class="row">
       <div class="large-12 columns"><p>This section is just an overview.  You could also jump directly to the plugin documentation for the relevant plugins: <a href="#liquidprompt">Liquidprompt</a>, <a href="#autojump">Autojump</a>, <a href="#dwim">Do What I Mean</a>, or <a href="#cd-hooks">Change-dir Hooks</a>.</p>
 <hr />
-<h4>Considerations <a id="considerations"></a></h4>
-<p>To avoid conflicting with python namespaces, commands that involve period (<code>.</code>) will be translated to use an underscore (<code>_</code>) instead.  Any command invocations that use a hyphen (<code>-</code>) should work normally.</p>
+<h4>Shell signals/events system <a id="signals"></a></h4>
+<p>Plugin authors may wish to subscribe to various smash events to extend smash's functionality.  The smash event system will send signals for all the scenarios described below.</p>
+<table>
+<thead>
+<tr>
+<th>Signal Name</th>
+<th>Signal Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CHANGE_DIR</td>
+<td>Issued on 'cd' or 'pushd', etc</td>
+</tr>
+<tr>
+<td>POST_RUN_INPUT</td>
+<td>Issued after user input has been processed (raw input)</td>
+</tr>
+<tr>
+<td>POST_RUN_CELL</td>
+<td>Issued after user input has been processed (transformed input)</td>
+</tr>
+<tr>
+<td>COMMAND_FAIL</td>
+<td>Issued when a system command ("ls non_existant_directory") has failed</td>
+</tr>
+<tr>
+<td>FILE_INPUT</td>
+<td>Issued whenever user input looks like a file path</td>
+</tr>
+<tr>
+<td>URL_INPUT</td>
+<td>Issued whenever user input looks like a URL</td>
+</tr>
+<tr>
+<td>UPDATE_PROMPT_REQUEST</td>
+<td>Can be issued to request that prompt is redrawn</td>
+</tr>
+<tr>
+<td>DOT_CMD</td>
+<td>Issued when user input starts with "." but is not a file name</td>
+</tr>
+<tr>
+<td>SMASH_INIT_COMPLETE</td>
+<td>Issued when smash is completely bootstrapped</td>
+</tr>
+</tbody>
+</table>
+<p>Signal payloads and current subscribers (if any) are described in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Signal Name</th>
+<th>Signal Payload</th>
+<th>Subscribers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CHANGE_DIR</td>
+<td>(new_dir, old_dir)</td>
+<td><a href=plugins.html#autojump>autojump</a></td>
+</tr>
+<tr>
+<td>POST_RUN_INPUT</td>
+<td>last input <em>(raw)</em></td>
+<td><a href=plugins.html#post_input>post_input</a></td>
+</tr>
+<tr>
+<td>POST_RUN_CELL</td>
+<td>last_input <em>(transformed)</em></td>
+<td><em>None</em></td>
+</tr>
+<tr>
+<td>COMMAND_FAIL</td>
+<td>(last_command, error_code)</td>
+<td><a href=plugins.html#handle_command_failure>handle_command_failure</a></td>
+</tr>
+<tr>
+<td>FILE_INPUT</td>
+<td>file_path</td>
+<td><a href=plugins.html#dwim>dwim</a></td>
+</tr>
+<tr>
+<td>URL_INPUT</td>
+<td>url</td>
+<td><a href=plugins.html#dwim>dwim</a></td>
+</tr>
+<tr>
+<td>UPDATE_PROMPT_REQUEST</td>
+<td>new_prompt</td>
+<td><a href=plugins.html#liquidprompt>liquidprompt</a></td>
+</tr>
+<tr>
+<td>DOT_CMD</td>
+<td>dot_cmd</td>
+<td><a href=project_manager.html>project manager</a></td>
+</tr>
+<tr>
+<td>SMASH_INIT_COMPLETE</td>
+<td><em>None</em></td>
+<td><em>all</em></td>
+</tr>
+</tbody>
+</table>
+<h4>Command Considerations <a id="considerations"></a></h4>
+<p>To avoid conflicting with python namespaces, system commands that involve period (<code>.</code>) will be translated to use an underscore (<code>_</code>) instead.  Any system command invocations that use a hyphen (<code>-</code>) should work normally.</p>
 <h4>Shell-related Problems <a id="shell-problems"></a></h4>
 <p>Most shell stuff "just works", even when it looks like the grammar for shell vs. python might be ambiguous (for instance, try: <code>[ string ] &amp;&amp; echo its true || echo its false</code>).  In the event of name collisions, the python namespace typically has preference over the system commands, but this is easy to fix by just deleting the python shadow:</p>
 <pre><code class="bash">    smash$ ls
