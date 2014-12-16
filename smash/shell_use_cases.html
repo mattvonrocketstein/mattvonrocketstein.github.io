@@ -167,9 +167,9 @@
 </tr>
 </tbody>
 </table>
-<h4>Command Considerations <a id="considerations"></a></h4>
+<h4><a id="considerations">Command Considerations</a></h4>
 <p>To avoid conflicting with python namespaces, system commands that involve period (<code>.</code>) will be translated to use an underscore (<code>_</code>) instead.  Any system command invocations that use a hyphen (<code>-</code>) should work normally.</p>
-<h4>Shell-related Problems <a id="shell-problems"></a></h4>
+<h4><a id="shell-problems">Shell-related Problems</a></h4>
 <p>Most shell stuff "just works", even when it looks like the grammar for shell vs. python might be ambiguous (for instance, try: <code>[ string ] &amp;&amp; echo its true || echo its false</code>).  In the event of name collisions, the python namespace typically has preference over the system commands, but this is easy to fix by just deleting the python shadow:</p>
 <pre><code class="bash">    smash$ ls
     file1     file2     file3     file4

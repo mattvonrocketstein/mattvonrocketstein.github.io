@@ -63,6 +63,7 @@
       <div class="large-12 columns"><p><a id="list"></a></p>
 <p><a href="#liquidprompt">Liquidprompt</a> |
 <a href="#autojump">Autojump</a> |
+<a href="#hcf">Handle Command Failure</a> |
 <a href="#dwim">Do What I Mean</a> |
 <a href="#cd-hooks">Change-dir Hooks</a> |
 <a href="#ptc">Python Tools Completion</a> |
@@ -72,11 +73,15 @@
 <li>have configuration options</li>
 <li>publish commands or command aliases</li>
 <li>add completers or new input preprocessing</li>
-<li>receive messages from the IPython event subsystem</li>
-<li>receive messages from the smash-specific event subsystem</li>
-<li>send messages on the smash-specific event subsystem</li>
+<li>receive signals from the IPython event subsystem</li>
+<li>receive signals from the smash-specific event subsystem</li>
+<li>send signals on the smash-specific event subsystem</li>
 </ol>
 <p>The rest of this page attempts to completely describe the plugins which ship with smash, although note that these plugins may not be enabled by default.</p>
+<h4><a id="hcf">Handle Command Failure</a></h4>
+<p>This plugin receives a signal whenever a system command fails, where the signal contains information about both the full command and the exit code.  Note that this is happens all the time since "ls /does/not/exist" terminates with a non-zero exit status, but this may interest plugins.</p>
+<h5>Signals</h5>
+<p><em>Receives:</em> COMMAND_FAIL</p>
 <p><a id="ptc"></a></p>
 <h4>Python Tools Completion</h4>
 <p>This plugin provides completion options for common python tools like <a href="#">Fabric</a>, <a href="#">IPython</a>, <a href="#">setup.py</a>, <a href="#">flake8</a>/<a href="#">pyflakes</a> <a href="#">tox</a>, and other stuff you probably use on a daily basis.  Completion for each command is at least over command line options/flags, but in some cases there are other context clues that can be provided:</p>
@@ -90,8 +95,7 @@
 <li><code>PythonTools.verbose</code>: set True to see debug messages</li>
 </ul>
 <hr />
-<p><a id="autojump"></a></p>
-<h4>Autojump</h4>
+<h4><a id="autojump">Autojump</a></h4>
 <p>Smash ships with an integrated version of the wonderful <a href="https://github.com/joelthelion/autojump">autojump</a> command line tool, which uses information from change-dir to maintain a ranked list of flexible short cuts.  In other words after you've cd'd into /foo/bar/baz/qux at least once, you can use <code>j qux</code> or <code>jump qux</code> to take you there afterwards.  Tab completion over jump-destinations is automatically enabled so that <code>j qu&lt;TAB&gt;</code> does what you'd expect.</p>
 <h5>Commands:</h5>
 <ul>
@@ -101,9 +105,10 @@
 <ul>
 <li><code>_.AutoJump.verbose</code>: set True to see debug messages</li>
 </ul>
+<h5>Signals</h5>
+<p><em>Receives:</em> CHANGE_DIR</p>
 <hr />
-<p><a id="liquidprompt"></a></p>
-<h4>Liquidprompt</h4>
+<h4><a id="liquidprompt">Liquidprompt</a></h4>
 <p>This plugin provides prompt rendering via the wonderfully dynamic <a href="#https://github.com/nojhan/liquidprompt">liquidprompt tool</a>.  Liquidprompt has rich options for configuration and it's recommended that you <a href="https://github.com/nojhan/liquidprompt#features-configuration">configure it in the normal way</a>, but, some of these options can be overridden from <code>~/.smash/config.py</code> (see below).</p>
 <h5>Commands:</h5>
 <ul>
@@ -115,9 +120,10 @@
 <li><code>_.LiquidPrompt.float</code>: set True to insert more space around prompt</li>
 <li><code>_.LiquidPrompt.prompt_append</code>: set a suffix on the prompt ('\n&gt;' is a good one for legibility)</li>
 </ul>
+<h5>Signals</h5>
+<p><em>Receives:</em> UPDATE_PROMPT_REQUEST</p>
 <hr />
-<p><a id="cd-hooks"></a></p>
-<h4>Change directory hooks</h4>
+<h4><a id="cd-hooks">Change directory hooks</a></h4>
 <p>The CD hooks feature is mostly a service for other plugins to use. It adds a "directory changed" event to smash, which is useful for building stuff like automatic-activation rules (see for example the <a href="project_manager.html">project manager</a>.  New plugins can build hooks and subscribe to CD events, or you can just register a callback without writing a new plugin.  Here's a minimal example of what a callback would look like:</p>
 <pre><code class="python">    def test_change_message(bus, new, old):
         &quot;&quot;&quot; a demo for the CD hook &quot;&quot;&quot;
@@ -129,9 +135,10 @@
 <li><code>ChangeDirHooks.verbose</code>: set True to see debug messages</li>
 <li><code>ChangeDirHooks.change_dir_hooks.append('foo)</code>: add python dot-paths or shell commands as cd-hooks</li>
 </ul>
+<h5>Signals</h5>
+<p><em>Publishes:</em> CHANGE_DIR</p>
 <hr />
-<p><a id="dwim"></a></p>
-<h4>Do What I mean</h4>
+<h4><a id="dwim">Do What I mean</a></h4>
 <p><a id="dwim-suffix"></a>
 The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory changing, opening of urls, etc.  For a feature summary, see the input -&gt; action list below.</p>
 <table>
@@ -149,6 +156,21 @@ The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory ch
 <td>open with browser</td>
 </tr>
 <tr>
+<td>ftp://foo/bar</td>
+<td><em>(none)</em></td>
+<td>open with browser</td>
+</tr>
+<tr>
+<td>ssh://user@host</td>
+<td><em>(none)</em></td>
+<td>run ssh</td>
+</tr>
+<tr>
+<td>mosh://user@host</td>
+<td><em>(none)</em></td>
+<td>run mosh</td>
+</tr>
+<tr>
 <td>foo.bar</td>
 <td>is foo.bar executable?</td>
 <td>run as usual</td>
@@ -163,6 +185,16 @@ The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory ch
 <td>is bar a directory?</td>
 <td>change-dir to bar</td>
 </tr>
+<tr>
+<td>foo/bar</td>
+<td>is bar editable?</td>
+<td>open with editor</td>
+</tr>
+<tr>
+<td>foo/bar:ROW:COL:</td>
+<td>is bar editable?</td>
+<td>open with editor</td>
+</tr>
 </tbody>
 </table>
 <h5>Configuration Options:</h5>
@@ -170,9 +202,10 @@ The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory ch
 <li><code>DoWhatIMean.verbose</code>: set True to see debug messages</li>
 <li><code>DoWhatIMean.suffix_aliases</code>: map of <code>{file_extension -&gt; open_command}</code></li>
 </ul>
+<h5>Signals</h5>
+<p><em>Receives:</em> URL_INPUT, FILE_INPUT</p>
 <hr />
-<p><a id="virtualenv"></a></p>
-<h4>Virtual Environment</h4>
+<h4><a id="virtualenv">Virtual Environment</a></h4>
 <p>Smash has sophisticated virtualenv support which is useful particularly if you're working on multiple projects or working with multiple versions of the same requirements.  Activating/deactivating venvs is done with <code>venv_activate some_dir</code> and <code>venv_deactivate</code>, respectively.  This not only updates your $PATH, but updates the python runtime.  Modules from the new environment can now be imported directly, and side-effects from the old virtualenv are purged.  To activate and deactivate virtualenv's automatically, take a look at the <a href="/project_manager.html">project manager documentation</a>.</p>
 <h5>Commands:</h5>
 <ul>
@@ -183,12 +216,12 @@ The DoWhatIMean plugin supports zsh-style alias suffixes, automatic directory ch
 <ul>
 <li><code>VirtualEnv.verbose</code>: set True to see debug messages</li>
 </ul>
+<h5>Signals</h5>
 <hr />
-<p><a id="writing-new"></a></p>
-<h2>Writing new plugins</h2>
+<h2><a id="writing-new">Writing new plugins</a></h2>
 <p>Writing new plugins is fairly easy, but may not be necessary for your application (see the <a href="features.html#configuration">configuration summary</a> or the <a href="configuration.html">main configuration documentation</a>). If you do need to write a plugin, read on, but first a bit of background.  Smash is built on top of <a href="http://ipython.org/">IPython</a> and is in fact itself an IPython extension.  <em>Smash plugins are essentially ipython extensions which require smash</em>, but it can be useful to differentiate the terminology.  Before going much further it's probably a good idea to check out the existing IPython docs on <a href="http://ipython.org/ipython-doc/dev/config/extensions/">writing extensions</a>.</p>
 <p>If you want to do simple stuff like just writing new commands then a tutorials for <a href="http://catherinedevlin.blogspot.com/2013/07/ipython-helloworld-magic.html">writing IPython magic</a> will probably be all you need.</p>
-<p>If you want to get your hooks into smash-specific events like "directory change" or "virtual environment deactived" then read <a href="signals.html">this documentation</a> about the smash event system. For an example of writing new tab-completion stuff, check out <a href="https://raw.githubusercontent.com/mattvonrocketstein/smash/master/smashlib/plugins/fabric.py">the code for the fabric completer</a>.  For an example of input preprocessing see the <a href="#TODO">code for</a> the <a href="#TODO">currency converter</a>.  For an example of all-else-fails input processing (meaning input was neither bash nor python) see <a href="https://raw.githubusercontent.com/mattvonrocketstein/smash/master/smashlib/plugins/dwim.py">the code for</a> the <a href="#TODO">do-what-i-mean plugin</a></p>
+<p>If you want to get your hooks into smash-specific events like "directory change" or "virtual environment deactived" then read <a href="shell_use_cases.html#signals">this documentation</a> about the smash event system. For an example of writing new tab-completion stuff, check out <a href="https://raw.githubusercontent.com/mattvonrocketstein/smash/master/smashlib/plugins/fabric.py">the code for the fabric completer</a>.  For an example of input preprocessing see the <a href="#TODO">code for</a> the <a href="#TODO">currency converter</a>.  For an example of all-else-fails input processing (meaning input was neither bash nor python) see <a href="https://raw.githubusercontent.com/mattvonrocketstein/smash/master/smashlib/plugins/dwim.py">the code for</a> the <a href="#TODO">do-what-i-mean plugin</a></p>
 <hr /></div>
     </div>
 
