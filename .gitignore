@@ -8,4 +8,4 @@ dist/*
 *#*
 .coverage
 *venv*/*
-src/smash/output
+src/*/output
