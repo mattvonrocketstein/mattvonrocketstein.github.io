@@ -72,8 +72,8 @@
 <h2>Quickstart</h2>
 <p>The smash installation happens in a sandbox, does not require root, and will not interefere with existing versions of IPython.  The cost of this is that setup is a little bit nonstandard and <code>setup.py</code> should not be used directly unless you only want to develop against the support libraries (for that see: <a href="#dev-installation">dev installation</a>)</p>
 <pre><code class="bash">  $ export SMASH_BRANCH=master
-  $ export url=https://raw.githubusercontent.com/mattvonrocketstein/smash/$SMASH_BRANCH/bootstrap.sh
-  $ curl url|bash
+  $ export SMASH_URL=https://raw.githubusercontent.com/mattvonrocketstein/smash/$SMASH_BRANCH/bootstrap.sh
+  $ curl $SMASH_URL|bash
   $ ~/bin/smash
 </code></pre>
 
