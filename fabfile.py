@@ -10,7 +10,7 @@
 #
 #   * foo: bar, baz, qux
 #
-import os, re, sys
+import os, sys
 
 from fabric.api import env, run
 from fabric.colors import red

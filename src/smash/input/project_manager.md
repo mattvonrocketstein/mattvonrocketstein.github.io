@@ -30,7 +30,7 @@ In the sections below, you will find instructions on how to invoke operations an
 
 -------------------------------------------------------------------------------
 
-<a id="cmd-activate"></a>
+<a id="cmd-activate" href="#cmd-activate"></a>
 **Activating Projects** is done with a command like `proj.nickname`.  (Note: you can use tab-completion over project names).
 
 * Vagrant projects:
@@ -42,7 +42,7 @@ In the sections below, you will find instructions on how to invoke operations an
 
 -------------------------------------------------------------------------------
 
-<a id="cmd-deactivate"></a>
+<a href="#cmd-deactivate" id="cmd-deactivate"></a>
 **Deactivating Projects** usually isn't necessary because activating a new project will automatically deactivate the previous project.  To manually deactivate the current project, type `proj._deactivate` or `deactivate_project`.
 
 1. Vagrant projects:
@@ -52,8 +52,9 @@ In the sections below, you will find instructions on how to invoke operations an
 
 -------------------------------------------------------------------------------
 
-<a id="cmd-build"></a>
-**Building Projects** is done for the current project using `.build`, or for an arbitrary project using `build_project nickname`.
+
+<a id="cmd-build" href="#cmd-build">**Building Projects**</a> is done for the current project using `.build`, or for an arbitrary project using `build_project nickname`.
+
 * Python projects:
     * if tox.ini is present
         * runs `tox $TOX_BUILD_ARGS` *(set this up in the activation rules)*
@@ -63,19 +64,20 @@ In the sections below, you will find instructions on how to invoke operations an
     * if there are other markdown files, generate html
 
 -------------------------------------------------------------------------------
-<a id="cmd-check"></a>
 
-**Checking Projects** is done on the current project using `.check`, or on an arbitrary project using `check_project nickname`.
+<a id="cmd-check" href="#cmd-check">**Checking Projects**</a> is done on the current project using `.check`, or on an arbitrary project using `check_project nickname`.
+
 * Python projects:
-    * run flake8 but ignore any venvs
-* Documentation projects:
-    * got markdown?  if yes, then
-       * [grip](https://pypi.python.org/pypi/grip/) is started to view html
+    * `flake8` will be used if found, virtualenvs and tox will be ignored
+    * collects statistics about total problems and triages files
+* Haskell Projects:
+    * `hlint` will be used if found
+    * output is parsed for statistics about total problems
+
 
 -------------------------------------------------------------------------------
-<a id="cmd-test"></a>
 
-**Testing Projects** is done for the current project using `.test`, or on an arbitrary project `test_project nickname`.  It's difficult to guess in general how project tests should be run, but smash can detect or guess a few different patterns:
+<a id="cmd-test">**Testing Projects**</a> is done for the current project using `.test`, or on an arbitrary project `test_project nickname`.  It's difficult to guess in general how project tests should be run, but smash can detect or guess a few different patterns:
 * Python projects:
     * try using tox first if tox.ini found
         * runs `tox $TOX_TEST_ARGS` *(set this in the activation rules)*
@@ -83,9 +85,8 @@ In the sections below, you will find instructions on how to invoke operations an
         * if found, collect and attempt to run with pytest
 
 -------------------------------------------------------------------------------
-<a id="cmd-search"></a>
 
-**Searching inside a project** is blah blah blah blah blah.
+<a id="cmd-search">**Searching inside a project**</a> is blah blah blah blah blah.
 * Python projects:
     * try using tox first if tox.ini found
         * runs `tox $TOX_TEST_ARGS` *(set this in the activation rules)*

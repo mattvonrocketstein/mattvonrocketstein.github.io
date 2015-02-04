@@ -21,7 +21,9 @@ You'll need git in order for the smash bootstrap to clone the smash repo.  Also 
 The smash installation happens in a sandbox, does not require root, and will not interefere with existing versions of IPython.  The cost of this is that setup is a little bit nonstandard and `setup.py` should not be used directly unless you only want to develop against the support libraries (for that see: [dev installation](#dev-installation))
 
 ~~~~{.bash}
-  $ curl https://raw.githubusercontent.com/mattvonrocketstein/smash/master/bootstrap.sh | bash
+  $ export SMASH_BRANCH=master
+  $ export SMASH_URL=https://raw.githubusercontent.com/mattvonrocketstein/smash/$SMASH_BRANCH/bootstrap.sh
+  $ curl $SMASH_URL|bash
   $ ~/bin/smash
 ~~~~
 

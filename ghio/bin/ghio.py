@@ -1,16 +1,20 @@
 """ ghio.bin.ghio
 """
 import os
-from optparse import OptionParser
+import sys
+import time
 import threading
 import webbrowser
-import time
+from optparse import OptionParser
 
 from fabric.api import local
 
 from report import report
 from goulash.python import dirname, opj, ope
-
+URL = 'http://localhost:8080/'
+USAGE = '{0} subcommands are {1}'.format(
+    os.path.split(sys.argv[0])[-1],
+    'update build show init'.split())
 ghio_root = dirname(dirname(dirname(__file__)))
 src_root  = opj(ghio_root, 'src')
 
@@ -23,14 +27,20 @@ def _require_project_dir(fxn):
     return newf
 
 def build_parser():
-    parser = OptionParser()
+    parser = OptionParser(usage=USAGE)
     return parser
 
 @_require_project_dir
 def build(project):
+    """ build project from source """
     proot = opj(src_root, project)
     report("rebuilding "+proot)
     local("cd {0} && poole --build --base-url=project".format(proot))
+
+def init(project):
+    """ initialize new project """
+    local("cd {0} && poole --init --theme=foundation {1}".format(
+        src_root, project))
 
 @_require_project_dir
 def show(project):
@@ -38,8 +48,7 @@ def show(project):
     proot = opj(src_root, project)
     report("serving "+proot)
     def f():
-
-        webbrowser.open('http://localhost:8080/')
+        webbrowser.open(URL)
     threading.Thread(target=f).start()
     local("cd {0} && poole --serve".format(proot))
 
@@ -59,6 +68,7 @@ def update(project):
         ghio_root, project,'update '+project))
     local("git push")
 
+
 def main():
     opts,args = build_parser().parse_args()
     print opts,args
@@ -68,7 +78,7 @@ def main():
     try:
         cmd = eval(cmd)
     except NameError:
-        raise SystemExit('subcommands are {0}'.format('update build show'.split()))
+        raise SystemExit(USAGE)
 
     cmd(project)
 

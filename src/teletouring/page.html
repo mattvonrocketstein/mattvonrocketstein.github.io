@@ -24,7 +24,7 @@
       <ul class="title-area">
         <li class="name">
           <h1>
-            <a href="#">Horse Trekking</a>
+            <a href="#">Poole</a>
           </h1>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
@@ -35,13 +35,13 @@
           {%
             mpages = [p for p in pages if "menu-position" in p]
             mpages.sort(key=lambda p: int(p["menu-position"]))
-            entry = '<li class="%s"><a href="%s"> %s </a></li>'
+            entry = '<li class="%s"><a href="%s">%s</a></li>'
             for p in mpages:
                 style = p["title"] == page["title"] and "active" or ""
                 print(entry % (style, p["url"], hx(p["title"])))
           %}
           <li class="divider"></li>
-          <!--li class="has-dropdown"><a href="#">Poole</a>
+          <li class="has-dropdown"><a href="#">Poole</a>
             <ul class="dropdown">
               <li><a href="https://bitbucket.org/obensonne/poole">Website</a></li>
               <li><a href="https://bitbucket.org/obensonne/poole/wiki/Recipes">Recipes</a></li>
@@ -49,7 +49,7 @@
               <li class="divider"></li>
               <li><a href="https://news.ycombinator.com/item?id=4857473">Alternatives</a></li>
             </ul>
-          </li-->
+          </li>
         </ul>
       </section>
     </nav>
@@ -65,20 +65,6 @@
     <!-- Content -->
     <div class="row">
       <div class="large-12 columns">{{ __content__ }}</div>
-
-      <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'htghio';
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
 
     <div id="push"></div> <!-- push footer down -->
@@ -86,7 +72,7 @@
 
   <!-- Footer -->
   <hr />
-      <footer class="row">
+  <footer class="row">
     <div class="large-12 columns">
       <div class="row">
 
@@ -130,7 +116,8 @@
   <script src="js/foundation/foundation.tooltips.js"></script>
   <script src="js/foundation/foundation.topbar.js"></script>
   -->
-  <script>$(document).foundation();</script>
-
+  <script>
+    $(document).foundation();
+  </script>
 </body>
 </html>

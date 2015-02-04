@@ -10,12 +10,12 @@ Smash is a fundamentally just a wrapper on top of IPython.  You can expect every
 
 -------------------------------------------------------------------------------
 
-####Python Virtualenv Support
+####<a id="venvs">Python Virtualenv Support</a>
 Smash has sophisticated virtualenv support which is useful particularly if you're working on multiple projects or working with multiple versions of the same requirements.  Activating/deactivating venvs is done with `venv_activate some_dir` and `venv_deactivate`, respectively.  This not only updates your $PATH, but updates the python runtime.  Modules from the new environment can now be imported directly, and side-effects from the old virtualenv are purged.  For more details take a look at the [plugin documentation](plugins.html#virtualenv).  To activate and deactivate virtualenv's automatically, take a look at the [project manager documentation](/project_manager.html).
 
 -------------------------------------------------------------------------------
 
-####Macros
+####<a id="macros">Macros</a>
 
 Macros and command functions are similar to shell functions, meaning they are typically useful when you have in mind a piece of functionality that is: *(a)* more complex than an alias *(b)* interacting or sharing information with the shell itself, *(c)* too small or too idiosyncratic to merit it's own file in ~/bin.
 
@@ -23,7 +23,7 @@ Macros are an IPython concept, and simply correspond to a named array of input-l
 
 -------------------------------------------------------------------------------
 
-####Command functions
+####<a id="command-fxns">Command functions</a>
 
 **Command-functions** are python functions which are parsed into something that's more conveniently called from the command line.  For instance suppose you have a python function like this:
 
@@ -46,7 +46,7 @@ $ check_mail --source=gmail
 
 -------------------------------------------------------------------------------
 
-####Completion Support for Python Tools
+####<a id="completion">Completion Support for Python Tools</a>
 
 By default smash supports various completion options for common python tools like [Fabric](#), [IPython](#), [setup.py](#), [flake8](#)/[pyflakes](#) [tox](#), and other stuff you probably use on a daily basis.  Some of this is just option completion, but some is more interesting and dynamic (for example completion of task-names with fabric).  For a full description, take a look at the [plugin documentation](plugins.html#python-tools-completion)
 
