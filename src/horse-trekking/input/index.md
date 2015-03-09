@@ -1,7 +1,7 @@
 title: horse trekking Mongolia
 menu-position: 0
 ---
-![man on a horse](/images/htrek1.png =100x20)
+![man on a horse](/horse-trekking/images/htrek1.png =100x20)
 
 <a href="#intro">Intro</a> |
 <a href="#buying-horses">Buying horses</a> |
