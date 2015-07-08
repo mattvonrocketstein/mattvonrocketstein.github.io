@@ -1,0 +1,7 @@
+site_name: ghio
+theme: bootstrap
+repo_url: https://github.com/mattvonrocketstein/ghio.git
+site_author: mvr
+pages:
+- 'Home': 'index.md'
+- 'API Reference': 'api/index.html'
