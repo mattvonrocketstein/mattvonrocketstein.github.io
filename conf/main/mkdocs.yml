@@ -1,0 +1,9 @@
+site_name: mvr
+theme_dir: ../../glsh
+site_dir: ../../site
+docs_dir: ../../docs
+site_author: mvr
+pages:
+- 'Home': 'index.md'
+- 'Teletouring': 'travel/teletouring/index.md'
+- 'Horse-trekking': 'travel/horse-trekking/index.md'

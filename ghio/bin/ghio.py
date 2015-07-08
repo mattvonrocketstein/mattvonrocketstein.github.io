@@ -5,16 +5,20 @@ import sys
 import time
 import threading
 import webbrowser
-from optparse import OptionParser
+#from optparse import OptionParser
+from argparse import ArgumentParser
 
 from fabric.api import local
 
 from report import report
 from goulash.python import dirname, opj, ope
+
+COMMANDS = 'update build show init'.split()
 URL = 'http://localhost:8080/'
 USAGE = '{0} subcommands are {1}'.format(
     os.path.split(sys.argv[0])[-1],
-    'update build show init'.split())
+    COMMANDS)
+USAGE+='\n\nas in: "ghio build project-name"'
 ghio_root = dirname(dirname(dirname(__file__)))
 src_root  = opj(ghio_root, 'src')
 
@@ -27,7 +31,9 @@ def _require_project_dir(fxn):
     return newf
 
 def build_parser():
-    parser = OptionParser(usage=USAGE)
+    parser = ArgumentParser(usage=USAGE)
+    parser.add_argument('command')
+    parser.add_argument('project')
     return parser
 
 @_require_project_dir
@@ -35,7 +41,8 @@ def build(project):
     """ build project from source """
     proot = opj(src_root, project)
     report("rebuilding "+proot)
-    local("cd {0} && poole --build --base-url=project".format(proot))
+    local("cd {0} && poole --build --base-url={1}".format(
+        proot, os.path.split(proot)[-1]))
 
 def init(project):
     """ initialize new project """
@@ -70,17 +77,15 @@ def update(project):
 
 
 def main():
-    opts,args = build_parser().parse_args()
-    print opts,args
-    assert args
-    cmd = args[0]
-    project = args[1]
+    ns, extra = build_parser().parse_known_args()
+    cmd, project = ns.command, ns.project
     try:
         cmd = eval(cmd)
     except NameError:
-        raise SystemExit(USAGE)
-
-    cmd(project)
+        err = 'no such command "{0}", choose one of {1}'
+        err = err.format(cmd,COMMANDS)
+        raise SystemExit(err)
+    cmd(project)#, extra)
 
 if __name__=='__main__':
     main()
