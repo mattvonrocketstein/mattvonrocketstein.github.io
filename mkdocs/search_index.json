@@ -1,0 +1,84 @@
+{
+    "docs": [
+        {
+            "location": "/cv/", 
+            "text": "Matt Anderson 2015\n\n\nProgramming Languages\n\n\n\n\n10+ years experience with Python (expert)\n\n\n10+ years experience with shell (expert)\n\n\n3 years experience with Puppet (middling)\n\n\n5 years experience with Javascript (middling)\n\n\n4 years experience with Java \n C (very rusty now)\n\n\nHaskell, Scheme, Lisp off and on (mere enthusiast)\n\n\n\n\nDevOps, Automation, Etc\n\n\n\n\nJenkins/Hudson, Vagrant\n\n\nPuppet, fabric, boto\n\n\nAWS: Elasticbeanstalk, SQS, EC2, \n S3\n\n\nNagios, Graphite\n\n\nELK stack (mere enthusiast)\n\n\nAPM with vendors like Datadog \n Newrelic\n\n\n\n\nSpecial Expertise\n\n\n\n\nRESTful API design and best practices\n\n\nStrategies for devops, continuous integration\n\n\nPython: from functional to complex OO and crazy metaprogramming\n\n\nDjango: especially performance, automated testing, and admin mods\n\n\nRapid prototyping, feasibility studies, and project automation\n\n\nPlatform architecture \n configuration management\n\n\nMathematical modeling (e.g. Queueing, visualization, simulation)\n\n\n\n\nWeb Frameworks\n\n\n\n\nDjango: 7+ years of professional experience\n\n\nFlask \n Twisted: 4 years mixed professional/personal experience\n\n\n\n\nWebservers, DBs, Task Queues, etc\n\n\n\n\nNginx, Apache, \n Tornado\n\n\nRDBs: Postgres \n MySQL, with and without Amazon RDS\n\n\nNoSQL and friends:\n\n\nSolr 3 \n 4, strict and dynamic schemas\n\n\nCouchDB, Mongo, Redis\n\n\nZookeeper, DynamoDB\n\n\n\n\n\n\nRabbitMQ \n Celery, Amazon SQS\n\n\n\n\nEducation\n\n\n\n\nNo degree, ~85% of credits completed on Mathematics / CS double-major\n\n\nMostly at GeorgiaTech; a few credits from UC Berkeley\n\n\n\n\nWork experience\n\n\n\n\nUbiquitous Computing Laboratory, College of Computing, GaTech.\n\n\n(Undergraduate Researcher; 3 years)\n\n\nDARPA-funded research, mostly on gesture recognition\n\n\nCoauthor for technical paper; results now used in google glass!\n\n\nWork involved prototyping electronics, code, algorithms\n\n\n\n\n\n\nVanderbilt University, Learning Laboratory\n\n\n(Java web dev; summer internship)\n\n\nUsing Tomcat / Spring\n\n\nProduct was educational technology (distance learning)\n\n\n\n\n\n\nLots of random stupid startups \n contract programming\n\n\n(Freelance; 3 years)\n\n\nMostly websites; everything from social networking to e-commerce\n\n\nCooler projects include: Fleet-tracking with RT GPS data; VoIP apps\n\n\n\n\n\n\nCox Media Group\n\n\n(Software developer, Platform team; 4 years)\n\n\nSaw department grow from 10 developers to 50+\n\n\nQuickly built a monolithic core and had to tear it down into services\n\n\nInstrumental in defining our testing, docs, \n automation culture\n\n\nDesigned and implemented infrastructure testing strategies \n parallel testing\n\n\nHelped scaling existing legacy architecture and\n\n\nDesigned and implemented the AWS replacement with zero downtime\n\n\n\n\n\n\nNaxos Inc.\n\n\n(Consulting Software Architect; ongoing)\n\n\nDesign and implementation of cloud-based music services\n\n\nDesigned and implemented CI \n release procedures\n\n\nMigration of assets to AWS, misc automation\n\n\n\n\n\n\n\n\n\n\n\n\nOpen source\n\n\n\n\nSeveral libraries on PyPi: tunl, goulash, reporting\n\n\nContributor to jenkinsapi, IPython, fabric, haystack, and others\n\n\nAuthor of SmaSh shell ( http://mattvonrocketstein.github.io/smash )\n\n\nAuthor of toybox ( http://github.com/mattvonrocketstein/toybox )\n\n\nAuthor of ymir ( http://github.com/mattvonrocketstein/ymir )\n\n\n\n\nWorkflows of Choice\n\n\n\n\nArchitecture: microservices not monoliths!\n\n\nTeam: Given a choice, prefer agile with small teams\n\n\nInfrastructure: configured programmatically and deployed from images\n\n\nDevelopment: prefer API-first or docs-first approach, sometimes TDD\n\n\nEditor / VCS: Emacs; git with feature-branching and rebasing workflow\n\n\nOS: Linux (user since age 12!), lately as vbox guest in OSX host\n\n\nWM: XMonad\n\n\n\n\nAbout Me\n\n\n\n\n30 years old, American citizen\n\n\nAccomplished trekker, amateur mountaineer\n\n\nEnthusiastic cyclist, very bad kayak pilot\n\n\nSculptor, poet, and soccer player\n\n\nBook nerd, math geek, world traveler", 
+            "title": "Abbreviated CV"
+        }, 
+        {
+            "location": "/cv/#programming-languages", 
+            "text": "10+ years experience with Python (expert)  10+ years experience with shell (expert)  3 years experience with Puppet (middling)  5 years experience with Javascript (middling)  4 years experience with Java   C (very rusty now)  Haskell, Scheme, Lisp off and on (mere enthusiast)", 
+            "title": "Programming Languages"
+        }, 
+        {
+            "location": "/cv/#devops-automation-etc", 
+            "text": "Jenkins/Hudson, Vagrant  Puppet, fabric, boto  AWS: Elasticbeanstalk, SQS, EC2,   S3  Nagios, Graphite  ELK stack (mere enthusiast)  APM with vendors like Datadog   Newrelic", 
+            "title": "DevOps, Automation, Etc"
+        }, 
+        {
+            "location": "/cv/#special-expertise", 
+            "text": "RESTful API design and best practices  Strategies for devops, continuous integration  Python: from functional to complex OO and crazy metaprogramming  Django: especially performance, automated testing, and admin mods  Rapid prototyping, feasibility studies, and project automation  Platform architecture   configuration management  Mathematical modeling (e.g. Queueing, visualization, simulation)", 
+            "title": "Special Expertise"
+        }, 
+        {
+            "location": "/cv/#web-frameworks", 
+            "text": "Django: 7+ years of professional experience  Flask   Twisted: 4 years mixed professional/personal experience", 
+            "title": "Web Frameworks"
+        }, 
+        {
+            "location": "/cv/#webservers-dbs-task-queues-etc", 
+            "text": "Nginx, Apache,   Tornado  RDBs: Postgres   MySQL, with and without Amazon RDS  NoSQL and friends:  Solr 3   4, strict and dynamic schemas  CouchDB, Mongo, Redis  Zookeeper, DynamoDB    RabbitMQ   Celery, Amazon SQS", 
+            "title": "Webservers, DBs, Task Queues, etc"
+        }, 
+        {
+            "location": "/cv/#education", 
+            "text": "No degree, ~85% of credits completed on Mathematics / CS double-major  Mostly at GeorgiaTech; a few credits from UC Berkeley", 
+            "title": "Education"
+        }, 
+        {
+            "location": "/cv/#work-experience", 
+            "text": "Ubiquitous Computing Laboratory, College of Computing, GaTech.  (Undergraduate Researcher; 3 years)  DARPA-funded research, mostly on gesture recognition  Coauthor for technical paper; results now used in google glass!  Work involved prototyping electronics, code, algorithms    Vanderbilt University, Learning Laboratory  (Java web dev; summer internship)  Using Tomcat / Spring  Product was educational technology (distance learning)    Lots of random stupid startups   contract programming  (Freelance; 3 years)  Mostly websites; everything from social networking to e-commerce  Cooler projects include: Fleet-tracking with RT GPS data; VoIP apps    Cox Media Group  (Software developer, Platform team; 4 years)  Saw department grow from 10 developers to 50+  Quickly built a monolithic core and had to tear it down into services  Instrumental in defining our testing, docs,   automation culture  Designed and implemented infrastructure testing strategies   parallel testing  Helped scaling existing legacy architecture and  Designed and implemented the AWS replacement with zero downtime    Naxos Inc.  (Consulting Software Architect; ongoing)  Design and implementation of cloud-based music services  Designed and implemented CI   release procedures  Migration of assets to AWS, misc automation", 
+            "title": "Work experience"
+        }, 
+        {
+            "location": "/cv/#open-source", 
+            "text": "Several libraries on PyPi: tunl, goulash, reporting  Contributor to jenkinsapi, IPython, fabric, haystack, and others  Author of SmaSh shell ( http://mattvonrocketstein.github.io/smash )  Author of toybox ( http://github.com/mattvonrocketstein/toybox )  Author of ymir ( http://github.com/mattvonrocketstein/ymir )", 
+            "title": "Open source"
+        }, 
+        {
+            "location": "/cv/#workflows-of-choice", 
+            "text": "Architecture: microservices not monoliths!  Team: Given a choice, prefer agile with small teams  Infrastructure: configured programmatically and deployed from images  Development: prefer API-first or docs-first approach, sometimes TDD  Editor / VCS: Emacs; git with feature-branching and rebasing workflow  OS: Linux (user since age 12!), lately as vbox guest in OSX host  WM: XMonad", 
+            "title": "Workflows of Choice"
+        }, 
+        {
+            "location": "/cv/#about-me", 
+            "text": "30 years old, American citizen  Accomplished trekker, amateur mountaineer  Enthusiastic cyclist, very bad kayak pilot  Sculptor, poet, and soccer player  Book nerd, math geek, world traveler", 
+            "title": "About Me"
+        }, 
+        {
+            "location": "/work/", 
+            "text": "Ubiquitous Computing Laboratory, College of Computing, GaTech.\n\n\nUndergraduate Researcher, Atlanta 2004 - 2007\n\n\n*\n  * Involved in DARPA-funded research mostly on gesture recognition.\n  * Designed and prototyped lower power wireless infrared electronics for tracking hand and finger movements.\n  * Prototyped AI algorithms for rogue object detection in streams.\n  * Coauthor for \ntechnical paper\n; results now used in google glass!\n  * Learned to work with budget requirements, manage time, and work independently.\n\n\nVanderbilt University, Learning Laboratory\n\n\nSoftware developer, Nashville, 2008\n\n\n\n\nInterned in educational technology group developing software for distance learning\n\n\nProduct was highly interactive web application for online quizzes and other courseware\n\n\nWe used Java, Spring, and Tomcat.\n\n\n\n\nFreelance Contractor/Consultant\n\n\nSan Francisco 2008 - 2011\n\n\n\n\nMostly websites; everything from social networking to e-commerce\n\n\nCooler projects include: Fleet-tracking with RT GPS data; VoIP apps\n\n\n\n\n\n\n\n\nCox Media Group\n\n\nSoftware Developer; Senior software developer; Platform engineer\n\n\nOnsite in Atlanta 2010\n\n\nTelecommuter 2011-2015\n\n\n\n\n(Software developer, Platform team; 5 years; Telecommuter 2010-2015)\n\n\nSaw department grow from 10 developers to 50+\n\n\nQuickly built a monolithic core and had to tear it down into services\n\n\nInstrumental in defining our testing, docs, \n automation culture\n\n\nDesigned and implemented infrastructure testing strategies \n parallel testing\n\n\nHelped scaling existing legacy architecture and\n\n\nDesigned and implemented the AWS replacement with zero downtime\n\n\n\n\n\n\n\n\nNaxos, Inc.\n\n\nConsulting Software Architect; 2015 - present\n\n\n\n\nDesign and implementation of cloud-based music services\n\n\nDesigned and implemented CI \n release procedures\n\n\nMigration of assets to AWS, misc automation", 
+            "title": "Detailed Work Experience"
+        }, 
+        {
+            "location": "/projects/", 
+            "text": "Matt Anderson 2015\n\n\nDemos\n\n\nMy personal website is a simple python app built on top of flask and mongo for persisting a few simple models.  See for example a list of \nbooks I've read\n.  It also \nintegrates with the Goole+ API\n for tracking my photography and uses the \nthe Github API\n for tracking my code.\n\n\nCode Samples", 
+            "title": "Demos and Code Samples"
+        }, 
+        {
+            "location": "/projects/#demos", 
+            "text": "My personal website is a simple python app built on top of flask and mongo for persisting a few simple models.  See for example a list of  books I've read .  It also  integrates with the Goole+ API  for tracking my photography and uses the  the Github API  for tracking my code.", 
+            "title": "Demos"
+        }, 
+        {
+            "location": "/projects/#code-samples", 
+            "text": "", 
+            "title": "Code Samples"
+        }, 
+        {
+            "location": "/writing_sample/", 
+            "text": "", 
+            "title": "Design and Writing Samples"
+        }
+    ]
+}
