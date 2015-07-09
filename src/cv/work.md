@@ -1,6 +1,7 @@
-<div align=right>**Matt Anderson 2015**</div>
+<div align=right>Matt Anderson 2015</div>
 
-__**Naxos, Inc**__
+#### **Naxos, Inc**
+
 
 *Contracted Software Architect/Automation Engineer; 2015 - present*
 
@@ -14,9 +15,7 @@ __**Naxos, Inc**__
   * Addressed problems with existing manual data export tasks by creating automation for a more parallel ETL pipeline.  The old approach was a tangle of bash scripts, the new approach uses multiprocessing and SQS for messaging.
   * Gained experience working with Redis both as a developer and an administrator
 
-**Cox Media Group**
---------------------
-
+#### **Cox Media Group**
 
 *Software Developer; Senior software developer; Platform engineer*
 
@@ -45,8 +44,7 @@ __**Naxos, Inc**__
   * Wrote and maintained nagios checks
 
 
-**Freelance Software Developer**
-----------------------------------
+#### **Freelance Software Developer**
 
 *San Francisco 2008 - 2011*
 
@@ -54,8 +52,7 @@ __**Naxos, Inc**__
   * Designed and created a fleet-tracking solution for San Francisco tour company with a web app and a hardware device, using real-time GPS data.  I was responsible for everything from hardware selection to finished software.  Hardware platform was a vehicle-powered embedded linux device with a cellular data connection.  The device was used used to announce stops and and inform hotel/airport ETA information.
   * Customizations to php-based asterisk software for a call-center application
 
-**Learning Laboratory, Vanderbilt University **
-------------------------------------------------
+#### **Learning Laboratory, Vanderbilt University **
 
 *Software developer, Nashville, 2008*
 
@@ -63,8 +60,7 @@ __**Naxos, Inc**__
   * Product was highly interactive web application for online quizzes and other courseware using Java, Spring, and Tomcat.
   * Learned to work independently
 
-**Ubiquitous Computing Laboratory, College of Computing, GaTech.**
--------------------------------------------------------------------
+#### **Ubiquitous Computing Laboratory, College of Computing, GaTech.**
 
 *Undergraduate Researcher, Atlanta 2004 - 2007*
 

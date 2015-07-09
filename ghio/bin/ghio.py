@@ -48,7 +48,13 @@ def build(project):
         proot=opj(proot,project)
         report("rebuilding " + proot)
         local("cd {0} && mkdocs build".format(proot))
-
+        dest = os.path.dirname(src_root)
+        rendered_site = os.path.join(dest, 'site')
+        cmd = 'cp -rfv {0} "{1}"'.format(
+            os.path.join(rendered_site, '*'),
+            dest)
+        local(cmd)
+        #raise Exception,cmd
 
 def init(project):
     """ initialize new project """

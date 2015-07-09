@@ -55,7 +55,6 @@ div.source-links {
     display: block;
     padding: 5px 20px;
     z-index: 1;
-    font-size:.8em;
 }
 .bs-sidebar .nav > li > a:hover,
 .bs-sidebar .nav > li > a:focus {
