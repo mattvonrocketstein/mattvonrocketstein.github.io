@@ -1,10 +1,10 @@
 site_name: CV 2015
 theme_dir: ../../cv/style
 site_author: matt
-site_dir: ../../site
+site_dir: ../../../site
 docs_dir: ../../cv
 pages:
 - Abbreviated CV: 'cv.md'
 - Detailed Work Experience: 'work.md'
-- Demos and Code Samples: 'projects.md'
-- Design and Writing Samples: 'writing_sample.md'
+- Projects, Demos, Code Samples: 'projects.md'
+- Diagrams, Documentation Samples: 'samples.md'

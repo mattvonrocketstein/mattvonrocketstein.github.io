@@ -14,6 +14,7 @@ from report import report
 from goulash.python import dirname, opj, ope
 
 COMMANDS = 'update build show init'.split()
+COMMANDS = 'build'.split()
 URL = 'http://localhost:8080/'
 USAGE = '{0} subcommands are {1}'.format(
     os.path.split(sys.argv[0])[-1],
@@ -36,13 +37,18 @@ def build_parser():
     parser.add_argument('project')
     return parser
 
-@_require_project_dir
 def build(project):
     """ build project from source """
-    proot = opj(src_root, project)
-    report("rebuilding "+proot)
-    local("cd {0} && poole --build --base-url={1}".format(
-        proot, os.path.split(proot)[-1]))
+    proot = opj(src_root, 'conf')
+    if project =='all':
+        for pdir in [x for x in os.listdir(proot) if x]:
+            build(pdir)
+        return
+    else:
+        proot=opj(proot,project)
+        report("rebuilding " + proot)
+        local("cd {0} && mkdocs build".format(proot))
+
 
 def init(project):
     """ initialize new project """

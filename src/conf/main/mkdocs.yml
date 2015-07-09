@@ -1,6 +1,6 @@
 site_name: mvr
-theme_dir: ../../glsh
-site_dir: ../../site
+theme_dir: ../../../glsh
+site_dir: ../../../site
 docs_dir: ../../docs
 site_author: mvr
 pages:
