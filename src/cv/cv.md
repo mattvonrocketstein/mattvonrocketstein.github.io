@@ -1,4 +1,4 @@
-**Matt Anderson 2015**
+<div align=right><strong>Matt Anderson 2015</strong></div><br/>
 
 Programming Languages
 ---------------------
@@ -111,3 +111,9 @@ About Me
   * Enthusiastic cyclist, very bad kayak pilot
   * Sculptor, poet, and soccer player
   * Book nerd, math geek, world traveler
+
+Contact
+-------
+
+  * E-mail: mattvonrocketstein[at]gmail[dot]com
+  * Skype: mvr123456

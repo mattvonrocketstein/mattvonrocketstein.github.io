@@ -1,4 +1,4 @@
-<div align=right>Matt Anderson 2015</div>
+<div align=right><strong>Matt Anderson 2015</strong></div><br/>
 
 #### **Naxos, Inc**
 
@@ -29,7 +29,7 @@
   * Created internal and customer-facing APIs for everything from our "breaking news" alerts to metadata search features used by mobile apps
   * Created highly customized, responsive interfaces for the Django admin panel
   * Worked closely with multiple versions of Solr, pysolr, and haystack to implement site search
-  * Worked with celery and rabbitmq as both a developer and an administrator for work outside of application request/response cycle
+  * Worked with celery and rabbitmq as both a developer and an administrator for application tasks outside of application request/response cycle
   * Promoted to senior developer and "platform team" as department grew from 10 to 50+ developers
   * Was tasked with ensuring that sites could scale smoothly, both in terms of our application performance and in terms of our teams ability to collaborate
   * Helped to identify architectural problems and our technical debt, suggesting or implementing solutions

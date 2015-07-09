@@ -1,11 +1,13 @@
-**Matt Anderson 2015**
+<div align=right><strong>Matt Anderson 2015</strong></div><br/>
 
 Personal Projects
 ------------------
 
-   * [Spock](http://mattvonrocketstein.github.io/smash/) is a library I made for playing around with logic in python and also includes improvements I've made to the python [AI:MA](https://en.wikipedia.org/wiki/Artificial_Intelligence:_A_Modern_Approach) library.  The improvements fall into a few main categories: adding missing tests, improving the code to more idiomatically pythonic, and in a few cases adding missing features.
+   * [Spock](http://github.com/mattvonrocketstein/spock/) is a library I made for playing around with logic in python and also includes improvements I've made to the python [AI:MA](https://en.wikipedia.org/wiki/Artificial_Intelligence:_A_Modern_Approach) library.  The improvements fall into a few main categories: adding missing tests, improving the code to more idiomatically pythonic, and in a few cases adding missing features.
 
-  * [Tunl](http://mattvonrocketstein.github.io/tunl/) is a library and command-line utility for managing ssh tunnels on posix systems.  It's not super complicated, but it is documented, tested, and available on PyPi.
+   * [Smash](http://mattvonrocketstein.github.io/smash/) is an experimental command line shell for replacing bash with a hybrid system shell/python environment.  It is based on IPython
+
+* [Tunl](http://mattvonrocketstein.github.io/tunl/) is a library and command-line utility for managing ssh tunnels on posix systems.  It's not super complicated, but it is documented, tested, and available on PyPi.
 
   * [Ymir](https://github.com/mattvonrocketstein/ymir) is a command-line devops utility/library for describing and deploying services on EC2.  In many respects it is similar to [terraform](https://www.terraform.io/), and I wrote this mainly to learn more about puppet and fabric.
 

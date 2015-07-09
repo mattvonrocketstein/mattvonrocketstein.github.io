@@ -3,7 +3,7 @@
 
     
     <url>
-     <loc>None/</loc>
+     <loc>None/cv/</loc>
      <lastmod>2015-07-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -11,7 +11,7 @@
 
     
     <url>
-     <loc>None/travel/teletouring/</loc>
+     <loc>None/work/</loc>
      <lastmod>2015-07-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -19,7 +19,15 @@
 
     
     <url>
-     <loc>None/travel/horse-trekking/</loc>
+     <loc>None/projects/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/samples/</loc>
      <lastmod>2015-07-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
