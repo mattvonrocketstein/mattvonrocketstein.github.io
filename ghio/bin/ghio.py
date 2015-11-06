@@ -19,7 +19,7 @@ URL = 'http://localhost:8080/'
 USAGE = '{0} subcommands are {1}'.format(
     os.path.split(sys.argv[0])[-1],
     COMMANDS)
-USAGE+='\n\nas in: "ghio build project-name"'
+USAGE += '\n\nas in: "ghio build project-name"'
 ghio_root = dirname(dirname(dirname(__file__)))
 src_root  = opj(ghio_root, 'src')
 
@@ -40,7 +40,7 @@ def build_parser():
 def build(project):
     """ build project from source """
     proot = opj(src_root, 'conf')
-    if project =='all':
+    if project == 'all':
         for pdir in [x for x in os.listdir(proot) if x]:
             build(pdir)
         return

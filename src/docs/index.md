@@ -4,7 +4,8 @@ For full documentation visit [mkdocs.org](http://mkdocs.org).
 
 ## Travel
 
-* [Teletouring](travel/teletouring/)
+* [Teletouring](travel/teletouring/) (unfinished)
+* [Horse trekking](travel/horse-trekking/)
 
 ## Project layout
 

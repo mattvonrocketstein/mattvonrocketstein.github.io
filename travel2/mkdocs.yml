@@ -1,0 +1,9 @@
+site_name: ⚡
+theme_dir: glsh
+site_author: mvr
+site_dir: site
+pages:
+- Travel:
+    - Digital nomadism: 'index.md'
+    - Teletouring: 'teletouring/index.md'
+    - Horse Trekking: 'horse-trekking/index.md'
