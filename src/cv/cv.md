@@ -78,10 +78,21 @@ Work experience
      * Helped scaling existing legacy architecture and
      * Designed and implemented the AWS replacement with zero downtime
  * Naxos Inc.
-     * (Consulting Software Architect; ongoing)
+     * Consulting Software/Infrastructure Architect; 5 months
      * Design and implementation of cloud-based music services
+     * ETL data pipelines for quarterly data exports
      * Designed and implemented CI & release procedures
-        * Migration of assets to AWS, misc automation
+     * Migration of assets to AWS, misc automation
+ * Gannet Media
+     * Devops consultant, part time. On-going
+     * Migrated dozens of hosts with 50+ apps from rackspace to AWS
+     * Built out programmatic infrastructure,
+     * Replaced and improved legacy environments where there was no specification
+     * Formalized deployment and testing procedures that were previously adhoc
+ * Cerner
+     * Consulting software engineer; 4 months
+     * One of hundreds of engineers building massive healthcare platform as part of a DoD contract
+     * Championed the establishment of better software safety, including static analysis and encryption
 
 Open source
 ------------
@@ -110,7 +121,7 @@ About Me
   * Accomplished trekker, amateur mountaineer
   * Enthusiastic cyclist, very bad kayak pilot
   * Sculptor, poet, and soccer player
-  * Book nerd, math geek, world traveler
+  * Lit nerd, math geek, world traveler
 
 Contact
 -------

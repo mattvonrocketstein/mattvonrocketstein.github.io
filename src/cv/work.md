@@ -1,9 +1,23 @@
 <div align=right><strong>Matt Anderson 2015</strong></div><br/>
 
-#### **Naxos, Inc**
+#### ** Cerner Corp, Kansas City  // Consulting Software Engineer // 2015 - 2016 **
+
+  * 
+
+#### ** Gannett Media, Telecommuter // Devops and Automation Engineer // 2015 - Present **
 
 
-*Contracted Software Architect/Automation Engineer; 2015 - present*
+  * Acted in both a planning and execution role to migrate existing resources from rackspace to AWS
+  * During the migration, converted all ad-hoc infrastructure to more formal infrastructure-as-code
+  * Outfitted all services with monitoring (cabot) helping both developers and product owners sleep better
+  * Outfitted all services with and application performance metrics (via graphite+grafana)
+  * Created and deployed ELK stack, establishing procedures for centralized logging and reducing average time spent debugging production issues
+  * Improved deployment and testing automation for applications written in goland, node, python and php
+  * End result: safer and smoother operations which ultimately save more than $200k a year on hosting costs alone
+
+#### **Naxos, Inc, Telecommuter**
+
+*Software Architect / Automation Engineer; 2015 - present*
 
   * Designed and implemented key parts of cloud-based music services stack in AWS
   * System implements one-time downloads with mailinglist integration, using cloudfront as a CDN, written with Django on Elasticbeanstalk

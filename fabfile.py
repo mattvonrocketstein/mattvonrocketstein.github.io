@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# fabfile for pkg_name
+# fabfile for ghio
 #
 # this file is a self-hosting fabfile, meaning it
 # supports standard option parsing, including
@@ -20,14 +20,6 @@ from fabric.contrib.console import confirm
 _ope = os.path.exists
 _mkdir = os.mkdir
 _expanduser = os.path.expanduser
-
-def repackage():
-    local('python setup.py develop')
-    ans=confirm('proceed with pypi?')
-    if ans:
-        #with quiet():
-        local('python setup.py register -r pypi')
-        local('python setup.py sdist upload -r pypi')
 
 if __name__ == '__main__':
     # a neat hack that makes this file a "self-hosting" fabfile,
