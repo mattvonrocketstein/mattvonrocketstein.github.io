@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ymir</title>
+    <meta name="description" content="">
+    <meta name="author" content="mvr">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="../theme/html5.js"></script>
+        <![endif]-->
+
+    <!-- Styles -->
+    <link href="../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
+
+    <!-- Feeds -->
+
+
+
+
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="../">ymir</a>
+          <ul class="nav">
+            <li><a href="../pages/intro.html">Intro</a></li>
+            <li><a href="../pages/installation.html">Installation</a></li>
+            <li><a href="../pages/usage.html">Quick Start</a></li>
+            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
+            <li><a href="../pages/service-operations.html">Service Operations</a></li>
+            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+          </ul>
+          <p class="pull-right">
+            <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
+            <a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+          <h3>Links</h3>
+          <ul>
+            <li><a href="https://github.com/mattvonrocketstein/ymir/">Source code</a></li>
+            <li><a href="https://github.com/mattvonrocketstein/ymir/issues">Issues</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <div class='page'>
+                <div class="page-header"><h1>Service Descriptions</h1></div>
+                <div><h1><a name="service-descriptions">Service Descriptions</a></h1>
+<p>Service descriptions are structured service metadata which you can find stored in <code>service.json</code> files.  Particularly important fields which you will definitely want to override are described in the paragraphs below.</p>
+<p>The <em>security_groups</em> field defines which AWS security groups this service will belong to.  Ymir may eventually contain helpers for <em>building</em> security groups, but at the moment these should probably be constructed by hand in advance.</p>
+<p>Both the <em>setup_list</em> and <em>provision_list</em> fields both describe a list puppet files which will be invoked in standalone-mode on the remote host, in the order they are listed.  For more information on the difference between setup and provisioning, please see <a href="">this section</a> of the <em>service operations</em> documentation.</p>
+<p>The <em>key_name</em> and <em>pem</em> fields are critical for authenticating with your service to complete updates, etc.  The <em>key_name</em> field refers to a named AWS key, and the <em>pem</em> field should be a path that points to your corresponding AWS private key file.  If you don't already have a key and pem file, you can create this data using ymir: see <a href="#">this section</a> of the usage-overview documentation.</p>
+<table>
+<thead>
+<tr>
+<th>Field name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>org_name</td>
+<td>string</td>
+<td>the organization responsible for this service</td>
+</tr>
+<tr>
+<td>app_name</td>
+<td>string</td>
+<td>the application this service is a part of</td>
+</tr>
+<tr>
+<td>env_name</td>
+<td>string</td>
+<td>the environment name (suggested value: one of dev/test/prod)</td>
+</tr>
+<tr>
+<td>service_name</td>
+<td>string</td>
+<td>the name of this service</td>
+</tr>
+<tr>
+<td>service_description</td>
+<td>string</td>
+<td>a human-friendly description of this service</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td org_name="org_name">name of this instance (suggested value: </td>
+</tr>
+<tr>
+<td>ymir_debug</td>
+<td>bool</td>
+<td>whether ymir is in debug mode</td>
+</tr>
+<tr>
+<td>s3_buckets</td>
+<td>list_of_strings</td>
+<td>s3 buckets associated with this service</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>list_of_strings</td>
+<td>AWS tags which are associated with service instance</td>
+</tr>
+<tr>
+<td>logs</td>
+<td>list_of_strings</td>
+<td>absolute paths to important logfiles on this service</td>
+</tr>
+<tr>
+<td>elastic_ips</td>
+<td>list_of_strings</td>
+<td>elastic IP addresses associated with this service</td>
+</tr>
+<tr>
+<td>ami</td>
+<td>string</td>
+<td>AMI used when this service is initially created</td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>username used for sshing into service for provisioning, etc</td>
+</tr>
+<tr>
+<td>instance_type</td>
+<td>string</td>
+<td>aws instance type used when creating this service</td>
+</tr>
+<tr>
+<td>pem</td>
+<td>string</td>
+<td>a path to a keyfile on localhost that is used for sshing into the service</td>
+</tr>
+<tr>
+<td>key_name</td>
+<td>string</td>
+<td>AWS key used when creating this instance</td>
+</tr>
+<tr>
+<td>setup_list</td>
+<td>list_of_strings</td>
+<td>a list of instructions to carry out during service setup phase</td>
+</tr>
+<tr>
+<td>provision_list</td>
+<td>list_of_strings</td>
+<td>a list of instructions to carry out during service provision phase</td>
+</tr>
+<tr>
+<td>security_groups</td>
+<td>list_of_strings</td>
+<td>a list of AWS security groups this service will belong to</td>
+</tr>
+<tr>
+<td>health_checks</td>
+<td _check_type_="[check_type," check_argument_="check_argument]," class="." name:="name:"></td>
+<td>a hash of named checks that can be performed against this service</td>
+</tr>
+<tr>
+<td>service_defaults</td>
+<td key:="key:" value="value"></td>
+<td>free form schema-free subsection, typically used for holding application configuration data, puppet facts, etc</td>
+</tr>
+</tbody>
+</table></div>
+        </div>
+        <footer>
+          <p>&copy; mvr</p>
+        </footer>
+      </div>
+
+    </div>
+  </body>
+</html>

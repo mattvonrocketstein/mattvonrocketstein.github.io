@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ymir</title>
+    <meta name="description" content="">
+    <meta name="author" content="mvr">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="./theme/html5.js"></script>
+        <![endif]-->
+
+    <!-- Styles -->
+    <link href="./theme/bootstrap.min.css" rel="stylesheet">
+    <link href="./theme/local.css" rel="stylesheet">
+    <link href="./theme/pygments.css" rel="stylesheet">
+
+    <!-- Feeds -->
+
+
+
+
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="./">ymir</a>
+          <ul class="nav">
+            <li><a href="./pages/intro.html">Intro</a></li>
+            <li><a href="./pages/installation.html">Installation</a></li>
+            <li><a href="./pages/usage.html">Quick Start</a></li>
+            <li><a href="./pages/service-description.html">Service Descriptions</a></li>
+            <li><a href="./pages/service-operations.html">Service Operations</a></li>
+            <li><a href="./pages/service-implementations.html">Service Implementations</a></li>
+          </ul>
+          <p class="pull-right">
+            <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
+            <a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+          <h3>Links</h3>
+          <ul>
+            <li><a href="https://github.com/mattvonrocketstein/ymir/">Source code</a></li>
+            <li><a href="https://github.com/mattvonrocketstein/ymir/issues">Issues</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <div class='page'>
+                <div class="page-header"><h1>Intro</h1></div>
+                <div><h1><a name="about">What is ymir for?</a></h1>
+<p>Ymir can be used to generate project boilerplate which combines fabric, boto, and puppet to create, setup, provision and control EC2 services (and, more experimentally, Elasticbeanstalk services).</p>
+<p>After services are instantiated, it can help you with command-and-control and there is <a href="service-operations.html">lots of functionality</a> out of the box.  Think of it as "glue code" that can help lay out project skeletons and give you a concise and relevant vocabulary for service description.   It's designed to (at least theoretically) help with creation, provisioning, etc <em>in general</em> regardless of the instance OS, but for now at least, some parts of it might still be specific to Ubuntu servers.  More specifically,</p>
+<ul>
+<li><a href="http://boto.readthedocs.org/en/latest/">Boto</a> is used for AWS automation (ex: creating EC2 instance from AMI)</li>
+<li><a href="http://docs.fabfile.org/en/latest/tutorial.html">Fabric</a> is used for command execution on local and remote hosts, and control automation after services are created</li>
+<li><a href="https://puppetlabs.com/puppet/what-is-puppet">Puppet</a> normally describes how services will be provisioned (ex: installing system packages) but,</li>
+<li>You can also <a href="#">use fabric, shell, or ansible</a> for provisioning.</li>
+</ul>
+<h1><a name="philosophy">Philosophy and future development</a></h1>
+<p>Ymir is obviously Yet Another Devops Tool in a rapidly expanding and sometimes <a href="#">bewildering toolbox</a>, which may or may not make you sigh in frustration.  I built this to learn more about fabric, boto, and puppet while scratching my own itch for automation.  In the end though it's become more than a learning project, and is stable enough for production use.  So is it like <a href="#">docker</a> or <a href="#">ansible</a>?  Or maybe <a href="#">packer</a>?  How does it compare with <a href="#">vagrant</a> or <a href="#">cloud formation</a> or <a href="#">terraform</a>?  Why doesn't it use <a href="#">salt</a> or <a href="#">chef</a>?  OMG, I don't know!  But I do strongly believe that <em>sufficiently advanced abstractions are indistinguishable from obfuscation</em> and I think this is a bad thing.  Therefore,</p>
+<ul>
+<li>Ymir has a specific focus on EC2 at this point, and configuring digital ocean or rackspace instances, etc, is not a priority.</li>
+<li>Ymir allows you to easily use puppet in stand-alone mode, similar to how you might use ansible.. there are no puppetmaster daemons or additional servers to setup.</li>
+<li>Ymir simply stores service configuration variables as json in a normal file in version control, and</li>
+<li>Because a "service" is typically an instance plus an application, instance descriptions and application configuration may live side by side in <a href="#">service.json</a> files if you so choose.</li>
+</ul>
+<p>At some point it might make sense for ymir configuration data to "compile" to terraform or cloudformation configuration.. that option will become attractive the moment it helps me avoid additional work by leveraging prior art.  I'm not dogmatically attached to the underlying mechanisms ymir uses but I am attached to the simplicity of it's interface.</p></div>
+        </div>
+        <footer>
+          <p>&copy; mvr</p>
+        </footer>
+      </div>
+
+    </div>
+  </body>
+</html>
