@@ -56,21 +56,30 @@
       <div class="content">
         <div class='page'>
                 <div class="page-header"><h1>Installation</h1></div>
-                <div><h1><a name="installation">INSTALLATION</a></h1>
-<p><strong>Prerequisites:</strong> A simple python setup for your platform, basically python, python-dev, &amp; python-virtualenv.  For debian you can use a one-liner like <code>sudo apt-get install python python-dev python-virtualenv</code>.</p>
-<p><strong>Installation:</strong></p>
-<div class="highlight"><pre>  <span class="nv">$ </span>git clone https://github.com/mattvonrocketstein/ymir.git
-  <span class="nv">$ </span><span class="nb">cd </span>ymir
-  <span class="nv">$ </span>virtualenv venv
-  <span class="nv">$ </span><span class="nb">source </span>venv/bin/activate
-  <span class="nv">$ </span>pip install -r requirements.txt
-  <span class="nv">$ </span>python setup.py develop
+                <div><h3>Prerequisites:</h3>
+<p>A simple python setup for your platform, basically python, python-dev, &amp; python-virtualenv.  For debian you can use a one-liner like this:</p>
+<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python python-dev python-virtualenv
+</pre></div>
+
+
+<h3>Installation:</h3>
+<div class="highlight"><pre><span class="nv">$ </span>git clone https://github.com/mattvonrocketstein/ymir.git
+<span class="nv">$ </span><span class="nb">cd </span>ymir
+<span class="nv">$ </span>virtualenv venv
+<span class="nv">$ </span><span class="nb">source </span>venv/bin/activate
+<span class="nv">$ </span>pip install -r requirements.txt
+<span class="nv">$ </span>python setup.py develop
 </pre></div>
 
 
 <p>To test if it worked, try running <code>ymir version</code>.</p>
-<p><strong>Suggested software:</strong>
-    * <a href="https://rubygems.org/gems/metadata-json-lint">Puppet metadata validator</a></p></div>
+<h3>Suggested software:</h3>
+<p>Stuff that you might need, depending on how you intend to provision stuff:</p>
+<ul>
+<li><a href="https://www.ansible.com/">Ansible</a></li>
+<li><a href="http://puppet-lint.com/">Puppet linter</a></li>
+<li><a href="https://rubygems.org/gems/metadata-json-lint">Puppet metadata validator</a></li>
+</ul></div>
         </div>
         <footer>
           <p>&copy; mvr</p>
