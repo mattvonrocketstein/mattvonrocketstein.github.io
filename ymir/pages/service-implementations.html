@@ -28,12 +28,13 @@
         <div class="container-fluid">
           <a class="brand" href="../">ymir</a>
           <ul class="nav">
-            <li><a href="../pages/intro.html">Intro</a></li>
+            <li><a href="../">About</a></li>
             <li><a href="../pages/installation.html">Installation</a></li>
             <li><a href="../pages/usage.html">Quick Start</a></li>
             <li><a href="../pages/service-description.html">Service Descriptions</a></li>
             <li><a href="../pages/service-operations.html">Service Operations</a></li>
             <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
           </ul>
           <p class="pull-right">
             <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
@@ -46,7 +47,19 @@
     <div class="container-fluid">
       <div class="sidebar">
         <div class="well">
-          <h3>Links</h3>
+          <h3>TOC</h3>
+          <ul>
+            <li><a href="../">About</a></li>
+            <li><a href="../pages/installation.html">Installation</a></li>
+            <li><a href="../pages/usage.html">Quick Start</a></li>
+            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
+            <li><a href="../pages/service-operations.html">Service Operations</a></li>
+            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          </ul>
+        </div>
+        <div class="well">
+          <h3>Other Links</h3>
           <ul>
             <li><a href="https://github.com/mattvonrocketstein/ymir/">Source code</a></li>
             <li><a href="https://github.com/mattvonrocketstein/ymir/issues">Issues</a></li>
@@ -56,9 +69,66 @@
       <div class="content">
         <div class='page'>
                 <div class="page-header"><h1>Service Implementations</h1></div>
-                <div><h1><a name="service-implementation">SERVICE IMPLEMENTATION</a></h1>
-<p><em>Service implementation</em> is currently achieved with puppet code, but eventually ymir might support chef or shell.
-  Pull requests welcome!  Until this feature is added, invoking shell or chef <em>from</em> puppet may be the best option.</p></div>
+                <div><h2>Prerequisite reading</h2>
+<p>Provisioning your service is accomplished via the <a href="service-descriptions.html">service description</a> fields <em>setup_list</em> and <em>provision_list</em>, and via the <a href="service-operations.html">service operation</a> <code>fab setup</code> and <code>fab provision</code>.  If you haven't reviewed what service descriptions and service operations are all about yet, you might want to read that first.</p>
+<p>Also another bit of terminology.. on this page, "local" means you are executing a command that runs for example on your friendly neighborhood build bot or a developers laptop.  The service being provisioned is normally referred to as the "remote".  Also note that some of the examples on this page may make use of the <a href="#">templating capabilities of ymir service descriptions</a></p>
+<h2>Provisioning with puppet</h2>
+<p>By default, the field <em>ymir_build_puppet</em> is set to true inside service-descriptions.  Whenever puppet support is enabled, puppet will be compiled from scratch by ymir during the <code>fab setup</code> phase, so you do not need to choose an AMI that includes it out of the box.  Note: The <code>fab setup</code> command uses <a href="https://github.com/icy/pacapt#description">pacapt</a> to install system packages that are prerequisites for the puppet build, so in theory it doesn't matter whether the remote side is Ubuntu or Centos, etc.</p>
+<p>To avoid the complexity of puppet masters, hiera, etc, Ymir always invokes puppet in "stand-alone" mode by copying puppet files from the local machine to the remote service with rsync, then using "puppet apply".  For better or worse (I think it's better) the overall effect is that puppet acts somewhat more like ansible.</p>
+<h4>Adding new puppet dependencies</h4>
+<p>Puppet dependencies are managed via <a href="https://github.com/rodjek/librarian-puppet">puppet-librarian</a>, and specified in <code>&lt;service_root&gt;/puppet/metadata.json</code> and refreshed whenever the <code>fab setup</code> operation is invoked.</p>
+<h4>Service descriptions may publish puppet facts</h4>
+<p>Strings mentioned inside the <strong>service_defaults</strong> field of your <code>service.json</code> file are available as puppet facts.  You may also like to review how <a href="#">service descriptions are themselves templated</a>.  For instance, if your <code>service.json</code> looks like this:</p>
+<div class="highlight"><pre><span></span>{
+   ... lots of ymir key/values here ...
+   provision_list: [
+     &quot;puppet://puppet/install_daemon.pp&quot;,
+   ],
+   service_defaults : {
+     daemon_port: &quot;1337&quot;,
+     daemon_config_file: &quot;/etc/daemon.conf&quot;
+   },
+
+   ...lots more ymir key/values here ...
+}
+</pre></div>
+
+
+<p>Then your puppet file at <code>&lt;service_root&gt;/puppet/install_daemon.pp</code> might look like this:</p>
+<div class="highlight"><pre><span></span><span class="x">file { &quot;${daemon_config_file}&quot;:</span>
+<span class="x">  ensure  =&gt; file,</span>
+<span class="x">  content =&gt; inline_template(&quot; port = </span><span class="cp">&lt;%=</span> <span class="vi">@daemon_port</span> <span class="cp">%&gt;</span><span class="x">&quot;),</span>
+<span class="x">}</span>
+</pre></div>
+
+
+<h2>Provisioning with other stuff</h2>
+<h4>Provisioning with abritrary local commands</h4>
+<p>To install a package on the remote side using a local command for example, your service.json file could look something like the example below.</p>
+<div class="highlight"><pre><span></span>{
+  ...lots of ymir key/values...
+
+  provision_list: [
+    &quot;local://ssh -i {key_file} {username}@{host} sudo apt-get install some_package&quot;,
+  ]
+
+  ...lots of other ymir key/values...
+}
+</pre></div>
+
+
+<h4>Provisioning with abritrary remote commands</h4>
+<p>To install a package on the remote side using a remote command for example, your service.json file could look something like the example below.</p>
+<div class="highlight"><pre><span></span>{
+  ...lots of ymir key/values...
+
+  provision_list: [
+    &quot;remote://sudo apt-get install some_package&quot;,
+  ]
+
+  ...lots of other ymir key/values...
+}
+</pre></div></div>
         </div>
         <footer>
           <p>&copy; mvr</p>

@@ -28,12 +28,13 @@
         <div class="container-fluid">
           <a class="brand" href="../">ymir</a>
           <ul class="nav">
-            <li><a href="../pages/intro.html">Intro</a></li>
+            <li><a href="../">About</a></li>
             <li><a href="../pages/installation.html">Installation</a></li>
             <li><a href="../pages/usage.html">Quick Start</a></li>
             <li><a href="../pages/service-description.html">Service Descriptions</a></li>
             <li><a href="../pages/service-operations.html">Service Operations</a></li>
             <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
           </ul>
           <p class="pull-right">
             <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
@@ -46,7 +47,19 @@
     <div class="container-fluid">
       <div class="sidebar">
         <div class="well">
-          <h3>Links</h3>
+          <h3>TOC</h3>
+          <ul>
+            <li><a href="../">About</a></li>
+            <li><a href="../pages/installation.html">Installation</a></li>
+            <li><a href="../pages/usage.html">Quick Start</a></li>
+            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
+            <li><a href="../pages/service-operations.html">Service Operations</a></li>
+            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          </ul>
+        </div>
+        <div class="well">
+          <h3>Other Links</h3>
           <ul>
             <li><a href="https://github.com/mattvonrocketstein/ymir/">Source code</a></li>
             <li><a href="https://github.com/mattvonrocketstein/ymir/issues">Issues</a></li>
@@ -56,34 +69,66 @@
       <div class="content">
         <div class='page'>
                 <div class="page-header"><h1>Service Operations</h1></div>
-                <div><h1><a name="service-operations">Service Operations</a></h1>
-<p><em>Service operations</em> are "command and control" helpers for your service.  Operations are always <a href="http://docs.fabfile.org/en/latest/usage/fab.html">fabric commands</a> which are <em>invoked</em> from your local environment (or from a buildbot like <a href="https://jenkins-ci.org/">jenkins</a>) but are <em>executed</em> on your AWS-based service.  Authentication with the remote side happens transparently and automatically, provided your keypair is setup correctly in your <a href="#service-description">service description</a>.   <em>To execute operations</em>, cd into the directory for your your service and type <code>fab operation_name</code>.  If you're willing to write code and especially if you're familiar with python and fabric, you can define new operations of any kind at any time.  By default though, several operations are already defined for you automatically and they are described below.</p>
+                <div><p><em>Service operations</em> are "command and control" helpers for your service.  Operations are always <a href="http://docs.fabfile.org/en/latest/usage/fab.html">fabric commands</a> which are <em>invoked</em> from your local environment (or from a buildbot like <a href="https://jenkins-ci.org/">jenkins</a>) but are <em>executed</em> on your AWS-based service.  Authentication with the remote side happens transparently and automatically, provided your <a href="#service-description">service description</a> is setup correctly.   <em>To execute operations</em>, cd into the directory for your your service and type <code>fab &lt;operation_name&gt;</code>.  If you're willing to write code and especially if you're familiar with python and fabric, you can easily define new operations of any kind at any time.  By default though, several operations are already defined for you automatically and they are described below.</p>
 <table>
-
 <tr><th>Operation</th><th>Description</th></tr>
 
-<tr><td class=td_operation>fab validate</td><td>attempts to validate configuration files for sanity, useful to execute before `fab create`</td></tr>
+<tr><td class=td_operation>fab validate</td><td>
+Attempts to validate `service.json` files and other configuration files for sanity.  Useful to execute before `fab create`.
+</td></tr>
 
-<tr><td class=td_operation>fab create</td><td>creates your EC2 instance according to the specification in the `service.json` file (which is in the same directory as the fabfile).  To force creation even when your service is already present, use `fab create:force=True`</td></tr>
+<tr><td class=td_operation>fab create</td><td>
+Creates your EC2 instance according to the specification in the `service.json` file (which is normally in the same directory as the fabfile).  To force creation even when your service is already present, use `fab create:force=True`
+</td></tr>
 
-<tr><td class=td_operation>fab setup</td><td>operation should typically occur after `create` and before `provision`.  Setup is often slow because it needs to do things like updates for apt or yum.  Setup must be reinvoked if puppet dependencies change</td></tr>
+<tr><td class=td_operation>fab setup</td><td>
+The setup operation should typically occur after "create" and before "provision".  Setup is safe to invoke repeatedly, but is separated from "provision" because it often involves very slow steps like updates for apt or yum.  Setup can be reinvoked if <a href=#>puppet dependencies</a> change, or if you wish to resynchronize things like tags, s3 buckets, or elastic IPs.  More information about the "setup" phase is available <a href=#>here</a>.
+</td></tr>
 
-<tr><td class=td_operation>fab provision</td><td>typically occurs after setup and executes the bulk of provisioning code.  This step should do things like clone or update code repos on the service host, add or update files from templates, etc.  It should run fast and be idempotent</td></tr>
+<tr><td class=td_operation>fab provision</td><td>
+The provision operation typically occurs after "setup" and executes the bulk of provisioning code.  This step should do things like clone or update code repos on the service host, add or update files from templates, etc.  It should always run fast and be idempotent.  More information about the "provision" phase is available <a href=#>here</a>.
+</td></tr>
 
-<tr><td class=td_operation> fab status</td><td>shows service status, including IP address, EC2 status, etc.  It also displays (but does not check) URLs which might be useful when running health tests on this service.</td></tr>
-<tr><td class=td_operation> fab check</td><td>runs health checks on the service.  The idea is to provide a simple starting point for integration with more sophisticated health monitoring with stuff like nagios</td></tr>
+<tr><td class=td_operation> fab status</td><td>
+The "status" operation shows service status, including IP address, EC2 status, etc.  It also displays (but does not check) URLs which might be useful when running health tests on this service.</td></tr>
 
-<tr><td class=td_operation>fab *ssh*</td><td>operation simply connects to the service.  Apart from normal system administration or inspecting the service, this is good to use when you suspect that other operations might be failing because of AWS keypair issues</td></tr>
-<tr><td class=td_operation>fab run</td><td>operation runs a single command on the remote host as the default user.  Very useful for tailing logs and such</td></tr>
+<tr><td class=td_operation> fab check</td><td>
+The "check" operation runs health checks on the service.  The idea is to provide a simple starting point for integration with more sophisticated health monitoring via stuff like periodic jenkins jobs, nagios, etc.
+</td></tr>
 
-<tr><td class=td_operation>fab show</td><td></td></tr>
-<tr><td class=td_operation></td><td>operation integrates with your local browser to opens every webpage that `fab check` operation would have been looking at</td></tr>
+<tr><td class=td_operation>fab ssh</td><td>
+The "ssh" operation simply connects to the service.  Apart from normal system administration or inspecting the service, this is good to use when you suspect that other operations might be failing because of AWS keypair issues.
+</td></tr>
 
-<tr><td class=td_operation>fab test</td><td>operation is intended to be an entry point for running integration tests on your service.  By default the `test` operation looks at everything that the *check* operation does, plus extra stuff (see [this section](#) of the service description documentation for more information about how to configure integration tests)</td></tr>
-<tr><td class=td_operation>fab s3</td><td>summarizes contents of the s3 buckets your service defines, if any</td></tr>
-<tr><td class=td_operation>fab get</td><td>scp "get" for this service.  takes one argument (the remote file) and always saves to the working directory</td></tr>
-<tr><td class=td_operation>fab put</td><td>scp "put" for this service</td></tr>
-<tr><td class=td_operation>fab freeze</td><td>freeze a (running) service to an AMI (not fully implemented yet)</td></tr>
+<tr><td class=td_operation>fab mosh</td><td>
+The "mosh" operation connects to the service using [mosh](https://mosh.mit.edu/).  It is required that mosh already be installed on the remote side, and your security group has openings for the correct ports.
+</td></tr>
+
+<tr><td class=td_operation>fab run</td><td>
+The "run" operation runs a single command on the remote host as the default user.  Useful for tailing logs and such.
+</td></tr>
+
+<tr><td class=td_operation>fab show</td><td>
+The "show" operation invokes your local webbrowser to open every webpage that `fab check` operation would have been looking at.
+</td></tr>
+
+<tr><td class=td_operation>fab test</td><td>
+The "test" operation is intended to be an entry point for running integration tests on your service.  By default the "test" operation looks at everything that the "check" operation does, plus extra stuff (see [this section](#) of the service description documentation for more information about how to configure integration tests)
+</td></tr>
+
+<tr><td class=td_operation>fab s3</td><td>
+The "s3" operation summarizes contents of the s3 buckets your service defines, if any.
+</td></tr>
+<tr><td class=td_operation>fab get</td><td>
+The "get" operation is a shortcut for "scp get" commands against this service.   It takes one argument (the remote file) and always saves to the working directory.  Under the hood, this uses <a href="http://docs.fabfile.org/en/1.0.0/api/core/operations.html#fabric.operations.get">fabric.operations.get</a>.
+</td></tr>
+
+<tr><td class=td_operation>fab put</td><td>
+The "put" operation is a shortcut for "scp put" commands against this service.  It takes two arguments, namely the local file and the remote destination.  Under the hood, this uses <a href="http://docs.fabfile.org/en/1.0.0/api/core/operations.html#fabric.operations.put">fabric.operations.put</a>.
+</td></tr>
+<tr><td class=td_operation>fab freeze</td><td>
+The "freeze" operation saves the current service to an AMI <font color=red>(not implemented yet)</font>
+</td></tr>
 </table></div>
         </div>
         <footer>

@@ -28,12 +28,13 @@
         <div class="container-fluid">
           <a class="brand" href="../">ymir</a>
           <ul class="nav">
-            <li><a href="../pages/intro.html">Intro</a></li>
+            <li><a href="../">About</a></li>
             <li><a href="../pages/installation.html">Installation</a></li>
             <li><a href="../pages/usage.html">Quick Start</a></li>
             <li><a href="../pages/service-description.html">Service Descriptions</a></li>
             <li><a href="../pages/service-operations.html">Service Operations</a></li>
             <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
           </ul>
           <p class="pull-right">
             <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
@@ -46,7 +47,19 @@
     <div class="container-fluid">
       <div class="sidebar">
         <div class="well">
-          <h3>Links</h3>
+          <h3>TOC</h3>
+          <ul>
+            <li><a href="../">About</a></li>
+            <li><a href="../pages/installation.html">Installation</a></li>
+            <li><a href="../pages/usage.html">Quick Start</a></li>
+            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
+            <li><a href="../pages/service-operations.html">Service Operations</a></li>
+            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          </ul>
+        </div>
+        <div class="well">
+          <h3>Other Links</h3>
           <ul>
             <li><a href="https://github.com/mattvonrocketstein/ymir/">Source code</a></li>
             <li><a href="https://github.com/mattvonrocketstein/ymir/issues">Issues</a></li>
@@ -58,23 +71,23 @@
                 <div class="page-header"><h1>Installation</h1></div>
                 <div><h3>Prerequisites:</h3>
 <p>A simple python setup for your platform, basically python, python-dev, &amp; python-virtualenv.  For debian you can use a one-liner like this:</p>
-<div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python python-dev python-virtualenv
+<div class="highlight"><pre><span></span>$ sudo apt-get install python python-dev python-virtualenv
 </pre></div>
 
 
 <h3>Installation:</h3>
-<div class="highlight"><pre><span class="nv">$ </span>git clone https://github.com/mattvonrocketstein/ymir.git
-<span class="nv">$ </span><span class="nb">cd </span>ymir
-<span class="nv">$ </span>virtualenv venv
-<span class="nv">$ </span><span class="nb">source </span>venv/bin/activate
-<span class="nv">$ </span>pip install -r requirements.txt
-<span class="nv">$ </span>python setup.py develop
+<div class="highlight"><pre><span></span>$ git clone https://github.com/mattvonrocketstein/ymir.git
+$ <span class="nb">cd</span> ymir
+$ virtualenv venv
+$ <span class="nb">source</span> venv/bin/activate
+$ pip install -r requirements.txt
+$ python setup.py develop
 </pre></div>
 
 
 <p>To test if it worked, try running <code>ymir version</code>.</p>
 <h3>Suggested software:</h3>
-<p>Stuff that you might need, depending on how you intend to provision stuff:</p>
+<p>There's other stuff that you might need, depending on how you intend to provision stuff and what kinds of <a href="other-automation.html#validation">validation</a> you want ymir to do later.</p>
 <ul>
 <li><a href="https://www.ansible.com/">Ansible</a></li>
 <li><a href="http://puppet-lint.com/">Puppet linter</a></li>

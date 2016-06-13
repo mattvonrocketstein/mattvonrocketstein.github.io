@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ymir</title>
+    <meta name="description" content="">
+    <meta name="author" content="mvr">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="../theme/html5.js"></script>
+        <![endif]-->
+
+    <!-- Styles -->
+    <link href="../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
+
+    <!-- Feeds -->
+
+
+
+
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="../">ymir</a>
+          <ul class="nav">
+            <li><a href="../">About</a></li>
+            <li><a href="../pages/installation.html">Installation</a></li>
+            <li><a href="../pages/usage.html">Quick Start</a></li>
+            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
+            <li><a href="../pages/service-operations.html">Service Operations</a></li>
+            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          </ul>
+          <p class="pull-right">
+            <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
+            <a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+          <h3>TOC</h3>
+          <ul>
+            <li><a href="../">About</a></li>
+            <li><a href="../pages/installation.html">Installation</a></li>
+            <li><a href="../pages/usage.html">Quick Start</a></li>
+            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
+            <li><a href="../pages/service-operations.html">Service Operations</a></li>
+            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          </ul>
+        </div>
+        <div class="well">
+          <h3>Other Links</h3>
+          <ul>
+            <li><a href="https://github.com/mattvonrocketstein/ymir/">Source code</a></li>
+            <li><a href="https://github.com/mattvonrocketstein/ymir/issues">Issues</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <div class='page'>
+                <div class="page-header"><h1>Other automation</h1></div>
+                <div><p>Primarily you will interact with your services using <a href="#">service operations</a> which are generated for you based on your <a href="#">service description</a>.  This page describes other, generic automation helpers  which are provided by the ymir command line utility and which do <em>not</em> interact with a specific concrete service.</p>
+<hr />
+<p><a name=validation></p>
+<h3>Validating ymir boilerplate</h3>
+<p></a></p>
+<p>To validate ymir service boilerplate simply use <code>ymir validate</code> in the working directory for your service.  Validation includes:</p>
+<ul>
+<li>Confirmation that service description conforms to <code>service.json</code> schema</li>
+<li>Confirmation for the <code>pem</code> service description field, i.e. confirmation that your local key file actually exists.</li>
+<li>Confirmation for the <code>keypair</code>service description field, i.e. confirmation that the AWS keypair mentioned exists according to the AWS API.</li>
+<li>Confirmation for <code>security_groups</code> service description entries, i.e. confirmation that the security groups mentioned exist according to the AWS API.</li>
+<li>Confirmation that puppet metadata.json is well-formed (uses the <a href="https://github.com/voxpupuli/metadata-json-lint">metadata-json-lint gem</a>)</li>
+<li>Confirmation that puppet provisioning code is lint-free (uses <a href="http://puppet-lint.com">puppet-lint</a>)</li>
+<li><em>Heuristic confirmation</em> that puppet templates only use facts which are defined somewhere in <code>service.json</code></li>
+</ul>
+<hr />
+<p><a name=aws-keypairs></p>
+<h3>Creating AWS keypairs</h3>
+<p></a></p>
+<p>To create a new AWS keypair, use <code>ymir keypair &lt;keypair_name&gt;</code>.  The pem file will be saved in the current working directory.  Use <code>ymir keypair -f &lt;keypair_name&gt;</code> to force creation (and possibly overwrite) without asking for confirmation.</p>
+<hr />
+<p><a name=security-groups></p>
+<h3>Synchronizing security groups from JSON</h3>
+<p></a></p>
+<p>By using either <code>ymir sg security_groups.json</code> or <code>ymir security_groups security_groups.json</code> you can synchronize AWS security groups with provided JSON file.  Note that this is true synchronization in the sense that it doesn't just add rules.. rules discovered for this security group via the AWS API that are not mentioned in <code>security_groups.json</code> will be removed.  To learn about <code>security_group.json</code> schema, see the example json <a href="https://github.com/mattvonrocketstein/ymir/blob/master/ymir/skeleton/security_groups.json">here</a> (this example file is included in the boilerplate generated by the <code>ymir init</code> command).</p>
+<hr /></div>
+        </div>
+        <footer>
+          <p>&copy; mvr</p>
+        </footer>
+      </div>
+
+    </div>
+  </body>
+</html>
