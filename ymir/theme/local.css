@@ -3,8 +3,18 @@ div.article { padding-top: 20px; }
 div.article h2 { padding-bottom: 10px; }
 
 div.highlight pre {
-  background-color: #fefbf3;
+  background-color: #efefef;
   margin: 0 0 10px;
+}
+
+.attention, .caution, .danger, .error, .hint, .important, .note, .tip, .warning, div.admonition {
+    border: 1px solid black;
+    margin: 10px 0 0 20px;
+    padding: 5px;
+}
+
+.admonition-title {
+    font-weight: bold;
 }
 
 .well.small {

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ymir</title>
+    <meta name="description" content="">
+    <meta name="author" content="mvr">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="../theme/html5.js"></script>
+        <![endif]-->
+
+    <!-- Styles -->
+    <link href="../theme/bootstrap.min.css" rel="stylesheet">
+    <link href="../theme/local.css" rel="stylesheet">
+    <link href="../theme/pygments.css" rel="stylesheet">
+
+    <!-- Feeds -->
+
+
+
+
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="../">ymir</a>
+          <ul class="nav">
+            <li><a href="../">About</a></li>
+            <li><a href="../pages/installation.html">Installation</a></li>
+            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
+            <li><a href="../pages/usage.html">Usage</a></li>
+            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
+            <li><a href="../pages/service-operations.html">Service Operations</a></li>
+            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          </ul>
+          <p class="pull-right">
+            <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
+            <a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="well">
+          <h3>TOC</h3>
+          <ul>
+            <li><a href="../">About</a></li>
+            <li><a href="../pages/installation.html">Installation</a></li>
+            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
+            <li><a href="../pages/usage.html">Usage</a></li>
+            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
+            <li><a href="../pages/service-operations.html">Service Operations</a></li>
+            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
+            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          </ul>
+        </div>
+        <div class="well">
+          <h3>Other Links</h3>
+          <ul>
+            <li><a href="https://github.com/mattvonrocketstein/ymir/">Source code</a></li>
+            <li><a href="https://github.com/mattvonrocketstein/ymir/issues">Issues</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        <div class='page'>
+                <div class="page-header"><h1>Quick Start: Vagrant</h1></div>
+                <div><h1>Working with Vagrant</h1>
+<h2>Prerequisites</h2>
+<h3><strong>1</strong> Setup Amazon API keys</h3>
+<p>Before ymir can work with boto, you'll need to have boto setup (unless you use multiple amazon accounts, this only happens once).  Follow the <a href="http://boto.readthedocs.org/en/latest/boto_config_tut.html">instructions here</a> to setup your <code>aws_access_key_id</code> and <code>aws_secret_access_key</code></p>
+<h3><strong>2</strong> Setup Amazon keypairs <a name=create_keypairs></a></h3>
+<p>Think a bit about how you want to setup your AWS keypairs for accessing the service.  Some people may want one keypair per app, others may want one keypair per service and you may or may not want to change your keypairs per environment.  You can create a keypair by issuing the following command:</p>
+<p><code>shell
+    $ ymir keypair &lt;app_name&gt;</code></p>
+<h1>Bootstrap a new service</h1>
+<h3><strong>3</strong> Create a service template <a name=ymir_init></a></h3>
+<p>Initializing a new service template with ymir copies boilerplate that you'll find useful.  The following command will create a new folder <code>demo_service</code> with your project skeleton:</p>
+<p><code>shell
+$ ymir init demo_service</code></p>
+<h3><strong>4</strong> Customize your <em>service description</em></h3>
+<p>Customize your service description by making changes to the boilerplate in <code>demo_service/service.json</code> (this file was created in step 3) you can tune the instance size, tags, and other attributes for your service. The <code>service.json</code> file specifies other important service metadata like the service name, the base AMI, the EC2 instance size, and how health checks should be performed.  Most of the options are illustrated in the default <code>service.json</code>.</p>
+<p>In particular you will want to change the <code>name</code>, <code>key_name</code>, and <code>pem</code> fields at minimum, where <code>key_name</code> and <code>pem</code> match what you setup in <a href="#create_keypairs">step 2</a>  For more detailed information about the fields and what they do, see the <a href="#service-description">service description</a> section of this documentation.</p>
+<h3><strong>5</strong> Customize your <em>service implementation</em></h3>
+<p>Customize your service implementation by making changes to the puppet provisioning code in the <code>demo_service/puppet</code> directory (this directory was created in step 3).  Puppet is the best place to install system packages for your service, add daemons, configure users, etc etc.  Eventually ymir may support chef or shell, but at the moment if you want to invoke that kind of provisioning you'll have to invoke it with puppet (or fork ymir and write some python code.. pull requests are welcome!).  For more detailed information about common provisioning tasks with puppet, see the <a href="#service-implementation">service implementation</a> section of this documentation.</p>
+<h3><strong>6</strong>  Validate your service description so far</h3>
+<p><code>ymir validate</code></p>
+<p>At this point you have a pretty good starting place for infrastructure as code: everything is declarative, and the approach leaves you with a lot of descriptive power and flexibility.  Now it's time to actually test out <em>service operations</em>.  To create your service from it's description'</p>
+<h3><strong>7</strong> Add customized service operations</h3>
+<p>If you're willing to write code you can define new operations of any kind, but you get lots of basic operations out of the box.  To show a list of default operations, make sure you are in the service directory and run this command: <code>fab -l</code>.  For instance, to build out your service based on the <code>service.json</code> file, run <code>$ fab create</code>.</p>
+<h3><strong>8</strong> Instantiate your service, setup it up, provision it</h3>
+<p>Run <code>fab create</code>, and if all is well, then <code>fab setup</code> and <code>fab provision</code>.</p></div>
+        </div>
+        <footer>
+          <p>&copy; mvr</p>
+        </footer>
+      </div>
+
+    </div>
+  </body>
+</html>

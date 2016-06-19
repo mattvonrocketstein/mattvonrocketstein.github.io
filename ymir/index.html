@@ -30,7 +30,9 @@
           <ul class="nav">
             <li><a href="./">About</a></li>
             <li><a href="./pages/installation.html">Installation</a></li>
-            <li><a href="./pages/usage.html">Quick Start</a></li>
+            <li><a href="./pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="./pages/vagrant.html">Quick Start: Vagrant</a></li>
+            <li><a href="./pages/usage.html">Usage</a></li>
             <li><a href="./pages/service-description.html">Service Descriptions</a></li>
             <li><a href="./pages/service-operations.html">Service Operations</a></li>
             <li><a href="./pages/service-implementations.html">Service Implementations</a></li>
@@ -51,7 +53,9 @@
           <ul>
             <li><a href="./">About</a></li>
             <li><a href="./pages/installation.html">Installation</a></li>
-            <li><a href="./pages/usage.html">Quick Start</a></li>
+            <li><a href="./pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="./pages/vagrant.html">Quick Start: Vagrant</a></li>
+            <li><a href="./pages/usage.html">Usage</a></li>
             <li><a href="./pages/service-description.html">Service Descriptions</a></li>
             <li><a href="./pages/service-operations.html">Service Operations</a></li>
             <li><a href="./pages/service-implementations.html">Service Implementations</a></li>
@@ -70,34 +74,52 @@
         <div class='page'>
                 <div class="page-header"><h1>About</h1></div>
                 <div><h1><a name="about">What is ymir for?</a></h1>
-<p>Ymir can be used to quickly generate project boilerplate which combines <a href="http://docs.fabfile.org/en/latest/tutorial.html">fabric</a> and <a href="http://boto.readthedocs.org/en/latest/">boto</a> to create, setup, provision and control EC2 services (and, more experimentally, Elasticbeanstalk services).</p>
-<p>After services are instantiated, it can help you with command-and-control and there is <a href="pages/service-operations.html">lots of functionality</a> out of the box.  Think of ymir as "glue code" that can help lay out project skeletons and give you a concise and relevant vocabulary for service description.   It's designed to (at least theoretically) help with creation, provisioning, etc <em>in general</em> regardless of the instance OS, but for now it's mainly only tested on Ubuntu servers.  More specifically,</p>
+<p>Ymir is a lightweight automation tool that can be used to quickly generate project boilerplate which combines <a href="http://docs.fabfile.org/en/latest/tutorial.html">fabric</a>, <a href="http://boto.readthedocs.org/en/latest/">boto</a>, and the <a href="https://en.wikipedia.org/wiki/Comparison_of_open-source_configuration_management_software">configuration-management language of your choice</a> to create, setup, provision and control EC2 services (and more experimentally, Vagrant and Elasticbeanstalk services).</p>
+<p>Ymir tries to be fairly agnostic about your choice of the configuration management language used for service provisioning, but realistically has the best support for puppet and ansible.  (There is currently not any explicit or in-depth support for chef/salt, but insofar as these tools can be invoked via shell commands on the local or remote host, implicit support does exist).  Ymir also has some features for supporting polyglot infracode which you may find interesting if you use a combination of puppet/ansible and would like to simplify storage of configuration variables for both systems.  See the <a href="#philosophy">feature list</a> below.</p>
+<p>Think of ymir as "glue code" that can help lay out project skeletons and give you a concise and relevant vocabulary for service description.   It's designed to help with creation, provisioning, etc, regardless of other technology choices, but it does require some version of *nix, and it's currently only tested with CentOS or Ubuntu.  After services are instantiated, there is <a href="pages/service-operations.html">lots of functionality</a> for command/control out of the box.  More specifically,</p>
 <ul>
-<li><a href="http://boto.readthedocs.org/en/latest/">Boto</a> is used for AWS automation (ex: creating EC2 instance from AMI)</li>
-<li><a href="http://docs.fabfile.org/en/latest/tutorial.html">Fabric</a> is used for command execution on local and remote hosts, and control automation after services are created</li>
+<li><a href="http://boto.readthedocs.org/en/latest/">Boto</a> is used for AWS automation (ex: creating EC2 instance from AMI).</li>
+<li><a href="http://docs.fabfile.org/en/latest/tutorial.html">Fabric</a> is used for command execution on local and remote hosts, and control automation after services are created.</li>
+<li>Project initialization lays out <a href="service_description.html">service definition JSON</a> as well as templates for beginning work with <a href="#">puppet</a> / <a href="#">ansible</a>.</li>
 </ul>
-<p>Ymir aims to be agnostic about your choice of <a href="https://en.wikipedia.org/wiki/Comparison_of_open-source_configuration_management_software">configuration-management language</a> used for service provisioning, but it makes it especially easy to <a href="pages/service-implementations.html#puppet">use puppet in stand-alone mode</a> on remote servers with no puppet master.  You can also <a href="pages/service-implementations.html#provisioning">use fabric, shell, or ansible</a>.  There is currently not any explicit or in-depth support for chef/salt, but insofar as these tools can be invoked via shell commands on the local or remote host, implicit support does exist.</p>
-<h1><a name="about">A peek under the hood</a></h1>
+<h1><a name="who">Who is Ymir for?</a></h1>
+<p>Ymir is obviously Yet Another Devops Tool in a rapidly expanding and <a href="https://github.com/AcalephStorage/awesome-devops">sometimes</a> <a href="https://xebialabs.com/the-ultimate-devops-tool-chest/open-source/">bewildering</a> <a href="https://github.com/joubertredrat/awesome-devops">toolbox</a>, which may or may not make you sigh in frustration.  It was originally built to learn more about boto and puppet while scratching my own itch for an automation tool, but in the end it's become more than a learning project, and is stable enough for production use.  Is it for you though?  Well, Ymir is probably most suitable for:</p>
+<ol>
+<li>
+<p>Small operations, just looking to just keep things simple.  These organizations are perhaps characterized by still having "<a href="http://www.theregister.co.uk/2013/03/18/servers_pets_or_cattle_cern/">pets not cattle</a>", and they are mostly unapologetic about that since it works well for them.  Perhaps they are interested in having better-specified pets that can terminated/resurrected/restructured reliably with infrastructure-as-code, but are mostly <strong>not</strong> interested in having truly immutable infrastructure because they don't have time/money to restructure applications or rearchitect their CI / CD workflows.</p>
+</li>
+<li>
+<p>Transitional operations or hackers who are experimenting with infrastructure-as-code, but are unable or unwilling to limit themselves to only one "do everything" CM language.  Some people are still just charged with delivering servers, and having maintainable infracode is just a bonus that their bosses (unfortunately) don't really understand or care about.  These people typically don't want to pick a "favorite" CM language, they want to use the one that's already closest to providing a complete solution for their domain.</p>
+</li>
+<li>
+<p>Operations who are becoming addicted to puppet, but who are frustrated by obnoxious requirements of agents, additional servers, etc to get basic work done.</p>
+</li>
+</ol>
+<h1><a name="under-the-hood">A peek under the hood</a></h1>
 <p>Ymir has two parts: a command line utility, and a library.</p>
-<p>The functionality of the command line utility is generally sparse because it's main purpose is to generate project boilerplate using <a href=pages/usage#ymir_init>the <em>ymir init</em> invocation</a>.  But, as a command line tool, ymir does have a few other <a href=pages/other-automation.html>helper functions</a> such as project validation, AWS key generation, etc.</p>
-<p>Service boilerplate generated by the ymir command line includes, amongst other things, two very important files: <strong>service.json</strong> and <strong>fabfile.py</strong>.  The <strong>service.json</strong> aka the <a href=#><em>service description</em></a> file describes the details of service you are building, including the base AMI to be used, the instance size, and other details that will be used in creating and provisioning the service.  You can read more about that file and its schema <a href=pages/service-description.html>here</a>.</p>
-<p>The <strong>fabfile</strong> allows you to interact with your service via fabric and ymir-as-a-library.  How does this work? Basically, ymir-as-a-library creates a "service object" from the service description, and publishes object methods into the fabric namespace to automatically generate command-and-control functions, aka service operations.  You can read more about service operations <a href=pages/service-operations.html>here</a>.</p>
-<h1><a name="philosophy">Philosophy and future development</a></h1>
-<p>Ymir is obviously Yet Another Devops Tool in a rapidly expanding and <a href="https://github.com/AcalephStorage/awesome-devops">sometimes</a> <a href="https://xebialabs.com/the-ultimate-devops-tool-chest/open-source/">bewildering</a> <a href="https://github.com/joubertredrat/awesome-devops">toolbox</a>, which may or may not make you sigh in frustration.  I initially built this to learn more about fabric, boto, and puppet while scratching my own itch for an automation tool.  In the end though, it's become more than a learning project, and is stable enough for production use.  This tool is probably most suitable for small operations looking to keep things simple.  I currently use it to maintain various "golden images" and organize and create infracode &amp; automation for about 50 different kinds of servers/services.</p>
-<p>So is it like <a href="https://www.docker.com/">docker</a> or maybe <a href="https://www.packer.io/">packer</a>?  How does it compare with <a href="https://www.vagrantup.com/">vagrant</a> or <a href="https://aws.amazon.com/cloudformation/">cloud formation</a> or <a href="http://www.terraform.io">terraform</a>?  Why doesn't it use <a href="https://saltstack.com/">salt</a> or <a href="https://www.chef.io">chef</a>?  OMG, I don't know!  Probably it's most like packer, but there's a lot of stuff in the ecosystem, and at the time I began work on this I was frustrated by my initial forays into using other tools which felt unstable. Further, I strongly believe that <strong>sufficiently advanced abstractions are indistinguishable from obfuscation</strong> and I think this is a bad thing.  Therefore,</p>
-<ul>
-<li>Ymir has a specific focus on EC2 so configuring digital ocean, rackspace, vagrant VMs, etc is not a priority</li>
-<li>Ymir allows you to easily use puppet in stand-alone mode similar to how you might use ansible, and</li>
-<li>Ymir doesn't require puppet masters, ansible towers, other external servers/daemons/CM key-value stores</li>
-<li>Ymir can be invoked on-demand by individual devops personnel or by a buildbot as long as they have AWS keys or whatever, but</li>
-<li>Ymir has no ambitions about aggressively "auto synchronizing" infracode changes onto servers</li>
-<li>Ymir can store service config variables as normal JSON in a normal file stored in VCS, and</li>
-<li>Ymir supports instance descriptions and application configuration living side by side in <a href="pages/service-description.html">service description files</a> if you so choose.</li>
-<li>Ymir supports</li>
-</ul>
-<p>The final point is maybe contentious so I'll expand on it: for most purposes a running service is more or less an application at a particular version, plus application configuration, plus the instance implied by the infracode.  Separating applications and application configuration is just good practice, whereas for most of my use-cases separating infracode from application configuration is overkill since they normally change together.  (For example when the instance size is increased, you may want to change the number of worker threads, etc.)</p>
-<p>At some point it might make sense for ymir configuration data to "compile" to terraform or cloudformation configurations.. that option will become attractive the moment it helps me avoid additional work by leveraging prior art.  I'm not dogmatically attached to any of the underlying mechanisms ymir uses but I am attached to the simplicity of it's interface.</p>
-<h1><a name="contributing">Contributing</a></h1></div>
+<p>The functionality of the command line utility is sparse, because it's main purpose is to generate project boilerplate using <a href="pages/usage#ymir_init">the <em>ymir init</em> invocation</a>.  But, as a command line tool, ymir does have a few other <a href="pages/other-automation.html">helper functions</a> such as project validation, AWS key generation, etc.</p>
+<p>Service boilerplate generated by the ymir command line includes, amongst other things, two very important files: <strong>service.json</strong> and <strong>fabfile.py</strong>.  The <strong>service.json</strong> aka the <a href="pages/service_description.html">service description file</a> describes the details of the service you are building, including the base AMI to be used, the instance size, and other details that will be used in creating and provisioning the service.  You can read more about that file and its schema <a href="pages/service-description.html">here</a>.</p>
+<p>The <strong>fabfile</strong> allows you to interact with your service via fabric and ymir-as-a-library.  How does this work?  Basically ymir-as-a-library creates a "service object" from the service description JSON, then publishes the service object instance methods into the fabric namespace to automatically generate command-and-control functions, aka <a href="pages/service_operations">service operations</a>.</p>
+<h1><a name="philosophy">Features, Philosophy and Future Development</a></h1>
+<h3>Comparisons</h3>
+<p><a name=comparisons></a></p>
+<p>So is ymir like <a href="https://www.docker.com/">docker</a> or maybe <a href="https://www.packer.io/">packer</a>?  How does it compare with <a href="https://www.vagrantup.com/">vagrant</a> or <a href="https://aws.amazon.com/cloudformation/">cloud formation</a> or <a href="http://www.terraform.io">terraform</a>?  Why doesn't it use <a href="https://saltstack.com/">salt</a> or <a href="https://www.chef.io">chef</a>?  OMG, I don't know!  Maybe it's most like packer or terraform, but there's a lot of stuff in the ecosystem and even building a taxonomy for the huge number of tools is difficult.  When work began on ymir, some of the available tooling felt unstable and the rest felt stifling.  Besides, it's well known that <strong>sufficiently advanced abstractions are indistinguishable from obfuscation</strong> and this seems like a bad thing.  Therefore...</p>
+<h3>Features</h3>
+<p><a name=features></a></p>
+<p>Here's a quick list of features and (equally importantly) non-features.</p>
+<ol>
+<li><strong>Ymir has a focus on EC2.</strong>  Specific support for docker, digital ocean, rackspace, etc, is not a priority but there is some support for <a href="pages/examples.html#vagrant">configuring Vagrant</a>.</li>
+<li><strong>Ymir has a focus on building servers, not building multi-server clusters with complex entangled configurations.</strong>  Simple orchestration is easily possible, but if you need really complex things you should probably look elsewhere (or perhaps use ymir to drive an external tool such as terraform).</li>
+<li><strong>Ymir has no server-side agents, and no additional servers/daemons CM key-alue stores</strong>.  No ansible towers, vaults, puppet-masters, mcollectives, etc, etc.  There's no RESTful API, but there's also no server to harden/firewall, certificates to setup, or access-control DSLs to learn before you can get started using it.</li>
+<li><strong>Ymir's configuration format supports <a href="#">reflective templating</a>, but will (..probably) never support inclusion.</strong>  For comparison, see <a href="http://docs.ansible.com/ansible/playbooks_roles.html#task-include-files-and-encouraging-reuse">inclusion in ansible</a>.  Inclusion typically encourages reuse, but also encourages fragmentation that increases overall complexity. Reuse in this case is not a priority anyway, because configuration should not be confused with code.</li>
+<li><strong>Ymir makes it easy to use puppet in stand-alone mode on remote hosts, agent-free</strong>, similar to how you might use ansible.  More specifically, when <em>ymir_build_puppet</em> is enabled in service JSON, puppet is installed from scratch on the remote side (thus you aren't restricted to images with puppet pre-installed).  Puppet files in your ymir project are rsync'ed to the remote, and executed via ssh and puppet-apply.</li>
+<li><strong>Ymir reads configuration variables from normal JSON in a normal file on VCS</strong>, and instance configuration variables (such as <em>AMI</em>, <em>instance_type</em>, etc), can live side-by-side with infracode configuration variables (such as <em>daemon_listen_port</em> or <em>use_ssl</em>).  Depending on <a href="pages/examples.html#deploy_operation">how your write your deploy operations</a> it often makes sense to put application secrets here as well because, whereas your application may be open source, your infracode repo probably is not.</li>
+<li><strong>Ymir can publish configuration variables to both puppet and ansible</strong>.  The motivation for this is that, while larger organizations will not want to maintain polyglot CM langs, smaller organizations and experimenters simply want to leverage as much prior art as possible to build servers faster.</li>
+<li><strong>Ymir's invocation is simple</strong> so it can be used on-demand by individual devops personnel at the CLI or by a buildbot.  <strong>There are no ambitions to aggressively "auto synchronize" infracode changes onto servers</strong> (for small operations this causes more harm than it prevents by changing the files out from under would-be debuggers, etc).</li>
+<li><strong>Adding extra command/control automation is simple</strong>, and the place extra automation should go is clear.  Just edit the fabfile.</li>
+</ol>
+<h1><a name="contributing">Contributing</a></h1>
+<p>Pull requests and feature requests are welcome, just use the github.  Tests are run with tox.</p></div>
         </div>
         <footer>
           <p>&copy; mvr</p>

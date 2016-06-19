@@ -30,7 +30,9 @@
           <ul class="nav">
             <li><a href="../">About</a></li>
             <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/usage.html">Quick Start</a></li>
+            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
+            <li><a href="../pages/usage.html">Usage</a></li>
             <li><a href="../pages/service-description.html">Service Descriptions</a></li>
             <li><a href="../pages/service-operations.html">Service Operations</a></li>
             <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
@@ -51,7 +53,9 @@
           <ul>
             <li><a href="../">About</a></li>
             <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/usage.html">Quick Start</a></li>
+            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
+            <li><a href="../pages/usage.html">Usage</a></li>
             <li><a href="../pages/service-description.html">Service Descriptions</a></li>
             <li><a href="../pages/service-operations.html">Service Operations</a></li>
             <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
@@ -69,7 +73,7 @@
       <div class="content">
         <div class='page'>
                 <div class="page-header"><h1>Service Operations</h1></div>
-                <div><p><em>Service operations</em> are "command and control" helpers for your service.  Operations are always <a href="http://docs.fabfile.org/en/latest/usage/fab.html">fabric commands</a> which are <em>invoked</em> from your local environment (or from a buildbot like <a href="https://jenkins-ci.org/">jenkins</a>) but are <em>executed</em> on your AWS-based service.  Authentication with the remote side happens transparently and automatically, provided your <a href="#service-description">service description</a> is setup correctly.   <em>To execute operations</em>, cd into the directory for your your service and type <code>fab &lt;operation_name&gt;</code>.  If you're willing to write code and especially if you're familiar with python and fabric, you can easily define new operations of any kind at any time.  By default though, several operations are already defined for you automatically and they are described below.</p>
+                <div><p><em>Service operations</em> are "command and control" helpers for your service.  Operations are always <a href="http://docs.fabfile.org/en/latest/usage/fab.html">fabric commands</a> which are <em>invoked</em> from your local environment (or from a buildbot like <a href="https://jenkins-ci.org/">jenkins</a>) but are <em>executed</em> on your AWS-based service.  Authentication with the remote side happens transparently and automatically, provided your <a href="service-description.html">service description</a> is setup correctly.   To invoke operations, cd into the directory for your your service and type <code>fab &lt;operation_name&gt;</code>.  If you're willing to write code and especially if you're familiar with python and fabric, you can easily define new operations of any kind at any time (take a look at code for a <a href="examples.html">custom operation here</a>).  By default though, several operations are already defined for you automatically and they are described below.</p>
 <table>
 <tr><th>Operation</th><th>Description</th></tr>
 
@@ -82,7 +86,7 @@ Creates your EC2 instance according to the specification in the `service.json` f
 </td></tr>
 
 <tr><td class=td_operation>fab setup</td><td>
-The setup operation should typically occur after "create" and before "provision".  Setup is safe to invoke repeatedly, but is separated from "provision" because it often involves very slow steps like updates for apt or yum.  Setup can be reinvoked if <a href=#>puppet dependencies</a> change, or if you wish to resynchronize things like tags, s3 buckets, or elastic IPs.  More information about the "setup" phase is available <a href=#>here</a>.
+The setup operation should typically occur after "create" and before "provision".  Setup is safe to invoke repeatedly, but is separated from "provision" because it often involves very slow steps like updates for apt or yum.  Setup can be reinvoked if <a href=#>puppet dependencies</a> change, or if you wish to resynchronize things like tags, s3 buckets, or elastic IPs.  More information about the "setup" phase is available <a href=#setup>here</a>.
 </td></tr>
 
 <tr><td class=td_operation>fab provision</td><td>
@@ -93,15 +97,18 @@ The provision operation typically occurs after "setup" and executes the bulk of 
 The "status" operation shows service status, including IP address, EC2 status, etc.  It also displays (but does not check) URLs which might be useful when running health tests on this service.</td></tr>
 
 <tr><td class=td_operation> fab check</td><td>
-The "check" operation runs health checks on the service.  The idea is to provide a simple starting point for integration with more sophisticated health monitoring via stuff like periodic jenkins jobs, nagios, etc.
+The "check" operation runs health checks on the service.<br/>
+The idea is to provide a simple starting point for integration with more sophisticated health monitoring via stuff like periodic jenkins jobs, nagios, etc.  See <a href="service_description.html#health-checks">this section</a> of the service-description documentation for more information.
 </td></tr>
 
 <tr><td class=td_operation>fab ssh</td><td>
-The "ssh" operation simply connects to the service.  Apart from normal system administration or inspecting the service, this is good to use when you suspect that other operations might be failing because of AWS keypair issues.
+The "ssh" operation simply connects to the service.</br>
+Apart from normal system administration or inspecting the service, this is good to use when you suspect that other operations might be failing because of AWS keypair issues.
 </td></tr>
 
 <tr><td class=td_operation>fab mosh</td><td>
-The "mosh" operation connects to the service using [mosh](https://mosh.mit.edu/).  It is required that mosh already be installed on the remote side, and your security group has openings for the correct ports.
+The "mosh" operation connects to the service using <a href="https://mosh.mit.edu/">mosh</a>.  <br/>
+It is required that mosh already be installed on the remote side, and your security group has openings for the correct ports.
 </td></tr>
 
 <tr><td class=td_operation>fab run</td><td>
@@ -129,7 +136,16 @@ The "put" operation is a shortcut for "scp put" commands against this service.  
 <tr><td class=td_operation>fab freeze</td><td>
 The "freeze" operation saves the current service to an AMI <font color=red>(not implemented yet)</font>
 </td></tr>
-</table></div>
+</table>
+
+<hr/>
+
+<h4><a name=setup> The "Setup" Operation in more detail </a></h4>
+<p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p>
+<h4><a name=provision> The "Provision" Operation in more detail </a></h4>
+<p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p>
+<h4><a name=provision> The "Check" Operation in more detail </a></h4>
+<p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p></div>
         </div>
         <footer>
           <p>&copy; mvr</p>
