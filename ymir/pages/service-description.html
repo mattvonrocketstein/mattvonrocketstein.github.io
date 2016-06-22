@@ -11,6 +11,8 @@
         <script src="../theme/html5.js"></script>
         <![endif]-->
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <!-- Styles -->
     <link href="../theme/bootstrap.min.css" rel="stylesheet">
     <link href="../theme/local.css" rel="stylesheet">
@@ -30,17 +32,18 @@
           <ul class="nav">
             <li><a href="../">About</a></li>
             <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="../pages/ec2.html">Quickstart: EC2</a></li>
             <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
             <li><a href="../pages/service-description.html">Service Descriptions</a></li>
             <li><a href="../pages/service-operations.html">Service Operations</a></li>
             <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
-            <li><a href="../pages/other-automation.html">Other automation</a></li>
+            <li><a href="../pages/examples.html">Examples</a></li>
+            <li><a href="../pages/misc.html">Misc.</a></li>
           </ul>
           <p class="pull-right">
             <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
-            <a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
-          </p>
+            <!--a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
+          </p-->
         </div>
       </div>
     </div>
@@ -49,17 +52,136 @@
       <div class="sidebar">
         <div class="well">
           <h3>TOC</h3>
-          <ul>
-            <li><a href="../">About</a></li>
-            <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
-            <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
-            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
-            <li><a href="../pages/service-operations.html">Service Operations</a></li>
-            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
-            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          <ul class=main_toc>
+            <li class=page_toc>
+              <a href="../">About</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#what-is-it">What is it?</a></li>
+<li><a href="#who-is-it-for">Who is it for?</a></li>
+<li><a href="#under-the-hood">Under the hood</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#contributing">Contributing</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/installation.html">Installation</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#suggested-software">Suggested software</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/ec2.html">Quickstart: EC2</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#create-boilerplate">Create Boilerplate</a></li>
+<li><a href="#customize-things">Customize things</a></li>
+<li><a href="#validate-and-create">Validate and create</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/vagrant.html">Quick Start: Vagrant</a>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-description.html">Service Descriptions</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#choosing-a-file"><a href="#alt-file" name="alt-file">Choosing a file</a></a></li>
+<li><a href="#templating"><a href="#templating" name="templating">Templating</a></a></li>
+<li><a href="#ec2-json">EC2 JSON</a></li>
+<li><a href="#vagrant-json">Vagrant JSON</a></li>
+<li><a href="#health-checks">Health Checks</a></li>
+<li><a href="#setup-provision">Setup &amp; provision</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-operations.html">Service Operations</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#built-in-operations">Built-in Operations</a></li>
+<li><a href="#setup-operation">Setup Operation</a></li>
+<li><a href="#provision-operation">Provision Operation</a></li>
+<li><a href="#check-operation">Check Operation</a></li>
+<li><a href="#custom-operations">Custom Operations</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-implementations.html">Service Implementations</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisite-reading">Prerequisite reading</a></li>
+<li><a href="#puppet-provisioning">Puppet Provisioning</a><ul>
+<li><a href="#puppet-deps">Puppet Deps</a></li>
+<li><a href="#puppet-facts">Puppet Facts</a></li>
+</ul>
+</li>
+<li><a href="#ansible-provisioning">Ansible Provisioning</a><ul>
+<li><a href="#ansible-deps">Ansible Deps</a></li>
+<li><a href="#ansible-facts">Ansible Facts</a></li>
+</ul>
+</li>
+<li><a href="#other-provisioning">Other Provisioning</a><ul>
+<li><a href="#local-commands">Local commands</a></li>
+<li><a href="#remote-commands">Remote commands</a></li>
+</ul>
+</li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/examples.html">Examples</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#polyglot-demo">Polyglot demo</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/misc.html">Misc.</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#automation-helpers">Automation Helpers</a></li>
+<li><a href="#validating-boilerplate">Validating boilerplate</a></li>
+<li><a href="#creating-keypairs">Creating Keypairs</a></li>
+<li><a href="#synchronizing-security-groups">Synchronizing security groups</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
           </ul>
         </div>
+        <script>
+          $('ul.main_toc nav.sub_toc li > a').each(function(){
+            $(this).attr(
+               'href',
+               $(this).closest('.page_toc').children()[0].href+$(this).attr('href'));
+          });
+        </script>
         <div class="well">
           <h3>Other Links</h3>
           <ul>
@@ -71,234 +193,39 @@
       <div class="content">
         <div class='page'>
                 <div class="page-header"><h1>Service Descriptions</h1></div>
-                <div><p>Service descriptions are JSON files conforming to a particular schema.  For the purpose of allowing multiple string indicators ("'" and '"') and including comments in the files, ymir parses a superset of strict JSON.  All comments must be prefixed with "//".</p>
+                <div>
+<p>Service descriptions are JSON files conforming to a particular schema.  For the purpose of allowing multiple string indicators ("'" and '"') and including comments in the files, ymir parses a superset of strict JSON.  All comments must be prefixed with "//".</p>
 <p>In the boilerplate generated by <code>ymir init</code>, there are two different service description files; <a href="https://github.com/mattvonrocketstein/ymir/blob/master/ymir/skeleton/service.json">one is for ec2</a> and <a href="https://github.com/mattvonrocketstein/ymir/blob/master/ymir/skeleton/vagrant.json">the other is for vagrant</a>.  You can always view the most recent service-description schema/boilerplate at the previous two links to find complete and well-commented examples.</p>
 <p>These two files have different schemas, and the schema used by your service description determines the service object that will be instantiated, and the operations that will be available on that service object.</p>
-<h4><a name=alt-file>Choosing a Service Description</a></h4>
-<p>By default, ymir assumes your service description is in the <code>service.json</code> file.  So for example if you have no need of EC2 and only want to work with vagrant, then <code>mv vagrant.json service.json</code> after running ymir init.</p>
-<p>If you want to use a file of a specific name, you can set the environment variable <code>YMIR_SERVICE_JSON=...</code> before running <a href="../service-operations.html">service operations</a> commands.  For example,</p>
+<h4 id="choosing-a-file"><a href="#alt-file" name="alt-file">Choosing a file</a></h4>
+<p>By default, ymir assumes your service description is in the <code>service.json</code> file.  <strong>If you have no need of EC2 and only want to work with vagrant</strong></p>
+<div class="highlight"><pre><span></span>$ ymir init myservice
+$ <span class="nb">cd</span> myservice
+$ mv vagrant.json service.json
+</pre></div>
+<p><strong>If you want to use a file of a specific name</strong>, you can set the environment variable <code>YMIR_SERVICE_JSON=...</code> before running <a href="pages/service-operations.html">service operations</a> commands.  For example:</p>
 <div class="highlight"><pre><span></span>$ <span class="nv">YMIR_SERVICE_JSON</span><span class="o">=</span>my_service.json fab create
 </pre></div>
-
-
-<h4><a name="templating">Templating</a></h4>
+<h4 id="templating"><a href="#templating" name="templating">Templating</a></h4>
 <p>Service description files support reflective templating, or to put it another way, values inside your JSON may be used to render other values inside your template.  (Under the hood, this works with <a href="http://jinja.pocoo.org/docs/dev/">jinja2</a>).</p>
 <p>Always use double-mustaches to indicate template variables.  For example, in the JSON below, the value of "name" would be rendered to "OrgName-AppName-ServiceName-EnvName".</p>
-<div class="highlight"><pre><span></span><span class="x">{ &quot;org_name&quot;: &quot;OrgName&quot;,</span>
-<span class="x">  &quot;app_name&quot;: &quot;AppName&quot;,</span>
-<span class="x">  &quot;env_name&quot;: &quot;EnvName&quot;,</span>
-<span class="x">  &quot;service_name&quot;: &quot;ServiceName&quot;,</span>
-<span class="x">  &quot;name&quot;: &quot;</span><span class="cp">{{</span><span class="nv">org_name</span><span class="cp">}}</span><span class="x">-</span><span class="cp">{{</span><span class="nv">app_name</span><span class="cp">}}</span><span class="x">-</span><span class="cp">{{</span><span class="nv">service_name</span><span class="cp">}}</span><span class="x">-</span><span class="cp">{{</span><span class="nv">env_name</span><span class="cp">}}</span><span class="x">&quot;,</span>
+<div class="highlight"><pre><span></span><span class="x">{ "org_name": "OrgName",</span>
+<span class="x">  "app_name": "AppName",</span>
+<span class="x">  "env_name": "EnvName",</span>
+<span class="x">  "service_name": "ServiceName",</span>
+<span class="x">  "name": "</span><span class="cp">{{</span><span class="nv">org_name</span><span class="cp">}}</span><span class="x">-</span><span class="cp">{{</span><span class="nv">app_name</span><span class="cp">}}</span><span class="x">-</span><span class="cp">{{</span><span class="nv">service_name</span><span class="cp">}}</span><span class="x">-</span><span class="cp">{{</span><span class="nv">env_name</span><span class="cp">}}</span><span class="x">",</span>
 <span class="x">}</span>
 </pre></div>
-
-
-<h5>Lazy variables</h5>
+<p><strong>Lazy variables</strong></p>
 <p>Some variables are special, because they are determined just in time.  The main example is <code>{{host}}</code>, because AWS must be consulted in order to determine the external IP address of the service from it's name.</p>
 <p>For vagrant-based services, there are several lazy variables which are determined just in time to avoid changing JSON everytime the Vagrantfile changes.  These variables include <code>{{pem}}</code>, <code>{{username}}</code>, and <code>{{port}}</code>.</p>
-<h4><a name="ec2-summary">EC2 JSON summary</a></h4>
-<p>Click any individual field name to jump to a more detailed description of the field.</p>
-<table>
-<thead>
-<tr>
-<th>Field name</th>
-<th>Schema</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>org_name</td>
-<td>string</td>
-<td>The name of the organization responsible for this service</td>
-</tr>
-<tr>
-<td>app_name</td>
-<td>string</td>
-<td>The name of the application this service is a part of</td>
-</tr>
-<tr>
-<td>env_name</td>
-<td>string</td>
-<td>The environment name for this service (suggested value: one of dev/test/prod)</td>
-</tr>
-<tr>
-<td>service_name</td>
-<td>string</td>
-<td>The name of this service.  This is essentially the name of the EC2 instance, and so must be unique inside a given AWS account.  This value is always used to discover the service IP dynamically.</td>
-</tr>
-<tr>
-<td>service_description</td>
-<td>string</td>
-<td>A human-friendly description of this service.</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>name of this instance (suggested value: {org_name}-{app_name}-{service_name}-{env_name})</td>
-</tr>
-<tr>
-<td>ymir_debug</td>
-<td>bool</td>
-<td>Specifies whether ymir is in debug mode.  This adds extra output from ymir itself, as well as implying debug mode for puppet and ansible.</td>
-</tr>
-<tr>
-<td>ymir_build_puppet</td>
-<td>bool</td>
-<td>Specifies whether ymir will support puppet.  If support is enabled and puppet is not found on the remote service, puppet will be built from scratch.</td>
-</tr>
-<tr>
-<td>s3_buckets</td>
-<td>list_of_strings</td>
-<td>A list of named s3 buckets associated with this service.  During <code>fab setup</code>, buckets that do not exist will be created.  When the <code>fab s3</code> operation is invoked, the contents of buckets mentioned in this list will be summarized.</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>list_of_strings</td>
-<td>AWS tags which are associated with service instance.  Key-value maps are not supported.  Suggested values are things like "python", or "node".  Entries here will get tagged as "true" since the main use-case is filtering instances later.</td>
-</tr>
-<tr>
-<td>logs</td>
-<td>list_of_strings</td>
-<td>A list of absolute paths to important logfiles on this service.</td>
-</tr>
-<tr>
-<td>elastic_ips</td>
-<td>list_of_strings</td>
-<td>A list of elastic IP addresses associated with this service.  (NB: These are actual addresses, not AWS address-IDs)  The elastic IPs must already exist and will not be created, but during <code>fab setup</code>, the IPs will be bound to the instance if they are not already.</td>
-</tr>
-<tr>
-<td>ami</td>
-<td>string</td>
-<td>The AMI used when this service is initially created.   Only used during <code>fab setup</code></td>
-</tr>
-<tr>
-<td>username</td>
-<td>string</td>
-<td>The username used for ssh'ing into service for provisioning, etc.  Typically either <code>ubuntu</code> or <code>ec2-user</code>, depending on the AMI you're using.</td>
-</tr>
-<tr>
-<td>instance_type</td>
-<td>string</td>
-<td>AWS instance type used when creating this service.  See <a href="http://ec2instances.info">this page</a> for some hints about instance type attributes and associated costs per month.</td>
-</tr>
-<tr>
-<td>pem</td>
-<td>string</td>
-<td>The path to the keyfile on localhost that is used for sshing into the service.  This entry typically  is the thing you downloaded when creating the AWS key, see also the <code>key_name</code> field.  This field supports tilda-expansion, so for instance a value like <code>~/.ssh/keyfile.pem</code> is acceptable.</td>
-</tr>
-<tr>
-<td>key_name</td>
-<td>string</td>
-<td>The AWS key used when creating this instance.  The key must already exist.  See <a href="other-automation.html#aws-keypairs">this section</a> for help creating new AWS keys.</td>
-</tr>
-<tr>
-<td>setup_list</td>
-<td>list_of_strings</td>
-<td>A list of instructions to carry out during service setup phase.  <a href="#setup-provision">Read more here</a></td>
-</tr>
-<tr>
-<td>provision_list</td>
-<td>list_of_strings</td>
-<td>A list of instructions to carry out during service provision phase.  <a href="#setup-provision">Read more here</a></td>
-</tr>
-<tr>
-<td>security_groups</td>
-<td>list_of_strings</td>
-<td>A list of AWS security groups this service will belong to.  These security groups must already exist.  See <a href="other-automation.html#security-groups">this section</a> for help creating and synchronizing new AWS security groups.</td>
-</tr>
-<tr>
-<td>health_checks</td>
-<td><code>{name: [check_type, check_argument], .. }</code></td>
-<td>A hash of named checks that can be performed against this service.  See <a href="#health-checks">this section</a> for more information about health checks that ymir supports.</td>
-</tr>
-<tr>
-<td>service_defaults</td>
-<td><code>{ key: value}</code></td>
-<td>Free form, schema-free subsection, which typically is used for holding application configuration data, facts available to puppet &amp; ansible, etc.</td>
-</tr>
-</tbody>
-</table>
-<h4><a name="vagrant-summary">Vagrant JSON summary</a></h4>
+<h4 id="ec2-json">EC2 JSON</h4>
+<script src="https://gist-it.appspot.com/github/mattvonrocketstein/ymir/blob/vagrant/ymir/skeleton/service.json"></script>
+<h4 id="vagrant-json">Vagrant JSON</h4>
 <p>The <code>vagrant.json</code> schema is much simpler than EC2, because most of the instance particulars will be configured inside the <code>Vagrantfile</code>.</p>
-<table>
-<thead>
-<tr>
-<th>Field name</th>
-<th>Schema</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>instance_type</td>
-<td>string</td>
-<td><strong>must be set to "vagrant"</strong></td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td><strong>should match vm.hostname in Vagrantfile</strong></td>
-</tr>
-<tr>
-<td>org_name</td>
-<td>string</td>
-<td>The name of the organization responsible for this service</td>
-</tr>
-<tr>
-<td>app_name</td>
-<td>string</td>
-<td>The name of the application this service is a part of</td>
-</tr>
-<tr>
-<td>env_name</td>
-<td>string</td>
-<td>The environment name for this service (suggested value: one of dev/test/prod)</td>
-</tr>
-<tr>
-<td>service_description</td>
-<td>string</td>
-<td>A human-friendly description of this service.</td>
-</tr>
-<tr>
-<td>service_defaults</td>
-<td><code>{ key: value}</code></td>
-<td>Free form, schema-free subsection, which typically is used for holding application configuration data, facts available to puppet &amp; ansible, etc.</td>
-</tr>
-<tr>
-<td>health_checks</td>
-<td><code>{name: [check_type, check_argument], .. }</code></td>
-<td>A hash of named checks that can be performed against this service.  See <a href="#health-checks">this section</a> for more information about health checks that ymir supports.</td>
-</tr>
-<tr>
-<td>setup_list</td>
-<td>list_of_strings</td>
-<td>A list of instructions to carry out during service setup phase.  <a href="#setup-provision">Read more here</a></td>
-</tr>
-<tr>
-<td>provision_list</td>
-<td>list_of_strings</td>
-<td>A list of instructions to carry out during service provision phase.  <a href="#setup-provision">Read more here</a></td>
-</tr>
-<tr>
-<td>logs</td>
-<td>list_of_strings</td>
-<td>A list of absolute paths to important logfiles on this service.</td>
-</tr>
-<tr>
-<td>ymir_build_puppet</td>
-<td>bool</td>
-<td>Specifies whether ymir will support puppet.  If support is enabled and puppet is not found on the remote service, puppet will be built from scratch.</td>
-</tr>
-<tr>
-<td>ymir_debug</td>
-<td>bool</td>
-<td>Specifies whether ymir is in debug mode.  This adds extra output from ymir itself, as well as implying debug mode for puppet and ansible.</td>
-</tr>
-</tbody>
-</table>
-<h4><a href=#health-checks name="health-checks">Supported health Checks</a></h4>
-<h4><a href=#setup-provision name="setup-provision">Setup and provision lists</a></h4>
+<script src="https://gist-it.appspot.com/github/mattvonrocketstein/ymir/blob/vagrant/ymir/skeleton/vagrant.json"></script>
+<h4 id="health-checks">Health Checks</h4>
+<h4 id="setup-provision">Setup &amp; provision</h4>
 <p>Both the <em>setup_list</em> and <em>provision_list</em> fields describe a list of instructions (such as puppet files which will be invoked in standalone-mode on the remote host).  Each field is a list of strings, where order matters.  Each string is an instruction, and each instruction has the form <strong>protocol://argument_string</strong>.</p>
 <p>These are the available protocols:</p>
 <table>

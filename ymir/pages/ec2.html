@@ -11,6 +11,8 @@
         <script src="../theme/html5.js"></script>
         <![endif]-->
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <!-- Styles -->
     <link href="../theme/bootstrap.min.css" rel="stylesheet">
     <link href="../theme/local.css" rel="stylesheet">
@@ -30,17 +32,18 @@
           <ul class="nav">
             <li><a href="../">About</a></li>
             <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="../pages/ec2.html">Quickstart: EC2</a></li>
             <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
             <li><a href="../pages/service-description.html">Service Descriptions</a></li>
             <li><a href="../pages/service-operations.html">Service Operations</a></li>
             <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
-            <li><a href="../pages/other-automation.html">Other automation</a></li>
+            <li><a href="../pages/examples.html">Examples</a></li>
+            <li><a href="../pages/misc.html">Misc.</a></li>
           </ul>
           <p class="pull-right">
             <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
-            <a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
-          </p>
+            <!--a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
+          </p-->
         </div>
       </div>
     </div>
@@ -49,17 +52,136 @@
       <div class="sidebar">
         <div class="well">
           <h3>TOC</h3>
-          <ul>
-            <li><a href="../">About</a></li>
-            <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
-            <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
-            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
-            <li><a href="../pages/service-operations.html">Service Operations</a></li>
-            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
-            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          <ul class=main_toc>
+            <li class=page_toc>
+              <a href="../">About</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#what-is-it">What is it?</a></li>
+<li><a href="#who-is-it-for">Who is it for?</a></li>
+<li><a href="#under-the-hood">Under the hood</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#contributing">Contributing</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/installation.html">Installation</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#suggested-software">Suggested software</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/ec2.html">Quickstart: EC2</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#create-boilerplate">Create Boilerplate</a></li>
+<li><a href="#customize-things">Customize things</a></li>
+<li><a href="#validate-and-create">Validate and create</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/vagrant.html">Quick Start: Vagrant</a>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-description.html">Service Descriptions</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#choosing-a-file"><a href="#alt-file" name="alt-file">Choosing a file</a></a></li>
+<li><a href="#templating"><a href="#templating" name="templating">Templating</a></a></li>
+<li><a href="#ec2-json">EC2 JSON</a></li>
+<li><a href="#vagrant-json">Vagrant JSON</a></li>
+<li><a href="#health-checks">Health Checks</a></li>
+<li><a href="#setup-provision">Setup &amp; provision</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-operations.html">Service Operations</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#built-in-operations">Built-in Operations</a></li>
+<li><a href="#setup-operation">Setup Operation</a></li>
+<li><a href="#provision-operation">Provision Operation</a></li>
+<li><a href="#check-operation">Check Operation</a></li>
+<li><a href="#custom-operations">Custom Operations</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-implementations.html">Service Implementations</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisite-reading">Prerequisite reading</a></li>
+<li><a href="#puppet-provisioning">Puppet Provisioning</a><ul>
+<li><a href="#puppet-deps">Puppet Deps</a></li>
+<li><a href="#puppet-facts">Puppet Facts</a></li>
+</ul>
+</li>
+<li><a href="#ansible-provisioning">Ansible Provisioning</a><ul>
+<li><a href="#ansible-deps">Ansible Deps</a></li>
+<li><a href="#ansible-facts">Ansible Facts</a></li>
+</ul>
+</li>
+<li><a href="#other-provisioning">Other Provisioning</a><ul>
+<li><a href="#local-commands">Local commands</a></li>
+<li><a href="#remote-commands">Remote commands</a></li>
+</ul>
+</li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/examples.html">Examples</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#polyglot-demo">Polyglot demo</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/misc.html">Misc.</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#automation-helpers">Automation Helpers</a></li>
+<li><a href="#validating-boilerplate">Validating boilerplate</a></li>
+<li><a href="#creating-keypairs">Creating Keypairs</a></li>
+<li><a href="#synchronizing-security-groups">Synchronizing security groups</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
           </ul>
         </div>
+        <script>
+          $('ul.main_toc nav.sub_toc li > a').each(function(){
+            $(this).attr(
+               'href',
+               $(this).closest('.page_toc').children()[0].href+$(this).attr('href'));
+          });
+        </script>
         <div class="well">
           <h3>Other Links</h3>
           <ul>
@@ -70,57 +192,51 @@
       </div>
       <div class="content">
         <div class='page'>
-                <div class="page-header"><h1>Quick Start: EC2</h1></div>
-                <div><hr />
-<h2>Prerequisites</h2>
-<h3><strong>1</strong> Setup Amazon API keys</h3>
+                <div class="page-header"><h1>Quickstart: EC2</h1></div>
+                <div>
+<h2 id="prerequisites">Prerequisites</h2>
+<p><strong>1. Setup Amazon API keys</strong></p>
 <p>Before ymir can work with boto, you'll need to have boto setup (unless you use multiple amazon accounts, this only happens once).  Follow the <a href="http://boto.readthedocs.org/en/latest/boto_config_tut.html">instructions here</a> to setup your <code>aws_access_key_id</code> and <code>aws_secret_access_key</code></p>
-<h3><strong>2</strong> Setup Amazon keypairs <a name=create_keypairs></a></h3>
+<p><strong>2. Setup Amazon keypairs</strong></p>
 <p>Think a bit about how you want to setup your AWS keypairs for accessing the service.  Some people may want one keypair per app, others may want one keypair per service and you may or may not want to change your keypairs per environment.  You can create a keypair by issuing the following command:</p>
 <div class="highlight"><pre><span></span>$ ymir keypair &lt;app_name&gt;
 </pre></div>
-
-
-<hr />
-<h2>Bootstrap a new service</h2>
-<h3><strong>3</strong> Create a service template <a name=ymir_init></a></h3>
+<hr/>
+<h2 id="create-boilerplate">Create Boilerplate</h2>
+<p><strong>3 Create a service template</strong></p>
 <p>Initializing a new service template with ymir copies boilerplate that you'll find useful.  The following command will create a new folder <code>demo_service</code> with your project skeleton:</p>
 <div class="highlight"><pre><span></span>$ ymir init demo_service
 </pre></div>
-
-
-<hr />
-<h2>Customize all the things</h2>
-<h3><strong>4</strong> Customize your service description</h3>
+<hr/>
+<h2 id="customize-things">Customize things</h2>
+<p><strong>4 Customize your service description</strong></p>
 <p>Customize your service description by making changes to the boilerplate in <code>demo_service/service.json</code> (this file was created in step 3) you can tune the instance size, tags, and other attributes for your service. The <code>service.json</code> file specifies other important service metadata like the service name, the base AMI, the EC2 instance size, and how health checks should be performed.  Most of the options are illustrated in the <a href="https://github.com/mattvonrocketstein/ymir/blob/master/ymir/skeleton/service.json">default service.json</a>.</p>
 <p>In particular you will want to change the <code>name</code>, <code>key_name</code>, and <code>pem</code> fields at minimum, where <code>key_name</code> and <code>pem</code> match what you setup in <a href="#create_keypairs">step 2</a>  For more detailed information about the fields and what they do, see the <a href="pages/service-description.html#ec2-summary">service description</a> section of this documentation.</p>
-<h3><strong>5</strong> Customize your <em>service implementation</em></h3>
+<p><strong>5. Customize your <em>service implementation</em> </strong></p>
 <p>Customize your service implementation.  You can do this with shell, ansible, or puppet or fabric tasks depending on your preference.  Consult the <a href="pages/service-implementation.html">service implementation</a> section of this documentation.</p>
-<h3><strong>7</strong>  Customize and synchronize your AWS security groups</h3>
+<p><strong>7.  Customize and synchronize your AWS security groups</strong></p>
 <p>Open the <code>security_groups.json</code> file inside the demo_service directory.  Name your security group, then and add any extra firewall rules you'd like to have apply to your service.  To synchronize your security rules, run the following command:</p>
 <div class="highlight"><pre><span></span>$ ymir sg
 </pre></div>
-
-
-<p>Make sure the <strong>security_group</strong> field inside of <code>service.json</code> matches whatever name you used here.</p>
-<h3><strong>6</strong> Add any customized service operations</h3>
+<p>Make sure the "security_group""* field inside of <code>service.json</code> matches whatever name you used here.</p>
+<p><strong>6. Add any customized service operations</strong></p>
 <p>If you're willing to write new code you can define new operations of any kind, but you get lots of basic operations out of the box.  To show a list of default operations, make sure you are in the service root and run this command:</p>
 <div class="highlight"><pre><span></span>$ fab -l
 </pre></div>
-
-
 <p>For an example of how you might write a deploy operation, see <a href="pages/examples.html#custom-operation">this example</a>.</p>
-<hr />
-<h2>Validate and create</h2>
-<h3><strong>7</strong>  Validate your service description so far</h3>
+<hr/>
+<h2 id="validate-and-create">Validate and create</h2>
+<p><strong>7.  Validate your service description so far</strong></p>
 <p>To make sure your setup is sane so far, run</p>
 <div class="highlight"><pre><span></span>$ ymir validate
 </pre></div>
-
-
-<p>This will tell you if your AWS keys, security groups, pem files, etc are all setup correctly and will attempt to validate some of your provisioning code.  See the <a href="pages/other-automation.html#validation">validation docs</a> for more information.</p>
-<h3><strong>8</strong> Instantiate your service, setup it up, provision it</h3>
-<p>Run <code>fab create</code>, and if all is well, then <code>fab setup</code> and <code>fab provision</code>.  Initially it's better to run these separately, because despite retry-behaviours, if you have a bad internet connection then something is liable to timeout and it's might be useful to inspect the output more carefully.</p>
+<p>This will tell you if your AWS keys, security groups, pem files, etc are all setup correctly and will attempt to validate some of your provisioning code.  See the <a href="pages/misc.html#validating-boilerplate">validation docs</a> for more information.</p>
+<p><strong>8. Instantiate your service, setup &amp; provision it</strong></p>
+<p>Run the create/setup/provision operations one by one, proceeding at each stage if all is well.  Initially it's better to run these separately, because despite retry-behaviours, if you have a bad internet connection then something is liable to timeout and it might be useful to inspect the output more carefully.</p>
+<div class="highlight"><pre><span></span>$ fab create
+$ fab setup
+$ fab provision
+</pre></div>
 <p>If you have a great internet connection, try running everything at once:</p>
 <div class="highlight"><pre><span></span>fab create setup provision
 </pre></div></div>

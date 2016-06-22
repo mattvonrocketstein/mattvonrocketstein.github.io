@@ -11,6 +11,8 @@
         <script src="../theme/html5.js"></script>
         <![endif]-->
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <!-- Styles -->
     <link href="../theme/bootstrap.min.css" rel="stylesheet">
     <link href="../theme/local.css" rel="stylesheet">
@@ -30,17 +32,18 @@
           <ul class="nav">
             <li><a href="../">About</a></li>
             <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="../pages/ec2.html">Quickstart: EC2</a></li>
             <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
             <li><a href="../pages/service-description.html">Service Descriptions</a></li>
             <li><a href="../pages/service-operations.html">Service Operations</a></li>
             <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
-            <li><a href="../pages/other-automation.html">Other automation</a></li>
+            <li><a href="../pages/examples.html">Examples</a></li>
+            <li><a href="../pages/misc.html">Misc.</a></li>
           </ul>
           <p class="pull-right">
             <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
-            <a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
-          </p>
+            <!--a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
+          </p-->
         </div>
       </div>
     </div>
@@ -49,17 +52,136 @@
       <div class="sidebar">
         <div class="well">
           <h3>TOC</h3>
-          <ul>
-            <li><a href="../">About</a></li>
-            <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
-            <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
-            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
-            <li><a href="../pages/service-operations.html">Service Operations</a></li>
-            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
-            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          <ul class=main_toc>
+            <li class=page_toc>
+              <a href="../">About</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#what-is-it">What is it?</a></li>
+<li><a href="#who-is-it-for">Who is it for?</a></li>
+<li><a href="#under-the-hood">Under the hood</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#contributing">Contributing</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/installation.html">Installation</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#suggested-software">Suggested software</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/ec2.html">Quickstart: EC2</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#create-boilerplate">Create Boilerplate</a></li>
+<li><a href="#customize-things">Customize things</a></li>
+<li><a href="#validate-and-create">Validate and create</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/vagrant.html">Quick Start: Vagrant</a>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-description.html">Service Descriptions</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#choosing-a-file"><a href="#alt-file" name="alt-file">Choosing a file</a></a></li>
+<li><a href="#templating"><a href="#templating" name="templating">Templating</a></a></li>
+<li><a href="#ec2-json">EC2 JSON</a></li>
+<li><a href="#vagrant-json">Vagrant JSON</a></li>
+<li><a href="#health-checks">Health Checks</a></li>
+<li><a href="#setup-provision">Setup &amp; provision</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-operations.html">Service Operations</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#built-in-operations">Built-in Operations</a></li>
+<li><a href="#setup-operation">Setup Operation</a></li>
+<li><a href="#provision-operation">Provision Operation</a></li>
+<li><a href="#check-operation">Check Operation</a></li>
+<li><a href="#custom-operations">Custom Operations</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-implementations.html">Service Implementations</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisite-reading">Prerequisite reading</a></li>
+<li><a href="#puppet-provisioning">Puppet Provisioning</a><ul>
+<li><a href="#puppet-deps">Puppet Deps</a></li>
+<li><a href="#puppet-facts">Puppet Facts</a></li>
+</ul>
+</li>
+<li><a href="#ansible-provisioning">Ansible Provisioning</a><ul>
+<li><a href="#ansible-deps">Ansible Deps</a></li>
+<li><a href="#ansible-facts">Ansible Facts</a></li>
+</ul>
+</li>
+<li><a href="#other-provisioning">Other Provisioning</a><ul>
+<li><a href="#local-commands">Local commands</a></li>
+<li><a href="#remote-commands">Remote commands</a></li>
+</ul>
+</li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/examples.html">Examples</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#polyglot-demo">Polyglot demo</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/misc.html">Misc.</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#automation-helpers">Automation Helpers</a></li>
+<li><a href="#validating-boilerplate">Validating boilerplate</a></li>
+<li><a href="#creating-keypairs">Creating Keypairs</a></li>
+<li><a href="#synchronizing-security-groups">Synchronizing security groups</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
           </ul>
         </div>
+        <script>
+          $('ul.main_toc nav.sub_toc li > a').each(function(){
+            $(this).attr(
+               'href',
+               $(this).closest('.page_toc').children()[0].href+$(this).attr('href'));
+          });
+        </script>
         <div class="well">
           <h3>Other Links</h3>
           <ul>
@@ -71,93 +193,77 @@
       <div class="content">
         <div class='page'>
                 <div class="page-header"><h1>Service Operations</h1></div>
-                <div><hr />
-<h2>Overview</h2>
+                <div>
+<hr/>
+<h3 id="overview">Overview</h3>
 <p><em>Service operations</em> are "command and control" helpers for your service.  Operations are always <a href="http://docs.fabfile.org/en/latest/usage/fab.html">fabric commands</a> which are <em>invoked</em> from your local environment (or from a buildbot like <a href="https://jenkins-ci.org/">jenkins</a>) but are typically <em>executed</em> on the remote service.  Authentication with the remote side happens transparently and automatically, provided your <a href="service-description.html">service description</a> is setup correctly.   To list operations, cd into the service root and run</p>
 <div class="highlight"><pre><span></span>$ fab --list
 </pre></div>
-
-
 <p>Executing individual operations is normally as simple as running</p>
 <div class="highlight"><pre><span></span>$ fab &lt;operation_name&gt;
 </pre></div>
-
-
 <p>Passing arguments to operations is also possible, and occasionally desirable.  For instance to tail syslog on the remote service, you can use a command like this:</p>
 <div class="highlight"><pre><span></span>$ fab tail:/var/log/syslog
 </pre></div>
-
-
 <p>The syntax looks a little funny, but that's so each fabric task can have separate options. See <a href="http://docs.fabfile.org/en/1.11/usage/fab.html#per-task-arguments">the fabric documentation here</a> for more information.</p>
-<p>Note that the <strong>global</strong> arguments of fabric (to specify hosts, keyfiles, etc) should generally not be used with ymir at all. <img width=24px src=../images/attention.gif></p>
+<p>Note that the <strong>global</strong> arguments of fabric (to specify hosts, keyfiles, etc) should generally not be used with ymir at all. <img src="../images/attention.gif" width="24px"/></p>
 <p>If you're willing to write code and especially if you're familiar with python and fabric, you can easily define new operations of any kind at any time (take a look at code for a <a href="examples.html">custom operation here</a>).  By default though, several operations are already defined for you automatically and they are described below.</p>
-<hr />
-<h2>Built-in Operations</h2>
+<hr/>
+<h3 id="built-in-operations">Built-in Operations</h3>
 <table>
 <tr><th>Operation</th><th>Description</th></tr>
-
-<tr><td class=td_operation>fab create</td><td>
+<tr><td class="td_operation">fab create</td><td>
 Creates your EC2 instance according to the specification in the `service.json` file (which is normally in the same directory as the fabfile).  To force creation even when your service is already present, use `fab create:force=True`
 </td></tr>
-
-<tr><td class=td_operation>fab setup</td><td>
-The setup operation should typically occur after "create" and before "provision".  Setup is safe to invoke repeatedly, but is separated from "provision" because it often involves very slow steps like updates for apt or yum.  Setup can be reinvoked if <a href=#>puppet dependencies</a> change, or if you wish to resynchronize things like tags, s3 buckets, or elastic IPs.  More information about the "setup" phase is available <a href=#setup>here</a>.
+<tr><td class="td_operation">fab setup</td><td>
+The setup operation should typically occur after "create" and before "provision".  Setup is safe to invoke repeatedly, but is separated from "provision" because it often involves very slow steps like updates for apt or yum.  Setup can be reinvoked if <a href="#">puppet dependencies</a> change, or if you wish to resynchronize things like tags, s3 buckets, or elastic IPs.  More information about the "setup" phase is available <a href="#setup">here</a>.
 </td></tr>
-
-<tr><td class=td_operation>fab provision</td><td>
-The provision operation typically occurs after "setup" and executes the bulk of provisioning code.  This step should do things like clone or update code repos on the service host, add or update files from templates, etc.  It should always run fast and be idempotent.  More information about the "provision" phase is available <a href=#>here</a>.
+<tr><td class="td_operation">fab provision</td><td>
+The provision operation typically occurs after "setup" and executes the bulk of provisioning code.  This step should do things like clone or update code repos on the service host, add or update files from templates, etc.  It should always run fast and be idempotent.  More information about the "provision" phase is available <a href="#">here</a>.
 </td></tr>
-
-<tr><td class=td_operation> fab status</td><td>
+<tr><td class="td_operation"> fab status</td><td>
 The "status" operation shows service status, including IP address, EC2 status, etc.  It also displays (but does not check) URLs which might be useful when running health tests on this service.</td></tr>
-
-<tr><td class=td_operation> fab check</td><td>
+<tr><td class="td_operation"> fab check</td><td>
 The "check" operation runs health checks on the service.<br/>
 The idea is to provide a simple starting point for integration with more sophisticated health monitoring via stuff like periodic jenkins jobs, nagios, etc.  See <a href="service_description.html#health-checks">this section</a> of the service-description documentation for more information.
 </td></tr>
-
-<tr><td class=td_operation>fab ssh</td><td>
-The "ssh" operation simply connects to the service.</br>
+<tr><td class="td_operation">fab ssh</td><td>
+The "ssh" operation simply connects to the service.</td></tr></table>
 Apart from normal system administration or inspecting the service, this is good to use when you suspect that other operations might be failing because of AWS keypair issues.
-</td></tr>
 
-<tr><td class=td_operation>fab mosh</td><td>
+<tr><td class="td_operation">fab mosh</td><td>
 The "mosh" operation connects to the service using <a href="https://mosh.mit.edu/">mosh</a>.  <br/>
 It is required that mosh already be installed on the remote side, and your security group has openings for the correct ports.
 </td></tr>
-
-<tr><td class=td_operation>fab run</td><td>
+<tr><td class="td_operation">fab run</td><td>
 The "run" operation runs a single command on the remote host as the default user.  Useful for tailing logs and such.<br/>
 For example: <code>fab run:"whoami"</code>
 </td></tr>
-
-<tr><td class=td_operation>fab show</td><td>
+<tr><td class="td_operation">fab show</td><td>
 The "show" operation invokes your local webbrowser to open every webpage that `fab check` operation would have been looking at.
 </td></tr>
-
-<tr><td class=td_operation>fab s3</td><td>
+<tr><td class="td_operation">fab s3</td><td>
 The "s3" operation summarizes contents of the s3 buckets your service defines, if any.
 </td></tr>
-<tr><td class=td_operation>fab get</td><td>
+<tr><td class="td_operation">fab get</td><td>
 The "get" operation is a shortcut for "scp get" commands against this service.   It takes one argument (the remote file) and always saves to the working directory.  Under the hood, this uses <a href="http://docs.fabfile.org/en/1.0.0/api/core/operations.html#fabric.operations.get">fabric.operations.get</a>.
 </td></tr>
-
-<tr><td class=td_operation>fab put</td><td>
+<tr><td class="td_operation">fab put</td><td>
 The "put" operation is a shortcut for "scp put" commands against this service.  It takes two arguments, namely the local file and the remote destination.  Under the hood, this uses <a href="http://docs.fabfile.org/en/1.0.0/api/core/operations.html#fabric.operations.put">fabric.operations.put</a>.<br/>
 Examples: <code>fab put:local_fname,remote_dir,owner=user</code> <code>fab put:local_fname,remote_fname</code>
 </td></tr>
-<tr><td class=td_operation>fab freeze</td><td>
-The "freeze" operation saves the current service to an AMI <font color=red>(not implemented yet)</font>
+<tr><td class="td_operation">fab freeze</td><td>
+The "freeze" operation saves the current service to an AMI <font color="red">(not implemented yet)</font>
 </td></tr>
-</table>
 
 <hr/>
-
-<h4><a name=setup> The "Setup" Operation in more detail </a></h4>
+<h3 id="setup-operation">Setup Operation</h3>
 <p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p>
-<h4><a name=provision> The "Provision" Operation in more detail </a></h4>
+<h3 id="provision-operation">Provision Operation</h3>
 <p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p>
-<h4><a name=provision> The "Check" Operation in more detail </a></h4>
+<h3 id="check-operation">Check Operation</h3>
+<p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p>
+<h3 id="custom-operations">Custom Operations</h3>
 <p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p></div>
         </div>
         <footer>

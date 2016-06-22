@@ -11,6 +11,8 @@
         <script src="../theme/html5.js"></script>
         <![endif]-->
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <!-- Styles -->
     <link href="../theme/bootstrap.min.css" rel="stylesheet">
     <link href="../theme/local.css" rel="stylesheet">
@@ -30,17 +32,18 @@
           <ul class="nav">
             <li><a href="../">About</a></li>
             <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
+            <li><a href="../pages/ec2.html">Quickstart: EC2</a></li>
             <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
             <li><a href="../pages/service-description.html">Service Descriptions</a></li>
             <li><a href="../pages/service-operations.html">Service Operations</a></li>
             <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
-            <li><a href="../pages/other-automation.html">Other automation</a></li>
+            <li><a href="../pages/examples.html">Examples</a></li>
+            <li><a href="../pages/misc.html">Misc.</a></li>
           </ul>
           <p class="pull-right">
             <a href="https://github.com/mattvonrocketstein/ymir/">[github]</a>
-            <a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
-          </p>
+            <!--a href="https://github.com/mattvonrocketstein/ymir/issues">[issues]</a>
+          </p-->
         </div>
       </div>
     </div>
@@ -49,17 +52,136 @@
       <div class="sidebar">
         <div class="well">
           <h3>TOC</h3>
-          <ul>
-            <li><a href="../">About</a></li>
-            <li><a href="../pages/installation.html">Installation</a></li>
-            <li><a href="../pages/ec2.html">Quick Start: EC2</a></li>
-            <li><a href="../pages/vagrant.html">Quick Start: Vagrant</a></li>
-            <li><a href="../pages/service-description.html">Service Descriptions</a></li>
-            <li><a href="../pages/service-operations.html">Service Operations</a></li>
-            <li><a href="../pages/service-implementations.html">Service Implementations</a></li>
-            <li><a href="../pages/other-automation.html">Other automation</a></li>
+          <ul class=main_toc>
+            <li class=page_toc>
+              <a href="../">About</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#what-is-it">What is it?</a></li>
+<li><a href="#who-is-it-for">Who is it for?</a></li>
+<li><a href="#under-the-hood">Under the hood</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#contributing">Contributing</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/installation.html">Installation</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#suggested-software">Suggested software</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/ec2.html">Quickstart: EC2</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#create-boilerplate">Create Boilerplate</a></li>
+<li><a href="#customize-things">Customize things</a></li>
+<li><a href="#validate-and-create">Validate and create</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/vagrant.html">Quick Start: Vagrant</a>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-description.html">Service Descriptions</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#choosing-a-file"><a href="#alt-file" name="alt-file">Choosing a file</a></a></li>
+<li><a href="#templating"><a href="#templating" name="templating">Templating</a></a></li>
+<li><a href="#ec2-json">EC2 JSON</a></li>
+<li><a href="#vagrant-json">Vagrant JSON</a></li>
+<li><a href="#health-checks">Health Checks</a></li>
+<li><a href="#setup-provision">Setup &amp; provision</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-operations.html">Service Operations</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#built-in-operations">Built-in Operations</a></li>
+<li><a href="#setup-operation">Setup Operation</a></li>
+<li><a href="#provision-operation">Provision Operation</a></li>
+<li><a href="#check-operation">Check Operation</a></li>
+<li><a href="#custom-operations">Custom Operations</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/service-implementations.html">Service Implementations</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisite-reading">Prerequisite reading</a></li>
+<li><a href="#puppet-provisioning">Puppet Provisioning</a><ul>
+<li><a href="#puppet-deps">Puppet Deps</a></li>
+<li><a href="#puppet-facts">Puppet Facts</a></li>
+</ul>
+</li>
+<li><a href="#ansible-provisioning">Ansible Provisioning</a><ul>
+<li><a href="#ansible-deps">Ansible Deps</a></li>
+<li><a href="#ansible-facts">Ansible Facts</a></li>
+</ul>
+</li>
+<li><a href="#other-provisioning">Other Provisioning</a><ul>
+<li><a href="#local-commands">Local commands</a></li>
+<li><a href="#remote-commands">Remote commands</a></li>
+</ul>
+</li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/examples.html">Examples</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#polyglot-demo">Polyglot demo</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
+            <li class=page_toc>
+              <a href="../pages/misc.html">Misc.</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#automation-helpers">Automation Helpers</a></li>
+<li><a href="#validating-boilerplate">Validating boilerplate</a></li>
+<li><a href="#creating-keypairs">Creating Keypairs</a></li>
+<li><a href="#synchronizing-security-groups">Synchronizing security groups</a></li>
+</ul>
+</div>
+              </nav>
+            </li>
           </ul>
         </div>
+        <script>
+          $('ul.main_toc nav.sub_toc li > a').each(function(){
+            $(this).attr(
+               'href',
+               $(this).closest('.page_toc').children()[0].href+$(this).attr('href'));
+          });
+        </script>
         <div class="well">
           <h3>Other Links</h3>
           <ul>
@@ -71,68 +193,79 @@
       <div class="content">
         <div class='page'>
                 <div class="page-header"><h1>Service Implementations</h1></div>
-                <div><h2>Prerequisite reading</h2>
+                <div>
+<h2 id="prerequisite-reading">Prerequisite reading</h2>
 <p>Provisioning your service is accomplished via the <a href="service-description.html">service description</a> fields <em>setup_list</em> and <em>provision_list</em>, and via the <a href="service-operations.html">service operation</a> <code>fab setup</code> and <code>fab provision</code>.  If you haven't reviewed what service descriptions and service operations are all about yet, you might want to read that first.</p>
 <p>Also another bit of terminology.. on this page, <strong>local</strong> means you are executing a command that runs (for example) on your friendly neighborhood build bot or a developers laptop.  The service being provisioned is normally referred to as the <strong>remote</strong>.</p>
-<p>Some of the examples on this page make use of the <a href="service_description.html#templating">templating capabilities of ymir service descriptions</a>.  <img width=24px src=../images/attention.gif></p>
-<h2>Provisioning with puppet</h2>
+<p>Some of the examples on this page make use of the <a href="service_description.html#templating">templating capabilities of ymir service descriptions</a>.  <img src="../images/attention.gif" width="24px"/></p>
+<h2 id="puppet-provisioning">Puppet Provisioning</h2>
 <p>By default, the field <em>ymir_build_puppet</em> is set to true inside service-descriptions.  Whenever puppet support is enabled, puppet will be compiled from scratch by ymir during the <code>fab setup</code> phase, so you do not need to choose an AMI that includes it out of the box.  Note: The <code>fab setup</code> command uses <a href="https://github.com/icy/pacapt#description">pacapt</a> to install system packages that are prerequisites for the puppet build, so in theory it doesn't matter whether the remote side is Ubuntu or Centos, etc.</p>
 <p>To avoid the complexity of puppet masters, hiera, etc, Ymir always invokes puppet in "stand-alone" mode by copying puppet files from the local machine to the remote service with rsync, then using "puppet apply".  For better or worse (I think it's better) the overall effect is that puppet acts somewhat more like ansible.</p>
-<h4>Adding new puppet dependencies</h4>
+<h4 id="puppet-deps">Puppet Deps</h4>
 <p>Puppet dependencies are managed via <a href="https://github.com/rodjek/librarian-puppet">puppet-librarian</a>, specified in <code>&lt;service_root&gt;/puppet/metadata.json</code> and refreshed whenever the <code>fab setup</code> operation is invoked.  The default file generated during <code>ymir init</code> invocations is always visible <a href="https://github.com/mattvonrocketstein/ymir/blob/master/ymir/skeleton/puppet/metadata.json">here</a>.</p>
-<h4>Service descriptions may publish puppet facts</h4>
+<h4 id="puppet-facts">Puppet Facts</h4>
 <p>Strings mentioned inside the <strong>service_defaults</strong> field of your <code>service.json</code> file are available as puppet facts.  You may also like to review how <a href="service_description.html#templating">service descriptions are themselves templated</a>.  For instance, if your <code>service.json</code> looks like this:</p>
-<p>```
-{
-   ... lots of ymir key/values here ...</p>
-<p>provision_list: [
-     "puppet://puppet/install_daemon.pp",
-   ],</p>
-<p>service_defaults : {
-     daemon_port: "1337",
-     daemon_config_file: "/etc/daemon.conf"
-   },</p>
-<p>...lots more ymir key/values here ...
+<div class="highlight"><pre><span></span>{
+  ... lots of ymir key/values here ...
+
+  provision_list: [
+    "puppet://puppet/install_daemon.pp",
+  ],
+
+  service_defaults : {
+    daemon_port: "1337",
+    daemon_config_file: "/etc/daemon.conf"
+  },
+
+  ...lots more ymir key/values here ...
 }
-```</p>
+</pre></div>
 <p>Then your puppet file at <code>&lt;service_root&gt;/puppet/install_daemon.pp</code> could use these variables like this:</p>
-<p><code>file { "${daemon_config_file}":
-  ensure  =&gt; file,
-  content =&gt; inline_template(" port = &lt;%= @daemon_port %&gt;"),
-}</code></p>
-<h2>Provisioning with other stuff</h2>
-<h4>Provisioning with abritrary local commands</h4>
+<div class="highlight"><pre><span></span><span class="x">file { "${daemon_config_file}":</span>
+<span class="x"> ensure  =&gt; file,</span>
+<span class="x"> content =&gt; inline_template(" port = </span><span class="cp">&lt;%=</span> <span class="vi">@daemon_port</span> <span class="cp">%&gt;</span><span class="x">"),</span>
+<span class="x">}</span>
+</pre></div>
+<h2 id="ansible-provisioning">Ansible Provisioning</h2>
+<h4 id="ansible-deps">Ansible Deps</h4>
+<p>Ansible dependencies are managed via <a href="">ansible-galaxy</a>, specified in <code>&lt;service_root&gt;/ansible/requirements.yml</code>, and refreshed whenever the <code>fab setup</code> operation is invoked.  The default file generated during <code>ymir init</code> invocations is always visible <a href="https://github.com/mattvonrocketstein/ymir/blob/master/ymir/skeleton/ansible/requirements.yml">here</a>.</p>
+<h4 id="ansible-facts">Ansible Facts</h4>
+<p>Strings mentioned inside the <strong>service_defaults</strong> field of your <code>service.json</code> file are available as ansible variables.  You may also like to review how <a href="service_description.html#templating">service descriptions are themselves templated</a>.  For instance, if your <code>service.json</code> looks like this:</p>
+<div class="highlight"><pre><span></span>{
+ ...lots of ymir key/values...
+
+ provision_list: [
+   'local://ansible -u {username} --private-key={pem} -i "{host}," -m some_ansible_module',
+ ]
+
+ ...lots of other ymir key/values...
+}
+</pre></div>
+<h2 id="other-provisioning">Other Provisioning</h2>
 <p>To install a package on the remote side using a local command, your service.json file could look something like the example below.</p>
-<p>```
-{
-  ...lots of ymir key/values...</p>
-<p>provision_list: [
-    "local://ssh -i {key_file} {username}@{host} sudo apt-get install some_package",
-  ]</p>
-<p>...lots of other ymir key/values...
+<div class="highlight"><pre><span></span>{
+ ...lots of ymir key/values...
+
+ provision_list: [
+   "local://ssh -i {key_file} {username}@{host} sudo apt-get install some_package",
+ ]
+
+ ...lots of other ymir key/values...
 }
-```</p>
-<h4>Provisioning with abritrary remote commands</h4>
+</pre></div>
+<h4 id="local-commands">Local commands</h4>
+<h4 id="remote-commands">Remote commands</h4>
 <p>To install a package on the remote side using a remote command, your service.json file could look something like the example below.</p>
-<p>```
-{
-  ...lots of ymir key/values...</p>
-<p>provision_list: [
-    "remote://sudo apt-get install some_package",
-  ]</p>
-<p>...lots of other ymir key/values...
+<div class="highlight"><pre><span></span>{
+ ...lots of ymir key/values...
+
+ provision_list: [
+   "remote://sudo apt-get install some_package",
+ ]
+
+ ...lots of other ymir key/values...
 }
-```</p>
-<h4>Provisioning with ansible</h4>
-<p>```
-{
-  ...lots of ymir key/values...</p>
-<p>provision_list: [
-    'local://ansible -u {username} --private-key={pem} -i "{host}," -m some_ansible_module',
-  ]</p>
-<p>...lots of other ymir key/values...
-}
-```</p></div>
+</pre></div></div>
         </div>
         <footer>
           <p>&copy; mvr</p>
