@@ -63,6 +63,7 @@
 <li><a href="#under-the-hood">Under the hood</a></li>
 <li><a href="#features">Features</a></li>
 <li><a href="#contributing">Contributing</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul>
 </div>
               </nav>
@@ -94,13 +95,26 @@
             </li>
             <li class=page_toc>
               <a href="../pages/vagrant.html">Quick Start: Vagrant</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#create-boilerplate">Create boilerplate</a></li>
+<li><a href="#customize-things">Customize things</a><ul>
+<li><a href="#5-customize-your-service-implementation">5 Customize your service implementation</a></li>
+</ul>
+</li>
+<li><a href="#validate-and-create">Validate and create</a></li>
+</ul>
+</div>
+              </nav>
             </li>
             <li class=page_toc>
               <a href="../pages/service-description.html">Service Descriptions</a>
               <nav class="sub_toc">
                 <div class="toc">
 <ul>
-<li><a href="#choosing-a-file"><a href="#alt-file" name="alt-file">Choosing a file</a></a></li>
+<li><a href="#choosing-a-file">Choosing a file</a></li>
 <li><a href="#templating"><a href="#templating" name="templating">Templating</a></a></li>
 <li><a href="#ec2-json">EC2 JSON</a></li>
 <li><a href="#vagrant-json">Vagrant JSON</a></li>
@@ -156,6 +170,7 @@
                 <div class="toc">
 <ul>
 <li><a href="#polyglot-demo">Polyglot demo</a></li>
+<li><a href="#custom-service-operations-with-fabric">Custom service operations with fabric</a></li>
 </ul>
 </div>
               </nav>
@@ -197,14 +212,14 @@
 <h2 id="prerequisite-reading">Prerequisite reading</h2>
 <p>Provisioning your service is accomplished via the <a href="service-description.html">service description</a> fields <em>setup_list</em> and <em>provision_list</em>, and via the <a href="service-operations.html">service operation</a> <code>fab setup</code> and <code>fab provision</code>.  If you haven't reviewed what service descriptions and service operations are all about yet, you might want to read that first.</p>
 <p>Also another bit of terminology.. on this page, <strong>local</strong> means you are executing a command that runs (for example) on your friendly neighborhood build bot or a developers laptop.  The service being provisioned is normally referred to as the <strong>remote</strong>.</p>
-<p>Some of the examples on this page make use of the <a href="service_description.html#templating">templating capabilities of ymir service descriptions</a>.  <img src="../images/attention.gif" width="24px"/></p>
+<p>Some of the examples on this page make use of the <a href="service-description.html#templating">templating capabilities of ymir service descriptions</a>.  <img src="../images/attention.gif" width="24px"/></p>
 <h2 id="puppet-provisioning">Puppet Provisioning</h2>
 <p>By default, the field <em>ymir_build_puppet</em> is set to true inside service-descriptions.  Whenever puppet support is enabled, puppet will be compiled from scratch by ymir during the <code>fab setup</code> phase, so you do not need to choose an AMI that includes it out of the box.  Note: The <code>fab setup</code> command uses <a href="https://github.com/icy/pacapt#description">pacapt</a> to install system packages that are prerequisites for the puppet build, so in theory it doesn't matter whether the remote side is Ubuntu or Centos, etc.</p>
 <p>To avoid the complexity of puppet masters, hiera, etc, Ymir always invokes puppet in "stand-alone" mode by copying puppet files from the local machine to the remote service with rsync, then using "puppet apply".  For better or worse (I think it's better) the overall effect is that puppet acts somewhat more like ansible.</p>
 <h4 id="puppet-deps">Puppet Deps</h4>
 <p>Puppet dependencies are managed via <a href="https://github.com/rodjek/librarian-puppet">puppet-librarian</a>, specified in <code>&lt;service_root&gt;/puppet/metadata.json</code> and refreshed whenever the <code>fab setup</code> operation is invoked.  The default file generated during <code>ymir init</code> invocations is always visible <a href="https://github.com/mattvonrocketstein/ymir/blob/master/ymir/skeleton/puppet/metadata.json">here</a>.</p>
 <h4 id="puppet-facts">Puppet Facts</h4>
-<p>Strings mentioned inside the <strong>service_defaults</strong> field of your <code>service.json</code> file are available as puppet facts.  You may also like to review how <a href="service_description.html#templating">service descriptions are themselves templated</a>.  For instance, if your <code>service.json</code> looks like this:</p>
+<p>Strings mentioned inside the <strong>service_defaults</strong> field of your <code>service.json</code> file are available as puppet facts.  You may also like to review how <a href="service-description.html#templating">service descriptions are themselves templated</a>.  For instance, if your <code>service.json</code> looks like this:</p>
 <div class="highlight"><pre><span></span>{
   ... lots of ymir key/values here ...
 
@@ -230,7 +245,7 @@
 <h4 id="ansible-deps">Ansible Deps</h4>
 <p>Ansible dependencies are managed via <a href="">ansible-galaxy</a>, specified in <code>&lt;service_root&gt;/ansible/requirements.yml</code>, and refreshed whenever the <code>fab setup</code> operation is invoked.  The default file generated during <code>ymir init</code> invocations is always visible <a href="https://github.com/mattvonrocketstein/ymir/blob/master/ymir/skeleton/ansible/requirements.yml">here</a>.</p>
 <h4 id="ansible-facts">Ansible Facts</h4>
-<p>Strings mentioned inside the <strong>service_defaults</strong> field of your <code>service.json</code> file are available as ansible variables.  You may also like to review how <a href="service_description.html#templating">service descriptions are themselves templated</a>.  For instance, if your <code>service.json</code> looks like this:</p>
+<p>Strings mentioned inside the <strong>service_defaults</strong> field of your <code>service.json</code> file are available as ansible variables.  You may also like to review how <a href="service-description.html#templating">service descriptions are themselves templated</a>.  For instance, if your <code>service.json</code> looks like this:</p>
 <div class="highlight"><pre><span></span>{
  ...lots of ymir key/values...
 

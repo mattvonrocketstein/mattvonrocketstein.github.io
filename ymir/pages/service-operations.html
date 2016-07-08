@@ -63,6 +63,7 @@
 <li><a href="#under-the-hood">Under the hood</a></li>
 <li><a href="#features">Features</a></li>
 <li><a href="#contributing">Contributing</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul>
 </div>
               </nav>
@@ -94,13 +95,26 @@
             </li>
             <li class=page_toc>
               <a href="../pages/vagrant.html">Quick Start: Vagrant</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#create-boilerplate">Create boilerplate</a></li>
+<li><a href="#customize-things">Customize things</a><ul>
+<li><a href="#5-customize-your-service-implementation">5 Customize your service implementation</a></li>
+</ul>
+</li>
+<li><a href="#validate-and-create">Validate and create</a></li>
+</ul>
+</div>
+              </nav>
             </li>
             <li class=page_toc>
               <a href="../pages/service-description.html">Service Descriptions</a>
               <nav class="sub_toc">
                 <div class="toc">
 <ul>
-<li><a href="#choosing-a-file"><a href="#alt-file" name="alt-file">Choosing a file</a></a></li>
+<li><a href="#choosing-a-file">Choosing a file</a></li>
 <li><a href="#templating"><a href="#templating" name="templating">Templating</a></a></li>
 <li><a href="#ec2-json">EC2 JSON</a></li>
 <li><a href="#vagrant-json">Vagrant JSON</a></li>
@@ -156,6 +170,7 @@
                 <div class="toc">
 <ul>
 <li><a href="#polyglot-demo">Polyglot demo</a></li>
+<li><a href="#custom-service-operations-with-fabric">Custom service operations with fabric</a></li>
 </ul>
 </div>
               </nav>
@@ -196,7 +211,7 @@
                 <div>
 <hr/>
 <h3 id="overview">Overview</h3>
-<p><em>Service operations</em> are "command and control" helpers for your service.  Operations are always <a href="http://docs.fabfile.org/en/latest/usage/fab.html">fabric commands</a> which are <em>invoked</em> from your local environment (or from a buildbot like <a href="https://jenkins-ci.org/">jenkins</a>) but are typically <em>executed</em> on the remote service.  Authentication with the remote side happens transparently and automatically, provided your <a href="service-description.html">service description</a> is setup correctly.   To list operations, cd into the service root and run</p>
+<p><em>Service operations</em> are "command and control" helpers for your service.  Operations are always <a href="http://docs.fabfile.org/en/latest/usage/fab.html">fabric commands</a> which are <em>invoked</em> from your local environment (or from a buildbot like <a href="https://jenkins-ci.org/">jenkins</a>) but are typically <em>executed</em> on the remote service.  Authentication with the remote side happens transparently and automatically, provided your <a href="pages/service-description.html">service description</a> is setup correctly.   To list operations, cd into the service root and run</p>
 <div class="highlight"><pre><span></span>$ fab --list
 </pre></div>
 <p>Executing individual operations is normally as simple as running</p>
@@ -205,9 +220,9 @@
 <p>Passing arguments to operations is also possible, and occasionally desirable.  For instance to tail syslog on the remote service, you can use a command like this:</p>
 <div class="highlight"><pre><span></span>$ fab tail:/var/log/syslog
 </pre></div>
-<p>The syntax looks a little funny, but that's so each fabric task can have separate options. See <a href="http://docs.fabfile.org/en/1.11/usage/fab.html#per-task-arguments">the fabric documentation here</a> for more information.</p>
-<p>Note that the <strong>global</strong> arguments of fabric (to specify hosts, keyfiles, etc) should generally not be used with ymir at all. <img src="../images/attention.gif" width="24px"/></p>
-<p>If you're willing to write code and especially if you're familiar with python and fabric, you can easily define new operations of any kind at any time (take a look at code for a <a href="examples.html">custom operation here</a>).  By default though, several operations are already defined for you automatically and they are described below.</p>
+<p>The syntax above might look a little funny, but that's so each fabric task can have separate options. See <a href="http://docs.fabfile.org/en/1.11/usage/fab.html#per-task-arguments">the fabric documentation here</a> for more information.</p>
+<p>Note that the <strong>global</strong> arguments of fabric (to specify hosts, keyfiles, etc) should generally not be used with ymir at all, because these are implied your <code>service.json</code> or <code>vagrant.json</code> configurations.  <img src="../images/attention.gif" width="24px"/></p>
+<p>If you're willing to write code and especially if you're familiar with python and fabric, you can easily define new operations of any kind at any time (take a look at code for a <a href="pages/examples.html#custom_operations">custom operation here</a>).  By default though, several operations are already defined for you automatically and they are described below.</p>
 <hr/>
 <h3 id="built-in-operations">Built-in Operations</h3>
 <table>
@@ -225,12 +240,13 @@ The provision operation typically occurs after "setup" and executes the bulk of 
 The "status" operation shows service status, including IP address, EC2 status, etc.  It also displays (but does not check) URLs which might be useful when running health tests on this service.</td></tr>
 <tr><td class="td_operation"> fab check</td><td>
 The "check" operation runs health checks on the service.<br/>
-The idea is to provide a simple starting point for integration with more sophisticated health monitoring via stuff like periodic jenkins jobs, nagios, etc.  See <a href="service_description.html#health-checks">this section</a> of the service-description documentation for more information.
+The idea is to provide a simple starting point for integration with more sophisticated health monitoring via stuff like periodic jenkins jobs, nagios, etc.  See <a href="service-description.html#health-checks">this section</a> of the service-description documentation for more information.
 </td></tr>
 <tr><td class="td_operation">fab ssh</td><td>
-The "ssh" operation simply connects to the service.</td></tr></table>
+The "ssh" operation simply connects to the service.<br/>
 Apart from normal system administration or inspecting the service, this is good to use when you suspect that other operations might be failing because of AWS keypair issues.
-
+</td>
+</tr>
 <tr><td class="td_operation">fab mosh</td><td>
 The "mosh" operation connects to the service using <a href="https://mosh.mit.edu/">mosh</a>.  <br/>
 It is required that mosh already be installed on the remote side, and your security group has openings for the correct ports.
@@ -255,16 +271,34 @@ Examples: <code>fab put:local_fname,remote_dir,owner=user</code> <code>fab put:l
 <tr><td class="td_operation">fab freeze</td><td>
 The "freeze" operation saves the current service to an AMI <font color="red">(not implemented yet)</font>
 </td></tr>
-
+</table>
 <hr/>
 <h3 id="setup-operation">Setup Operation</h3>
-<p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p>
+<p>Invoke this operation from the root directory of your service with the command</p>
+<div class="highlight"><pre><span></span>$ fab setup
+</pre></div>
+<p>.The <strong>setup</strong> operation's primary responsibility is to update dependencies which the <strong>provision</strong> operation requires.  This includes:</p>
+<ul>
+<li>Updating ansible dependencies on the local side, based on <code>ansible/requirements.yml</code></li>
+<li>Synchronizing / updating puppet dependencies on the remote side, based on <code>puppet/metadata.json</code></li>
+<li>Building puppet itself on the remote if it is found to be missing.</li>
+<li>Executing additional custom setup operations which are specified inside the <em>setup_list</em> field of <code>service.json</code></li>
+</ul>
+<p>You can read about the file format for ansible's <code>requirements.yml</code> <a href="http://docs.ansible.com/ansible/galaxy.html#advanced-control-over-role-requirements-files">here</a>, and the file format for puppet's metdata.json <a href="#">here</a>.</p>
+<p>Ansible dependencies are <strong>always</strong> updated during the <strong>setup</strong> operation.  Puppet will be built and it's dependencies are updated only if <em>ymir_build_puppet</em> is true inside <code>service.json</code>.</p>
+<p>The <strong>setup</strong> operation is differentiated from the <strong>provision</strong> operation mainly just because it is likely to be slow and should run less frequently.  <strong>Therefore while you're experimenting with new infracode, most changes you make to <code>service.json</code> should be to <em>provision_list</em> not <em>setup_list</em>.</strong>  Work that has been completed in a previous run (like installing git or ruby) will be very fast in subsequent runs, but depending on your base image and your internet connection, building puppet may also involve downloading and compiling all kinds of other build-tools.</p>
 <h3 id="provision-operation">Provision Operation</h3>
-<p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p>
+<p>Invoke this operation from the root directory of your service with the command</p>
+<div class="highlight"><pre><span></span>$ fab provision
+</pre></div>
+<p>.The <strong>provision</strong> operation's sole responsibility is to configure the service using all of the instructons mentioned in <code>service.json</code> under the <em>provision_list</em> field.</p>
 <h3 id="check-operation">Check Operation</h3>
-<p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p>
+<p>Invoke this operation from the root directory of your service with the command</p>
+<div class="highlight"><pre><span></span>$ fab check
+</pre></div>
+<p>.The <strong>check</strong> operation is used to execute health checks for this service.</p>
 <h3 id="custom-operations">Custom Operations</h3>
-<p>sadlkajdlkjsd sd asd asd asdsa dasdsa</p></div>
+<p><a href="pages/examples.html#custom_operation">See this section of the examples page</a></p></div>
         </div>
         <footer>
           <p>&copy; mvr</p>

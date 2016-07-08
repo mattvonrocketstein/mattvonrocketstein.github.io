@@ -63,6 +63,7 @@
 <li><a href="#under-the-hood">Under the hood</a></li>
 <li><a href="#features">Features</a></li>
 <li><a href="#contributing">Contributing</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul>
 </div>
               </nav>
@@ -94,13 +95,26 @@
             </li>
             <li class=page_toc>
               <a href="../pages/vagrant.html">Quick Start: Vagrant</a>
+              <nav class="sub_toc">
+                <div class="toc">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#create-boilerplate">Create boilerplate</a></li>
+<li><a href="#customize-things">Customize things</a><ul>
+<li><a href="#5-customize-your-service-implementation">5 Customize your service implementation</a></li>
+</ul>
+</li>
+<li><a href="#validate-and-create">Validate and create</a></li>
+</ul>
+</div>
+              </nav>
             </li>
             <li class=page_toc>
               <a href="../pages/service-description.html">Service Descriptions</a>
               <nav class="sub_toc">
                 <div class="toc">
 <ul>
-<li><a href="#choosing-a-file"><a href="#alt-file" name="alt-file">Choosing a file</a></a></li>
+<li><a href="#choosing-a-file">Choosing a file</a></li>
 <li><a href="#templating"><a href="#templating" name="templating">Templating</a></a></li>
 <li><a href="#ec2-json">EC2 JSON</a></li>
 <li><a href="#vagrant-json">Vagrant JSON</a></li>
@@ -156,6 +170,7 @@
                 <div class="toc">
 <ul>
 <li><a href="#polyglot-demo">Polyglot demo</a></li>
+<li><a href="#custom-service-operations-with-fabric">Custom service operations with fabric</a></li>
 </ul>
 </div>
               </nav>
@@ -197,7 +212,8 @@
 <p>Ymir <a href="#">source code</a> includes various demos that showcase functionality and can be used for integration testing ymir itself.</p>
 <h4 id="polyglot-demo">Polyglot demo</h4>
 <p>Ymir ships with a demo that is setup to work with AWS and vagrant, and shows how to configure a system with a combination of ansible and puppet using shared variables.  See <a href="https://github.com/mattvonrocketstein/ymir/blob/master/demos/polyglot/README.md">the README</a> below for more information</p>
-<script src="https://gist-it.appspot.com/github/mattvonrocketstein/ymir/blob/vagrant/demos/polyglot/README.md"></script></div>
+<script src="https://gist-it.appspot.com/github/mattvonrocketstein/ymir/blob/vagrant/demos/polyglot/README.md"></script>
+<h4 id="custom-service-operations-with-fabric">Custom service operations with fabric</h4></div>
         </div>
         <footer>
           <p>&copy; mvr</p>
