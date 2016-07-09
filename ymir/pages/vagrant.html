@@ -47,11 +47,10 @@
         </div>
       </div>
     </div>
-
     <div class="container-fluid">
       <div class="sidebar">
         <div class="well">
-          <h3>TOC</h3>
+          <h3>Contents</h3>
           <ul class=main_toc>
             <li class=page_toc>
               <a href="https://mattvonrocketstein.github.io/ymir/">About</a>
@@ -221,16 +220,16 @@
 <hr/>
 <h2 id="customize-things">Customize things</h2>
 <p><strong>4. Customize your service description</strong></p>
-<p>Most of the instance specifics (RAM, base-box) are configured inside of <code>Vagrantfile</code> (this file was created for you in step 3).  Inside <code>vagrant.json</code>, make sure the <strong>instance_type</strong> field is always set to "vagrant", and that the <strong>name</strong> field matches the <strong>vm.hostname</strong> value inside <code>Vagrantfile</code>.  For more detailed information about the fields and what they do, see the <a href="/pages/service-description.html#vagrant-summary">service description</a> section of this documentation.</p>
+<p>Most of the instance specifics (RAM, base-box) are configured inside of <code>Vagrantfile</code> (this file was created for you in step 3).  Inside <code>vagrant.json</code>, make sure the <strong>instance_type</strong> field is always set to "vagrant", and that the <strong>name</strong> field matches the <strong>vm.hostname</strong> value inside <code>Vagrantfile</code>.  For more detailed information about the fields and what they do, see the <a href="service-description.html#vagrant-summary">service description</a> section of this documentation.</p>
 <h3 id="5-customize-your-service-implementation"><strong>5</strong> Customize your service implementation</h3>
-<p>Customize your service implementation.  You can do this with shell, ansible, or puppet or fabric tasks depending on your preference.  Consult the <a href="/pages/service-implementation.html">service implementation</a> section of this documentation.</p>
+<p>Customize your service implementation.  You can do this with shell, ansible, or puppet or fabric tasks depending on your preference.  Consult the <a href="service-implementation.html">service implementation</a> section of this documentation.</p>
 <hr/>
 <h2 id="validate-and-create">Validate and create</h2>
 <p><strong>6.  Validate your service description so far</strong></p>
 <p>To make sure your setup is sane so far, run</p>
 <div class="highlight"><pre><span></span>$ ymir validate
 </pre></div>
-<p>See the <a href="/pages/misc.html#validation">validation docs</a> for more information.</p>
+<p>See the <a href="misc.html#validation">validation docs</a> for more information.</p>
 <p><strong>7. Add customized service operations</strong></p>
 <p>If you're willing to write code you can define new operations of any kind, but you get lots of basic operations out of the box.  To show a list of default operations, make sure you are in the service directory and run this command: <code>fab -l</code>.  For instance, to build out your service based on the <code>service.json</code> file, run</p>
 <div class="highlight"><pre><span></span>$ fab create

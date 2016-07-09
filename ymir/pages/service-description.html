@@ -47,11 +47,10 @@
         </div>
       </div>
     </div>
-
     <div class="container-fluid">
       <div class="sidebar">
         <div class="well">
-          <h3>TOC</h3>
+          <h3>Contents</h3>
           <ul class=main_toc>
             <li class=page_toc>
               <a href="https://mattvonrocketstein.github.io/ymir/">About</a>
@@ -220,7 +219,7 @@
 $ <span class="nb">cd</span> myservice
 $ mv vagrant.json service.json
 </pre></div>
-<p><strong>If you want to use a file of a specific name</strong>, you can set the environment variable <code>YMIR_SERVICE_JSON=...</code> before running <a href="/pages/service-operations.html">service operations</a> commands.  Use <code>export var=val</code> in bash or execute it per command, like this:</p>
+<p><strong>If you want to use a file of a specific name</strong>, you can set the environment variable <code>YMIR_SERVICE_JSON=...</code> before running <a href="service-operations.html">service operations</a> commands.  Use <code>export var=val</code> in bash or execute it per command, like this:</p>
 <div class="highlight"><pre><span></span>$ <span class="nv">YMIR_SERVICE_JSON</span><span class="o">=</span>my_service.json fab create
 </pre></div>
 <h4 id="templating"><a href="#templating" name="templating">Templating</a></h4>
@@ -304,7 +303,7 @@ $ mv vagrant.json service.json
   </td>
 </tr>
 </tbody></table></p>
-<p>For more information on the difference between setup and provisioning, please see <a href="/pages/service-operations.html#setup-operation">this section</a> of the service operations documentation.</p><ol class="simple-footnotes"><li id="sf-service-description-1">Under the hood, this works with <a href="http://jinja.pocoo.org/docs/dev/">jinja2</a> <a href="#sf-service-description-1-back" class="simple-footnote-back">↩</a></li><li id="sf-service-description-2"> Actually the <code>ansible-role://</code> instruction does require creating a temporary file to hold the implied playbook, but users don't have to worry about it. <a href="#sf-service-description-2-back" class="simple-footnote-back">↩</a></li></ol></div>
+<p>For more information on the difference between setup and provisioning, please see <a href="service-operations.html#setup-operation">this section</a> of the service operations documentation.</p><ol class="simple-footnotes"><li id="sf-service-description-1">Under the hood, this works with <a href="http://jinja.pocoo.org/docs/dev/">jinja2</a> <a href="#sf-service-description-1-back" class="simple-footnote-back">↩</a></li><li id="sf-service-description-2"> Actually the <code>ansible-role://</code> instruction does require creating a temporary file to hold the implied playbook, but users don't have to worry about it. <a href="#sf-service-description-2-back" class="simple-footnote-back">↩</a></li></ol></div>
         </div>
         <footer>
           <p>&copy; mvr</p>
