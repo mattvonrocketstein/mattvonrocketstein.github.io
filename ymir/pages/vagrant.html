@@ -88,6 +88,7 @@
 <li><a href="#create-boilerplate">Create Boilerplate</a></li>
 <li><a href="#customize-things">Customize things</a></li>
 <li><a href="#validate-and-create">Validate and create</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul>
 </div>
               </nav>
@@ -104,6 +105,7 @@
 </ul>
 </li>
 <li><a href="#validate-and-create">Validate and create</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul>
 </div>
               </nav>
@@ -222,7 +224,7 @@
 <p><strong>4. Customize your service description</strong></p>
 <p>Most of the instance specifics (RAM, base-box) are configured inside of <code>Vagrantfile</code> (this file was created for you in step 3).  Inside <code>vagrant.json</code>, make sure the <strong>instance_type</strong> field is always set to "vagrant", and that the <strong>name</strong> field matches the <strong>vm.hostname</strong> value inside <code>Vagrantfile</code>.  For more detailed information about the fields and what they do, see the <a href="service-description.html#vagrant-summary">service description</a> section of this documentation.</p>
 <h3 id="5-customize-your-service-implementation"><strong>5</strong> Customize your service implementation</h3>
-<p>Customize your service implementation.  You can do this with shell, ansible, or puppet or fabric tasks depending on your preference.  Consult the <a href="service-implementation.html">service implementation</a> section of this documentation.</p>
+<p>Customize your service implementation.  You can do this with shell, ansible, or puppet or fabric tasks depending on your preference.  Consult the <a href="service-implementations.html">service implementation</a> section of this documentation.</p>
 <hr/>
 <h2 id="validate-and-create">Validate and create</h2>
 <p><strong>6.  Validate your service description so far</strong></p>
@@ -242,7 +244,8 @@ $ fab provision
 </pre></div>
 <p>If you have a great internet connection, try running everything at once:</p>
 <div class="highlight"><pre><span></span>fab create wait:30 setup provision
-</pre></div></div>
+</pre></div>
+<h1 id="footnotes">Footnotes</h1></div>
         </div>
         <footer>
           <p>&copy; mvr</p>
