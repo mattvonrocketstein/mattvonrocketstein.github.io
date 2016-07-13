@@ -136,6 +136,7 @@
 <li><a href="#provision-operation">Provision Operation</a></li>
 <li><a href="#check-operation">Check Operation</a></li>
 <li><a href="#custom-operations">Custom Operations</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul>
 </div>
               </nav>
@@ -171,7 +172,9 @@
                 <div class="toc">
 <ul>
 <li><a href="#polyglot-demo">Polyglot demo</a></li>
-<li><a href="#custom-service-operations-with-fabric">Custom service operations with fabric</a></li>
+<li><a href="#custom-operations">Custom Operations</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul>
 </div>
               </nav>
@@ -250,7 +253,7 @@ Apart from normal system administration or inspecting the service, this is good 
 </tr>
 <tr><td class="td_operation">fab mosh</td><td>
 The "mosh" operation connects to the service using <a href="https://mosh.mit.edu/">mosh</a>.  <br/>
-It is required that mosh already be installed on the remote side, and your security group has openings for the correct ports.
+Only defined for Amazon-based services, not supported with vagrant.  It is required that mosh already be installed on the remote side, and your security group has openings for the correct ports.
 </td></tr>
 <tr><td class="td_operation">fab run</td><td>
 The "run" operation runs a single command on the remote host as the default user.  Useful for tailing logs and such.<br/>
@@ -299,7 +302,8 @@ The "freeze" operation saves the current service to an AMI <font color="red">(no
 </pre></div>
 <p>.The <strong>check</strong> operation is used to execute health checks for this service.</p>
 <h3 id="custom-operations">Custom Operations</h3>
-<p><a href="examples.html#custom_operation">See this section of the examples page</a></p></div>
+<p><a href="examples.html#custom_operation">See this section of the examples page</a></p>
+<h3 id="footnotes">Footnotes</h3></div>
         </div>
         <footer>
           <p>&copy; mvr</p>

@@ -136,6 +136,7 @@
 <li><a href="#provision-operation">Provision Operation</a></li>
 <li><a href="#check-operation">Check Operation</a></li>
 <li><a href="#custom-operations">Custom Operations</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul>
 </div>
               </nav>
@@ -171,7 +172,9 @@
                 <div class="toc">
 <ul>
 <li><a href="#polyglot-demo">Polyglot demo</a></li>
-<li><a href="#custom-service-operations-with-fabric">Custom service operations with fabric</a></li>
+<li><a href="#custom-operations">Custom Operations</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul>
 </div>
               </nav>
@@ -274,9 +277,21 @@
 </li>
 </ol>
 <h1 id="contributing">Contributing</h1>
-<p>Pull requests and feature requests are welcome, just use <a href="https://github.com/mattvonrocketstein/ymir/issues">the githubs</a>.  Tests are run with tox.  To maintain consistent style in the library, please use the same precommit hooks as me.  To install precommit hooks after cloning the source repository, run these commands:</p>
+<p><strong>Pull requests and feature requests are welcome</strong>, just use <a href="https://github.com/mattvonrocketstein/ymir/issues">the githubs</a>.</p>
+<p><strong>Testing:</strong>.   All tests are run with tox.  Afterwards, you can view the coverage results in the <code>htmlcov</code> folder.</p>
+<div class="highlight"><pre><span></span>$ pip install tox
+$ tox
+</pre></div>
+<p><strong>Commit hooks</strong>: To maintain consistent style in the library, please use the same precommit hooks as me.  To install precommit hooks after cloning the source repository, run these commands:</p>
 <div class="highlight"><pre><span></span>$ pip install pre-commit
 $ pre-commit install
+</pre></div>
+<p><strong>Documentation:</strong>  Contributions to this documentation (in the <code>docs</code> folder of the source root) are also welcome.  If you make significant changes, run the documentation test-server and the script to check for broken links.</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> docs
+$ fab run <span class="c1"># runs the auto-updating test server for the markdown docs</span>
+</pre></div>
+<p>In another terminal, run the crawler script against the test server</p>
+<div class="highlight"><pre><span></span>$ fab check_links
 </pre></div>
 <h1 id="footnotes">Footnotes</h1><ol class="simple-footnotes"><li id="sf-intro-1"> For instance, terraform has poor support for ansible and for <a href="http://stackoverflow.com/questions/37865979/terraform-how-to-run-the-provisioner-on-existing-resources">reprovisioning existing resources</a>  <a href="#sf-intro-1-back" class="simple-footnote-back">↩</a></li></ol></div>
         </div>
