@@ -50,6 +50,7 @@
 <ul>
 <li><a href="#about-tunl">About tunl</a></li>
 <li><a href="#installing-tunl">Installing tunl</a></li>
+<li><a href="#contributing">Contributing</a></li>
 </ul>
 </div>
               </nav>
@@ -129,6 +130,30 @@ $ <span class="nb">cd</span> tunl
 $ virtualenv venv
 $ <span class="nb">source</span> venv/bin/activate
 $ python setup.py develop
+</pre></div>
+<h2 id="contributing">Contributing</h2>
+<p><strong>Pull requests and feature requests are welcome</strong>, just use <a href="https://github.com/mattvonrocketstein/tunl/issues">the githubs</a>.</p>
+<p><br/></p>
+<p><strong>Testing:</strong> <br/>
+All tests are run with tox.  Afterwards, you can view the coverage results in the <code>htmlcov</code> folder.  Coverage information is also deployed with this document, <a href="htmlcov">see the results here</a>.</p>
+<div class="highlight"><pre><span></span>$ pip install tox
+$ tox
+</pre></div>
+<p><br/>
+<strong>Commit hooks</strong>:
+To maintain consistent style in the library, please use the same precommit hooks as me.  To install precommit hooks after cloning the source repository, run these commands:</p>
+<div class="highlight"><pre><span></span>$ pip install pre-commit
+$ pre-commit install
+</pre></div>
+<p><br/>
+<strong>Documentation:</strong><br/>
+Contributions to this documentation (in the <code>docs</code> folder of the source root) are also welcome.  If you make significant changes, run the documentation test-server and the script to check for broken links.</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> docs
+$ pip install -r requirements.txt
+$ fab run <span class="c1"># runs the auto-updating test server for the markdown docs</span>
+</pre></div>
+<p>In another terminal, run the crawler script against the test server</p>
+<div class="highlight"><pre><span></span>$ fab check_links
 </pre></div></div>
         </div>
         <footer>
