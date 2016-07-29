@@ -211,13 +211,11 @@ the true guardians of my doomwagons.
                     </div>
                 </div>
 
-                <p>A problem that comes up every time I make a new Pypi package is this: I want software version information to be included inside my python package and inside setup.py in a way that has a <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>, <a href="https://en.wikipedia.org/wiki/Single_source_of_truth">single source of truth</a> but also in way that I can increment the version automatically.  This post outlines a solution for this problem, and discusses other tricks that can make release automation tasks easier.</p>
-<h2>Choosing a project layout</h2>
-<p>The best project layout for you will obviously depend on various things like whether you are releasing a library, a command-line application, whether your code also requires support-data, etc.  There are plenty of <a href="https://github.com/seanfisk/python-project-template">full-service project templates</a> out there, most of which are pretty opinionated.  If you use <a href="https://github.com/audreyr/cookiecutter">cookiecutter</a>, then have a look at the options <a href="https://github.com/audreyr/cookiecutter#python">here</a>.  Choose one you like, I'll wait...</p>
-<h2>A little release automation</h2>
-<p>So by now you hopefully have a project template that doesn't suck.  Maybe it already includes some release automation you're happy with, but if not read on.  </p>
-<p>With the fabfile included below, version bumps are accomplished using the <code>fab version_bump</code> command, but you might need some changes to your project skeleton for this to work.</p>
-<p>First I'm assuming your new project layout looks something like this.  If the <code>version.py</code> file doesn't exist, create it.</p>
+                <p>A problem that comes up every time I make a new Pypi package is this: I want software version information to be included inside my python package and inside setup.py in a way that has a <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> and <a href="https://en.wikipedia.org/wiki/Single_source_of_truth">single source of truth</a>'y but also in such a way that I can increment the version automatically from release tools.  This post discusses a solution to this problem and <a href="#">is part of</a> a <a href="#">series discussing</a> other <a href="#">tricks</a> that can make release automation tasks easier.</p>
+<h1>Choosing a project layout</h1>
+<p>You might already have a directory layout for your python package, but if not it's time to choose one.  The best project layout for you will obviously depend on various things like whether you are releasing a library, a command-line application, whether your code also requires support-data, etc.  There are plenty of <a href="https://github.com/seanfisk/python-project-template">full-service project templates</a> out there, most of which are pretty opinionated.  If you use <a href="https://github.com/audreyr/cookiecutter">cookiecutter</a>, then have a look at the options <a href="https://github.com/audreyr/cookiecutter#python">here</a>.  Choose one you like, I'll wait...</p>
+<h1>File Changes for DRY versions</h1>
+<p>Hopefully you now have a project template that doesn't suck, but you might need some small changes to the skeleton to support DRY version data.  First, I'm assuming your new project layout looks something like what you'll find below.  If the <em>version.py</em> and <em>fabfile.py</em> files don't exist, create them.  I'll describe the contents later.</p>
 <div class="highlight"><pre><span></span>pkg_root/
 <span class="p">|</span>-- setup.py
 <span class="p">|</span>-- fabfile.py
@@ -227,7 +225,8 @@ the true guardians of my doomwagons.
 </pre></div>
 
 
-<p>The <code>version.py</code> file contents should look something like this:</p>
+<h2>Version.py</h2>
+<p>The <code>version.py</code> file contents should look something like what you see below.  Keep this file simple!  Don't use any imports because you want <code>setup.py</code> to still be able to import the version number, even when your package and it's dependencies are not yet installed.  </p>
 <div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot; py_pkg.version</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -235,8 +234,8 @@ the true guardians of my doomwagons.
 </pre></div>
 
 
-<h2>Version.py and Setup.py</h2>
-<p>Keep this file simple!  Don't use any imports because you want <code>setup.py</code> to still be able to import the version number, even when your package and it's dependencies are not yet installed.  Inside <code>setup.py</code>, import the version data and put it in the call to <code>setup()</code>.</p>
+<h2>Setup.py</h2>
+<p>Inside <code>setup.py</code>, import the version data and put it in the call to <code>setup()</code> as illustrated below:</p>
 <div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot; this is pkg_root/setup.py &quot;&quot;&quot;</span>
@@ -257,8 +256,15 @@ the true guardians of my doomwagons.
 </pre></div>
 
 
-<p>Once everything above is configured, run <code>pip install fabric</code> and then download <a href="https://gist.github.com/mattvonrocketstein/ac7c3fc1da4e696e58976324c414c72e">the gist below</a>.  Now you can use the <code>fab version_bump</code> command to increment the version number everywhere, all at once.</p>
-<h2>bump_version command</h2>
+<p>Once everything above is configured, you can change everything by hand if you want to.. at least now you only have to change it in once place.  However if you're interested in bumping the version from commandline without editing a file, or maybe bumping it from your buildbot after a test job passes, read on.  </p>
+<h2>Fabfile.py</h2>
+<p>I implement lots of simple automation using <a href="http://www.fabfile.org/">fabric</a>, and so it is for the <code>bump_version</code> command.  To install fabric itself you'll need to run the command below:</p>
+<div class="highlight"><pre><span></span>pip install fabric
+</pre></div>
+
+
+<p>The fabfile with the <code>bump_version</code> command is <a href="https://gist.github.com/mattvonrocketstein/ac7c3fc1da4e696e58976324c414c72e">gisted here</a> and included below.  Basically you just need to run "fab bump_version" and it will rewrite the version.py file described previous.  </p>
+<p>Be warned!  The version-bumper below assumes naive incremental decimal versioning and it won't JustWork™ with stuff like <a href="http://semver.org/">semver</a> out of the box.  The reason for that is because then the release automation gets somewhat less, well, automatic, in that case because the <code>bump_version</code> command would have parse tuples and accept arguments that described whether your changes were backwards compatible. Extending the solution is left as an exercise to the reader :)  </p>
 <p><a href="https://gist.githubusercontent.com/mattvonrocketstein/ac7c3fc1da4e696e58976324c414c72e/raw/">View this gist on github</a></p>
 <div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
@@ -314,47 +320,7 @@ the true guardians of my doomwagons.
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">version_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fhandle</span><span class="p">:</span>
         <span class="n">fhandle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">new_file</span><span class="p">)</span>
         <span class="k">print</span> <span class="s1">&#39;version has been rewritten.&#39;</span>
-
-
-<span class="nd">@api.task</span>
-<span class="k">def</span> <span class="nf">pypi_repackage</span><span class="p">():</span>
-    <span class="n">ldir</span> <span class="o">=</span> <span class="n">_dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
-    <span class="k">print</span> <span class="n">colors</span><span class="o">.</span><span class="n">red</span><span class="p">(</span><span class="s2">&quot;warning:&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; by now you should have commited local&quot;</span>
-                             <span class="s2">&quot; master and bumped version string&quot;</span><span class="p">)</span>
-    <span class="n">ans</span> <span class="o">=</span> <span class="n">confirm</span><span class="p">(</span><span class="s1">&#39;proceed with pypi update in &quot;{0}&quot;?&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ldir</span><span class="p">))</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">ans</span><span class="p">:</span>
-        <span class="k">return</span>
-    <span class="k">with</span> <span class="n">api</span><span class="o">.</span><span class="n">lcd</span><span class="p">(</span><span class="n">ldir</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">api</span><span class="o">.</span><span class="n">settings</span><span class="p">(</span><span class="n">warn_only</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-            <span class="c1"># in case this has never been done before</span>
-            <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s2">&quot;git checkout -b pypi&quot;</span><span class="p">)</span>
-        <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s2">&quot;git reset --hard master&quot;</span><span class="p">)</span>
-        <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s2">&quot;python setup.py register -r pypi&quot;</span><span class="p">)</span>
-        <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s2">&quot;python setup.py sdist upload -r pypi&quot;</span><span class="p">)</span>
-
-
-<span class="nd">@api.task</span>
-<span class="k">def</span> <span class="nf">vulture</span><span class="p">():</span>
-    <span class="k">with</span> <span class="n">api</span><span class="o">.</span><span class="n">lcd</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)):</span>
-        <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span>
-            <span class="s1">&#39;vulture {0} --exclude fabfile.py&#39;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="c1"># a neat hack that makes this file a &quot;self-hosting&quot; fabfile,</span>
-    <span class="c1"># ie it is invoked directly but still gets all the fabric niceties</span>
-    <span class="c1"># like real option parsing, including --help and -l (for listing</span>
-    <span class="c1"># commands). note that as of fabric 1.10, the file for some reason</span>
-    <span class="c1"># needs to end in .py, despite what the documentation says.  see:</span>
-    <span class="c1"># http://docs.fabfile.org/en/1.4.2/usage/fabfiles.html#fabfile-discovery</span>
-    <span class="c1">#</span>
-    <span class="c1"># the .index() manipulation below should make this work regardless of</span>
-    <span class="c1"># whether this is invoked from shell as &quot;./foo.py&quot; or &quot;python foo.py&quot;</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="kn">from</span> <span class="nn">fabric.main</span> <span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">fmain</span>
-    <span class="n">patched_argv</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fab&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="n">__file__</span><span class="p">,</span> <span class="p">]</span> <span class="o">+</span> \
-        <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="n">patched_argv</span>
-    <span class="n">fmain</span><span class="p">()</span>
+<span class="n">bump_version</span><span class="o">=</span><span class="n">version_bump</span>
 </pre></div>
 
 
@@ -362,9 +328,19 @@ the true guardians of my doomwagons.
                 <script>
                   $(function(){$("#toc").tocify(
                     {
-                      selectors: "h2,h3,h4",	
+                      context: '.entry-content',
+                      selectors: "h1,h2,h3,h4",
+                      showAndHide: true,
+                      showAndHideOnScroll: true,
                     }
-                  )})
+                  );
+
+                });
+                $(document).ready(function(){
+                  if (!$('#toc').html().trim()){
+                    $("#toc").hide()
+                  }
+                })
                 </script>
 
             </div>

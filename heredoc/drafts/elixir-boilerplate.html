@@ -210,9 +210,19 @@ the true guardians of my doomwagons.
                 <script>
                   $(function(){$("#toc").tocify(
                     {
-                      selectors: "h2,h3,h4",	
+                      context: '.entry-content',
+                      selectors: "h1,h2,h3,h4",
+                      showAndHide: true,
+                      showAndHideOnScroll: true,
                     }
-                  )})
+                  );
+
+                });
+                $(document).ready(function(){
+                  if (!$('#toc').html().trim()){
+                    $("#toc").hide()
+                  }
+                })
                 </script>
 
             </div>
