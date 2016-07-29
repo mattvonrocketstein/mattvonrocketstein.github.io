@@ -223,7 +223,7 @@ the true guardians of my doomwagons.
                 </div>
 
                 <p>Release automation and project management are complicated.  You've got your tests and test coverage, documentation generation, linters, perhaps static asset generation and uploading artifacts, and more.  There are a lot of different ways to handle these things and it depends a lot on the project, and ultimately choosing your tool chain is largely a matter of taste. I'm documenting some of my go-to approaches here just for my own reference, but perhaps it will be useful to someone else as well.</p>
-<h1>Testing</h1>
+<h2>Testing</h2>
 <p>The <a href="https://tox.readthedocs.io/en/latest/#what-is-tox">tox tool</a> is pretty much the gold standard for python these days because it makes it easy to manage multiple virtual environments and test with different python versions.  Tox itself is a very general tool and is completely agnostic about your choice of the underlying testing framework.  Use whatever you want.. tox simply helps you to invoke the test runner.  It's possible to add other automation stuff for code-quality (linters) to your toxfile (I used to do this) but now I'd suggest using commit hooks.  Tox itself <a href="https://tox.readthedocs.io/en/latest/">is well documented</a> with <a href="https://tox.readthedocs.io/en/latest/examples.html">lots of examples</a> but for whatever it's worth here's my standard boilerplate below.</p>
 <div class="highlight"><pre><span></span><span class="k">[tox]</span>
 <span class="na">envlist</span> <span class="o">=</span><span class="s"></span>
@@ -250,7 +250,7 @@ the true guardians of my doomwagons.
 
 <p>As you can see, I typically prefer <a href="http://docs.pytest.org/en/latest/">py.test</a> as my testing framework, I do not like to support python2.6, and I put tests inside a "test" directory under the source root (NOT inside my package).</p>
 <p>Note that in addition to what you see above, you can also declare sections for various linters like <a href="https://pypi.python.org/pypi/flake8">flake8</a>, <a href="https://pypi.python.org/pypi/pep8">pep8</a>, and <a href="https://pypi.python.org/pypi/pycodestyle">pycodestyle</a> .  Each tool, respectively, will parse configuration from it's own tox.ini and respect those settings regardless of whether the tool was invoked from tox.</p>
-<h1>Commit hooks</h1>
+<h2>Commit hooks</h2>
 <p>Regardless of programming language, I've come to believe that linting should be done strictly, constantly, and consistently across all contributing project members.  Thus, I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
 <p>Another benefit of the hooks approach is that it works better with code-bases that are large and under construction, because hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once.</p>
 <p>There are a few competitors out there, but I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple. Just make a <code>.pre-commit-config.yaml</code> file in your source root.  For python code my hooks normally look something like what you see below (to see my elixir hooks <a href="#">go here</a>).  </p>
@@ -277,11 +277,11 @@ $ git push
 
 
 <p>Now you just have to browbeat your peers until they use this thing, and afterwards everything is wonderful. <img height="20px" alt=":thumbsup:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" title=":thumbsup:" align="absmiddle" width="20px" class="emoji"></p>
-<h1>Generic automation</h1>
+<h2>Generic automation</h2>
 <p>There are a lot of pythonic<sup id="sf-python-release-automation-1-back"><a href="#sf-python-release-automation-1" class="simple-footnote" title="It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb.. ">1</a></sup> approaches to generic automation.  Lots of people use <a href="https://github.com/paver/paver">paver</a> for instance, but my weapon of choice is <strong><a href="www.fabfile.org">fabric</a></strong>.</p>
 <p>Fabric simplifies command-line option-parsing and between the shell invocation/ssh-helpers it is very suitable for automating both local and remote work<sup id="sf-python-release-automation-2-back"><a href="#sf-python-release-automation-2" class="simple-footnote" title="Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible.">2</a></sup>.  Fabric definitely has some problems, most notably a lack of py3 compatibility and the fact that the paramiko requirement means fairly long installations on fresh virtualenvs, but it still saves me far more time than it costs me.</p>
 <p>I've already written elsewhere <a href="dry-versioning-python.html">about a version-bump command</a> that uses fabric.  In this section you'll find more descriptions of little automation problems and the corresponding solutions presented as fabric commands.</p>
-<h2>Detect dead code</h2>
+<h3>Detect dead code</h3>
 <p>Dead code paths are tricky to find.  A strong integration test suite is really the best thing to use, but many projects are unlikely to have this luxury (especially projects that are libraries rather than applications).  Meanwhile.. your unit tests suite can help you or hide the truth from you, it just depends.  Realistically, the best approach one can hope for is often just approximate.  </p>
 <p>I like using <a href="https://pypi.python.org/pypi/vulture">vulture</a> as a heuristic aid.  Vulture qualifies as a <a href="https://en.wikipedia.org/wiki/Static_program_analysis">static analysis</a> tool, and unlike your test suites it won't actually execute code. However, since you are almost certain to get false positives, vulture cannot be used as a commit-hook or an abort-job in your buildbot.</p>
 <p>So why a fabric task, why not just use the command-line tool <code>vulture</code>?  Well, the problem is that since vulture will generate false positives, you're quite likely to eschew the default invocation because the output is cluttered.  You'll end up with some customized command like this:</p>
@@ -298,47 +298,66 @@ $ git push
 <span class="kn">import</span> <span class="nn">contextlib</span>
 <span class="kn">from</span> <span class="nn">fabric</span> <span class="kn">import</span> <span class="n">api</span>
 
-<span class="n">PKG_NAME</span> <span class="o">=</span> <span class="s1">'ansible_role'</span>
-<span class="n">VULTURE_EXCLUDE_PATHS</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">VULTURE_IGNORE_FUNCTIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'format_help'</span><span class="p">,</span> <span class="s1">'entry'</span><span class="p">]</span>
+<span class="n">PKG_NAME</span> <span class="o">=</span> <span class="s1">'MY_PKG'</span>
+<span class="n">VULTURE_EXCLUDE_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'tests'</span><span class="p">,</span> <span class="p">]</span>
+<span class="n">VULTURE_IGNORE_FUNCTIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'commandline_entry_point'</span><span class="p">]</span>
 
 
 <span class="nd">@api.task</span>
 <span class="k">def</span> <span class="nf">vulture</span><span class="p">():</span>
     <span class="sd">""" try to find dead code paths """</span>
+    <span class="n">egrep_cmd</span> <span class="o">=</span> <span class="s1">'egrep -v "{0}"'</span>
     <span class="k">with</span> <span class="n">api</span><span class="o">.</span><span class="n">quiet</span><span class="p">():</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s1">'which vulture'</span><span class="p">)</span><span class="o">.</span><span class="n">succeeded</span><span class="p">:</span>
             <span class="k">print</span> <span class="s1">'vulture not found, installing it'</span>
             <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s1">'pip install vulture'</span><span class="p">)</span>
-    <span class="n">ignore_functions_grep</span> <span class="o">=</span> <span class="s1">'egrep -v "{0}"'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="s1">'|'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">VULTURE_IGNORE_FUNCTIONS</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">VULTURE_IGNORE_FUNCTIONS</span><span class="p">:</span>
+        <span class="n">ignore_functions_grep</span> <span class="o">=</span> <span class="n">egrep_cmd</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s1">'|'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">VULTURE_IGNORE_FUNCTIONS</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ignore_functions_grep</span> <span class="o">=</span> <span class="s1">''</span>
     <span class="n">excluded</span> <span class="o">=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">VULTURE_EXCLUDE_PATHS</span><span class="p">)</span>
     <span class="n">excluded_paths</span> <span class="o">=</span> <span class="p">(</span><span class="s1">' --exclude '</span> <span class="o">+</span> <span class="n">excluded</span><span class="p">)</span> <span class="k">if</span> <span class="n">excluded</span> <span class="k">else</span> <span class="s1">''</span>
-    <span class="n">vulture_cmd</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">  vulture {pkg_name}{exclude}{pipes}'</span>
+    <span class="n">pipes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">ignore_functions_grep</span><span class="p">:</span>
+        <span class="n">pipes</span> <span class="o">+=</span> <span class="p">[</span><span class="n">ignore_functions_grep</span><span class="p">]</span>
+    <span class="c1"># the empty-string below makes sure this</span>
+    <span class="c1"># command section is prefixed with a pipe</span>
+    <span class="n">pipes</span> <span class="o">=</span> <span class="n">pipes</span> <span class="ow">and</span> <span class="p">[</span><span class="s1">''</span><span class="p">]</span> <span class="o">+</span> <span class="n">pipes</span>
+    <span class="n">vulture_cmd</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">'</span><span class="se">\n</span><span class="s1">  find {pkg_name}|'</span>
+        <span class="s1">'grep \.py$|'</span>
+        <span class="s1">'xargs vulture '</span>
+        <span class="s1">'{pkg_name}{exclude}{pipes}'</span><span class="p">)</span>
     <span class="n">vulture_cmd</span> <span class="o">=</span> <span class="n">vulture_cmd</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">pkg_name</span><span class="o">=</span><span class="n">PKG_NAME</span><span class="p">,</span>
         <span class="n">exclude</span><span class="o">=</span><span class="n">excluded_paths</span><span class="p">,</span>
-        <span class="n">pipes</span><span class="o">=</span><span class="s1">'|'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">''</span><span class="p">,</span> <span class="n">ignore_functions_grep</span><span class="p">]))</span>
-    <span class="n">changedir</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">lcd</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+        <span class="n">pipes</span><span class="o">=</span><span class="s1">'|'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pipes</span><span class="p">))</span>
+    <span class="n">this_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+    <span class="n">changedir</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">lcd</span><span class="p">(</span><span class="n">this_dir</span><span class="p">)</span>
     <span class="n">warn_only</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">settings</span><span class="p">(</span><span class="n">warn_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">be_quit</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">hide</span><span class="p">(</span><span class="s1">'warnings'</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="s1">'could not find directory for package {0} in {1}'</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">err</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PKG_NAME</span><span class="p">,</span> <span class="n">this_dir</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">nested</span><span class="p">(</span><span class="n">changedir</span><span class="p">,</span> <span class="n">warn_only</span><span class="p">,</span> <span class="n">be_quit</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">PKG_NAME</span><span class="p">),</span> <span class="n">err</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="n">vulture_cmd</span><span class="p">,</span> <span class="n">capture</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">exit_code</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">return_code</span>
     <span class="n">result</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">result</span>
     <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="n">exit_code</span><span class="p">)</span>
 </pre></div>
 
 
-<h2>Pypi releases</h2>
-<h1>Footnotes</h1><ol class="simple-footnotes"><li id="sf-python-release-automation-1">It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb..  <a href="#sf-python-release-automation-1-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-2">Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible. <a href="#sf-python-release-automation-2-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-3">Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile.) <a href="#sf-python-release-automation-3-back" class="simple-footnote-back">↩</a></li></ol>
+<h3>Pypi releases</h3>
+<h2>Footnotes</h2><ol class="simple-footnotes"><li id="sf-python-release-automation-1">It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb..  <a href="#sf-python-release-automation-1-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-2">Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible. <a href="#sf-python-release-automation-2-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-3">Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile.) <a href="#sf-python-release-automation-3-back" class="simple-footnote-back">↩</a></li></ol>
                 <script>
                   $(document).ready(
                     function(){
                       $("#toc").tocify(
                         {
                           context: '.entry-content',
-                          selectors: "h1,h2,h3,h4",
+                          selectors: "h2,h3,h4",
                           showAndHide: true,
                           showAndHideOnScroll: true,
                         }
