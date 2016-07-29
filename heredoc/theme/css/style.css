@@ -23,23 +23,23 @@ body {
 }
 
 .tag-0 {
-    font-size: 16pt;
+    font-size: 14pt;
 }
 
 .tag-1 {
-    font-size: 13pt;
+    font-size: 15pt;
 }
 
 .tag-2 {
-    font-size: 10pt;
+    font-size: 13pt;
 }
 
 .tag-3 {
-    font-size: 8pt;
+    font-size: 11pt;
 }
 
 .tag-4 {
-    font-size: 6pt;
+    font-size: 8pt;
 }
 
 #aboutme {
@@ -53,19 +53,26 @@ body {
     padding-top: 0px;
     -ms-word-break: break-all;
     word-break: break-all;
-    word-break: break-word;
+    word-break: normal;
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
 }
-
+.li-choice:before {
+  content: "★";
+}
 #sidebar a {
     color: inherit;
 }
 
 .icon-label {
-    margin-left: 10px;
+    margin-left: 5px;
+    font-size:13px;
+    font-weight:bold;
+}
+div .sidebar {
+
 }
 
 /* Example for how to control spacing between icon and label in specific
@@ -102,7 +109,6 @@ a, a:hover {
     max-width: 100%;
     height: auto;
 }
-
 
 .floatright, .align-right {
     float: right;
@@ -183,7 +189,7 @@ figure.floatcenter, .align-center {
 }
 
 #banner .copy {
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.7);
+    background: none repeat scroll 0 0 #efefef);
     display: inline;
     float: left;
     max-width: 600px;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>pelican boilerplate - heredoc</title>
+    <title>Pelican boilerplate - heredoc</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="pelican boilerplate"/>
+        <meta property="og:title" content="Pelican boilerplate"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html"/>
         <meta property="og:description" content="pelican boilerplate"/>
         <meta property="article:published_time" content="2016-07-20" />
@@ -28,6 +28,8 @@
             <meta property="article:author" content="mvr" />
 
 
+    <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/heredoc.css" />
+    <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
     <!-- Bootstrap -->
         <link rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/bootstrap.min.css" type="text/css"/>
     <link href="https://mattvonrocketstein.github.io/heredoc/theme/css/font-awesome.min.css" rel="stylesheet">
@@ -38,6 +40,14 @@
 
 
 
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.min.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery-ui.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/bootstrap.min.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.tocify.min.js"></script>
+
+    <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/respond.min.js"></script>
 
 </head>
 <body>
@@ -45,23 +55,30 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icnavbaron-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a href="https://mattvonrocketstein.github.io/heredoc/" class="navbar-brand">
 heredoc            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                         <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html">Elixir</a>
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/pelican.html">Pelican</a>
                         </li>
-                        <li class="active">
-                            <a href="https://mattvonrocketstein.github.io/heredoc/category/python.html">Python</a>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">Fabric</a>
                         </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">Boilerplate</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">Python</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">Ansible</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
+                        </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
             </ul>
@@ -73,15 +90,100 @@ heredoc            </a>
 <!-- End Banner -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-2" id="sidebar">
+            <div style="">
+              <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="https://mattvonrocketstein.github.io/heredoc/img/avatar.png"/>
+        </p>
+    <p>
+        <strong>About Me</strong><br/>
+        
+Raised by wild animals in ancient times, sandwiches are
+the true guardians of my doomwagons.
+
+    </p>
+</div><h4>
+  <i class="fa fa-home fa-lg"></i>
+  <span class="icon-label">Recent</span></h4>
+            <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
+                            The missing "ansible-role" command</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/fabfile-pypi.html">
+                            DRY versioning in packages and setup.py</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
+                            Elixir boilerplate</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">
+                            Pelican boilerplate</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/test-toc.html">
+                            Test ToC</li>
+                        </a>
+              </ul>
+
+
+              <a href="https://mattvonrocketstein.github.io/heredoc/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group list-inline tagcloud" id="tags">
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">
+                            ansible
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
+                            boilerplate
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
+                            Elixir
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
+                            fabric
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/pelican.html">
+                            pelican
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">
+                            python
+                        </a>
+                    </li>
+                </ul>
+
+      <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+        <div id="gh_repos">
+            <p class="list-group-item">Status updating...</p>
+        </div>
+      <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="li-choice">
+            <a href="http://data.holdings" target="_blank">
+                data.holdings
+            </a>
+        </li>
+      </ul>
+            </aside>
+            </div>
+        </div>
+        <div class="col-sm-8">
     <section id="content">
         <article>
             <header class="page-header">
                 <h1>
                     <a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html"
                        rel="bookmark"
-                       title="Permalink to pelican boilerplate">
-                        pelican boilerplate
+                       title="Permalink to Pelican boilerplate">
+                        Pelican boilerplate
                     </a>
                 </h1>
             </header>
@@ -103,86 +205,34 @@ heredoc            </a>
         /
 	<a href="https://mattvonrocketstein.github.io/heredoc/tag/pelican.html">pelican</a>
     
-</footer><!-- /.post-info -->                    </div>
+</footer><!-- /.post-info -->
+                    </div>
                 </div>
-                
-<h3 id="footnotes">Footnotes</h3>
+
+                <h1>Plugins</h1>
+<h1>Theme</h1>
+<h1>Fabfile extras</h1>
+<h1>Footnotes</h1>
+                <script>
+                  $(function(){$("#toc").tocify(
+                    {
+                      selectors: "h2,h3,h4",	
+                    }
+                  )})
+                </script>
+
             </div>
             <!-- /.entry-content -->
         </article>
     </section>
 
         </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-<div id="aboutme">
-        <p>
-            <img width="100%" class="img-thumbnail" src="https://mattvonrocketstein.github.io/heredoc/img/avatar.png"/>
-        </p>
-    <p>
-        <strong>About Me</strong><br/>
-        foo bar baz bump
-    </p>
-</div>
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
-                <ul class="list-group" id="recentposts">
-                    <li class="list-group-item">
-                        <a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
-                            Elixir boilerplate
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">
-                            pelican boilerplate
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="list-group-item"><a href="https://mattvonrocketstein.github.io/heredoc/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
-                <ul class="list-group" id="categories">
-                    <li class="list-group-item">
-                        <a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html">
-                            <i class="fa fa-folder-open fa-lg"></i> Elixir
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="https://mattvonrocketstein.github.io/heredoc/category/python.html">
-                            <i class="fa fa-folder-open fa-lg"></i> python
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-
-
-
-    <li class="list-group-item"><h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
-        <div id="gh_repos">
-            <p class="list-group-item">Status updating...</p>
+        <div class="col-sm-2" >
+          <section id=toc class="well well-sm">
+            </section>
         </div>
-    </li>
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="https://github.com/mattvonrocketstein/ymir/" target="_blank">
-                Source code
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://github.com/mattvonrocketstein/ymir/issues" target="_blank">
-                Issues
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
-</section>
-            </aside>
-        </div>
+      </div>
+
     </div>
 </div>
 <footer>
@@ -197,14 +247,6 @@ heredoc            </a>
       </div>
    </div>
 </footer>
-<script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://mattvonrocketstein.github.io/heredoc/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="https://mattvonrocketstein.github.io/heredoc/theme/js/respond.min.js"></script>
-
     <!-- GitHub JS -->
     <script type="text/javascript">
         $(document).ready(function () {
