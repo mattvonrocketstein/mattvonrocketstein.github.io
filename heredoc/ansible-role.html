@@ -272,21 +272,16 @@ the true guardians of my doomwagons.
 <h2>The Code</h2>
 <p>All this is of course available on <a href="https://github.com/mattvonrocketstein/ansible-role">github</a> and <a href="https://pypi.python.org/pypi/ansible-role">pypi</a>.</p>
                 <script>
-                  $(function(){$("#toc").tocify(
-                    {
-                      context: '.entry-content',
-                      selectors: "h1,h2,h3,h4",
-                      showAndHide: true,
-                      showAndHideOnScroll: true,
-                    }
-                  );
-
-                });
-                $(document).ready(function(){
-                  if (!$('#toc').html().trim()){
-                    $("#toc").hide()
-                  }
-                })
+                  $(document).ready(
+                    function(){$("#toc").tocify(
+                      {
+                        context: '.entry-content',
+                        selectors: "h1,h2,h3,h4",
+                        showAndHide: true,
+                        showAndHideOnScroll: true,
+                      }
+                  )
+                );
                 </script>
 
             </div>
@@ -337,5 +332,14 @@ the true guardians of my doomwagons.
     <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/github.js" type="text/javascript"></script>
     <!-- End GitHub JS Code -->
 
+<script>
+console.debug('st');
+setTimeout(function(){
+  console.debug('str');
+  if (""==$('#toc').html().trim()){
+    console.debug('strn');
+    $("#toc").hide()
+  }}, 1000)
+  </script>
 </body>
 </html>
