@@ -221,9 +221,9 @@ the true guardians of my doomwagons.
                 </div>
 
                 <p>A problem that comes up every time I make a new Pypi package is this: I want software version information to be included inside my python package and inside setup.py in a way that has a <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> and <a href="https://en.wikipedia.org/wiki/Single_source_of_truth">single source of truth</a>'y but also in such a way that I can increment the version automatically from release tools.  This post discusses a solution to this problem and <a href="#">is part of</a> a <a href="#">series discussing</a> other <a href="#">tricks</a> that can make release automation tasks easier.</p>
-<h1>Choosing a project layout</h1>
+<h2>Project layout</h2>
 <p>You might already have a directory layout for your python package, but if not it's time to choose one.  The best project layout for you will obviously depend on various things like whether you are releasing a library, a command-line application, whether your code also requires support-data, etc.  There are plenty of <a href="https://github.com/seanfisk/python-project-template">full-service project templates</a> out there, most of which are pretty opinionated.  If you use <a href="https://github.com/audreyr/cookiecutter">cookiecutter</a>, then have a look at the options <a href="https://github.com/audreyr/cookiecutter#python">here</a>.  Choose one you like, I'll wait...</p>
-<h1>File Changes for DRY versions</h1>
+<h2>DRY versioning</h2>
 <p>Hopefully you now have a project template that doesn't suck, but you might need some small changes to the skeleton to support DRY version data.  First, I'm assuming your new project layout looks something like what you'll find below.  If the <em>version.py</em> and <em>fabfile.py</em> files don't exist, create them.  I'll describe the contents later.</p>
 <div class="highlight"><pre><span></span>pkg_root/
 <span class="p">|</span>-- setup.py
@@ -234,7 +234,7 @@ the true guardians of my doomwagons.
 </pre></div>
 
 
-<h2>Version.py</h2>
+<h3>Version.py</h3>
 <p>The <code>version.py</code> file contents should look something like what you see below.  Keep this file simple!  Don't use any imports because you want <code>setup.py</code> to still be able to import the version number, even when your package and it's dependencies are not yet installed.  </p>
 <div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot; py_pkg.version</span>
@@ -243,7 +243,7 @@ the true guardians of my doomwagons.
 </pre></div>
 
 
-<h2>Setup.py</h2>
+<h3>Setup.py</h3>
 <p>Inside <code>setup.py</code>, import the version data and put it in the call to <code>setup()</code> as illustrated below:</p>
 <div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
@@ -266,7 +266,7 @@ the true guardians of my doomwagons.
 
 
 <p>Once everything above is configured, you can change everything by hand if you want to.. at least now you only have to change it in once place.  However if you're interested in bumping the version from commandline without editing a file, or maybe bumping it from your buildbot after a test job passes, read on.  </p>
-<h2>Fabfile.py</h2>
+<h3>Fabfile.py</h3>
 <p>I implement lots of simple automation using <a href="http://www.fabfile.org/">fabric</a>, and so it is for the <code>bump_version</code> command.  To install fabric itself you'll need to run the command below:</p>
 <div class="highlight"><pre><span></span>pip install fabric
 </pre></div>
