@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Python release automation - heredoc</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
+
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
+
+        <meta name="author" content="mvr" />
+        <meta name="keywords" content="python,fabric,boilerplate,devops" />
+
+        <meta property="og:site_name" content="heredoc" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python release automation"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html"/>
+        <meta property="og:description" content=""/>
+        <meta property="article:published_time" content="2016-07-30" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="fabric" />
+            <meta property="article:tag" content="boilerplate" />
+            <meta property="article:tag" content="devops" />
+            <meta property="article:author" content="mvr" />
+
+
+    <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/heredoc.css" />
+    <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://mattvonrocketstein.github.io/heredoc/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://mattvonrocketstein.github.io/heredoc/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/style.css" type="text/css"/>
+
+
+
+
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.min.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery-ui.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/bootstrap.min.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.tocify.min.js"></script>
+
+    <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/respond.min.js"></script>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+        <div class="navbar-header">
+            <a href="https://mattvonrocketstein.github.io/heredoc/" class="navbar-brand">
+heredoc            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/pelican.html">Pelican</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">Fabric</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">Boilerplate</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">Python</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">Devops</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">Ansible</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
+                        </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2" id="sidebar">
+            <div style="">
+              <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="https://mattvonrocketstein.github.io/heredoc/img/avatar.png"/>
+        </p>
+    <p>
+        <strong>About Me</strong><br/>
+        
+Raised by wild animals in ancient times, sandwiches are
+the true guardians of my doomwagons.
+
+    </p>
+</div><h4>
+  <i class="fa fa-home fa-lg"></i>
+  <span class="icon-label">Recent</span></h4>
+            <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
+                            Python release automation</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
+                            The missing "ansible-role" command</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html">
+                            DRY versioning for Python packages</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
+                            Elixir boilerplate</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">
+                            Pelican boilerplate</li>
+                        </a>
+              </ul>
+
+
+              <a href="https://mattvonrocketstein.github.io/heredoc/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group list-inline tagcloud" id="tags">
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">
+                            ansible
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
+                            boilerplate
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">
+                            devops
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
+                            Elixir
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
+                            fabric
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/pelican.html">
+                            pelican
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">
+                            python
+                        </a>
+                    </li>
+                </ul>
+
+      <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+        <div id="gh_repos">
+            <p class="list-group-item">Status updating...</p>
+        </div>
+      <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="li-choice">
+            <a href="http://data.holdings" target="_blank">
+                data.holdings
+            </a>
+        </li>
+      </ul>
+            </aside>
+            </div>
+        </div>
+        <div class="col-sm-8">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html"
+                       rel="bookmark"
+                       title="Permalink to Python release automation">
+                        Python release automation
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-07-30T00:00:00-04:00"> Sat 30 July 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
+        /
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">fabric</a>
+        /
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">boilerplate</a>
+        /
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
+    
+</footer><!-- /.post-info -->
+                    </div>
+                </div>
+
+                <p>Release automation and project management are complicated.  You've got your tests and test coverage, documentation generation, linters, perhaps static asset generation and uploading artifacts, and more.  There are a lot of different ways to handle these things and it depends a lot on the project, and ultimately choosing your tool chain is largely a matter of taste. I'm documenting some of my go-to approaches here just for my own reference, but perhaps it will be useful to someone else as well.</p>
+<h1>Testing</h1>
+<p>The <a href="https://tox.readthedocs.io/en/latest/#what-is-tox">tox tool</a> is pretty much the gold standard for python these days because it makes it easy to manage multiple virtual environments and test with different python versions.  Tox itself is a very general tool and is completely agnostic about your choice of the underlying testing framework.  Use whatever you want.. tox simply helps you to invoke the test runner.  It's possible to add other automation stuff for code-quality (linters) to your toxfile (I used to do this) but now I'd suggest using commit hooks.  Tox itself <a href="https://tox.readthedocs.io/en/latest/">is well documented</a> with <a href="https://tox.readthedocs.io/en/latest/examples.html">lots of examples</a> but for whatever it's worth here's my standard boilerplate below.</p>
+<div class="highlight"><pre><span></span><span class="k">[tox]</span>
+<span class="na">envlist</span> <span class="o">=</span><span class="s"></span>
+<span class="s">  py27, py34</span>
+
+<span class="k">[pytest]</span>
+<span class="c1"># Turn off capture so that embedded debuggers can run inside tests</span>
+<span class="na">addopts</span><span class="o">=</span> <span class="s">--capture=no</span>
+
+<span class="k">[testenv]</span>
+<span class="na">deps</span><span class="o">=</span><span class="s"></span>
+<span class="s">     -r{toxinidir}/tests/requirements.txt</span>
+<span class="na">commands</span><span class="o">=</span><span class="s"></span>
+<span class="s">    python setup.py install</span>
+<span class="s">    rm -rf {toxinidir}/htmlcov</span>
+<span class="s">    py.test --cov-config {toxinidir}/.coveragerc \</span>
+<span class="s">            --cov=MY_PYTHON_PACKAGE --cov-report=html -vvv \</span>
+<span class="s">            --pyargs {toxinidir}/tests</span>
+<span class="na">setenv</span><span class="o">=</span><span class="s"></span>
+<span class="s">    # override $HOME so tests don't change the user-dir</span>
+<span class="s">    HOME={toxinidir}/tests</span>
+</pre></div>
+
+
+<p>As you can see, I typically prefer <a href="http://docs.pytest.org/en/latest/">py.test</a> as my testing framework, I do not like to support python2.6, and I put tests inside a "test" directory under the source root (NOT inside my package).</p>
+<p>Note that in addition to what you see above, you can also declare sections for various linters like <a href="https://pypi.python.org/pypi/flake8">flake8</a>, <a href="https://pypi.python.org/pypi/pep8">pep8</a>, and <a href="https://pypi.python.org/pypi/pycodestyle">pycodestyle</a> .  Each tool, respectively, will parse configuration from it's own tox.ini and respect those settings regardless of whether the tool was invoked from tox.</p>
+<h1>Commit hooks</h1>
+<p>Regardless of programming language, I've come to believe that linting should be done strictly, constantly, and consistently across all contributing project members.  Thus, I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
+<p>Another benefit of the hooks approach is that it works better with code-bases that are large and under construction, because hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once.</p>
+<p>There are a few competitors out there, but I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple. Just make a <code>.pre-commit-config.yaml</code> file in your source root.  For python code my hooks normally look something like what you see below (to see my elixir hooks <a href="#">go here</a>).  </p>
+<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">git://github.com/pre-commit/pre-commit-hooks</span>
+    <span class="l l-Scalar l-Scalar-Plain">sha</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+    <span class="l l-Scalar l-Scalar-Plain">hooks</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">trailing-whitespace</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">check-ast</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">check-merge-conflict</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">fix-encoding-pragma</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">autopep8-wrapper</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">flake8</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">check-yaml</span>
+</pre></div>
+
+
+<p>Afterwards you'll want to actually use this file, so run the commands below:</p>
+<div class="highlight"><pre><span></span>$ pip install pre-commit
+$ pre-commit install
+$ git add .pre-commit-config.yaml
+$ git commit -a -m<span class="s2">"add pre-commit config"</span>
+$ git push
+</pre></div>
+
+
+<p>Now you just have to browbeat your peers until they use this thing, and afterwards everything is wonderful. <img height="20px" alt=":thumbsup:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" title=":thumbsup:" align="absmiddle" width="20px" class="emoji"></p>
+<h1>Generic automation</h1>
+<p>There are a lot of pythonic<sup id="sf-python-release-automation-1-back"><a href="#sf-python-release-automation-1" class="simple-footnote" title="It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb.. ">1</a></sup> approaches to generic automation.  Lots of people use <a href="https://github.com/paver/paver">paver</a> for instance, but my weapon of choice is <strong><a href="www.fabfile.org">fabric</a></strong>.</p>
+<p>Fabric simplifies command-line option-parsing and between the shell invocation/ssh-helpers it is very suitable for automating both local and remote work<sup id="sf-python-release-automation-2-back"><a href="#sf-python-release-automation-2" class="simple-footnote" title="Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible.">2</a></sup>.  Fabric definitely has some problems, most notably a lack of py3 compatibility and the fact that the paramiko requirement means fairly long installations on fresh virtualenvs, but it still saves me far more time than it costs me.</p>
+<p>I've already written elsewhere <a href="dry-versioning-python.html">about a version-bump command</a> that uses fabric.  In this section you'll find more descriptions of little automation problems and the corresponding solutions presented as fabric commands.</p>
+<h2>Detect dead code</h2>
+<p>Dead code paths are tricky to find.  A strong integration test suite is really the best thing to use, but many projects are unlikely to have this luxury (especially projects that are libraries rather than applications).  Meanwhile.. your unit tests suite can help you or hide the truth from you, it just depends.  Realistically, the best approach one can hope for is often just approximate.  </p>
+<p>I like using <a href="https://pypi.python.org/pypi/vulture">vulture</a> as a heuristic aid.  Vulture qualifies as a <a href="https://en.wikipedia.org/wiki/Static_program_analysis">static analysis</a> tool, and unlike your test suites it won't actually execute code. However, since you are almost certain to get false positives, vulture cannot be used as a commit-hook or an abort-job in your buildbot.</p>
+<p>So why a fabric task, why not just use the command-line tool <code>vulture</code>?  Well, the problem is that since vulture will generate false positives, you're quite likely to eschew the default invocation because the output is cluttered.  You'll end up with some customized command like this:</p>
+<div class="highlight"><pre><span></span>$ vulture py_pkg <span class="p">|</span> grep -v KnownFalsePositive1 <span class="p">|</span> grep -v KnownFalsePositive2
+</pre></div>
+
+
+<p>Eventually tracking your project's known false positives mentally and typing them out becomes work, and you'll just want a script.  Another reason to fabric'ize this work is that the <code>fab</code> tool works the way you'd expect even after you're deep inside subdirectories of your project<sup id="sf-python-release-automation-3-back"><a href="#sf-python-release-automation-3" class="simple-footnote" title="Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile.)">3</a></sup>.</p>
+<p>Without further ado, you can find a simple fabric task below.  Change PKG_NAME and the VULTURE_* variables to match your project, and invoke the task using <code>fab vulture</code>.</p>
+<p><a href="https://gist.githubusercontent.com/mattvonrocketstein/3e3e881a183fd30bf641b9f6afbdb445/raw/">View this gist on github</a></p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">contextlib</span>
+<span class="kn">from</span> <span class="nn">fabric</span> <span class="kn">import</span> <span class="n">api</span>
+
+<span class="n">PKG_NAME</span> <span class="o">=</span> <span class="s1">'ansible_role'</span>
+<span class="n">VULTURE_EXCLUDE_PATHS</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">VULTURE_IGNORE_FUNCTIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'format_help'</span><span class="p">,</span> <span class="s1">'entry'</span><span class="p">]</span>
+
+
+<span class="nd">@api.task</span>
+<span class="k">def</span> <span class="nf">vulture</span><span class="p">():</span>
+    <span class="sd">""" try to find dead code paths """</span>
+    <span class="k">with</span> <span class="n">api</span><span class="o">.</span><span class="n">quiet</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s1">'which vulture'</span><span class="p">)</span><span class="o">.</span><span class="n">succeeded</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s1">'vulture not found, installing it'</span>
+            <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="s1">'pip install vulture'</span><span class="p">)</span>
+    <span class="n">ignore_functions_grep</span> <span class="o">=</span> <span class="s1">'egrep -v "{0}"'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="s1">'|'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">VULTURE_IGNORE_FUNCTIONS</span><span class="p">))</span>
+    <span class="n">excluded</span> <span class="o">=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">VULTURE_EXCLUDE_PATHS</span><span class="p">)</span>
+    <span class="n">excluded_paths</span> <span class="o">=</span> <span class="p">(</span><span class="s1">' --exclude '</span> <span class="o">+</span> <span class="n">excluded</span><span class="p">)</span> <span class="k">if</span> <span class="n">excluded</span> <span class="k">else</span> <span class="s1">''</span>
+    <span class="n">vulture_cmd</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">  vulture {pkg_name}{exclude}{pipes}'</span>
+    <span class="n">vulture_cmd</span> <span class="o">=</span> <span class="n">vulture_cmd</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">pkg_name</span><span class="o">=</span><span class="n">PKG_NAME</span><span class="p">,</span>
+        <span class="n">exclude</span><span class="o">=</span><span class="n">excluded_paths</span><span class="p">,</span>
+        <span class="n">pipes</span><span class="o">=</span><span class="s1">'|'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">''</span><span class="p">,</span> <span class="n">ignore_functions_grep</span><span class="p">]))</span>
+    <span class="n">changedir</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">lcd</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+    <span class="n">warn_only</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">settings</span><span class="p">(</span><span class="n">warn_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">be_quit</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">hide</span><span class="p">(</span><span class="s1">'warnings'</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">nested</span><span class="p">(</span><span class="n">changedir</span><span class="p">,</span> <span class="n">warn_only</span><span class="p">,</span> <span class="n">be_quit</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="n">vulture_cmd</span><span class="p">,</span> <span class="n">capture</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">exit_code</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">return_code</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="n">exit_code</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>Pypi releases</h2>
+<h1>Footnotes</h1><ol class="simple-footnotes"><li id="sf-python-release-automation-1">It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb..  <a href="#sf-python-release-automation-1-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-2">Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible. <a href="#sf-python-release-automation-2-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-3">Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile.) <a href="#sf-python-release-automation-3-back" class="simple-footnote-back">↩</a></li></ol>
+                <script>
+                  $(document).ready(
+                    function(){
+                      $("#toc").tocify(
+                        {
+                          context: '.entry-content',
+                          selectors: "h1,h2,h3,h4",
+                          showAndHide: true,
+                          showAndHideOnScroll: true,
+                        }
+                      )
+                    }
+                  );
+                </script>
+
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-2" >
+          <section id=toc class="well well-sm">
+            </section>
+        </div>
+      </div>
+
+    </div>
+</div>
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 mvr
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+    <!-- GitHub JS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (!window.jXHR) {
+                var jxhr = document.createElement('script');
+                jxhr.type = 'text/javascript';
+                jxhr.src = 'https://mattvonrocketstein.github.io/heredoc/theme/js/jXHR.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(jxhr, s);
+            }
+
+            github.showRepos({
+                user: 'mattvonrocketstein',
+                count: 5,
+                skip_forks: false,
+                target: '#gh_repos'
+            });
+        });
+    </script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/github.js" type="text/javascript"></script>
+    <!-- End GitHub JS Code -->
+
+<script>
+console.debug('st');
+setTimeout(function(){
+  console.debug('str');
+  if (""==$('#toc').html().trim()){
+    console.debug('strn');
+    $("#toc").hide()
+  }}, 2000)
+  </script>
+</body>
+</html>
