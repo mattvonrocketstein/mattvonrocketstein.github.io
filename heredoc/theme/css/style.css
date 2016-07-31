@@ -59,6 +59,11 @@ body {
     -ms-hyphens: auto;
     hyphens: auto;
 }
+
+ol.simple-footnotes:before {
+  content: "Footenoteszzzz",
+}
+
 .li-choice:before {
   content: "★";
 }

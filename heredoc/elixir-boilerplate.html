@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Elixir boilerplate - heredoc</title>
+    <title>heredoc - Elixir boilerplate</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -13,17 +13,17 @@
 <link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="Elixir,boilerplate" />
-        <meta name="description" content="Elixir boilerplate" />
+        <meta name="keywords" content="elixir,boilerplate" />
+        <meta name="description" content="Boilerplate for elixir: precommit hooks, testing, and more" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Elixir boilerplate"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html"/>
-        <meta property="og:description" content="Elixir boilerplate"/>
+        <meta property="og:description" content="Boilerplate for elixir: precommit hooks, testing, and more"/>
         <meta property="article:published_time" content="2016-07-20" />
             <meta property="article:section" content="misc" />
-            <meta property="article:tag" content="Elixir" />
+            <meta property="article:tag" content="elixir" />
             <meta property="article:tag" content="boilerplate" />
             <meta property="article:author" content="mvr" />
 
@@ -81,6 +81,9 @@ heredoc            </a>
                         <li >
                             <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
                         </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
+                        </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -97,9 +100,38 @@ heredoc            </a>
             <div style="">
               <aside>
 <div id="aboutme">
+
+    
         <p>
-            <img width="100%" class="img-thumbnail" src="https://mattvonrocketstein.github.io/heredoc/img/avatar.png"/>
+            <center>
+              <a id=stop_walking_man
+                href="javascript:toggle_walking_man()">
+              <img id=walking_man src="http://localhost:8000/heredoc/img/walking_man.gif">
+                <span style="position: relative;bottom: 20px;">
+                  <small><small>
+                    <small><small>
+                      click to stop animation
+                    </small></small>
+                  </small></small>
+                </span>
+              </a>
+            </center>
         </p>
+        <script>
+          function toggle_walking_man(){
+            var walking = 'http://localhost:8000/heredoc/img/walking_man_still.png';
+            var still = 'http://localhost:8000/heredoc/img/walking_man.gif';
+            var currently=$('#walking_man').attr('src');
+            if (currently==walking){
+              $('#walking_man').attr('src',still)
+            }
+            else {
+              $('#walking_man').attr('src', walking)
+            }
+          }
+
+        </script>
+
     <p>
         <strong>About Me</strong><br/>
         
@@ -111,20 +143,20 @@ the true guardians of my doomwagons.
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
+                            Loading Wikipedia into Neo4j with Elixir</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
                             Python release automation</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
                             The missing "ansible-role" command</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">
                             DRY versioning for Python packages</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
                             Elixir boilerplate</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">
-                            Pelican boilerplate</li>
                         </a>
               </ul>
 
@@ -136,7 +168,7 @@ the true guardians of my doomwagons.
                             ansible
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
                         </a>
@@ -146,14 +178,19 @@ the true guardians of my doomwagons.
                             devops
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
-                            Elixir
+                            elixir
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
                             fabric
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
+                            graphdb
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -184,6 +221,11 @@ the true guardians of my doomwagons.
             </div>
         </div>
         <div class="col-sm-8">
+            <ol class="breadcrumb">
+                <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">misc</a></li>
+                <li class="active">Elixir boilerplate</li>
+            </ol>
     <section id="content">
         <article>
             <header class="page-header">
@@ -209,7 +251,7 @@ the true guardians of my doomwagons.
 
 
 <span class="label label-default">Tags</span>
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
         /
 	<a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">boilerplate</a>
     
@@ -217,19 +259,98 @@ the true guardians of my doomwagons.
                     </div>
                 </div>
 
-                <h2>2Test1</h2>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<h2>2test2</h2>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<h3>3test1</h3>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<h4>4test1</h4>
-<hr />
-<p><a href="http://google.com">google</a></p>
-<h1>different kind of header</h1>
+                <p>This page is</p>
+<h2>Commit hooks</h2>
+<p>Regardless of programming language, I've come to believe that linting should be done strictly, constantly, and consistently across all contributing project members.  Thus, I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
+<p>Another benefit of the hooks approach is that it works better with code-bases that are large and under construction, because hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once.</p>
+<p>I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple; just make a <code>.pre-commit-config.yaml</code> file in your source root.  For elixir code my hooks normally look something like what you see below (to see my python hooks <a href="#">go here</a>).  </p>
+<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">local</span>
+    <span class="l l-Scalar l-Scalar-Plain">hooks</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mix-test</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;elixir:</span><span class="nv"> </span><span class="s">mixing</span><span class="nv"> </span><span class="s">tests&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">entry</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mix test</span>
+        <span class="l l-Scalar l-Scalar-Plain">language</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">system</span>
+        <span class="l l-Scalar l-Scalar-Plain">files</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">\.ex$</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mix-test</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;elixir:</span><span class="nv"> </span><span class="s">mixing</span><span class="nv"> </span><span class="s">compile&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">entry</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mix compile</span>
+        <span class="l l-Scalar l-Scalar-Plain">language</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">system</span>
+        <span class="l l-Scalar l-Scalar-Plain">files</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">\.ex$</span>
+<span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">git://github.com/pre-commit/pre-commit-hooks</span>
+    <span class="l l-Scalar l-Scalar-Plain">sha</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
+    <span class="l l-Scalar l-Scalar-Plain">hooks</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">trailing-whitespace</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">check-merge-conflict</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">check-yaml</span>
+</pre></div>
+
+
+<p>Afterwards you'll want to actually use this file, so run the commands below:</p>
+<div class="highlight"><pre><span></span>$ pip install pre-commit
+$ pre-commit install
+$ git add .pre-commit-config.yaml
+$ git commit -a -m<span class="s2">&quot;add pre-commit config&quot;</span>
+$ git push
+</pre></div>
+
+
+<h2>Extra dependencies</h2>
+<p>Several dependencies find their way into almost all my elixir projects, most of them related to static-analysis and mocking for tests.  Inside <em>mix.exs</em> modify the <code>deps</code> function as follows:</p>
+<div class="highlight"><pre><span></span><span class="kd">defp</span> <span class="n">deps</span> <span class="k">do</span>
+  <span class="p">[</span>
+    <span class="c1">#... your other project dependencies ...</span>
+
+    <span class="c1"># a linter for elixir code</span>
+    <span class="p">{</span><span class="ss">:dogma</span><span class="p">,</span> <span class="s2">&quot;~&gt; 0.1&quot;</span><span class="p">,</span> <span class="ss">only</span><span class="p">:</span> <span class="ss">:dev</span><span class="p">},</span>
+
+    <span class="c1"># NB: 0.1.4 is available on github but not hex currently</span>
+    <span class="p">{</span><span class="ss">:mock</span><span class="p">,</span> <span class="s2">&quot;~&gt; 0.1.4&quot;</span><span class="p">,</span> <span class="ss">git</span><span class="p">:</span> <span class="s2">&quot;https://github.com/jjh42/mock.git&quot;</span><span class="p">},</span>
+
+    <span class="c1"># a static analysis tool</span>
+    <span class="p">{</span><span class="ss">:dialyxir</span><span class="p">,</span> <span class="s2">&quot;~&gt; 0.3&quot;</span><span class="p">,</span> <span class="ss">only</span><span class="p">:</span> <span class="p">[</span><span class="ss">:dev</span><span class="p">]},</span>
+
+    <span class="c1"># coverage tool for tests</span>
+    <span class="c1"># https://github.com/alfert/coverex</span>
+    <span class="p">{</span><span class="ss">:coverex</span><span class="p">,</span> <span class="s2">&quot;~&gt; 1.4.9&quot;</span><span class="p">,</span> <span class="ss">only</span><span class="p">:</span> <span class="ss">:test</span><span class="p">},</span>
+
+    <span class="c1">#... your other project dependencies ...</span>
+  <span class="p">]</span>
+</pre></div>
+
+
+<h2>Test coverage</h2>
+<p>Coverage with <a href="https://github.com/alfert/coverex">coverex</a> requires a modification to the <code>project</code> function in <em>mix.exs</em>, as well as the coverex dependency mentioned above.</p>
+<div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">project</span> <span class="k">do</span>
+  <span class="p">[</span>
+    <span class="c1"># ... other project-config ...</span>
+    <span class="ss">test_coverage</span><span class="p">:</span> <span class="p">[</span>
+      <span class="ss">tool</span><span class="p">:</span> <span class="nc">Coverex.Task</span><span class="p">,</span>
+      <span class="ss">console_log</span><span class="p">:</span> <span class="no">true</span><span class="p">],</span>
+    <span class="c1"># ... other project-config ...</span>
+ <span class="p">]</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<h2>Custom Mix Tasks</h2>
+<p>One ends up making custom mix tasks in any project that's not an escript commandline.  It's also common to that your mix task needs to invoke other mix tasks, so that's demonstrated below.  If your mix task requires the app to be started, why not call do the programmatic equivalent of <code>mix app.start</code>?</p>
+<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Mix.Tasks.Load</span> <span class="k">do</span>
+  <span class="kn">use</span> <span class="nc">Mix.Task</span>
+
+  <span class="kd">def</span> <span class="n">run</span><span class="p">(</span><span class="n">anything</span><span class="p">)</span> <span class="k">do</span>
+    <span class="nc">Mix.Tasks.App.Start</span><span class="o">.</span><span class="n">run</span><span class="p">([])</span>
+    <span class="n">main</span><span class="p">(</span><span class="n">anything</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="kd">def</span> <span class="n">main</span><span class="p">([])</span> <span class="k">do</span>
+    <span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;No arguments given!&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="kd">def</span> <span class="n">main</span><span class="p">([</span><span class="n">fname</span><span class="p">])</span> <span class="k">do</span>
+    <span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Given a filename </span><span class="si">#{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="k">end</span>    
+<span class="k">end</span>
+</pre></div>
                 <script>
                   $(document).ready(
                     function(){
@@ -244,7 +365,13 @@ the true guardians of my doomwagons.
                     }
                   );
                 </script>
-
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">Loading Wikipedia into Neo4j with Elixir</a></li>
+    </ul>
+</section>
             </div>
             <!-- /.entry-content -->
         </article>
@@ -294,13 +421,10 @@ the true guardians of my doomwagons.
     <!-- End GitHub JS Code -->
 
 <script>
-console.debug('st');
 setTimeout(function(){
-  console.debug('str');
   if (""==$('#toc').html().trim()){
-    console.debug('strn');
     $("#toc").hide()
-  }}, 2000)
+  }}, 1500)
   </script>
 </body>
 </html>

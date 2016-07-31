@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Python release automation - heredoc</title>
+    <title>heredoc - Python release automation</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -14,12 +14,13 @@
 
         <meta name="author" content="mvr" />
         <meta name="keywords" content="python,fabric,boilerplate,devops" />
+        <meta name="description" content="Fabric tasks, pre-commit hooks, and other topics in release automation for python packages" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Python release automation"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html"/>
-        <meta property="og:description" content=""/>
+        <meta property="og:description" content="Fabric tasks, pre-commit hooks, and other topics in release automation for python packages"/>
         <meta property="article:published_time" content="2016-07-30" />
             <meta property="article:section" content="Python" />
             <meta property="article:tag" content="python" />
@@ -82,6 +83,9 @@ heredoc            </a>
                         <li >
                             <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
                         </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
+                        </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -98,9 +102,38 @@ heredoc            </a>
             <div style="">
               <aside>
 <div id="aboutme">
+
+    
         <p>
-            <img width="100%" class="img-thumbnail" src="https://mattvonrocketstein.github.io/heredoc/img/avatar.png"/>
+            <center>
+              <a id=stop_walking_man
+                href="javascript:toggle_walking_man()">
+              <img id=walking_man src="http://localhost:8000/heredoc/img/walking_man.gif">
+                <span style="position: relative;bottom: 20px;">
+                  <small><small>
+                    <small><small>
+                      click to stop animation
+                    </small></small>
+                  </small></small>
+                </span>
+              </a>
+            </center>
         </p>
+        <script>
+          function toggle_walking_man(){
+            var walking = 'http://localhost:8000/heredoc/img/walking_man_still.png';
+            var still = 'http://localhost:8000/heredoc/img/walking_man.gif';
+            var currently=$('#walking_man').attr('src');
+            if (currently==walking){
+              $('#walking_man').attr('src',still)
+            }
+            else {
+              $('#walking_man').attr('src', walking)
+            }
+          }
+
+        </script>
+
     <p>
         <strong>About Me</strong><br/>
         
@@ -112,20 +145,20 @@ the true guardians of my doomwagons.
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
+                            Loading Wikipedia into Neo4j with Elixir</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
                             Python release automation</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
                             The missing "ansible-role" command</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">
                             DRY versioning for Python packages</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
                             Elixir boilerplate</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">
-                            Pelican boilerplate</li>
                         </a>
               </ul>
 
@@ -137,7 +170,7 @@ the true guardians of my doomwagons.
                             ansible
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
                         </a>
@@ -147,14 +180,19 @@ the true guardians of my doomwagons.
                             devops
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
-                            Elixir
+                            elixir
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
                             fabric
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
+                            graphdb
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -185,6 +223,11 @@ the true guardians of my doomwagons.
             </div>
         </div>
         <div class="col-sm-8">
+            <ol class="breadcrumb">
+                <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/python.html" title="Python">Python</a></li>
+                <li class="active">Python release automation</li>
+            </ol>
     <section id="content">
         <article>
             <header class="page-header">
@@ -222,9 +265,10 @@ the true guardians of my doomwagons.
                     </div>
                 </div>
 
-                <p>Release automation and project management are complicated.  You've got your tests and test coverage, documentation generation, linters, perhaps static asset generation and uploading artifacts, and more.  There are a lot of different ways to handle these things and it depends a lot on the project, and ultimately choosing your tool chain is largely a matter of taste. I'm documenting some of my go-to approaches here just for my own reference, but perhaps it will be useful to someone else as well.</p>
+                <p>Release automation and project management are complicated.  Your ideas may differ, but I think of this as more than just slapping a version number on a tarball, and at least for the purposes of this write-up I want to widen the definition to discuss a bit about tests and test coverage, documentation generation, and linters.  Static asset generation and simple uploading of artifacts is also on the table, but complicated topics in general deployment and full-on CI are outside of scope.  I'll probably add more stuff here as I think of them.  </p>
+<p>There are a lot of different ways to handle these things and it depends a lot on the project, and ultimately choosing your tool chain is largely a matter of taste. I'm documenting some of my go-to approaches and boilerplate here (all python specific) just for my own reference, but perhaps it will be useful to someone else as well.</p>
 <h2>Testing</h2>
-<p>The <a href="https://tox.readthedocs.io/en/latest/#what-is-tox">tox tool</a> is pretty much the gold standard for python these days because it makes it easy to manage multiple virtual environments and test with different python versions.  Tox itself is a very general tool and is completely agnostic about your choice of the underlying testing framework.  Use whatever you want.. tox simply helps you to invoke the test runner.  It's possible to add other automation stuff for code-quality (linters) to your toxfile (I used to do this) but now I'd suggest using commit hooks.  Tox itself <a href="https://tox.readthedocs.io/en/latest/">is well documented</a> with <a href="https://tox.readthedocs.io/en/latest/examples.html">lots of examples</a> but for whatever it's worth here's my standard boilerplate below.</p>
+<p>The <a href="https://tox.readthedocs.io/en/latest/#what-is-tox">tox tool</a> is pretty much the gold standard for python these days because it makes it easy to manage multiple virtual environments and test with different python versions.  Tox itself is a very general tool and is completely agnostic about your choice of the underlying testing framework.  Use whatever you want.. tox simply helps you to invoke the test runner.  It's possible to add other automation stuff for code-quality (linters) to your toxfile (I used to do this) but now I'd suggest using commit hooks.  Tox itself <a href="https://tox.readthedocs.io/en/latest/">is well documented</a> with <a href="https://tox.readthedocs.io/en/latest/examples.html">lots of examples</a> but for whatever it's worth here's my standard starter copy-pasta below.</p>
 <div class="highlight"><pre><span></span><span class="k">[tox]</span>
 <span class="na">envlist</span> <span class="o">=</span><span class="s"></span>
 <span class="s">  py27, py34</span>
@@ -250,10 +294,12 @@ the true guardians of my doomwagons.
 
 <p>As you can see, I typically prefer <a href="http://docs.pytest.org/en/latest/">py.test</a> as my testing framework, I do not like to support python2.6, and I put tests inside a "test" directory under the source root (NOT inside my package).</p>
 <p>Note that in addition to what you see above, you can also declare sections for various linters like <a href="https://pypi.python.org/pypi/flake8">flake8</a>, <a href="https://pypi.python.org/pypi/pep8">pep8</a>, and <a href="https://pypi.python.org/pypi/pycodestyle">pycodestyle</a> .  Each tool, respectively, will parse configuration from it's own tox.ini and respect those settings regardless of whether the tool was invoked from tox.</p>
+<h2>Linters</h2>
+<p>Speaking of linters (the last section mentions 3 standard ones), there are a lot of other and more specialized options.  There's <a href="https://pypi.python.org/pypi/pyroma">pyroma</a>, essentially a linter for <code>setup.py</code> files.  There's <a href="https://github.com/willthames/ansible-lint">a linter for ansible</a>, a linter <a href="https://pypi.python.org/pypi/django-lint">for django</a> and a <a href="https://github.com/jschaf/pylint-flask">linter for flask</a>.  Go nuts, lint all the things and remember to throw that stuff into your pre-commit hooks anywhere you can.</p>
 <h2>Commit hooks</h2>
-<p>Regardless of programming language, I've come to believe that linting should be done strictly, constantly, and consistently across all contributing project members.  Thus, I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
-<p>Another benefit of the hooks approach is that it works better with code-bases that are large and under construction, because hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once.</p>
-<p>There are a few competitors out there, but I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple. Just make a <code>.pre-commit-config.yaml</code> file in your source root.  For python code my hooks normally look something like what you see below (to see my elixir hooks <a href="#">go here</a>).  </p>
+<p>Ideally linting should be done <em>strictly</em>, <em>constantly</em>, and <em>consistently</em> across all contributing project members.  But where best to drive it from? Lately I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
+<p>One big benefit of the hooks approach is that it works better with code-bases that are large, old, and still under construction.  Hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once which is often times not practical.</p>
+<p>I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple. Just make a <code>.pre-commit-config.yaml</code> file in your source root.  For python code my hooks normally look something like what you see below (to see my elixir hooks <a href="#">go here</a>).  </p>
 <div class="highlight"><pre><span></span><span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">git://github.com/pre-commit/pre-commit-hooks</span>
     <span class="l l-Scalar l-Scalar-Plain">sha</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
     <span class="l l-Scalar l-Scalar-Plain">hooks</span><span class="p p-Indicator">:</span>
@@ -264,10 +310,12 @@ the true guardians of my doomwagons.
     <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">autopep8-wrapper</span>
     <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">flake8</span>
     <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">check-yaml</span>
+    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">check-json</span>
 </pre></div>
 
 
-<p>Afterwards you'll want to actually use this file, so run the commands below:</p>
+<p>A list of available hooks <a href="http://pre-commit.com/hooks.html">is here</a> and you can always make your own.  Checking YAML and JSON will probably save you from botching a deploy eventually, and using <a href="https://pypi.python.org/pypi/autopep8">autopep8</a> to avoid like 70% of the useless bikeshedding on codereviews will probably make you smile.  </p>
+<p>Anyway after you've gotten the hooks written down, you'll probably want to actually use this file, so run the commands below:</p>
 <div class="highlight"><pre><span></span>$ pip install pre-commit
 $ pre-commit install
 $ git add .pre-commit-config.yaml
@@ -276,14 +324,14 @@ $ git push
 </pre></div>
 
 
-<p>Now you just have to browbeat your peers until they use this thing, and afterwards everything is wonderful. <img height="20px" alt=":thumbsup:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" title=":thumbsup:" align="absmiddle" width="20px" class="emoji"></p>
+<p>Now you just have to browbeat your coworkers until they use this thing, and afterwards everything is wonderful. <img height="20px" alt=":thumbsup:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" title=":thumbsup:" align="absmiddle" width="20px" class="emoji"></p>
 <h2>Generic automation</h2>
-<p>There are a lot of pythonic<sup id="sf-python-release-automation-1-back"><a href="#sf-python-release-automation-1" class="simple-footnote" title="It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb.. ">1</a></sup> approaches to generic automation.  Lots of people use <a href="https://github.com/paver/paver">paver</a> for instance, but my weapon of choice is <strong><a href="www.fabfile.org">fabric</a></strong>.</p>
+<p>There are a lot of pythonic approaches <sup id="sf-python-release-automation-1-back"><a href="#sf-python-release-automation-1" class="simple-footnote" title="It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb.. ">1</a></sup> to generic automation.  Lots of people use <a href="https://github.com/paver/paver">paver</a> for instance, but my weapon of choice is <strong><a href="www.fabfile.org">fabric</a></strong>.</p>
 <p>Fabric simplifies command-line option-parsing and between the shell invocation/ssh-helpers it is very suitable for automating both local and remote work<sup id="sf-python-release-automation-2-back"><a href="#sf-python-release-automation-2" class="simple-footnote" title="Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible.">2</a></sup>.  Fabric definitely has some problems, most notably a lack of py3 compatibility and the fact that the paramiko requirement means fairly long installations on fresh virtualenvs, but it still saves me far more time than it costs me.</p>
-<p>I've already written elsewhere <a href="dry-versioning-python.html">about a version-bump command</a> that uses fabric.  In this section you'll find more descriptions of little automation problems and the corresponding solutions presented as fabric commands.</p>
+<p>In this section you'll often find a few descriptions of little automation problems and the corresponding solutions will often be presented as fabric commands.</p>
 <h3>Detect dead code</h3>
 <p>Dead code paths are tricky to find.  A strong integration test suite is really the best thing to use, but many projects are unlikely to have this luxury (especially projects that are libraries rather than applications).  Meanwhile.. your unit tests suite can help you or hide the truth from you, it just depends.  Realistically, the best approach one can hope for is often just approximate.  </p>
-<p>I like using <a href="https://pypi.python.org/pypi/vulture">vulture</a> as a heuristic aid.  Vulture qualifies as a <a href="https://en.wikipedia.org/wiki/Static_program_analysis">static analysis</a> tool, and unlike your test suites it won't actually execute code. However, since you are almost certain to get false positives, vulture cannot be used as a commit-hook or an abort-job in your buildbot.</p>
+<p>I use <a href="https://pypi.python.org/pypi/vulture">vulture</a> as a heuristic aid.  Vulture qualifies as a <a href="https://en.wikipedia.org/wiki/Static_program_analysis">static analysis</a> tool, and unlike your test suites it won't actually execute code. However, since you are almost certain to get false positives, vulture cannot be used as a commit-hook or an abort-job in your buildbot.</p>
 <p>So why a fabric task, why not just use the command-line tool <code>vulture</code>?  Well, the problem is that since vulture will generate false positives, you're quite likely to eschew the default invocation because the output is cluttered.  You'll end up with some customized command like this:</p>
 <div class="highlight"><pre><span></span>$ vulture py_pkg <span class="p">|</span> grep -v KnownFalsePositive1 <span class="p">|</span> grep -v KnownFalsePositive2
 </pre></div>
@@ -350,6 +398,7 @@ $ git push
 
 
 <h3>Pypi releases</h3>
+<p>I've already written elsewhere <a href="dry-versioning-python.html">about a version-bump command</a> that uses fabric.  If you want a do-everything release helper consider using the <a href="http://zestreleaser.readthedocs.io/en/latest/overview.html">zest.releaser</a>.  I don't use zestreleaser much because project-to-project releases are likely to be a ticklish subject with idiosyncratic pre/post actions and conditions.  My approach is limited quite limited in that it's designed for git and github, but for easy customization later, I nevertheless prefer to start with a fabric task.</p>
 <h2>Footnotes</h2><ol class="simple-footnotes"><li id="sf-python-release-automation-1">It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb..  <a href="#sf-python-release-automation-1-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-2">Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible. <a href="#sf-python-release-automation-2-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-3">Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile.) <a href="#sf-python-release-automation-3-back" class="simple-footnote-back">↩</a></li></ol>
                 <script>
                   $(document).ready(
@@ -365,7 +414,12 @@ $ git push
                     }
                   );
                 </script>
-
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+    </ul>
+</section>
             </div>
             <!-- /.entry-content -->
         </article>
@@ -415,13 +469,10 @@ $ git push
     <!-- End GitHub JS Code -->
 
 <script>
-console.debug('st');
 setTimeout(function(){
-  console.debug('str');
   if (""==$('#toc').html().trim()){
-    console.debug('strn');
     $("#toc").hide()
-  }}, 2000)
+  }}, 1500)
   </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>DRY versioning for Python packages - heredoc</title>
+    <title>heredoc - DRY versioning for Python packages</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,22 +10,21 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="python,fabric,boilerplate" />
-        <meta name="description" content="DRY versioning for Python packages" />
+        <meta name="keywords" content="python,fabric" />
+        <meta name="description" content="DRY versioning for Python packages, configuring setup.py, fabric task for version bumping" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="DRY versioning for Python packages"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html"/>
-        <meta property="og:description" content="DRY versioning for Python packages"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html"/>
+        <meta property="og:description" content="DRY versioning for Python packages, configuring setup.py, fabric task for version bumping"/>
         <meta property="article:published_time" content="2016-07-28" />
             <meta property="article:section" content="Python" />
             <meta property="article:tag" content="python" />
             <meta property="article:tag" content="fabric" />
-            <meta property="article:tag" content="boilerplate" />
             <meta property="article:author" content="mvr" />
 
 
@@ -82,6 +81,9 @@ heredoc            </a>
                         <li >
                             <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
                         </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
+                        </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -98,9 +100,38 @@ heredoc            </a>
             <div style="">
               <aside>
 <div id="aboutme">
+
+    
         <p>
-            <img width="100%" class="img-thumbnail" src="https://mattvonrocketstein.github.io/heredoc/img/avatar.png"/>
+            <center>
+              <a id=stop_walking_man
+                href="javascript:toggle_walking_man()">
+              <img id=walking_man src="http://localhost:8000/heredoc/img/walking_man.gif">
+                <span style="position: relative;bottom: 20px;">
+                  <small><small>
+                    <small><small>
+                      click to stop animation
+                    </small></small>
+                  </small></small>
+                </span>
+              </a>
+            </center>
         </p>
+        <script>
+          function toggle_walking_man(){
+            var walking = 'http://localhost:8000/heredoc/img/walking_man_still.png';
+            var still = 'http://localhost:8000/heredoc/img/walking_man.gif';
+            var currently=$('#walking_man').attr('src');
+            if (currently==walking){
+              $('#walking_man').attr('src',still)
+            }
+            else {
+              $('#walking_man').attr('src', walking)
+            }
+          }
+
+        </script>
+
     <p>
         <strong>About Me</strong><br/>
         
@@ -112,20 +143,20 @@ the true guardians of my doomwagons.
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
+                            Loading Wikipedia into Neo4j with Elixir</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
                             Python release automation</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
                             The missing "ansible-role" command</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">
                             DRY versioning for Python packages</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
                             Elixir boilerplate</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">
-                            Pelican boilerplate</li>
                         </a>
               </ul>
 
@@ -137,7 +168,7 @@ the true guardians of my doomwagons.
                             ansible
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
                         </a>
@@ -147,14 +178,19 @@ the true guardians of my doomwagons.
                             devops
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
-                            Elixir
+                            elixir
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
                             fabric
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
+                            graphdb
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -185,11 +221,16 @@ the true guardians of my doomwagons.
             </div>
         </div>
         <div class="col-sm-8">
+            <ol class="breadcrumb">
+                <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/python.html" title="Python">Python</a></li>
+                <li class="active">DRY versioning for Python packages</li>
+            </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html"
                        rel="bookmark"
                        title="Permalink to DRY versioning for Python packages">
                         DRY versioning for Python packages
@@ -213,8 +254,6 @@ the true guardians of my doomwagons.
 	<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
         /
 	<a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">fabric</a>
-        /
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">boilerplate</a>
     
 </footer><!-- /.post-info -->
                     </div>
@@ -254,26 +293,26 @@ the true guardians of my doomwagons.
 <span class="c1"># also that `pkg_root/py_pkg/__init__.py` is also free to import various</span>
 <span class="c1"># requirements that haven&#39;t been installed yet</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s1">&#39;pkg_name&#39;</span><span class="p">))</span>
-<span class="kn">from</span> <span class="nn">version</span> <span class="kn">import</span> <span class="n">__version__</span>  <span class="c1"># flake8: noqa</span>
+<span class="kn">from</span> <span class="nn">version</span> <span class="kn">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">release_version</span>  <span class="c1"># flake8: noqa</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
 <span class="n">setup</span><span class="p">(</span>
   <span class="c1"># ... stuff ..</span>
-  <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
+  <span class="n">version</span><span class="o">=</span><span class="n">release_version</span><span class="p">,</span>
   <span class="c1"># ... more stuff ..</span>
 <span class="p">)</span>
 </pre></div>
 
 
 <p>Once everything above is configured, you can change everything by hand if you want to.. at least now you only have to change it in once place.  However if you're interested in bumping the version from commandline without editing a file, or maybe bumping it from your buildbot after a test job passes, read on.  </p>
+<p>Warning!  The version-bumper discussed here assumes naive incremental decimal versioning and it won't JustWork™ with stuff like <a href="http://semver.org/">semver</a> out of the box.  The reason for that is because then the release automation gets somewhat less, well, automatic, in that case because the <code>bump_version</code> command would have parse tuples and accept arguments that described whether your changes were backwards compatible.  If you need something more sophisticated and don't feel like tweaking the approach used here, you should consider using <a href="http://zestreleaser.readthedocs.io/en/latest/overview.html">zest.releaser</a> instead.</p>
 <h3>Fabfile.py</h3>
 <p>I implement lots of simple automation using <a href="http://www.fabfile.org/">fabric</a>, and so it is for the <code>bump_version</code> command.  To install fabric itself you'll need to run the command below:</p>
 <div class="highlight"><pre><span></span>pip install fabric
 </pre></div>
 
 
-<p>The fabfile with the <code>bump_version</code> command is <a href="https://gist.github.com/mattvonrocketstein/ac7c3fc1da4e696e58976324c414c72e">gisted here</a> and included below.  Basically you just need to run "fab bump_version" and it will rewrite the version.py file described previous.  </p>
-<p>Be warned!  The version-bumper below assumes naive incremental decimal versioning and it won't JustWork™ with stuff like <a href="http://semver.org/">semver</a> out of the box.  The reason for that is because then the release automation gets somewhat less, well, automatic, in that case because the <code>bump_version</code> command would have parse tuples and accept arguments that described whether your changes were backwards compatible. Extending the solution is left as an exercise to the reader :)  </p>
+<p>The fabfile with the <code>bump_version</code> command is <a href="https://gist.github.com/mattvonrocketstein/ac7c3fc1da4e696e58976324c414c72e">gisted here</a> and included below.  Basically you just need to run "fab bump_version" and it will rewrite the version.py file described earlier in this post.  </p>
 <p><a href="https://gist.githubusercontent.com/mattvonrocketstein/ac7c3fc1da4e696e58976324c414c72e/raw/">View this gist on github</a></p>
 <div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -340,7 +379,12 @@ the true guardians of my doomwagons.
                     }
                   );
                 </script>
-
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+    </ul>
+</section>
             </div>
             <!-- /.entry-content -->
         </article>
@@ -390,13 +434,10 @@ the true guardians of my doomwagons.
     <!-- End GitHub JS Code -->
 
 <script>
-console.debug('st');
 setTimeout(function(){
-  console.debug('str');
   if (""==$('#toc').html().trim()){
-    console.debug('strn');
     $("#toc").hide()
-  }}, 2000)
+  }}, 1500)
   </script>
 </body>
 </html>

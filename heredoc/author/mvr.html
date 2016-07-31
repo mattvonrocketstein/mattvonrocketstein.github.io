@@ -74,6 +74,9 @@ heredoc            </a>
                         <li >
                             <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
                         </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
+                        </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -90,9 +93,38 @@ heredoc            </a>
             <div style="">
               <aside>
 <div id="aboutme">
+
+    
         <p>
-            <img width="100%" class="img-thumbnail" src="https://mattvonrocketstein.github.io/heredoc/img/avatar.png"/>
+            <center>
+              <a id=stop_walking_man
+                href="javascript:toggle_walking_man()">
+              <img id=walking_man src="http://localhost:8000/heredoc/img/walking_man.gif">
+                <span style="position: relative;bottom: 20px;">
+                  <small><small>
+                    <small><small>
+                      click to stop animation
+                    </small></small>
+                  </small></small>
+                </span>
+              </a>
+            </center>
         </p>
+        <script>
+          function toggle_walking_man(){
+            var walking = 'http://localhost:8000/heredoc/img/walking_man_still.png';
+            var still = 'http://localhost:8000/heredoc/img/walking_man.gif';
+            var currently=$('#walking_man').attr('src');
+            if (currently==walking){
+              $('#walking_man').attr('src',still)
+            }
+            else {
+              $('#walking_man').attr('src', walking)
+            }
+          }
+
+        </script>
+
     <p>
         <strong>About Me</strong><br/>
         
@@ -104,20 +136,20 @@ the true guardians of my doomwagons.
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
+                            Loading Wikipedia into Neo4j with Elixir</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
                             Python release automation</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
                             The missing "ansible-role" command</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">
                             DRY versioning for Python packages</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
                             Elixir boilerplate</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">
-                            Pelican boilerplate</li>
                         </a>
               </ul>
 
@@ -129,7 +161,7 @@ the true guardians of my doomwagons.
                             ansible
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
                         </a>
@@ -139,14 +171,19 @@ the true guardians of my doomwagons.
                             devops
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
-                            Elixir
+                            elixir
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
                             fabric
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
+                            graphdb
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -177,43 +214,59 @@ the true guardians of my doomwagons.
             </div>
         </div>
         <div class="col-sm-8">
+        <ol class="breadcrumb">
+            <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
+            <li><a href="https://mattvonrocketstein.github.io/heredoc/authors.html" title="Authors">Authors</a></li>
+            <li class="active">mvr</li>
+        </ol>
+            <header class="page-header">
+                <h1>Writing with category:                  <small>foo</small>
+                </h1>
+            </header>
             <article>
-                <h2><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></h2>
-                <div class="summary">
+                <h3><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">Loading Wikipedia into Neo4j with Elixir</a></h2>
+                <div class="summary"><p>Loading wikipedia into neo4j with Elixir</p>
+                    <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h3><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></h2>
+                <div class="summary"><p>Fabric tasks, pre-commit hooks, and other topics in release automation for python packages</p>
                     <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></h2>
+                <h3><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></h2>
                 <div class="summary"><p>The missing "ansible-role" command</p>
                     <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html">DRY versioning for Python packages</a></h2>
-                <div class="summary"><p>DRY versioning for Python packages</p>
-                    <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html">more ...</a>
+                <h3><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></h2>
+                <div class="summary"><p>DRY versioning for Python packages, configuring setup.py, fabric task for version bumping</p>
+                    <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></h2>
-                <div class="summary"><p>Elixir boilerplate</p>
+                <h3><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></h2>
+                <div class="summary"><p>Boilerplate for elixir: precommit hooks, testing, and more</p>
                     <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">Pelican boilerplate</a></h2>
+                <h3><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">Pelican boilerplate</a></h2>
                 <div class="summary"><p>pelican boilerplate</p>
                     <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="https://mattvonrocketstein.github.io/heredoc/test-toc.html">Test ToC</a></h2>
+                <h3><a href="https://mattvonrocketstein.github.io/heredoc/test-toc.html">Test ToC</a></h2>
                 <div class="summary">
                     <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/test-toc.html">more ...</a>
                 </div>
@@ -264,13 +317,10 @@ the true guardians of my doomwagons.
     <!-- End GitHub JS Code -->
 
 <script>
-console.debug('st');
 setTimeout(function(){
-  console.debug('str');
   if (""==$('#toc').html().trim()){
-    console.debug('strn');
     $("#toc").hide()
-  }}, 2000)
+  }}, 1500)
   </script>
 </body>
 </html>

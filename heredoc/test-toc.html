@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Test ToC - heredoc</title>
+    <title>heredoc - Test ToC</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -79,6 +79,9 @@ heredoc            </a>
                         <li >
                             <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
                         </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
+                        </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -95,9 +98,38 @@ heredoc            </a>
             <div style="">
               <aside>
 <div id="aboutme">
+
+    
         <p>
-            <img width="100%" class="img-thumbnail" src="https://mattvonrocketstein.github.io/heredoc/img/avatar.png"/>
+            <center>
+              <a id=stop_walking_man
+                href="javascript:toggle_walking_man()">
+              <img id=walking_man src="http://localhost:8000/heredoc/img/walking_man.gif">
+                <span style="position: relative;bottom: 20px;">
+                  <small><small>
+                    <small><small>
+                      click to stop animation
+                    </small></small>
+                  </small></small>
+                </span>
+              </a>
+            </center>
         </p>
+        <script>
+          function toggle_walking_man(){
+            var walking = 'http://localhost:8000/heredoc/img/walking_man_still.png';
+            var still = 'http://localhost:8000/heredoc/img/walking_man.gif';
+            var currently=$('#walking_man').attr('src');
+            if (currently==walking){
+              $('#walking_man').attr('src',still)
+            }
+            else {
+              $('#walking_man').attr('src', walking)
+            }
+          }
+
+        </script>
+
     <p>
         <strong>About Me</strong><br/>
         
@@ -109,20 +141,20 @@ the true guardians of my doomwagons.
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
+                            Loading Wikipedia into Neo4j with Elixir</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
                             Python release automation</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
                             The missing "ansible-role" command</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/dry-versioning-python.html">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">
                             DRY versioning for Python packages</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
                             Elixir boilerplate</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">
-                            Pelican boilerplate</li>
                         </a>
               </ul>
 
@@ -134,7 +166,7 @@ the true guardians of my doomwagons.
                             ansible
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
                         </a>
@@ -144,14 +176,19 @@ the true guardians of my doomwagons.
                             devops
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
-                            Elixir
+                            elixir
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
                             fabric
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
+                            graphdb
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -182,6 +219,11 @@ the true guardians of my doomwagons.
             </div>
         </div>
         <div class="col-sm-8">
+            <ol class="breadcrumb">
+                <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">misc</a></li>
+                <li class="active">Test ToC</li>
+            </ol>
     <section id="content">
         <article>
             <header class="page-header">
@@ -241,7 +283,12 @@ the true guardians of my doomwagons.
                     }
                   );
                 </script>
-
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">Pelican boilerplate</a></li>
+    </ul>
+</section>
             </div>
             <!-- /.entry-content -->
         </article>
@@ -291,13 +338,10 @@ the true guardians of my doomwagons.
     <!-- End GitHub JS Code -->
 
 <script>
-console.debug('st');
 setTimeout(function(){
-  console.debug('str');
   if (""==$('#toc').html().trim()){
-    console.debug('strn');
     $("#toc").hide()
-  }}, 2000)
+  }}, 1500)
   </script>
 </body>
 </html>
