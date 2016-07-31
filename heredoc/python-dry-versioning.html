@@ -107,7 +107,7 @@ heredoc            </a>
               <a id=stop_walking_man
                 href="javascript:toggle_walking_man()">
               <img id=walking_man src="http://localhost:8000/heredoc/img/walking_man.gif">
-                <span style="position: relative;bottom: 20px;">
+                <span style="position:relative;bottom:15px;">
                   <small><small>
                     <small><small>
                       click to stop animation
@@ -305,7 +305,7 @@ the true guardians of my doomwagons.
 
 
 <p>Once everything above is configured, you can change everything by hand if you want to.. at least now you only have to change it in once place.  However if you're interested in bumping the version from commandline without editing a file, or maybe bumping it from your buildbot after a test job passes, read on.  </p>
-<p>Warning!  The version-bumper discussed here assumes naive incremental decimal versioning and it won't JustWork™ with stuff like <a href="http://semver.org/">semver</a> out of the box.  The reason for that is because then the release automation gets somewhat less, well, automatic, in that case because the <code>bump_version</code> command would have parse tuples and accept arguments that described whether your changes were backwards compatible.  If you need something more sophisticated and don't feel like tweaking the approach used here, you should consider using <a href="http://zestreleaser.readthedocs.io/en/latest/overview.html">zest.releaser</a> instead.</p>
+<p><strong>Warning!</strong>  The version-bumper discussed here assumes naive incremental decimal versioning and it won't JustWork™ with stuff like <a href="http://semver.org/">semver</a> out of the box.  The reason for that is because then the release automation gets somewhat less, well, automatic, in that case because the <code>bump_version</code> command would have parse tuples and accept arguments that described whether your changes were backwards compatible.  If you need something more sophisticated and don't feel like tweaking the approach used here, you should consider using <a href="http://zestreleaser.readthedocs.io/en/latest/overview.html">zest.releaser</a> instead.</p>
 <h3>Fabfile.py</h3>
 <p>I implement lots of simple automation using <a href="http://www.fabfile.org/">fabric</a>, and so it is for the <code>bump_version</code> command.  To install fabric itself you'll need to run the command below:</p>
 <div class="highlight"><pre><span></span>pip install fabric
