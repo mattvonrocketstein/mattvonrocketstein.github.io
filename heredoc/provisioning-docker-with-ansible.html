@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Elixir boilerplate</title>
+    <title>heredoc - Provisioning Docker with Ansible</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,22 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="elixir,boilerplate" />
-        <meta name="description" content="Boilerplate for elixir: precommit hooks, testing, and more" />
+        <meta name="keywords" content="docker,ansible,devops" />
+        <meta name="description" content="Provisioning Docker with Ansible (again)" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Elixir boilerplate"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html"/>
-        <meta property="og:description" content="Boilerplate for elixir: precommit hooks, testing, and more"/>
+        <meta property="og:title" content="Provisioning Docker with Ansible"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html"/>
+        <meta property="og:description" content="Provisioning Docker with Ansible (again)"/>
         <meta property="article:published_time" content="2016-07-20" />
-            <meta property="article:section" content="misc" />
-            <meta property="article:tag" content="elixir" />
-            <meta property="article:tag" content="boilerplate" />
+            <meta property="article:section" content="devops" />
+            <meta property="article:tag" content="docker" />
+            <meta property="article:tag" content="ansible" />
+            <meta property="article:tag" content="devops" />
             <meta property="article:author" content="mvr" />
 
 
@@ -231,17 +232,17 @@ the true guardians of my doomwagons.
         <div class="col-sm-8">
             <ol class="breadcrumb">
                 <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">misc</a></li>
-                <li class="active">Elixir boilerplate</li>
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/devops.html" title="devops">devops</a></li>
+                <li class="active">Provisioning Docker with Ansible</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html"
                        rel="bookmark"
-                       title="Permalink to Elixir boilerplate">
-                        Elixir boilerplate
+                       title="Permalink to Provisioning Docker with Ansible">
+                        Provisioning Docker with Ansible
                     </a>
                 </h1>
             </header>
@@ -259,105 +260,145 @@ the true guardians of my doomwagons.
 
 
 <span class="label label-default">Tags</span>
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">docker</a>
         /
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">boilerplate</a>
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">ansible</a>
+        /
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
     
 </footer><!-- /.post-info -->
                     </div>
                 </div>
 
-                <p>This page is</p>
-<h2>Commit hooks</h2>
-<p>Regardless of programming language, I've come to believe that linting should be done strictly, constantly, and consistently across all contributing project members.  Thus, I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
-<p>Another benefit of the hooks approach is that it works better with code-bases that are large and under construction, because hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once.</p>
-<p>I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple; just make a <code>.pre-commit-config.yaml</code> file in your source root.  For elixir code my hooks normally look something like what you see below (to see my python hooks <a href="#">go here</a>).  </p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">local</span>
-    <span class="l l-Scalar l-Scalar-Plain">hooks</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mix-test</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;elixir:</span><span class="nv"> </span><span class="s">mixing</span><span class="nv"> </span><span class="s">tests&#39;</span>
-        <span class="l l-Scalar l-Scalar-Plain">entry</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mix test</span>
-        <span class="l l-Scalar l-Scalar-Plain">language</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">system</span>
-        <span class="l l-Scalar l-Scalar-Plain">files</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">\.ex$</span>
-    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mix-test</span>
-        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&#39;elixir:</span><span class="nv"> </span><span class="s">mixing</span><span class="nv"> </span><span class="s">compile&#39;</span>
-        <span class="l l-Scalar l-Scalar-Plain">entry</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mix compile</span>
-        <span class="l l-Scalar l-Scalar-Plain">language</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">system</span>
-        <span class="l l-Scalar l-Scalar-Plain">files</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">\.ex$</span>
-<span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">git://github.com/pre-commit/pre-commit-hooks</span>
-    <span class="l l-Scalar l-Scalar-Plain">sha</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">master</span>
-    <span class="l l-Scalar l-Scalar-Plain">hooks</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">trailing-whitespace</span>
-    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">check-merge-conflict</span>
-    <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">check-yaml</span>
+                <h2>Docker and Ansible (Again)</h2>
+<p>You want to provision docker with ansible, and you want to invoke ansible from the docker host (not from inside the container).  Nice, so <a href="https://www.ansible.com/docker">the number one result</a> searching for ansible/docker just gives you a "request more info" button!  Of course there are other search results but many are outdated, for old ansible, old docker, or both. Did you maybe find five different blog posts where it looks like each writer is just copy/pasting more or less verbatim what is written elsewhere?  </p>
+<p>Generally speaking, despite what superficially looks like a lot of information and a lot of people already doing this, it was very frustrating to actually get this working.  Welcome to the dark side of hype.</p>
+<p>My own instructions will probably be frustratingly out of date eventually or maybe produce mysterious errors for someone else today, but what the hell? They work for me.. at least today.  Let's throw more gas on the fire!</p>
+<h2>Docker+SSH: the horror</h2>
+<p>Yeah, yeah, yeah. <a href="https://jpetazzo.github.io/2014/06/23/docker-ssh-considered-evil/">Docker+ssh considered harmful</a> .  I disagree, at least for a great many use-cases, but can't be bothered to articulate all the arguments. Other people have already <a href="https://github.com/phusion/baseimage-docker#docker_single_process">been there</a> and <a href="https://github.com/jeroenpeeters/docker-ssh">done that</a> more expertly than I can manage anyway and at great length.  </p>
+<p>All I have to add to that conversation is that I want my ansible stuff to JustWork™ whether it's pointed at vagrant, AWS, or docker and I'd prefer to avoid complicating the recipes or having tons of extra dependencies to accomplish this.  Is that so much to ask!?  You can always turn off ssh before deploying stuff.</p>
+<p>The approach covered in this write-up uses <a href="https://github.com/phusion/baseimage-docker">phusion's baseimage-docker</a>.  Phusion's stuff is actually really well documented, but leaves out steps since it already assumes some experience with docker, and it doesn't cover the ansible angle.  The <a href="https://github.com/jeroenpeeters/docker-ssh">docker-ssh</a> approach initially looked very promising but it <a href="https://github.com/jeroenpeeters/docker-ssh/issues/9">doesn't work with scp</a>.</p>
+<h2>Getting started</h2>
+<h3>Dockerfile</h3>
+<p>Create a new folder to work in, and edit <code>Dockerfile</code> to look something like what you see below.  </p>
+<p>Useful links: the <a href="https://github.com/phusion/baseimage-docker/blob/master/Changelog.md">changelog</a> describes other baseimage versions, and <a href="https://github.com/phusion/baseimage-docker#enabling_the_insecure_key_permanently">this section</a> describes insecure-ssh-key related things.</p>
+<div class="highlight"><pre><span></span><span class="c"># See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for</span>
+<span class="c"># a list of version numbers.</span>
+<span class="k">FROM</span><span class="s"> phusion/baseimage:0.9.19</span>
+
+<span class="c"># Use baseimage-docker&#39;s init system.</span>
+<span class="k">CMD</span><span class="s"> [&quot;/sbin/my_init&quot;]</span>
+
+<span class="c"># Ansible will require python on the container</span>
+<span class="k">RUN</span> apt-get update
+<span class="k">RUN</span> apt-get install -y python2.7
+
+<span class="c"># Enable ssh with insecure key permanently</span>
+<span class="k">RUN</span> rm -f /etc/service/sshd/down
+<span class="k">RUN</span> /usr/sbin/enable_insecure_key
+
+<span class="c"># Clean up APT when done.</span>
+<span class="k">RUN</span> apt-get clean <span class="o">&amp;&amp;</span> rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 </pre></div>
 
 
-<p>Afterwards you'll want to actually use this file, so run the commands below:</p>
-<div class="highlight"><pre><span></span>$ pip install pre-commit
-$ pre-commit install
-$ git add .pre-commit-config.yaml
-$ git commit -a -m<span class="s2">&quot;add pre-commit config&quot;</span>
-$ git push
+<h3>Boondoggles</h3>
+<p>From now on, just for the sake of choosing names I bet you don't already have inside your systems, we're going to the word <strong>boondoggle</strong> everywhere that we can.  More specificially <strong>iboondoggle</strong> will be used to refer to an image, and <strong>cboondoggle</strong> to refer to containers derived from the image.</p>
+<h3>Build image</h3>
+<p>Inside the folder with your Dockerfile, construct the base image:</p>
+<div class="highlight"><pre><span></span>$ docker build -t <span class="s2">&quot;iboondoggle&quot;</span> .
 </pre></div>
 
 
-<h2>Extra dependencies</h2>
-<p>Several dependencies find their way into almost all my elixir projects, most of them related to static-analysis and mocking for tests.  Inside <em>mix.exs</em> modify the <code>deps</code> function as follows:</p>
-<div class="highlight"><pre><span></span><span class="kd">defp</span> <span class="n">deps</span> <span class="k">do</span>
-  <span class="p">[</span>
-    <span class="c1">#... your other project dependencies ...</span>
-
-    <span class="c1"># a linter for elixir code</span>
-    <span class="p">{</span><span class="ss">:dogma</span><span class="p">,</span> <span class="s2">&quot;~&gt; 0.1&quot;</span><span class="p">,</span> <span class="ss">only</span><span class="p">:</span> <span class="ss">:dev</span><span class="p">},</span>
-
-    <span class="c1"># NB: 0.1.4 is available on github but not hex currently</span>
-    <span class="p">{</span><span class="ss">:mock</span><span class="p">,</span> <span class="s2">&quot;~&gt; 0.1.4&quot;</span><span class="p">,</span> <span class="ss">git</span><span class="p">:</span> <span class="s2">&quot;https://github.com/jjh42/mock.git&quot;</span><span class="p">},</span>
-
-    <span class="c1"># a static analysis tool</span>
-    <span class="p">{</span><span class="ss">:dialyxir</span><span class="p">,</span> <span class="s2">&quot;~&gt; 0.3&quot;</span><span class="p">,</span> <span class="ss">only</span><span class="p">:</span> <span class="p">[</span><span class="ss">:dev</span><span class="p">]},</span>
-
-    <span class="c1"># coverage tool for tests</span>
-    <span class="c1"># https://github.com/alfert/coverex</span>
-    <span class="p">{</span><span class="ss">:coverex</span><span class="p">,</span> <span class="s2">&quot;~&gt; 1.4.9&quot;</span><span class="p">,</span> <span class="ss">only</span><span class="p">:</span> <span class="ss">:test</span><span class="p">},</span>
-
-    <span class="c1">#... your other project dependencies ...</span>
-  <span class="p">]</span>
+<h3>Instantiate container</h3>
+<p>Instantiate the <strong>iboondoggle</strong> image into the <strong>cboondoggle</strong> container in such a way that it's ready and waiting with the ssh server.</p>
+<div class="highlight"><pre><span></span>$ docker run --name cboondoggle -t -i iboondoggle /sbin/my_init --enable-insecure-key
 </pre></div>
 
 
-<h2>Test coverage</h2>
-<p>Coverage with <a href="https://github.com/alfert/coverex">coverex</a> requires a modification to the <code>project</code> function in <em>mix.exs</em>, as well as the coverex dependency mentioned above.</p>
-<div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">project</span> <span class="k">do</span>
-  <span class="p">[</span>
-    <span class="c1"># ... other project-config ...</span>
-    <span class="ss">test_coverage</span><span class="p">:</span> <span class="p">[</span>
-      <span class="ss">tool</span><span class="p">:</span> <span class="nc">Coverex.Task</span><span class="p">,</span>
-      <span class="ss">console_log</span><span class="p">:</span> <span class="no">true</span><span class="p">],</span>
-    <span class="c1"># ... other project-config ...</span>
- <span class="p">]</span>
-<span class="k">end</span>
+<h2>Get Ready to Connect</h2>
+<p>Download the insecure private key from phusion:</p>
+<div class="highlight"><pre><span></span>$ curl -o insecure_key -fSL https://github.com/phusion/baseimage-docker/raw/master/image/services/sshd/keys/insecure_key
+$ chmod <span class="m">600</span> insecure_key
 </pre></div>
 
 
-<h2>Custom Mix Tasks</h2>
-<p>One ends up making custom mix tasks in any project that's not an escript commandline.  It's also common to that your mix task needs to invoke other mix tasks, so that's demonstrated below.  If your mix task requires the app to be started, why not call do the programmatic equivalent of <code>mix app.start</code>?</p>
-<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Mix.Tasks.Load</span> <span class="k">do</span>
-  <span class="kn">use</span> <span class="nc">Mix.Task</span>
+<h2>Make helpers</h2>
+<h3>Disclaimer</h3>
+<p>At this point, things get very bash'y which I kind of hate.  The trouble is there are a lot of long commands that are long, hard to remember, and hard to type.  These commands can also be based on variables that are potentially changing (like the container IP address).  If you leave something out, you're going to get mysterious errors.  You also might need to execute these commands repeatedly as you test things, so we're going to make some bash-functions to use as helpers.</p>
+<h3>Finding the container IP</h3>
+<p>Make a bash function "refresh_cip" to grab the IP address for the named container.  This address will be written to the <code>`$CIP</code> env-var for use by other functions and will be used to refresh the ansible inventory file.</p>
+<div class="highlight"><pre><span></span><span class="c1"># &quot;CNAME&quot; stores the container name.  IMPORTANT:</span>
+<span class="c1"># the refresh_cip&quot; function MUST have this variable available</span>
+<span class="nv">CNAME</span><span class="o">=</span>cboondoggle
 
-  <span class="kd">def</span> <span class="n">run</span><span class="p">(</span><span class="n">anything</span><span class="p">)</span> <span class="k">do</span>
-    <span class="nc">Mix.Tasks.App.Start</span><span class="o">.</span><span class="n">run</span><span class="p">([])</span>
-    <span class="n">main</span><span class="p">(</span><span class="n">anything</span><span class="p">)</span>
-  <span class="k">end</span>
+<span class="c1"># Bash function definition for &quot;refresh_cip&quot;</span>
+$ refresh_cip<span class="o">(){</span>
+  <span class="nb">export</span> <span class="nv">CIP</span><span class="o">=</span><span class="s2">&quot;`docker inspect -f \&quot;{{.NetworkSettings.IPAddress }}\&quot; </span><span class="nv">$CNAME</span><span class="s2">`&quot;</span><span class="p">;</span>
+  <span class="nb">echo</span> <span class="s2">&quot;docker ansible_host=</span><span class="nv">$CIP</span><span class="s2"> ansible_python_interpreter=/usr/bin/python2.7&quot;</span> &gt; ansible.hosts<span class="p">;</span>
+  <span class="o">}</span>
 
-  <span class="kd">def</span> <span class="n">main</span><span class="p">([])</span> <span class="k">do</span>
-    <span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;No arguments given!&quot;</span><span class="p">)</span>
-  <span class="k">end</span>
+<span class="c1"># Test it / Example usage</span>
+$ refresh_cip
+$ <span class="nb">echo</span> <span class="nv">$CIP</span>
+$ cat ansible.hosts
+</pre></div>
 
-  <span class="kd">def</span> <span class="n">main</span><span class="p">([</span><span class="n">fname</span><span class="p">])</span> <span class="k">do</span>
-    <span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Given a filename </span><span class="si">#{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-  <span class="k">end</span>  
-<span class="k">end</span>
+
+<h3>Connecting to the container</h3>
+<p>Make a bash function "run_ssh" to help with ssh'ing into your container.  Also works to execute individual commands.</p>
+<div class="highlight"><pre><span></span><span class="c1"># creates the &quot;run_ssh&quot; function</span>
+<span class="c1"># Bash function definition for &quot;run_ssh&quot;</span>
+$ run_ssh<span class="o">(){</span>
+  refresh_cip<span class="p">;</span> ssh -o <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no <span class="se">\</span>
+    -o <span class="nv">UserKnownHostsFile</span><span class="o">=</span>/dev/null <span class="se">\</span>
+    -i ./insecure_key <span class="se">\</span>
+    root@<span class="nv">$CIP</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span>
+  <span class="o">}</span>
+
+<span class="c1"># Test it / Example usage:</span>
+<span class="c1"># display &quot;root&quot; or drop to shell</span>
+$ run_ssh whoami
+$ run_ssh
+</pre></div>
+
+
+<h3>Running ansible</h3>
+<p>Create a trivial ansible playbook <code>ping.yml</code>, just to test with:</p>
+<div class="highlight"><pre><span></span><span class="c1"># ping.yml</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">docker</span>
+  <span class="l l-Scalar l-Scalar-Plain">remote_user</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">root</span>
+  <span class="l l-Scalar l-Scalar-Plain">gather_facts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+  <span class="l l-Scalar l-Scalar-Plain">tasks</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">test connection</span>
+      <span class="l l-Scalar l-Scalar-Plain">ping</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">remote_user</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">root</span>
+</pre></div>
+
+
+<p>Make a bash function "run_ansible" to help with running ansible.  This function requires at least one argument (the playbook to use).  You can pass <a href="#">additional ansible arguments</a> if you like as well but ansible will complain if you pass any of the ones already mentioned below.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Bash function definition for &quot;run_ansible&quot;</span>
+$ run_ansible<span class="o">(){</span>
+  refresh_cip<span class="p">;</span>
+  <span class="nb">export</span> <span class="nv">ANSIBLE_HOST_KEY_CHECKING</span><span class="o">=</span>False
+  ansible-playbook -vvv <span class="se">\</span>
+    --user<span class="o">=</span>root --private-key<span class="o">=</span>./insecure_key <span class="se">\</span>
+    --inventory<span class="o">=</span>ansible.hosts <span class="nv">$@</span><span class="p">;</span>
+  <span class="o">}</span>
+
+<span class="c1"># Test it / Example usage</span>
+run_ansible ./ping.yml
+</pre></div>
+
+
+<h2>More complicated playbooks</h2>
+<p>Phusion's baseimage is ubuntu-based, so using ansible's apt module is appropriate for installing system-level packages.</p>
+<div class="highlight"><pre><span></span><span class="c1"># packages.yml</span>
+<span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">docker</span>
+  <span class="l l-Scalar l-Scalar-Plain">gather_facts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
+  <span class="l l-Scalar l-Scalar-Plain">tasks</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Install system package</span>
+      <span class="l l-Scalar l-Scalar-Plain">apt</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">pkg=tree state=installed</span>
 </pre></div>
                 <script>
                   $(document).ready(
@@ -376,7 +417,7 @@ $ git push
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">Loading Wikipedia into Neo4j with Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
     </ul>
 </section>

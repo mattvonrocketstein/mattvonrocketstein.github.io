@@ -84,6 +84,9 @@ heredoc            </a>
                             <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
                         </li>
                         <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">Docker</a>
+                        </li>
+                        <li >
                             <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
                         </li>
 
@@ -165,7 +168,7 @@ the true guardians of my doomwagons.
 
               <a href="https://mattvonrocketstein.github.io/heredoc/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">
                             ansible
                         </a>
@@ -175,9 +178,14 @@ the true guardians of my doomwagons.
                             boilerplate
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">
                             devops
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">
+                            docker
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -398,7 +406,7 @@ $ git push
 
 
 <h3>Pypi releases</h3>
-<p>I've already written elsewhere <a href="dry-versioning-python.html">about a version-bump command</a> that uses fabric.  If you want a do-everything release helper consider using the <a href="http://zestreleaser.readthedocs.io/en/latest/overview.html">zest.releaser</a>.  I don't use zestreleaser much because project-to-project releases are likely to be a ticklish subject with idiosyncratic pre/post actions and conditions.  My approach is limited quite limited in that it's designed for git and github, but for easy customization later, I nevertheless prefer to start with a fabric task.</p>
+<p>I've already written elsewhere <a href="dry-versioning-python.html">about a version-bump command</a> that uses fabric.  If you want a do-everything release helper consider using the <a href="http://zestreleaser.readthedocs.io/en/latest/overview.html">zest.releaser</a>.  I don't use zestreleaser much because project-to-project releases are likely to be a ticklish subject with idiosyncratic pre/post actions and conditions.  My approach below quite limited in that it's designed for git and github, but for easy customization later, I nevertheless prefer to start with a fabric task.</p>
 <h2>Footnotes</h2><ol class="simple-footnotes"><li id="sf-python-release-automation-1">It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb..  <a href="#sf-python-release-automation-1-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-2">Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible. <a href="#sf-python-release-automation-2-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-3">Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile.) <a href="#sf-python-release-automation-3-back" class="simple-footnote-back">↩</a></li></ol>
                 <script>
                   $(document).ready(
