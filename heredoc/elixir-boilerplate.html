@@ -27,8 +27,6 @@
             <meta property="article:tag" content="boilerplate" />
             <meta property="article:author" content="mvr" />
 
-
-    <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/heredoc.css" />
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
     <!-- Bootstrap -->
         <link rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/bootstrap.min.css" type="text/css"/>
@@ -40,6 +38,7 @@
 
 
 
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/js.cookie.js"></script>
     <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.min.js"></script>
     <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery-ui.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -60,9 +59,6 @@ heredoc            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/pelican.html">Pelican</a>
-                        </li>
                         <li >
                             <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">Fabric</a>
                         </li>
@@ -107,40 +103,46 @@ heredoc            </a>
     
         <p>
             <center>
-              <a id=stop_walking_man
-                href="javascript:toggle_walking_man()">
-              <img id=walking_man src="https://mattvonrocketstein.github.io/heredoc/img/walking_man.gif">
-                <span style="position:relative;bottom:15px;">
-                  <small><small>
-                    <small><small>
-                      click to stop animation
-                    </small></small>
-                  </small></small>
+              <a id=walkingman_toggle>
+                <span id=walkingman_toggle_label style="font-size:7px;position:relative;bottom:15px;">
+                      stop animation
                 </span>
+              <img id=walking_man>
               </a>
             </center>
         </p>
         <script>
-          function toggle_walking_man(){
-            var walking = 'https://mattvonrocketstein.github.io/heredoc/img/walking_man_still.png';
-            var still = 'https://mattvonrocketstein.github.io/heredoc/img/walking_man.gif';
-            var currently=$('#walking_man').attr('src');
-            if (currently==walking){
-              $('#walking_man').attr('src',still)
-            }
-            else {
-              $('#walking_man').attr('src', walking)
-            }
+          var still = 'https://mattvonrocketstein.github.io/heredoc/img/walking_man_still.png';
+          var walking = 'https://mattvonrocketstein.github.io/heredoc/img/walking_man.gif';
+          function walkingman_on(){
+            $('#walking_man').attr('src', walking);
+            $('#walkingman_toggle_label').html('stop animation');
+            $("#walkingman_toggle").attr(
+                'href', 'javascript:walkingman_off()');
+            Cookies.set('walkingman_animate', 1)
           }
-
+          function walkingman_load(){
+            var animate = Cookies.get("walkingman_animate")
+            if(!animate||animate=="1"){
+                walkingman_on()
+            }
+            else { walkingman_off();}
+          }
+          function walkingman_off(){
+            $('#walking_man').attr('src', still);
+            $('#walkingman_toggle_label').html('start animation');
+            $("#walkingman_toggle").attr(
+                'href', 'javascript:walkingman_on()');
+            Cookies.set('walkingman_animate', 0)
+          }
+          $(document).ready(function(){
+            walkingman_load();
+            });
         </script>
 
     <p>
-        <strong>About Me</strong><br/>
-        
-Raised by wild animals in ancient times, sandwiches are
-the true guardians of my doomwagons.
-
+        <strong>Heredoc</strong><br/>
+        is a file literal or input stream literal: it is a section of a source code file that is treated as if it were a separate file.  It also happens to be the name of this technical blog..
     </p>
 </div><h4>
   <i class="fa fa-home fa-lg"></i>
@@ -171,7 +173,7 @@ the true guardians of my doomwagons.
                             ansible
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
                         </a>
@@ -201,11 +203,6 @@ the true guardians of my doomwagons.
                             graphdb
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
-                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/pelican.html">
-                            pelican
-                        </a>
-                    </li>
                     <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">
                             python
@@ -213,7 +210,11 @@ the true guardians of my doomwagons.
                     </li>
                 </ul>
 
-      <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+      <h4><i class="fa fa-github fa-lg"></i>
+        <span class="icon-label"><a href="https://github.com/mattvonrocketstein">
+          GitHub Repos
+        </a></span>
+      </h4>
         <div id="gh_repos">
             <p class="list-group-item">Status updating...</p>
         </div>
@@ -341,7 +342,7 @@ $ git push
 
 
 <h2>Custom Mix Tasks</h2>
-<p>One ends up making custom mix tasks in any project that's not an escript commandline.  It's also common to that your mix task needs to invoke other mix tasks, so that's demonstrated below.  If your mix task requires the app to be started, why not call do the programmatic equivalent of <code>mix app.start</code>?</p>
+<p>One ends up making custom mix tasks in any project that's not an escript commandline.  It's also common to that your mix task needs to invoke other mix tasks, so that's demonstrated below.  If your mix task requires the app to be started, why not do the programmatic equivalent of <code>mix app.start</code>?</p>
 <div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Mix.Tasks.Load</span> <span class="k">do</span>
   <span class="kn">use</span> <span class="nc">Mix.Task</span>
 
@@ -376,6 +377,7 @@ $ git push
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">Pelican boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">Loading Wikipedia into Neo4j with Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
     </ul>
