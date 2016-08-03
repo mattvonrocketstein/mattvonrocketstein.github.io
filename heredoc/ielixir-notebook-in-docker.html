@@ -299,87 +299,68 @@ heredoc            </a>
 
 <p><a href="https://gist.githubusercontent.com/mattvonrocketstein/4b46c138f2787a8674aedf0feb3f4879/raw/">View this gist on github</a></p>
 <div class="highlight"><pre><span></span><span class="c1"># playbook.yml</span>
+<span class="c1"># installs ielixir/jupyter on a stand-alone docker.</span>
+<span class="c1"># see: http://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html</span>
 <span class="o">-</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">docker</span>
   <span class="n">become</span><span class="p">:</span> <span class="n">yes</span>
   <span class="n">become_method</span><span class="p">:</span> <span class="n">sudo</span>
   <span class="n">gather_facts</span><span class="p">:</span> <span class="bp">False</span>
-
+  <span class="nb">vars</span><span class="p">:</span>
+     <span class="n">erls_url</span><span class="p">:</span> <span class="s2">"https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb"</span>
+     <span class="n">ielixir_repo</span><span class="p">:</span> <span class="s2">"https://github.com/pprzetacznik/IElixir.git"</span>
+     <span class="n">ielixir_hash</span><span class="p">:</span> <span class="s2">"fb9dc5f0ce"</span>
+     <span class="n">venv_dir</span><span class="p">:</span> <span class="s2">"/root/venv"</span>
   <span class="n">tasks</span><span class="p">:</span>
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Check</span> <span class="k">if</span> <span class="n">erlang_solutions</span> <span class="ow">is</span> <span class="n">installed</span>
-      <span class="n">command</span><span class="p">:</span> <span class="n">dpkg</span><span class="o">-</span><span class="n">query</span> <span class="o">-</span><span class="n">W</span> <span class="n">erlang_solutions</span>
-      <span class="n">register</span><span class="p">:</span> <span class="n">erlang_solutions_check_deb</span>
-      <span class="n">failed_when</span><span class="p">:</span> <span class="n">erlang_solutions_check_deb</span><span class="o">.</span><span class="n">rc</span> <span class="o">&gt;</span> <span class="mi">1</span>
-      <span class="n">changed_when</span><span class="p">:</span> <span class="n">erlang_solutions_check_deb</span><span class="o">.</span><span class="n">rc</span> <span class="o">==</span> <span class="mi">1</span>
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Download</span> <span class="n">erlang_solutions</span>
       <span class="n">get_url</span><span class="p">:</span>
-        <span class="n">url</span><span class="o">=</span><span class="s2">"https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb"</span>
+        <span class="n">url</span><span class="o">=</span><span class="s2">"{{erls_url}}"</span>
         <span class="n">dest</span><span class="o">=</span><span class="s2">"/root"</span>
-      <span class="n">when</span><span class="p">:</span> <span class="n">erlang_solutions_check_deb</span><span class="o">.</span><span class="n">rc</span> <span class="o">==</span> <span class="mi">1</span>
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">erlang_solutions</span>
-      <span class="n">apt</span><span class="p">:</span> <span class="n">deb</span><span class="o">=</span><span class="s2">"/root/erlang-solutions_1.0_all.deb"</span>
-      <span class="n">when</span><span class="p">:</span> <span class="n">erlang_solutions_check_deb</span><span class="o">.</span><span class="n">rc</span> <span class="o">==</span> <span class="mi">1</span>
-
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">install</span> <span class="n">erlang</span><span class="o">-</span><span class="n">solutions_1</span>
+      <span class="n">command</span><span class="p">:</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">erlang</span><span class="o">-</span><span class="n">solutions_1</span><span class="o">.</span><span class="mi">0</span><span class="n">_all</span><span class="o">.</span><span class="n">deb</span>
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Updating</span> <span class="n">APT</span> <span class="n">cache</span>
-      <span class="n">apt</span><span class="p">:</span> <span class="n">update_cache</span><span class="o">=</span><span class="n">yes</span> <span class="n">cache_valid_time</span><span class="o">=</span><span class="mi">3600</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">esl</span><span class="o">-</span><span class="n">erlang</span>
-      <span class="n">apt</span><span class="p">:</span> <span class="n">pkg</span><span class="o">=</span><span class="n">esl</span><span class="o">-</span><span class="n">erlang</span> <span class="n">state</span><span class="o">=</span><span class="n">installed</span> <span class="n">update_cache</span><span class="o">=</span><span class="n">no</span>
-      <span class="n">register</span><span class="p">:</span> <span class="n">output</span>
-    <span class="o">-</span> <span class="n">debug</span><span class="p">:</span> <span class="n">var</span><span class="o">=</span><span class="n">output</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">elixir</span>
-      <span class="n">apt</span><span class="p">:</span> <span class="n">pkg</span><span class="o">=</span><span class="n">elixir</span> <span class="n">state</span><span class="o">=</span><span class="n">installed</span> <span class="n">update_cache</span><span class="o">=</span><span class="n">no</span>
-      <span class="n">register</span><span class="p">:</span> <span class="n">output</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">git</span>
-      <span class="n">apt</span><span class="p">:</span> <span class="n">pkg</span><span class="o">=</span><span class="n">git</span> <span class="n">state</span><span class="o">=</span><span class="n">installed</span> <span class="n">update_cache</span><span class="o">=</span><span class="n">no</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span>
-      <span class="n">apt</span><span class="p">:</span> <span class="n">pkg</span><span class="o">=</span><span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">state</span><span class="o">=</span><span class="n">installed</span> <span class="n">update_cache</span><span class="o">=</span><span class="n">no</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">virtualenv</span>
-      <span class="n">apt</span><span class="p">:</span> <span class="n">pkg</span><span class="o">=</span><span class="n">python</span><span class="o">-</span><span class="n">virtualenv</span> <span class="n">state</span><span class="o">=</span><span class="n">installed</span> <span class="n">update_cache</span><span class="o">=</span><span class="n">no</span>
-      <span class="n">register</span><span class="p">:</span> <span class="n">output</span>
-    <span class="o">-</span> <span class="n">debug</span><span class="p">:</span> <span class="n">var</span><span class="o">=</span><span class="n">output</span>
-
+      <span class="n">apt</span><span class="p">:</span> <span class="n">update_cache</span><span class="o">=</span><span class="n">yes</span> <span class="n">force</span><span class="o">=</span><span class="n">yes</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Installing</span> <span class="n">erlang</span><span class="p">,</span> <span class="n">elixir</span><span class="p">,</span> <span class="ow">and</span> <span class="n">python</span> <span class="n">deps</span>
+      <span class="n">apt</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">"{{item}}"</span>
+      <span class="n">with_items</span><span class="p">:</span>
+        <span class="o">-</span> <span class="n">esl</span><span class="o">-</span><span class="n">erlang</span>
+        <span class="o">-</span> <span class="n">elixir</span>
+        <span class="o">-</span> <span class="n">git</span>
+        <span class="o">-</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span>
+        <span class="o">-</span> <span class="n">python</span><span class="o">-</span><span class="n">virtualenv</span>
     <span class="c1"># meddle with locales because of the error here:</span>
     <span class="c1"># warning: the VM is running with native name encoding</span>
     <span class="c1"># of latin1 which may cause Elixir to malfunction as it</span>
-    <span class="c1"># expects utf8. Please ensure your locale is set to</span>
-    <span class="c1"># UTF-8 (which can be verified by running "locale" in</span>
-    <span class="c1"># your shell)</span>
-    <span class="o">-</span> <span class="n">locale_gen</span><span class="p">:</span> <span class="n">name</span><span class="o">=</span><span class="n">en_US</span><span class="o">.</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="n">state</span><span class="o">=</span><span class="n">present</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">requirements</span>
+    <span class="c1"># expects utf8.</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Fix</span> <span class="n">locales</span>
+      <span class="n">locale_gen</span><span class="p">:</span> <span class="n">name</span><span class="o">=</span><span class="n">en_US</span><span class="o">.</span><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="n">state</span><span class="o">=</span><span class="n">present</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">notebook</span>
       <span class="n">pip</span><span class="p">:</span>
-        <span class="n">name</span><span class="p">:</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">console</span> <span class="n">notebook</span>
-        <span class="n">virtualenv</span><span class="p">:</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">venv</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">notebook</span><span class="o">==</span><span class="mf">4.2</span><span class="o">.</span><span class="mi">1</span>
+        <span class="n">virtualenv</span><span class="p">:</span> <span class="s2">"{{venv_dir}}"</span>
         <span class="n">virtualenv_python</span><span class="p">:</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span>
-
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">jupyter</span>
+      <span class="n">pip</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">console</span><span class="o">==</span><span class="mf">5.0</span>
+        <span class="n">virtualenv</span><span class="p">:</span> <span class="s2">"{{venv_dir}}"</span>
+        <span class="n">virtualenv_python</span><span class="p">:</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span>
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Clone</span> <span class="n">IElixir</span>
       <span class="n">git</span><span class="p">:</span>
-        <span class="n">repo</span><span class="p">:</span> <span class="s2">"https://github.com/pprzetacznik/IElixir.git"</span>
+        <span class="n">repo</span><span class="p">:</span> <span class="s2">"{{ielixir_repo}}"</span>
         <span class="n">dest</span><span class="p">:</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">IElixir</span>
         <span class="n">force</span><span class="p">:</span> <span class="n">yes</span>
         <span class="n">update</span><span class="p">:</span> <span class="n">no</span>
-        <span class="n">version</span><span class="p">:</span> <span class="n">fb9dc5f0ce</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Mix</span> <span class="n">local</span><span class="o">.</span><span class="n">hex</span>
-      <span class="n">command</span><span class="p">:</span> <span class="n">mix</span> <span class="n">local</span><span class="o">.</span><span class="n">hex</span> <span class="o">--</span><span class="n">force</span>
+        <span class="n">version</span><span class="p">:</span> <span class="s2">"{{ielixir_hash}}"</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Run</span> <span class="n">mix</span> <span class="n">tasks</span>
+      <span class="n">command</span><span class="p">:</span> <span class="s2">"{{item}}"</span>
       <span class="n">args</span><span class="p">:</span>
         <span class="n">chdir</span><span class="p">:</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">IElixir</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Mix</span> <span class="n">local</span><span class="o">.</span><span class="n">rebar</span>
-      <span class="n">command</span><span class="p">:</span> <span class="n">mix</span> <span class="n">local</span><span class="o">.</span><span class="n">rebar</span> <span class="o">--</span><span class="n">force</span>
-      <span class="n">args</span><span class="p">:</span>
-        <span class="n">chdir</span><span class="p">:</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">IElixir</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Mix</span> <span class="n">deps</span><span class="o">.</span><span class="n">get</span>
-      <span class="n">command</span><span class="p">:</span> <span class="n">mix</span> <span class="n">deps</span><span class="o">.</span><span class="n">get</span>
-      <span class="n">args</span><span class="p">:</span>
-        <span class="n">chdir</span><span class="p">:</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">IElixir</span>
-
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">IElixir</span>
+      <span class="n">with_items</span><span class="p">:</span>
+        <span class="o">-</span> <span class="n">mix</span> <span class="n">local</span><span class="o">.</span><span class="n">hex</span> <span class="o">--</span><span class="n">force</span>
+        <span class="o">-</span> <span class="n">mix</span> <span class="n">local</span><span class="o">.</span><span class="n">rebar</span> <span class="o">--</span><span class="n">force</span>
+        <span class="o">-</span> <span class="n">mix</span> <span class="n">deps</span><span class="o">.</span><span class="n">get</span>
+        <span class="o">-</span> <span class="n">mix</span> <span class="nb">compile</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">IElixir</span> <span class="n">kernel</span>
       <span class="n">command</span><span class="p">:</span> <span class="o">./</span><span class="n">install_script</span><span class="o">.</span><span class="n">sh</span>
       <span class="n">args</span><span class="p">:</span>
         <span class="n">chdir</span><span class="p">:</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">IElixir</span>
@@ -468,9 +449,9 @@ $ docker run <span class="se">\</span>
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">Provision Docker with Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">Pelican boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">Loading Wikipedia into Neo4j with Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">Pelican boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
     </ul>
