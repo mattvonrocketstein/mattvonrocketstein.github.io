@@ -14,13 +14,13 @@
 
         <meta name="author" content="mvr" />
         <meta name="keywords" content="elixir,boilerplate" />
-        <meta name="description" content="Boilerplate for elixir: precommit hooks, testing, and more" />
+        <meta name="description" content="Boilerplate for elixir: precommit hooks, testing, custom mix tasks" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Elixir boilerplate"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html"/>
-        <meta property="og:description" content="Boilerplate for elixir: precommit hooks, testing, and more"/>
+        <meta property="og:description" content="Boilerplate for elixir: precommit hooks, testing, custom mix tasks"/>
         <meta property="article:published_time" content="2016-07-20" />
             <meta property="article:section" content="misc" />
             <meta property="article:tag" content="elixir" />
@@ -148,6 +148,9 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-ambient-calculus.html">
+                            Ambient Calculus in Elixir</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">
                             IElixir Notebook in Docker</li>
                         </a>
@@ -160,9 +163,6 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
                             The missing "ansible-role" command</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">
-                            DRY versioning for Python packages</li>
-                        </a>
               </ul>
 
 
@@ -173,7 +173,7 @@ heredoc            </a>
                             ansible
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
                         </a>
@@ -252,7 +252,7 @@ heredoc            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2016-07-20T20:20:00-04:00"> Wed 20 July 2016</time>
+        <i class="fa fa-calendar"></i><time datetime="2016-07-20T00:00:00-04:00"> Wed 20 July 2016</time>
     </span>
 
 
@@ -268,8 +268,7 @@ heredoc            </a>
                     </div>
                 </div>
 
-                <p>This page is</p>
-<h2>Commit hooks</h2>
+                <h2>Commit hooks</h2>
 <p>Regardless of programming language, I've come to believe that linting should be done strictly, constantly, and consistently across all contributing project members.  Thus, I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
 <p>Another benefit of the hooks approach is that it works better with code-bases that are large and under construction, because hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once.</p>
 <p>I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple; just make a <code>.pre-commit-config.yaml</code> file in your source root.  For elixir code my hooks normally look something like what you see below (to see my python hooks <a href="#">go here</a>).  </p>
@@ -377,10 +376,10 @@ $ git push
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/pelican-boilerplate.html">Pelican boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">Loading Wikipedia into Neo4j with Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-ambient-calculus.html">Ambient Calculus in Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
     </ul>
 </section>
             </div>
