@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>heredoc - Python method semantics</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
+
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">
+
+        <meta name="author" content="mvr" />
+        <meta name="keywords" content="python" />
+        <meta name="description" content="Schizophrenic methods: an Experiment in Python method semantics" />
+
+        <meta property="og:site_name" content="heredoc" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python method semantics"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html"/>
+        <meta property="og:description" content="Schizophrenic methods: an Experiment in Python method semantics"/>
+        <meta property="article:published_time" content="2016-07-20" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:author" content="mvr" />
+
+    <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://mattvonrocketstein.github.io/heredoc/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://mattvonrocketstein.github.io/heredoc/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/style.css" type="text/css"/>
+
+
+
+
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/js.cookie.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.min.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery-ui.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/bootstrap.min.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.tocify.min.js"></script>
+
+    <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/respond.min.js"></script>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+        <div class="navbar-header">
+            <a href="https://mattvonrocketstein.github.io/heredoc/" class="navbar-brand">
+heredoc            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">Boilerplate</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">Python</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/vagrant.html">Vagrant</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">Devops</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">Ansible</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">Docker</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">Fabric</a>
+                        </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2" id="sidebar">
+            <div style="">
+              <aside>
+<div id="aboutme">
+
+    
+        <p>
+            <center>
+              <a id=walkingman_toggle>
+                <span id=walkingman_toggle_label style="font-size:7px;position:relative;bottom:15px;">
+                      stop animation
+                </span><br/>
+              <img id=walking_man>
+              </a>
+            </center>
+        </p>
+        <script>
+          var still = 'https://mattvonrocketstein.github.io/heredoc/img/walking_man_still.png';
+          var walking = 'https://mattvonrocketstein.github.io/heredoc/img/walking_man.gif';
+          function walkingman_on(){
+            $('#walking_man').attr('src', walking);
+            $('#walkingman_toggle_label').html('stop animation');
+            $("#walkingman_toggle").attr(
+                'href', 'javascript:walkingman_off()');
+            Cookies.set('walkingman_animate', 1)
+          }
+          function walkingman_load(){
+            var animate = Cookies.get("walkingman_animate")
+            if(!animate||animate=="1"){
+                walkingman_on()
+            }
+            else { walkingman_off();}
+          }
+          function walkingman_off(){
+            $('#walking_man').attr('src', still);
+            $('#walkingman_toggle_label').html('start animation');
+            $("#walkingman_toggle").attr(
+                'href', 'javascript:walkingman_on()');
+            Cookies.set('walkingman_animate', 0)
+          }
+          $(document).ready(function(){
+            walkingman_load();
+            });
+        </script>
+
+    <p>
+        <strong>Heredoc</strong><br/>
+        is a file literal or input stream literal: it is a section of a source code file that is treated as if it were a separate file.  It also happens to be the name of this technical blog..
+    </p>
+</div><h4>
+  <i class="fa fa-home fa-lg"></i>
+  <span class="icon-label">Recent</span></h4>
+            <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
+                            Loading Wikimedia data into Neo4j with Elixir</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">
+                            Setting up neo4j with vagrant and ansible</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">
+                            IElixir Notebook in Docker</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
+                            Python release automation</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
+                            The missing "ansible-role" command</li>
+                        </a>
+              </ul>
+
+
+              <a href="https://mattvonrocketstein.github.io/heredoc/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group list-inline tagcloud" id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">
+                            ansible
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
+                            boilerplate
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">
+                            devops
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">
+                            docker
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
+                            elixir
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
+                            fabric
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
+                            graphdb
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">
+                            python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/vagrant.html">
+                            vagrant
+                        </a>
+                    </li>
+                </ul>
+
+      <h4><i class="fa fa-github fa-lg"></i>
+        <span class="icon-label"><a href="https://github.com/mattvonrocketstein">
+          GitHub Repos
+        </a></span>
+      </h4>
+        <div id="gh_repos">
+            <p class="list-group-item">Status updating...</p>
+        </div>
+      <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="li-choice">
+            <a href="http://data.holdings" target="_blank">
+                data.holdings
+            </a>
+        </li>
+      </ul>
+            </aside>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <ol class="breadcrumb">
+                <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/python.html" title="Python">Python</a></li>
+                <li class="active">Python method semantics</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html"
+                       rel="bookmark"
+                       title="Permalink to Python method semantics">
+                        Python method semantics
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-07-20T20:20:00-04:00"> Wed 20 July 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
+    
+</footer><!-- /.post-info -->
+                    </div>
+                </div>
+
+                <h2>Intro</h2>
+<p>This post describes a fun little piece of code I wrote a few years back.  It's presented here just as a <strong>curiosity</strong> not as a good idea for production code, and more than anything else is just an experiment to demonstrate the flexibility of python as a language.  So let's play with function-call semantics.  This writeup is just some background and motivation, if you're more of a "show me the code!" kind of person, just check out the <a href="https://gist.github.com/mattvonrocketstein/76d6b96d536d2c8ef991">gist here</a>.</p>
+<h3>The Idea</h3>
+<p>We use "self" all the time in object-oriented python code all this time as an object reference, similar to "this" in Java or Javascript.  It's important to note though that in Python, "self" is only a convention and not a keyword.  When we use "self", the reference is always unambiguous and simple.. we just mean the current instance.  But they say that "art imitates life", so what if object-oriented was inspired by how people work?  </p>
+<p>Persons always have one <strong>self</strong> but potentially many <strong>roles</strong>.  For instance, suppose someone asks you a question. It's possible you will answer differently depending on whether you are answering in your capacity as that person's colleague/boss/friend/lover/enemy/etc.  Suppose you want to implement something like a  <a href="http://www.merriam-webster.com/dictionary/frenemy">frenemy</a> class.  Anyway, the code below contains a (contrived) example. <sup id="sf-python-multimethods-1-back"><a href="#sf-python-multimethods-1" class="simple-footnote" title=" See also: http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html ">1</a></sup>.  Another way of looking at the concept being demonstrated: here there is not one self but many, and what a thing <em>does</em> depends on <em>what</em> you call it, not <em>how</em> you call it.  </p>
+<h2>The Code</h2>
+<p><a href="https://gist.githubusercontent.com/mattvonrocketstein/76d6b96d536d2c8ef991/raw/">View this gist on github</a></p>
+<div class="highlight"><pre><span></span><span class="sd">"""</span>
+<span class="sd">   A curiosity for your programming zoo inspired by monty python,</span>
+<span class="sd">   famous philosophers, and GVR's multimethods demo.</span>
+
+<span class="sd">   This code demonstrates metaprogramming as well as runtime reflection</span>
+<span class="sd">   and introspection.  It also shows python's flexibility by bending language</span>
+<span class="sd">   semantics and demonstrates that python's "self" is convention (not keyword).</span>
+<span class="sd">"""</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">new</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">registry</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">class</span> <span class="nc">proxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">""" master registry for methodnames,</span>
+<span class="sd">        decorators, and the proxy scope</span>
+<span class="sd">        dummy object</span>
+<span class="sd">    """</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span> <span class="nf">personalityDependant</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">""" have to save func in the registry so each duplicate</span>
+<span class="sd">        function name doesnt just overwrite the previous one</span>
+
+<span class="sd">        NOTE: "which_self" is the name of the variable used where</span>
+<span class="sd">        "self" is usually found in instancemethod definitions</span>
+<span class="sd">    """</span>
+    <span class="n">which_self</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">func</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">which_self</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">registry</span><span class="p">:</span>
+        <span class="n">registry</span><span class="p">[</span><span class="n">which_self</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">registry</span><span class="p">[</span><span class="n">which_self</span><span class="p">][</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span>
+    <span class="k">return</span> <span class="n">func</span>
+
+
+<span class="k">def</span> <span class="nf">schizophrenic</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">""" tag a function as schizophrenic so the</span>
+<span class="sd">        metaclass knows when to effect the scope</span>
+<span class="sd">        mangling.</span>
+<span class="sd">    """</span>
+    <span class="n">func</span><span class="o">.</span><span class="n">schizophrenic</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="n">func</span>
+
+
+<span class="k">class</span> <span class="nc">schizotypal</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="sd">""" metaclass for all schizoids """</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">mcls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">clsdict</span><span class="p">):</span>
+        <span class="n">err1</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'expected a schizotypal object would '</span>
+                <span class="s1">'have a list of personalities.'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">'personalities'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">clsdict</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">err1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">personalities</span> <span class="o">=</span> <span class="n">clsdict</span><span class="p">[</span><span class="s1">'personalities'</span><span class="p">]</span>
+            <span class="n">replacement</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">pName</span> <span class="ow">in</span> <span class="n">personalities</span><span class="p">:</span>
+                <span class="n">replacement</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span> <span class="o">=</span> <span class="n">registry</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span>
+            <span class="n">personalities</span> <span class="o">=</span> <span class="n">replacement</span>
+            <span class="n">clsdict</span><span class="p">[</span><span class="s1">'personalities'</span><span class="p">]</span> <span class="o">=</span> <span class="n">personalities</span>
+            <span class="n">klassobj</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">mcls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">clsdict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">klassobj</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+        <span class="n">inst</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">__call__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">inst</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+            <span class="n">test</span> <span class="o">=</span> <span class="n">var</span> <span class="o">!=</span> <span class="s1">'__metaclass__'</span> <span class="ow">and</span> <span class="n">var</span> <span class="o">!=</span> <span class="s1">'__class__'</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="s1">'schizophrenic'</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">pName</span> <span class="ow">in</span> <span class="n">inst</span><span class="o">.</span><span class="n">personalities</span><span class="p">:</span>
+                    <span class="n">val</span><span class="o">.</span><span class="n">func_globals</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span> <span class="o">=</span> <span class="n">inst</span><span class="o">.</span><span class="n">_as</span><span class="p">(</span><span class="n">pName</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">inst</span>
+
+
+<span class="k">class</span> <span class="nc">schizoid</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">""" base schizoid object (inherit from this) """</span>
+
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">schizotypal</span>
+    <span class="n">personalities</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_as</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pName</span><span class="p">):</span>
+        <span class="sd">""" this method is used to obtain a representation</span>
+<span class="sd">             of self with respect to a specific personality</span>
+<span class="sd">        """</span>
+        <span class="n">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="s1">'illegal personality for '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="n">pName</span>
+        <span class="k">assert</span> <span class="n">pName</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">personalities</span><span class="p">,</span> <span class="n">err</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">personalities</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">proxy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">funcname</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="n">funcname</span><span class="p">]</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">instancemethod</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">funcname</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">P</span>
+
+<span class="k">class</span> <span class="nc">myschizoid</span><span class="p">(</span><span class="n">schizoid</span><span class="p">):</span>
+    <span class="sd">""" a simple demo.</span>
+
+<span class="sd">        NB: without the decorators, each status() definition below would simply</span>
+<span class="sd">        overwrite the previous one.  notice also under normal python semantics</span>
+<span class="sd">        how theres no reason the philosopher names in the run() method should</span>
+<span class="sd">        be in scope.</span>
+<span class="sd">    """</span>
+    <span class="n">personalities</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'kant'</span><span class="p">,</span> <span class="s1">'heidegger'</span><span class="p">,</span> <span class="s1">'wittgenstein'</span><span class="p">,</span> <span class="s1">'schlegel'</span><span class="p">]</span>
+
+    <span class="nd">@personalityDependant</span>
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">kant</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"a real pissant"</span>
+
+    <span class="nd">@personalityDependant</span>
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">heidegger</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"a boozy beggar"</span>
+
+    <span class="nd">@personalityDependant</span>
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">wittgenstein</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"beery swine"</span>
+
+    <span class="nd">@personalityDependant</span>
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">schlegel</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"schloshed"</span>
+
+    <span class="nd">@schizophrenic</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span>
+        <span class="k">print</span> <span class="s1">'kant:</span><span class="se">\t\t\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">kant</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s1">'heidegger:</span><span class="se">\t\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">heidegger</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s1">'wittgenstein:</span><span class="se">\t\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">wittgenstein</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s1">'schlegel:</span><span class="se">\t\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">schlegel</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+        <span class="k">print</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">myschizoid</span><span class="p">()</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+
+<h2>Footnotes</h2><ol class="simple-footnotes"><li id="sf-python-multimethods-1"> See also: <a href="http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html">http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html</a>  <a href="#sf-python-multimethods-1-back" class="simple-footnote-back">↩</a></li></ol>
+                <script>
+                  $(document).ready(
+                    function(){
+                      $("#toc").tocify(
+                        {
+                          context: '.entry-content',
+                          selectors: "h2,h3,h4",
+                          showAndHide: true,
+                          showAndHideOnScroll: true,
+                        }
+                      )
+                    }
+                  );
+                </script>
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
+    </ul>
+</section>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-2" >
+          <section id=toc class="well well-sm">
+            </section>
+        </div>
+      </div>
+
+    </div>
+</div>
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 mvr
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+    <!-- GitHub JS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (!window.jXHR) {
+                var jxhr = document.createElement('script');
+                jxhr.type = 'text/javascript';
+                jxhr.src = 'https://mattvonrocketstein.github.io/heredoc/theme/js/jXHR.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(jxhr, s);
+            }
+
+            github.showRepos({
+                user: 'mattvonrocketstein',
+                count: 5,
+                skip_forks: false,
+                target: '#gh_repos'
+            });
+        });
+    </script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/github.js" type="text/javascript"></script>
+    <!-- End GitHub JS Code -->
+
+<script>
+setTimeout(function(){
+  if (""==$('#toc').html().trim()){
+    $("#toc").hide()
+  }}, 1500)
+  </script>
+</body>
+</html>

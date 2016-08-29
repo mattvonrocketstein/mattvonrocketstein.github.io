@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>heredoc - Loading Wikimedia data into Neo4j with Elixir</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
+
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
+
+        <meta name="author" content="mvr" />
+        <meta name="keywords" content="elixir,graphdb" />
+        <meta name="description" content="Loading wikipedia into neo4j with Elixir" />
+
+        <meta property="og:site_name" content="heredoc" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Loading Wikimedia data into Neo4j with Elixir"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html"/>
+        <meta property="og:description" content="Loading wikipedia into neo4j with Elixir"/>
+        <meta property="article:published_time" content="2016-08-31" />
+            <meta property="article:section" content="Elixir" />
+            <meta property="article:tag" content="elixir" />
+            <meta property="article:tag" content="graphdb" />
+            <meta property="article:author" content="mvr" />
+
+    <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://mattvonrocketstein.github.io/heredoc/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://mattvonrocketstein.github.io/heredoc/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/style.css" type="text/css"/>
+
+
+
+
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/js.cookie.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.min.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery-ui.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/bootstrap.min.js"></script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/jquery.tocify.min.js"></script>
+
+    <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/respond.min.js"></script>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+        <div class="navbar-header">
+            <a href="https://mattvonrocketstein.github.io/heredoc/" class="navbar-brand">
+heredoc            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">Boilerplate</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">Python</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/vagrant.html">Vagrant</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">Devops</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">Ansible</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">Docker</a>
+                        </li>
+                        <li >
+                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">Fabric</a>
+                        </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2" id="sidebar">
+            <div style="">
+              <aside>
+<div id="aboutme">
+
+    
+        <p>
+            <center>
+              <a id=walkingman_toggle>
+                <span id=walkingman_toggle_label style="font-size:7px;position:relative;bottom:15px;">
+                      stop animation
+                </span><br/>
+              <img id=walking_man>
+              </a>
+            </center>
+        </p>
+        <script>
+          var still = 'https://mattvonrocketstein.github.io/heredoc/img/walking_man_still.png';
+          var walking = 'https://mattvonrocketstein.github.io/heredoc/img/walking_man.gif';
+          function walkingman_on(){
+            $('#walking_man').attr('src', walking);
+            $('#walkingman_toggle_label').html('stop animation');
+            $("#walkingman_toggle").attr(
+                'href', 'javascript:walkingman_off()');
+            Cookies.set('walkingman_animate', 1)
+          }
+          function walkingman_load(){
+            var animate = Cookies.get("walkingman_animate")
+            if(!animate||animate=="1"){
+                walkingman_on()
+            }
+            else { walkingman_off();}
+          }
+          function walkingman_off(){
+            $('#walking_man').attr('src', still);
+            $('#walkingman_toggle_label').html('start animation');
+            $("#walkingman_toggle").attr(
+                'href', 'javascript:walkingman_on()');
+            Cookies.set('walkingman_animate', 0)
+          }
+          $(document).ready(function(){
+            walkingman_load();
+            });
+        </script>
+
+    <p>
+        <strong>Heredoc</strong><br/>
+        is a file literal or input stream literal: it is a section of a source code file that is treated as if it were a separate file.  It also happens to be the name of this technical blog..
+    </p>
+</div><h4>
+  <i class="fa fa-home fa-lg"></i>
+  <span class="icon-label">Recent</span></h4>
+            <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
+                            Loading Wikimedia data into Neo4j with Elixir</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">
+                            Setting up neo4j with vagrant and ansible</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">
+                            IElixir Notebook in Docker</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
+                            Python release automation</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
+                            The missing "ansible-role" command</li>
+                        </a>
+              </ul>
+
+
+              <a href="https://mattvonrocketstein.github.io/heredoc/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group list-inline tagcloud" id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">
+                            ansible
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
+                            boilerplate
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">
+                            devops
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">
+                            docker
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
+                            elixir
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
+                            fabric
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-2">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
+                            graphdb
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">
+                            python
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/vagrant.html">
+                            vagrant
+                        </a>
+                    </li>
+                </ul>
+
+      <h4><i class="fa fa-github fa-lg"></i>
+        <span class="icon-label"><a href="https://github.com/mattvonrocketstein">
+          GitHub Repos
+        </a></span>
+      </h4>
+        <div id="gh_repos">
+            <p class="list-group-item">Status updating...</p>
+        </div>
+      <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="li-choice">
+            <a href="http://data.holdings" target="_blank">
+                data.holdings
+            </a>
+        </li>
+      </ul>
+            </aside>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <ol class="breadcrumb">
+                <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html" title="Elixir">Elixir</a></li>
+                <li class="active">Loading Wikimedia data into Neo4j with Elixir</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html"
+                       rel="bookmark"
+                       title="Permalink to Loading Wikimedia data into Neo4j with Elixir">
+                        Loading Wikimedia data into Neo4j with Elixir
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2016-08-31T00:00:00-04:00"> Wed 31 August 2016</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
+        /
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">graphdb</a>
+    
+</footer><!-- /.post-info -->
+                    </div>
+                </div>
+
+                <h2>Intro and Motivation</h2>
+<p>This post is about toy application that parses wikimedia dump files with <a href="http://elixir-lang.org/">elixir</a>, and throws the results into a graph database.  I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-neo4j-elixir-1-back"><a href="#sf-neo4j-elixir-1" class="simple-footnote" title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P '>1</a></sup></p>
+<p>Initially I intended to parse only <strong>wikipedia</strong> dump files, thinking that it would be very interesting to try and construct graph queries that could deduce stuff like "trigonometry is a prerequisite concept of calculus" based on page linkages.  I still might look into this at some point, but after I realized that more or less the same unmodified parsing code could be used with other wikimedia dumps I had another idea.</p>
+<p><a href="https://www.wikivoyage.org/">Wikivoyage</a> is a wikimedia project that constitutes an open travel guide.  Inevitably this dataset will be more tractable than using all of wikipedia.   Besides that, I am very interested in travel<sup id="sf-neo4j-elixir-2-back"><a href="#sf-neo4j-elixir-2" class="simple-footnote" title="Check out my (somewhat unfinished) travel blog here!">2</a></sup> and, being a frequent user of wikivoyage myself, I expected that the link structures embedded there might be somewhat less random than what I'd find trying to parse wikipedia.</p>
+<p><img alt="" src="img/neo-unesco.png"></p>
+<h2>The Players</h2>
+<p>There are <a href="https://en.wikipedia.org/wiki/Graph_database#List_of_graph_databases">different graph databases</a> out there, but without a lot of compare-and-contrast I decided to go with <a href="https://neo4j.com/">neo4j</a> simply because the community surrounding it is active and growing (and naturally it has all the obligatory WebScale hype). It seems like a good place to start experimenting, but I'm not yet in a position to advocate or condemn it compared with anything else.</p>
+<p>For writing GraphDB queries I'll be using Cypher, the weapon of choice of Neo4j.  <a href="http://react-etc.net/entry/graph-query-languages-graphql-opencypher-gremlin-and-sparql">Other query languages</a> are out there, and I can't condemn or condone them either.  In particular the extent to which Cypher and OpenCypher are exactly compatible is mysterious to me and knowing more about this would be really important for production use-cases.. but none of this really matters for my toy project.</p>
+<p>On the elixir side of things, communication with neo4j is done using a combination of <a href="https://github.com/CollabRx/callisto/">callisto</a> and <a href="https://github.com/florinpatrascu/neo4j_sips">neo4j_sips</a>.</p>
+<p>For parsing wikipedia dump files and XML generally, I'm using <a href="https://github.com/willemdj/erlsom">erlsom</a> which is kind of arcane.  I'm very much indebted to <a href="http://benjamintan.io/blog/2014/10/01/parsing-wikipedia-xml-dump-in-elixir-using-erlsom/">this post</a> for providing a complete working example.</p>
+<h2>Setting up Neo4j</h2>
+<p>Unless you've already got it up and running, you'll want to install neo4j.  It'll require about 2G RAM at minimum and a java installation.. this can be somewhat of a pain in the ass.  You can accomplish the installation however you like, but I opted not to clutter up my primary development environment.  There is <a href="https://neo4j.com/developer/docker/">official support for docker</a> which you might like to look into.</p>
+<p>Personally my standard development environment is an Ubuntu guest on an OSX host, using virtualbox. Only my guests run docker, since I'm fastidious about keeping the host OS as pristine as possible.   Given that I suspected that using docker in the guest for "serious data" might have similarly serious IO bottlenecks (not that I've done real benchmarks).  Thus I opted for a vagrant based approach in a second guest, but your approach may vary.</p>
+<p>I suggest spinning up a vagrant box with at least 2G of ram, and using <a href="https://galaxy.ansible.com/julienroubieu/neo4j/">this ansible role</a> to provision it.  <a href="https://gist.github.com/mattvonrocketstein/96670d2eb66a8ad9854b6f52a2b5339c">This gist</a> provides a complete ansible/vagrant/neo4j recipe with instructions.  Therein the guest neo4j server will be accessible from port 7474 on the host.  If you're allergic to ansible then <a href="https://github.com/bretcope/vagrant-neo4j">here</a> is another (untested) vagrant/neo4j recipe that just uses shell scripts.</p>
+<p>Regardless of how you get it setup, you'll want to be sure that you can access the fresh neo4j server once it's provisioned.  </p>
+<p>Confirm that you can connect to neo:</p>
+<div class="highlight"><pre><span></span>$ curl http://localhost:7474
+<span class="o">{</span>
+  <span class="s2">"management"</span> : <span class="s2">"http://neo_host_ip:7474/db/manage/"</span>,
+  <span class="s2">"data"</span> : <span class="s2">"http://neo_host_ip:7474/db/data/"</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>If you <strong>cannot</strong> connect to neo, then make sure the server is listening on 0.0.0.0 instead of 127.0.0.1  (this setting is inside <code>/etc/neo4j/neo4j-server.properties</code>).  <sup id="sf-neo4j-elixir-3-back"><a href="#sf-neo4j-elixir-3" class="simple-footnote" title=" Other modifications you might like to make: increase the ulimit in the default init script at /etc/init.d/neo4j-service. ">3</a></sup></p>
+<h2>Got Data?</h2>
+<p>A direct link to the latest XML datadump up the english wikivoyage content is always <a href="https://dumps.wikimedia.org/enwikivoyage/latest/enwikivoyage-latest-pages-meta-current.xml.bz2">here</a>.  You'll need a copy of this before proceeding to parsing in the next step</p>
+<div class="highlight"><pre><span></span>$ wget https://dumps.wikimedia.org/enwikivoyage/latest/enwikivoyage-latest-pages-meta-current.xml.bz2
+$ bunzip2 enwikivoyage-latest-pages-meta-current.xml.bz2
+$ mv enwikivoyage-latest-pages-meta-current.xml wikivoyage.xml
+</pre></div>
+
+
+<h2>Clone and configure</h2>
+<p>This assumes of course that you already have elixir installed.  Afterwards, clone my elixir project repository and install the dependencies with mix</p>
+<div class="highlight"><pre><span></span>$ git clone https://github.com/mattvonrocketstein/rapidmind.git
+$ <span class="nb">cd</span> rapidmind
+$ mix deps.get
+$ mix deps.compile
+</pre></div>
+
+
+<p>Edit the connection string for the neo4j server inside <code>config/config.exs</code>, changing the URL line to match your neo4j server.</p>
+<div class="highlight"><pre><span></span><span class="nl">url:</span> <span class="s">"http://neo4j_server:7474"</span><span class="o">,</span>
+</pre></div>
+
+
+<p>For me, I have two vagrant guests: one for elixir development and one for the neo4j server.  But since the neo4j guest is portforwarded back to the host, my development guest is configured to look for neo4j on the host.</p>
+<div class="highlight"><pre><span></span><span class="nl">url:</span> <span class="s">"http://10.0.2.2:7474"</span><span class="o">,</span>
+</pre></div>
+
+
+<h2>Parsing data</h2>
+<p>Assuming you have elixir installed and have unpacked the XML data as in the previous section, you can now run the parser against the XML dump.  In terms of what is populated in the graph DB, this will create "WikiPage" nodes and "links_to" relationships to capture<sup id="sf-neo4j-elixir-4-back"><a href="#sf-neo4j-elixir-4" class="simple-footnote" title=' Link relationships are parsed from page bodies with regexes looking for "[[" and "]]" '>4</a></sup> the inter-wiki links from page bodies.</p>
+<div class="highlight"><pre><span></span>$ mix load wikivoyage.xml
+
+<span class="m">16</span> outgoing links <span class="k">for</span> Aba <span class="o">(</span>prefecture<span class="o">)</span>
+extracting linked pages <span class="k">for</span> <span class="sb">`</span>Aba as Sa<span class="s1">'ud`</span>
+<span class="s1">1 outgoing links for Aba as Sa'</span>ud
+extracting linked pages <span class="k">for</span> <span class="sb">`</span>Abacos<span class="sb">`</span>
+<span class="m">3</span> outgoing links <span class="k">for</span> Abacos
+extracting linked pages <span class="k">for</span> <span class="sb">`</span>Abadan<span class="sb">`</span>
+<span class="m">7</span> outgoing links <span class="k">for</span> Abadan
+extracting linked pages <span class="k">for</span> <span class="sb">`</span>Abadeh<span class="sb">`</span>
+<span class="m">1</span> outgoing links <span class="k">for</span> Abadeh
+</pre></div>
+
+
+<p>Loading the entire wikidump into neo4j can take many hours, it all depends on your virtual machine resources.  Loading the inter-wiki links will work with everything from wikipedia to wiktionary, etc</p>
+<p><strong>Loading extra relationships</strong> (things other than page links) is possible.  There's the <code>mix partof [dumpfile.xml]</code> command, which will add "part_of" relationships to Neo4j.  This particular relationship is more specific to wikivoyage (as in California is part_of the UnitedStates), whereas simply extracting the link structure will work for wikipedia/wiktionary, etc.</p>
+<div class="highlight"><pre><span></span>$ mix partof wikivoyage.xml
+<span class="o">[</span><span class="s2">"Aakirkeby"</span>, <span class="s2">"Bornholm"</span><span class="o">]</span>
+<span class="o">[</span><span class="s2">"Abakan"</span>, <span class="s2">"Khakassia"</span><span class="o">]</span>
+<span class="o">[</span><span class="s2">"Abancay"</span>, <span class="s2">"Southern_Sierra_(Peru)"</span><span class="o">]</span>
+<span class="o">[</span><span class="s2">"Aberdare National Park"</span>, <span class="s2">"Southern Rift Valley"</span><span class="o">]</span>
+</pre></div>
+
+
+<h2>Other Commands</h2>
+<p>Other commands interacting with the graph database in one way or another are provided for in this project via elixir's <a href="http://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html">mix tool</a>.</p>
+<p><strong>Basic statistics</strong> about the graph database can be seen with the <code>mix stats</code> command.  Example output looks something like this:</p>
+<div class="highlight"><pre><span></span>$ mix stats
+
+Node Count:
+  55545
+
+Top nodes by relationship-count:
+   UNESCO World Heritage List <span class="o">(</span>1489<span class="o">)</span>
+   United States of America <span class="o">(</span>1454<span class="o">)</span>
+   Canada <span class="o">(</span>911<span class="o">)</span>
+   India <span class="o">(</span>795<span class="o">)</span>
+   California <span class="o">(</span>774<span class="o">)</span>
+</pre></div>
+
+
+<p><strong>To purge neo</strong> without destroying the whole neo4j virtual machine you can use <code>mix wipedb</code>.  This will also (re)set neo4j integrity constraints on the empty database.</p>
+<div class="highlight"><pre><span></span>$ mix wipedb
+
+<span class="m">1961</span> items left in database
+<span class="m">1892</span> items left in database
+<span class="m">1443</span> items left in database
+<span class="m">1212</span> items left in database
+<span class="m">1127</span> items left in database
+<span class="m">1048</span> items left in database
+<span class="m">779</span> items left in database
+
+database is empty.  adding indexes
+
+<span class="o">[</span><span class="s2">"CREATE CONSTRAINT ON (wp:WikiPage) ASSERT wp.title IS UNIQUE"</span>, <span class="o">[]]</span>
+<span class="o">[</span><span class="s2">"CREATE CONSTRAINT ON (wp:WikiPage) ASSERT wp.page_id IS UNIQUE"</span>, <span class="o">[]]</span>
+</pre></div>
+
+
+<p><strong>Running cypher queries</strong> directly against the Neo4j server is also possible using the <code>mix cypher</code> command. See the example below:</p>
+<div class="highlight"><pre><span></span>$ mix cypher <span class="s2">"match n where n.title='Yosemite' return n"</span>
+<span class="o">{</span>:ok, <span class="o">[</span>%<span class="o">{</span><span class="s2">"n"</span> <span class="o">=</span>&gt; %<span class="o">{</span><span class="s2">"page_id"</span> <span class="o">=</span>&gt; 40124, <span class="s2">"title"</span> <span class="o">=</span>&gt; <span class="s2">"Yosemite"</span><span class="o">}}]}</span>
+</pre></div>
+
+
+<h2>Exploring the data</h2>
+<p>So, what we have at this point is a simple but reasonably large graph, where nodes are Wikivoyage pages, and there are two kinds of relationships.  The <strong>links_to</strong> relationship means our graph models how the webpage connects to itself, and the <strong>part_of</strong> relationship gives some extra (but imperfect <sup id="sf-neo4j-elixir-5-back"><a href="#sf-neo4j-elixir-5" class="simple-footnote" title=" Not all page bodies contain the {{isPartOf}} entry, I think wikimedia bots fill in some of this ontology automatically but it's not included in the database dumps">5</a></sup>) semantic information about spatial data.  What kinds of questions can we ask and answer with the model?  First a brief aside about graph visualization and queries..</p>
+<p><strong>The web UI for Neo4j</strong> is at port 7474 by default or more specifically <a href="http://10.0.2.2:7474">http://10.0.2.2:7474</a> in the (unlikely) event you have exactly the same dual-guest vagrant setup as I do.  Point your webbrowser there and play around.  You can also see some vital statistics about the growth rate of nodes and relationships over time here at the /webadmin endpoint (for instance <a href="http://10.0.2.2:7474/webadmin/">http://10.0.2.2:7474/webadmin/</a>).</p>
+<p><strong>The Cypher Query Language</strong> is of course used to interrogate the graph.  There are <a href="https://neo4j.com/developer/cypher-query-language/">lots of introductions to cypher</a> out there but getting deep into that is outside of the scope of this write up and I'm still learning myself.  CQL is fairly readable though so the reader's intuition, plus <a href="https://neo4j.com/docs/cypher-refcard/current/">this quick reference</a>, plus brief commentary will hopefully suffice.</p>
+<h2>Questions &amp; Queries</h2>
+<p><strong>Nodes with large numbers of out-going links</strong> are very likely to be meta-pages, very large land-masses, or very well-documented (and thus popular) travel destinations.  You can see several such nodes in the output of the <code>mix stat</code> command mentioned above, and in the screenshot below.</p>
+<p>Taking for instance the meta-page for the <a href="https://en.wikivoyage.org/wiki/UNESCO_World_Heritage_List">UNESCO World Heritage List</a> here are some interesting queries:</p>
+<div class="highlight"><pre><span></span><span class="c1">// Query to actually count the out-going links of a particular node</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">rel</span><span class="p">)</span><span class="w"></span>
+
+<span class="c1">// Query to graph part of the neighborhood in the WebUI</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">rel</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
+</pre></div>
+
+
+<p><strong>Can we deduce which nodes (that is, wikipages) correspond to continents?</strong>  Yes (mostly).  Continents are exactly those nodes which are not "part of" other nodes, since they are at the top of the regional hierarchy.</p>
+<div class="highlight"><pre><span></span><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
+</pre></div>
+
+
+<h2>Footnotes</h2><ol class="simple-footnotes"><li id="sf-neo4j-elixir-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a href="#sf-neo4j-elixir-1-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-2">Check out my (somewhat unfinished) travel blog <a href="/travel">here</a>! <a href="#sf-neo4j-elixir-2-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a href="#sf-neo4j-elixir-3-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a href="#sf-neo4j-elixir-4-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-5"> Not all page bodies contain the {{isPartOf}} entry, I think wikimedia bots fill in some of this ontology automatically but it's not included in the database dumps <a href="#sf-neo4j-elixir-5-back" class="simple-footnote-back">↩</a></li></ol>
+                <script>
+                  $(document).ready(
+                    function(){
+                      $("#toc").tocify(
+                        {
+                          context: '.entry-content',
+                          selectors: "h2,h3,h4",
+                          showAndHide: true,
+                          showAndHideOnScroll: true,
+                        }
+                      )
+                    }
+                  );
+                </script>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-2" >
+          <section id=toc class="well well-sm">
+            </section>
+        </div>
+      </div>
+
+    </div>
+</div>
+<footer>
+   <div class="container-fluid">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2016 mvr
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+    <!-- GitHub JS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (!window.jXHR) {
+                var jxhr = document.createElement('script');
+                jxhr.type = 'text/javascript';
+                jxhr.src = 'https://mattvonrocketstein.github.io/heredoc/theme/js/jXHR.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(jxhr, s);
+            }
+
+            github.showRepos({
+                user: 'mattvonrocketstein',
+                count: 5,
+                skip_forks: false,
+                target: '#gh_repos'
+            });
+        });
+    </script>
+    <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/github.js" type="text/javascript"></script>
+    <!-- End GitHub JS Code -->
+
+<script>
+setTimeout(function(){
+  if (""==$('#toc').html().trim()){
+    $("#toc").hide()
+  }}, 1500)
+  </script>
+</body>
+</html>
