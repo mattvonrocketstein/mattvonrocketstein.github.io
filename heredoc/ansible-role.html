@@ -277,7 +277,7 @@ heredoc            </a>
                 </div>
 
                 <h2>The Problem</h2>
-<p>Whenever I'm building a server or simple local infrastructure for testing code, I start by looking at the <a href="#">available ansible roles</a>, hoping to find one that works for my use-case out the box.  One thing that annoys me though is that even for roles without extra variables, a playbook is still required.  It's a small file, but creating it annoys me when I'm just testing stuff.</p>
+<p>Whenever I'm building a server or simple local infrastructure for testing code, I start by looking at the <a href="https://galaxy.ansible.com/explore#/">available ansible roles</a>, hoping to find one that JustWorks for my use-case right out of the box.  One thing that annoys me though is that even for roles without extra variables, a playbook is still required.  Sure it's a small file, but creating it still annoys me when I'm just testing stuff.</p>
 <p>Typically these one-off playbooks look something like this:</p>
 <div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
   <span class="l l-Scalar l-Scalar-Plain">become</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
@@ -310,7 +310,7 @@ heredoc            </a>
 <p>In case a galaxy download is necessary and <code>--modulepath</code> is <strong>NOT</strong> given, then there is no caching.  <em>File system cleaning for the role download makes sense here because this is a one-off experiment and it's no use cluttering the file system.</em>  Thus the role will be downloaded to a temporary directory and will be deleted afterwards (regardless of whether the application of the role succeeds).</p>
 </li>
 <li>
-<p>Apart from the standard <code>ansible-playbook</code> arguments, the <code>ansible-role</code> command line understands exactly 2 other arguments: the primary positional argument <code>role_name</code>, which is required and which specifies an ansible-galaxy role, and the <code>host</code> argument (which defaults to <code>localhost</code>).  Again, <strong>everything else</strong> on the command line will be passed through to the <code>ansible-playbook</code> invocation.</p>
+<p>Apart from the standard <code>ansible-playbook</code> arguments, the <code>ansible-role</code> command line understands exactly 2 other arguments: the primary positional argument <code>role_name</code> (which is required and which specifies an ansible-galaxy role), and the <code>host</code> argument (which defaults to <code>localhost</code>).  Again, <strong>everything else</strong> on the command line will be passed through to the <code>ansible-playbook</code> invocation.</p>
 </li>
 <li>
 <p>After cleanup, the <code>ansible-role</code> command should return the same exit code as the implied <code>ansible-playbook</code> invocation.</p>
