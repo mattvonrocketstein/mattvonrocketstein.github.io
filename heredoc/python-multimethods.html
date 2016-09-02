@@ -53,38 +53,32 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icnavbaron-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <a href="https://mattvonrocketstein.github.io/heredoc/" class="navbar-brand">
 heredoc            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">Boilerplate</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">Python</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/vagrant.html">Vagrant</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">Devops</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">Ansible</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">Docker</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">Fabric</a>
-                        </li>
+                    <li>
+                      <a href="/heredoc/tag/python.html">Python</a>
+                    </li>
+                    <li>
+                      <a href="/heredoc/tag/elixir.html">Elixir</a>
+                    </li>
+                    <li>
+                      <a href="/heredoc/tag/devops.html">Devops</a>
+                    </li>
+                    <li>
+                      <a href="/heredoc/tag/data-science.html">Data Science</a>
+                    </li>
+                    <li>
+                      <a href="/heredoc/tag/misc.html">Misc</a>
+                    </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -150,6 +144,9 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-cypher-wikivoyage.html">
+                            Exploring Wikivoyage data with Neo4j and Cypher</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
                             Loading Wikimedia data into Neo4j with Elixir</li>
                         </a>
@@ -161,9 +158,6 @@ heredoc            </a>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
                             Python release automation</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
-                            The missing "ansible-role" command</li>
                         </a>
               </ul>
 
@@ -178,6 +172,11 @@ heredoc            </a>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
+                            data-science
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -200,7 +199,7 @@ heredoc            </a>
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
@@ -277,7 +276,8 @@ heredoc            </a>
 <p>This post describes a fun little piece of code I wrote a few years back.  It's presented here just as a <strong>curiosity</strong> not as a good idea for production code, and more than anything else is just an experiment to demonstrate the flexibility of python as a language.  So let's play with function-call semantics.  This writeup is just some background and motivation, if you're more of a "show me the code!" kind of person, just check out the <a href="https://gist.github.com/mattvonrocketstein/76d6b96d536d2c8ef991">gist here</a>.</p>
 <h3>The Idea</h3>
 <p>We use "self" all the time in object-oriented python code as an object reference, similar to "this" in Java or Javascript.  It's important to note though that in Python, "self" is only a convention and not a keyword.  When we use "self", the reference is always unambiguous and simple.. we just mean the current instance.  But they say that "art imitates life", so what if object-oriented was inspired by how people work?  </p>
-<p>Persons always have one <strong>self</strong> but potentially many <strong>roles</strong>.  For instance, suppose someone asks you a question. It's possible you will answer differently depending on whether you are answering in your capacity as that person's colleague/boss/friend/lover/enemy/etc.  Suppose you want to implement something like a  <a href="http://www.merriam-webster.com/dictionary/frenemy">frenemy</a> class.  Anyway, the code below contains a (contrived) example. <sup id="sf-python-multimethods-1-back"><a href="#sf-python-multimethods-1" class="simple-footnote" title=" See also: http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html ">1</a></sup>.  Another way of looking at the concept being demonstrated: here there is not one self but many, and what a thing <em>does</em> depends on <em>what</em> you call it, not <em>how</em> you call it.  </p>
+<p>Persons always have one <strong>self</strong> but potentially many <strong>roles</strong>.  For instance, suppose someone asks you a question. It's possible you will answer differently depending on whether you are answering in your capacity as that person's colleague/boss/friend/lover/enemy/etc.  Suppose you want to implement something like a  <a href="http://www.merriam-webster.com/dictionary/frenemy">frenemy</a> class.  Anyway, the code below contains a (contrived) example. <sup id="sf-python-multimethods-1-back"><a href="#sf-python-multimethods-1" class="simple-footnote" title=" See also: http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html ">1</a></sup>.  </p>
+<p>Another way of looking at the concept being demonstrated: here there is not one self but many, and what a thing <em>does</em> depends on <em>what</em> you call it, not <em>how</em> you call it.  </p>
 <h2>The Code</h2>
 <p><a href="https://gist.githubusercontent.com/mattvonrocketstein/76d6b96d536d2c8ef991/raw/">View this gist on github</a></p>
 <div class="highlight"><pre><span></span><span class="sd">"""</span>
@@ -436,8 +436,8 @@ heredoc            </a>
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
     </ul>
 </section>

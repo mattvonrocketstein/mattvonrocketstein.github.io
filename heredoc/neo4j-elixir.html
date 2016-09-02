@@ -54,38 +54,32 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icnavbaron-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <a href="https://mattvonrocketstein.github.io/heredoc/" class="navbar-brand">
 heredoc            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">Graphdb</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">Boilerplate</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">Python</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/vagrant.html">Vagrant</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">Devops</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">Ansible</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">Elixir</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">Docker</a>
-                        </li>
-                        <li >
-                            <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">Fabric</a>
-                        </li>
+                    <li>
+                      <a href="/heredoc/tag/python.html">Python</a>
+                    </li>
+                    <li>
+                      <a href="/heredoc/tag/elixir.html">Elixir</a>
+                    </li>
+                    <li>
+                      <a href="/heredoc/tag/devops.html">Devops</a>
+                    </li>
+                    <li>
+                      <a href="/heredoc/tag/data-science.html">Data Science</a>
+                    </li>
+                    <li>
+                      <a href="/heredoc/tag/misc.html">Misc</a>
+                    </li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -151,6 +145,9 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-cypher-wikivoyage.html">
+                            Exploring Wikivoyage data with Neo4j and Cypher</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
                             Loading Wikimedia data into Neo4j with Elixir</li>
                         </a>
@@ -162,9 +159,6 @@ heredoc            </a>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
                             Python release automation</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
-                            The missing "ansible-role" command</li>
                         </a>
               </ul>
 
@@ -179,6 +173,11 @@ heredoc            </a>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
+                            data-science
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -201,7 +200,7 @@ heredoc            </a>
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
@@ -277,7 +276,7 @@ heredoc            </a>
                 </div>
 
                 <h2>Intro and Motivation</h2>
-<p>This post is about toy application that parses wikimedia dump files with <a href="http://elixir-lang.org/">elixir</a>, and throws the results into a graph database.  I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-neo4j-elixir-1-back"><a href="#sf-neo4j-elixir-1" class="simple-footnote" title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P '>1</a></sup></p>
+<p>This post is part 1 of 2 about a toy application that parses wikimedia dump files with <a href="http://elixir-lang.org/">elixir</a>, and throws the results into a graph database.  I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-neo4j-elixir-1-back"><a href="#sf-neo4j-elixir-1" class="simple-footnote" title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P '>1</a></sup>  <a href="neo4j-cypher-wikivoyage.html">Part 2</a></p>
 <p>Initially I intended to parse only <strong>wikipedia</strong> dump files, thinking that it would be very interesting to try and construct graph queries that could deduce stuff like "trigonometry is a prerequisite concept of calculus" based on page linkages.  I still might look into this at some point, but after I realized that more or less the same unmodified parsing code could be used with other wikimedia dumps I had another idea.</p>
 <p><a href="https://www.wikivoyage.org/">Wikivoyage</a> is a wikimedia project that constitutes an open travel guide.  Inevitably this dataset will be more tractable than using all of wikipedia.   Besides that, I am very interested in travel<sup id="sf-neo4j-elixir-2-back"><a href="#sf-neo4j-elixir-2" class="simple-footnote" title="Check out my (somewhat unfinished) travel blog here!">2</a></sup> and, being a frequent user of wikivoyage myself, I expected that the link structures embedded there might be somewhat less random than what I'd find trying to parse wikipedia.</p>
 <p><img alt="" src="img/neo-unesco.png"></p>
@@ -347,10 +346,13 @@ extracting linked pages <span class="k">for</span> <span class="sb">`</span>Abad
 <p>Loading the entire wikidump into neo4j can take many hours, it all depends on your virtual machine resources.  Loading the inter-wiki links will work with everything from wikipedia to wiktionary, etc</p>
 <p><strong>Loading extra relationships</strong> (things other than page links) is possible.  There's the <code>mix partof [dumpfile.xml]</code> command, which will add "part_of" relationships to Neo4j.  This particular relationship is more specific to wikivoyage (as in California is part_of the UnitedStates), whereas simply extracting the link structure will work for wikipedia/wiktionary, etc.</p>
 <div class="highlight"><pre><span></span>$ mix partof wikivoyage.xml
-<span class="o">[</span><span class="s2">"Aakirkeby"</span>, <span class="s2">"Bornholm"</span><span class="o">]</span>
-<span class="o">[</span><span class="s2">"Abakan"</span>, <span class="s2">"Khakassia"</span><span class="o">]</span>
-<span class="o">[</span><span class="s2">"Abancay"</span>, <span class="s2">"Southern_Sierra_(Peru)"</span><span class="o">]</span>
-<span class="o">[</span><span class="s2">"Aberdare National Park"</span>, <span class="s2">"Southern Rift Valley"</span><span class="o">]</span>
+
+Southeastern Kansas -contains-&gt; Baxter Springs
+Eastern Dominican Republic -contains-&gt; Bayahibe
+Gobi -contains-&gt; Bayanhongor
+Penang -contains-&gt; Bayan Lepas
+Western Inner Mongolia -contains-&gt; Bayan Nur
+Nebraska Panhandle -contains-&gt; Bayard
 </pre></div>
 
 
@@ -396,32 +398,8 @@ database is empty.  adding indexes
 
 
 <h2>Exploring the data</h2>
-<p>So, what we have at this point is a simple but reasonably large graph, where nodes are Wikivoyage pages, and there are two kinds of relationships.  The <strong>links_to</strong> relationship means our graph models how the webpage connects to itself, and the <strong>part_of</strong> relationship gives some extra (but imperfect <sup id="sf-neo4j-elixir-5-back"><a href="#sf-neo4j-elixir-5" class="simple-footnote" title=" Not all page bodies contain the {{isPartOf}} entry, I think wikimedia bots fill in some of this ontology automatically but it's not included in the database dumps">5</a></sup>) semantic information about spatial data.  What kinds of questions can we ask and answer with the model?  First a brief aside about graph visualization and queries..</p>
-<p><strong>The web UI for Neo4j</strong> is at port 7474 by default or more specifically <a href="http://10.0.2.2:7474">http://10.0.2.2:7474</a> in the (unlikely) event you have exactly the same dual-guest vagrant setup as I do.  Point your webbrowser there and play around.  You can also see some vital statistics about the growth rate of nodes and relationships over time here at the /webadmin endpoint (for instance <a href="http://10.0.2.2:7474/webadmin/">http://10.0.2.2:7474/webadmin/</a>).</p>
-<p><strong>The Cypher Query Language</strong> is of course used to interrogate the graph.  There are <a href="https://neo4j.com/developer/cypher-query-language/">lots of introductions to cypher</a> out there but getting deep into that is outside of the scope of this write up and I'm still learning myself.  CQL is fairly readable though so the reader's intuition, plus <a href="https://neo4j.com/docs/cypher-refcard/current/">this quick reference</a>, plus brief commentary will hopefully suffice.</p>
-<h2>Questions &amp; Queries</h2>
-<p><strong>Nodes with large numbers of out-going links</strong> are very likely to be meta-pages, very large land-masses, or very well-documented (and thus popular) travel destinations.  You can see several such nodes in the output of the <code>mix stat</code> command mentioned above, and in the screenshot below.</p>
-<p>Taking for instance the meta-page for the <a href="https://en.wikivoyage.org/wiki/UNESCO_World_Heritage_List">UNESCO World Heritage List</a> here are some interesting queries:</p>
-<div class="highlight"><pre><span></span><span class="c1">// Query to actually count the out-going links of a particular node</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">rel</span><span class="p">)</span><span class="w"></span>
-
-<span class="c1">// Query to graph part of the neighborhood in the WebUI</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">rel</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
-</pre></div>
-
-
-<p><strong>Can we deduce which nodes (that is, wikipages) correspond to continents?</strong>  Yes (mostly).  Continents are exactly those nodes which are not "part of" other nodes, since they are at the top of the regional hierarchy.</p>
-<div class="highlight"><pre><span></span><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
-</pre></div>
-
-
-<p>To be continued...</p>
-<h2>Footnotes</h2><ol class="simple-footnotes"><li id="sf-neo4j-elixir-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a href="#sf-neo4j-elixir-1-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-2">Check out my (somewhat unfinished) travel blog <a href="/travel">here</a>! <a href="#sf-neo4j-elixir-2-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a href="#sf-neo4j-elixir-3-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a href="#sf-neo4j-elixir-4-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-5"> Not all page bodies contain the {{isPartOf}} entry, I think wikimedia bots fill in some of this ontology automatically but it's not included in the database dumps <a href="#sf-neo4j-elixir-5-back" class="simple-footnote-back">↩</a></li></ol>
+<p>So, what we have at this point is a simple but reasonably large graph, where nodes are Wikivoyage pages, and we have 2 kinds of inter-node relationships specified.  What the hell is this datastructure?  In short <strong>we have a good model for describing how the website connects to itself</strong>.  Because the website itself is basically trying to describe the world we have model for that too, despite the fact that it's low resoluton and second order!  So just for fun, what kinds of questions can we ask and answer with this model?  The data diving begins in <a href="neo4j-cypher-wikivoyage.html">part 2 of this series.</a></p>
+<h2>Footnotes</h2><ol class="simple-footnotes"><li id="sf-neo4j-elixir-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a href="#sf-neo4j-elixir-1-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-2">Check out my (somewhat unfinished) travel blog <a href="/travel">here</a>! <a href="#sf-neo4j-elixir-2-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a href="#sf-neo4j-elixir-3-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a href="#sf-neo4j-elixir-4-back" class="simple-footnote-back">↩</a></li></ol>
                 <script>
                   $(document).ready(
                     function(){
