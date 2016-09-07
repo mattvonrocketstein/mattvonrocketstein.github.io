@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Exploring Wikivoyage data with Neo4j and Cypher</title>
+    <title>heredoc - Exploring data with Neo4j and Cypher</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -14,13 +14,13 @@
 
         <meta name="author" content="mvr" />
         <meta name="keywords" content="graphdb,data-science" />
-        <meta name="description" content="Loading wikipedia into neo4j with Elixir (continued)" />
+        <meta name="description" content="Exploring Wikivoyage data with Neo4j with Elixir (continued)" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Exploring Wikivoyage data with Neo4j and Cypher"/>
+        <meta property="og:title" content="Exploring data with Neo4j and Cypher"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/neo4j-cypher-wikivoyage.html"/>
-        <meta property="og:description" content="Loading wikipedia into neo4j with Elixir (continued)"/>
+        <meta property="og:description" content="Exploring Wikivoyage data with Neo4j with Elixir (continued)"/>
         <meta property="article:published_time" content="2016-08-31" />
             <meta property="article:section" content="Elixir" />
             <meta property="article:tag" content="graphdb" />
@@ -146,10 +146,10 @@ heredoc            </a>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-cypher-wikivoyage.html">
-                            Exploring Wikivoyage data with Neo4j and Cypher</li>
+                            Exploring data with Neo4j and Cypher</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
-                            Loading Wikimedia data into Neo4j with Elixir</li>
+                            Loading Wikimedia into Neo4j with Elixir</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">
                             Setting up neo4j with vagrant and ansible</li>
@@ -157,8 +157,8 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">
                             IElixir Notebook in Docker</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
-                            Python release automation</li>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">
+                            Datadog Event Publishing</li>
                         </a>
               </ul>
 
@@ -175,7 +175,7 @@ heredoc            </a>
                             boilerplate
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
                         </a>
@@ -190,7 +190,7 @@ heredoc            </a>
                             docker
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
                             elixir
                         </a>
@@ -200,12 +200,12 @@ heredoc            </a>
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-0">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">
                             python
                         </a>
@@ -240,7 +240,7 @@ heredoc            </a>
             <ol class="breadcrumb">
                 <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
                 <li><a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html" title="Elixir">Elixir</a></li>
-                <li class="active">Exploring Wikivoyage data with Neo4j and Cypher</li>
+                <li class="active">Exploring data with Neo4j and Cypher</li>
             </ol>
     <section id="content">
         <article>
@@ -248,8 +248,8 @@ heredoc            </a>
                 <h1>
                     <a href="https://mattvonrocketstein.github.io/heredoc/neo4j-cypher-wikivoyage.html"
                        rel="bookmark"
-                       title="Permalink to Exploring Wikivoyage data with Neo4j and Cypher">
-                        Exploring Wikivoyage data with Neo4j and Cypher
+                       title="Permalink to Exploring data with Neo4j and Cypher">
+                        Exploring data with Neo4j and Cypher
                     </a>
                 </h1>
             </header>
@@ -275,81 +275,235 @@ heredoc            </a>
                     </div>
                 </div>
 
-                <h2>Intro</h2>
-<p>This is part 2 of a two part series.  In <a href="neo4j-elixir.html">part 1</a> I wrote about using Elixir to parse wikivoyage data dumps and push them into neo4j.  If you want to follow along at home but you have no data locally, then you'll want to go back to that section before reading further.  If you've already seen part 1 or if you're only interested in the resulting datastructure and its interrogation, then you can read on from here.</p>
-<p><img alt="" src="img/neo-unesco.png" /></p>
-<h2>Exploring the data</h2>
-<p>To review from the first part of this series, what we have at this point is a simple but reasonably large graph, where nodes are Wikivoyage pages.  There are two kinds of relationships:</p>
+                <h2>Part 2: Intro</h2>
+<p>This is part 2 of a two part series.  In <a href="neo4j-elixir.html">part 1</a> I wrote about using Elixir to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into Neo4j.  If you want to follow along at home but you have no data locally, then you'll want to go back to that section before reading further.  If you've already seen part 1 or if you're only interested in the resulting datastructure and its interrogation, then you can read on from here.</p>
+<p><img alt="results for continent query" src="img/neo-unesco.png"></p>
+<h2>Exploring the Data</h2>
+<p>To review from the first part of this series, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages.  Most nodes<sup id="sf-neo4j-cypher-wikivoyage-1-back"><a href="#sf-neo4j-cypher-wikivoyage-1" class="simple-footnote" title="That is, all nodes with the exception of pages that are linked to from somewhere but do not actually exist">1</a></sup> have properties for <code>body</code> (i.e. unparsed page content), a <code>title</code> (i.e. the article title), and a <code>page_id</code>.  As far as edges, there are at this point only two kinds of relationships:</p>
 <ol>
 <li>the <strong>links_to</strong> relationship means our graph models how the webpage connects to itself</li>
 <li>the <strong>contains</strong> relationship gives some extra semantic information about geopolitical regions</li>
 </ol>
-<p>What kinds of questions can we ask and answer with this model?  First a brief aside about graph visualization and queries..</p>
+<p>In this part of the writeup, we'll interrogate and improve the data model.  What kind of questions can be asked and answered using it?  First a brief aside about graph visualization and queries..</p>
 <p><strong>The web UI for Neo4j</strong> is at port 7474 by default or more specifically <a href="http://10.0.2.2:7474">http://10.0.2.2:7474</a> in the (unlikely) event you have exactly the same dual-guest vagrant setup as I do.  Point your webbrowser there and play around.  You can also see some vital statistics about the growth rate of nodes and relationships over time here at the /webadmin endpoint (for instance <a href="http://10.0.2.2:7474/webadmin/">http://10.0.2.2:7474/webadmin/</a>).</p>
-<p><strong>The Cypher Query Language</strong> is of course used to interrogate the graph.  There are <a href="https://neo4j.com/developer/cypher-query-language/">lots of introductions to cypher</a> out there but getting deep into that is outside of the scope of this write up and I'm still learning myself.  CQL is fairly readable though so the reader's intuition, plus <a href="https://neo4j.com/docs/cypher-refcard/current/">this quick reference</a>, plus brief commentary will hopefully suffice.</p>
-<h2>Questions &amp; Queries</h2>
-<p><strong>Can we discover which nodes (that is, wikipages) correspond to continents?</strong>  Yes!  This is actually kind of a neat trick, because it's not like pages are <em>labeled</em> as continents, we don't have access to that much wikimedia ontology explicitly.  Instead, one has to recognize: continents are those nodes which "contain" other nodes but are not themselves contained.  Then you can puzzle out the correct cypher query:</p>
-<div class="highlight"><pre><span></span><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="p">(()</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">))</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">continent</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">30</span><span class="w"></span>
+<p><strong>There are several CLI clients available</strong>, but I recommend using <a href="https://github.com/nicolewhite/cycli">cycli</a> or <a href="ipython-cypher.readthedocs.io/en/latest/">ipython-cypher</a>.</p>
+<p><strong>The Cypher Query Language</strong> is of course used to interrogate the graph, regardless of whether that is happening from Elixir code, from the WebUI, or from the CLI console.  There are <a href="https://neo4j.com/developer/cypher-query-language/">lots of introductions to cypher</a> out there but getting deep into that is outside of the scope of this write up and I'm still learning myself.  CQL is fairly readable though so the reader's intuition, plus <a href="https://neo4j.com/docs/cypher-refcard/current/">this quick reference</a>, plus brief commentary will hopefully suffice.</p>
+<h2>Curating the Graph</h2>
+<p>We've reached some kind of critical mass with the model, and it's possible now to use information in the graph to begin to improve the graph itself.  I'll be using cypher exclusively for this but keep in mind that most queries are  intended to be simple rather than performant.</p>
+<h3>Finding Continents</h3>
+<p><strong>Can we discover which nodes (that is, wikipages) correspond to continents?</strong>  Yes!  This is actually kind of a neat trick, because it's not like pages are <em>labeled</em> as continents, we don't have access to that much wikimedia ontology explicitly.  Instead, one has to recognize: continents are those nodes which "contain" other nodes but are not themselves contained.  A first guess at a naive query might look something like this</p>
+<div class="highlight"><pre><span></span><span class="c1">// On the right track, but not quite correct</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="p">()</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">continent</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="m">30</span><span class="w"></span>
 </pre></div>
 
 
-<hr style="border-top: dotted 2px;" />
-
-<p><strong>What about other geopolitical hierarchies?  Countries, cities, etc?</strong>  Since the previous query was able to discover continents, it's possible that we could just update the graph, tagging the continent nodes as such with a <a href="http://graphaware.com/neo4j/2015/01/16/neo4j-graph-model-design-labels-versus-indexed-properties.html">label or a property</a>.  If we did that then a query like this could discover things that are one level beneath continents via the "contains" relation:</p>
-<div class="highlight"><pre><span></span><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">Continent</span><span class="p">)</span><span class="w"> </span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">country</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">30</span><span class="w"></span>
+<p>The simple query doesn't quite work because of a few warts in the datastructure.  We'll fix most of this stuff later in the <a href="#CuratingtheGraph">curation section</a> of this write-up, but for now just to list the short-comings:</p>
+<ol>
+<li>Pages without page_id's are linked to from somewhere but do not actual exist (or have not been parsed yet because <code>mix load</code> was interrupted).  These have to be excluded by making sure that the <code>page_id</code> property is set.</li>
+<li>Redirect pages are somewhat like continents in that they are "root nodes" that "contain" no other entities on the graph.  These have to be excluded using a regex on the page body.  Similarly for disambiguation pages.</li>
+</ol>
+<p>With all this in mind you can puzzle out a more correct cypher query.</p>
+<div class="highlight"><pre><span></span><span class="c1">// A better query that takes into account warts of the graph</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="p">()</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">continent</span><span class="p">.</span><span class="n">page_id</span><span class="w"> </span><span class="k">IS NULL</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">continent</span><span class="p">.</span><span class="n">body</span><span class="w"> </span><span class="p">=</span><span class="err">~</span><span class="w"> </span><span class="err">'</span><span class="p">.*</span><span class="err">#</span><span class="n">REDIRECT</span><span class="p">.*</span><span class="err">'</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">continent</span><span class="p">.</span><span class="n">body</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s">"{{pagebanner|Disambiguation"</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">continent</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">30</span><span class="w"></span>
 </pre></div>
 
 
-<p>But, suppose we try it without updating the original graph.  Lacking a <code>Continent</code> label, we just need to return a different part of the same query that helped us discover continents.  Specifically:</p>
-<div class="highlight"><pre><span></span><span class="c1">// Returns countries?</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">country</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="p">(()</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">))</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">30</span><span class="w"></span>
+<p>In the screenshot below you can see that amongst the nodes returned as continents there are also nodes representing the pages for "Eurasia" and "Other Destinations".  This amount of error seems negligible though, so it's not worth adding special cases to exclude them</p>
+<p><img alt="" src="img/neo-continents.png"></p>
+<h3>Continent Labels</h3>
+<p>Having found continents, we should label them to avoid such an awkward query in the future.  While we're at it, let's make use of the various subparts of this query to improve other graph semantics by adding new labels for <code>:Redirect</code> and <code>:Disambiguation</code>.</p>
+<div class="highlight"><pre><span></span><span class="c1">// Query to label redirect pages as :Redirect</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">body</span><span class="w"> </span><span class="p">=</span><span class="err">~</span><span class="w"> </span><span class="err">'</span><span class="p">.*</span><span class="err">#</span><span class="n">REDIRECT</span><span class="p">.*</span><span class="err">'</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="p">:</span><span class="n">Redirect</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="w"></span>
 
-<span class="c1">// Returns cities?</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"> </span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="n">country</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"> </span><span class="err">-</span><span class="p">&gt;</span><span class="w"> </span><span class="o">[</span><span class="p">:</span><span class="n">contains</span><span class="o">]</span><span class="err">-</span><span class="p">&gt;</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="n">city</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="p">(()</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">))</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">city</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">30</span><span class="w"></span>
+<span class="c1">// Query to label disambiguation pages as :disambiguation</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">body</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s">"{{pagebanner|Disambiguation"</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="p">:</span><span class="n">Disambiguation</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 
 
-<p>But sadly these queries are too naive.  They only return nodes that are one or two steps below continents in terms of the "contains" relationship, respectively. That's because Wikivoyage has more complex regional hierarchies  where instead of finding that "Europe directly contains Spain", you will find that "Europe contains Iberia which contains Spain".  Hmmm.</p>
-<hr style="border-top: dotted 2px;" />
+<p>Now we can simplify the previous "find continents" query while we're adding the <code>:Continent</code> label</p>
+<div class="highlight"><pre><span></span><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"> </span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="w"> </span><span class="p">(:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="p">()</span><span class="o">-[</span><span class="p">:</span><span class="n">contains</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">continent</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">continent</span><span class="p">.</span><span class="n">page_id</span><span class="w"> </span><span class="k">IS NULL</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">continent</span><span class="p">:</span><span class="n">Redirect</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">continent</span><span class="p">:</span><span class="n">Disambiguation</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">continent</span><span class="w"> </span><span class="p">:</span><span class="n">Continent</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">continent</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">30</span><span class="w"></span>
+</pre></div>
 
-<p><strong>What can we say about nodes (pages) with large numbers of out-going links?</strong> Apriori, there are a a few obvious guesses: meta-pages, very large land-masses, or very well-documented (and thus popular) travel destinations.  You can see several such nodes in the output of the <code>mix stat</code> command mentioned above, and in the screenshot below.</p>
+
+<hr style="border-top: dotted 2px;">
+
+<h3>Regional Hierarchies</h3>
+<h4>Page-title data</h4>
+<p><strong>What about other geopolitical or administrative hierarchies?  Can we discover countries, cities, etc?</strong>  There are a few obvious things we can do here, like taking advantage of patterns in page titles to find counties, provinces, and regions.</p>
+<div class="highlight"><pre><span></span><span class="c1">// Query to label province pages as :Province</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="n">ENDS</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s">"(province)"</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="p">:</span><span class="n">Province</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">COUNT</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="w"></span>
+
+<span class="c1">// Query to label county pages as :County</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="n">ENDS</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s">"(county)"</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="p">:</span><span class="n">County</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">COUNT</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="w"></span>
+
+<span class="c1">// Query to label region pages as :Region</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="n">ENDS</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s">"(region)"</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="p">:</span><span class="n">Region</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">COUNT</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+<h4>Page-body data</h4>
+<p>At this point it's becoming clear the Wikivoyage <code>:contains</code> relationship hierarchy is somewhat complicated.  For instance since it is the case that Europe (a continent) contains Iberia (a region) which contains Spain (a country), there's no way that a naive query like "which nodes are exactly 1 <code>:contains</code> edge away from a continent" can be trusted to return <strong>only</strong> countries.</p>
+<p>Now certain domain-specific WikiMedia knowledge can be useful, namely <a href="https://en.wikivoyage.org/wiki/Wikivoyage:Article_status">article status</a> <a href="https://en.wikivoyage.org/wiki/Category:Article_classification_templates">classification templates</a>, for instance <a href="https://en.wikivoyage.org/wiki/Template:Usablecity">{{UsableCity}}</a>.  Note however that up until now we've only been using cypher regexes on title-properties, but to find {{UsableCity}} macros we'd have to match on WikiPage <code>body</code> properties (essentially this is repeatedly grepping like half a gigabyte of text).  </p>
+<p>I'll continue to use regexes and string functions in Cypher, but in production you should probably be using the full-text lucene search capabilities <sup id="sf-neo4j-cypher-wikivoyage-2-back"><a href="#sf-neo4j-cypher-wikivoyage-2" class="simple-footnote" title="which I've written about here">2</a></sup>.  </p>
+<div class="highlight"><pre><span></span><span class="c1">// Label pages invoking the {{UsableCity}} macro as :City</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">WITH</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">body</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">body</span><span class="w"></span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"></span>
+<span class="w">    </span><span class="n">body</span><span class="w"> </span><span class="n">CONTAINS</span><span class="w"> </span><span class="s">"{{usablecity}}"</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">    </span><span class="n">body</span><span class="w"> </span><span class="n">CONTAINS</span><span class="w"> </span><span class="s">"{{guidecity}}"</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">    </span><span class="n">body</span><span class="w"> </span><span class="n">CONTAINS</span><span class="w"> </span><span class="s">"{{starcity}}"</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">:</span><span class="n">City</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+<p>For other labels we can do likewise and as a result our graph data structure will model the WikiVoyage ontology more and more closely.  Surprisingly, the <code>{{UsableCountry}}</code> template macro is not very useful so we skip that in the cypher code below.</p>
+<div class="highlight"><pre><span></span><span class="c1">// Label pages invoking the {{UsableAirport}} macro as :Airport</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">WITH</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">body</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">body</span><span class="w"></span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"></span>
+<span class="w">  </span><span class="n">body</span><span class="w"> </span><span class="n">CONTAINS</span><span class="w"> </span><span class="s">"{{usableairport}}"</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">body</span><span class="w"> </span><span class="n">CONTAINS</span><span class="w"> </span><span class="s">"{{guideairport}}"</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">body</span><span class="w"> </span><span class="n">CONTAINS</span><span class="w"> </span><span class="s">"{{starairport}}"</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">:</span><span class="n">Airport</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+
+<span class="c1">// Label pages invoking the {{UsableRegion}} macro as :Region</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">WITH</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">body</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">body</span><span class="w"></span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"></span>
+<span class="w">  </span><span class="n">body</span><span class="w"> </span><span class="n">CONTAINS</span><span class="w"> </span><span class="s">"{{usableregion}}"</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">body</span><span class="w"> </span><span class="n">CONTAINS</span><span class="w"> </span><span class="s">"{{guideregion}}"</span><span class="w"> </span><span class="n">OR</span><span class="w"></span>
+<span class="w">  </span><span class="n">body</span><span class="w"> </span><span class="n">CONTAINS</span><span class="w"> </span><span class="s">"{{starregion}}"</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">:</span><span class="n">Region</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+<h3>Finding Countries</h3>
+<p>Having correct and fairly complete <code>:Country</code> labels for the graph would be really nice.  But based on <a href="https://en.wikivoyage.org/wiki/Special%3aWhatLinksHere/Template%3ausablecountry">this page</a> it's clear that identifying countries with the <code>{{UsableCountry}}</code> macro in page bodies is not painting a very complete picture.  To improve the model for our toy world (and to demonstrate some other neat things you can do with cypher) <strong>we'll have to cheat a bit</strong>.  The instructions below will download and parse <a href="https://github.com/opentraveldata/opentraveldata/blob/master/data/countries/27org/27org_iso_country_list_2007_12.sql">this country list</a>, provided via the <a href="https://github.com/opentraveldata/">OpenTravelData</a> project.  </p>
+<p>This OpenTravelData stuff is in SQL, and I just quickly massaged it into shape with a bash pipeline.  The resulting text file is <a href="https://github.com/mattvonrocketstein/rapidmind/blob/master/country_list.txt">included in the rapidmind repository</a>.  Just for completeness, I'll be explicit about the bash pipeline below.</p>
+<div class="highlight"><pre><span></span>$ wget -O country_list.sql https://raw.githubusercontent.com/opentraveldata/opentraveldata/master/data/countries/27org/27org_iso_country_list_2007_12.sql
+$ cat country_list.sql <span class="p">|</span> grep INSERT <span class="p">|</span> awk -F <span class="s2">"\("</span> <span class="s1">'{print $2}'</span><span class="p">|</span>awk -F <span class="s2">",'"</span> <span class="s1">'{print substr($3,0,length($3))}'</span><span class="p">|</span>awk -F <span class="s2">"',"</span> <span class="s1">'{print $1}'</span>cat country_list.sql <span class="p">|</span> grep INSERT <span class="p">|</span> awk -F <span class="s2">"\("</span> <span class="s1">'{print $2}'</span><span class="p">|</span>awk -F <span class="s2">",'"</span> <span class="s1">'{print substr($3,0,length($3))}'</span><span class="p">|</span>awk -F <span class="s2">"',"</span> <span class="s1">'{print $1}'</span>
+</pre></div>
+
+
+<p>Luckily for us, a text file with newlines is a kind of CSV file and Neo4j does <a href="http://blog.comperiosearch.com/blog/2015/02/04/csv-import-tricks-neo4j/">CSV parsing</a>.  You do need to have the CSV file somehow available to the Neo4j server, so if you want to avoid copying a file to your virtual machine or whatever you can use the link I mentioned earlier from the rapidmind repository.</p>
+<div class="highlight"><pre><span></span><span class="c1">// Query to label country nodes as :Country</span>
+<span class="c1">WITH 'https://raw.githubusercontent.com/mattvonrocketstein/rapidmind/master/country_list.txt'</span>
+<span class="k">AS</span><span class="w"> </span><span class="n">csv_url</span><span class="w"></span>
+<span class="n">LOAD</span><span class="w"> </span><span class="n">CSV</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">csv_url</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">csv_line</span><span class="w"></span>
+<span class="k">WITH</span><span class="w"> </span><span class="n">csv_line</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">country_name</span><span class="w"></span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="n">country_name</span><span class="w"></span>
+<span class="k">SET</span><span class="w"> </span><span class="n">n</span><span class="p">:</span><span class="n">Country</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+<p></p><center>
+  <img alt="results for country query" src="img/neo-country.png">
+</center>
+<hr style="border-top: dotted 2px;"><p></p>
+<h2>Questions and Queries</h2>
+<h3>Innate Ambiguity</h3>
+<p><strong>How frequently does ambiguity occur in place names?</strong> This is a tricky question to answer <em>exactly</em> with the data but by counting redirects and disambiguation pages we can pretty easily find information that gets us pointed in the right direction.  The basic approach is</p>
+<ol>
+<li>Find all pages with mediawiki-style redirects with a regex.  The page body will look like <code>#REDIRECT [[RedirectTarget]]</code></li>
+<li>Find the page each page redirects to, de-duplicate the resulting set and count the elements</li>
+</ol>
+<p>No doubt there's a better way to do it, but the cypher I came up with looks like what you see below.  The <code>split()</code> calls you see there are taking apart the <code>`[[link]]</code> markdown and the reference to "#" is handling a special-case where some pages redirect to <em>subsections</em> of other pages.</p>
+<div class="highlight"><pre><span></span><span class="c1">// Counts unique redirection targets</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">Redirect</span><span class="p">)</span><span class="w"></span>
+<span class="k">WITH</span><span class="w"></span>
+<span class="w">  </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">split</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="n">body</span><span class="p">,</span><span class="err">'</span><span class="o">[[</span><span class="err">'</span><span class="p">)</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="p">,</span><span class="err">'</span><span class="o">]]</span><span class="err">'</span><span class="p">)</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="p">,</span><span class="err">'#'</span><span class="p">)</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">redirect_to</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">redirect_to</span><span class="p">)</span><span class="w"></span>
+
+<span class="c1">// Counts disambiguation pages</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">Disambiguation</span><span class="p">)</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">page</span><span class="p">)</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">page</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+
+
+<h3>Redirect Edges</h3>
+<p>Since we've already written most of the correct query in the previous section, why not be opportunistic and add <code>:redirects_to</code> edges to the model?  It's tempting also to copy attributes and labels "across" the redirection edge, but I'm trying to avoid it until there's a specific use-case in mind (probably it would improve certain queries but be to the detriment of others).</p>
+<div class="highlight"><pre><span></span><span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">source</span><span class="p">:</span><span class="n">Redirect</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">WITH</span><span class="w"></span>
+<span class="w">      </span><span class="n">source</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">split</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">body</span><span class="p">,</span><span class="err">'</span><span class="o">[[</span><span class="err">'</span><span class="p">)</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="p">,</span><span class="err">'</span><span class="o">]]</span><span class="err">'</span><span class="p">)</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="p">,</span><span class="err">'#'</span><span class="p">)</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">target_title</span><span class="w"></span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="p">:</span><span class="n">WikiPage</span><span class="w"> </span><span class="p">{</span><span class="n">title</span><span class="p">:</span><span class="w"> </span><span class="n">target_title</span><span class="p">})</span><span class="w"></span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">-[</span><span class="p">:</span><span class="n">redirects_to</span><span class="o">]-&gt;</span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(*)</span><span class="w"></span>
+</pre></div>
+
+
+<hr style="border-top: dotted 2px;">
+
+<h3>Popular Topics</h3>
+<p><strong>What can we say about nodes (pages) with large numbers of out-going links?</strong> Apriori, there are a a few obvious guesses: these pages might represent meta-pages, very large land-masses, or very well-documented (and thus popular?) travel destinations.  You can see several such nodes in the output of the cypher query below:</p>
+<div class="highlight"><pre><span></span><span class="c1">// Query for finding the top-ten nodes by link-count</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-[</span><span class="n">r</span><span class="p">:</span><span class="n">links_to</span><span class="o">]-</span><span class="p">()</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">rel_count</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">rel_count</span><span class="w"> </span><span class="k">desc</span><span class="w"></span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
+</pre></div>
+
+
 <p>Taking for instance the meta-page for the <a href="https://en.wikivoyage.org/wiki/UNESCO_World_Heritage_List">UNESCO World Heritage List</a> here are some interesting queries:</p>
 <div class="highlight"><pre><span></span><span class="c1">// Query to count the out-going links of a particular node</span>
 <span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">&#39;</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">&#39;</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
 <span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">rel</span><span class="p">)</span><span class="w"></span>
 
 <span class="c1">// Query to graph part of the neighborhood in the WebUI</span>
 <span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">&#39;</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">&#39;</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
 <span class="k">RETURN</span><span class="w"> </span><span class="n">rel</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
 </pre></div>
 
 
-<h2>Curating the Graph</h2>
-<p>Based on some of the ideas in the previous section, let's augment the graph itself with some of what we learned from both successful and unsuccessful queries.  In other words this section contains cypher that actually update the graph instead of just querying it.  </p>
-<p>First, a cypher query that  <a href="http://graphaware.com/neo4j/2015/01/16/neo4j-graph-model-design-labels-versus-indexed-properties.html">tags</a> the pages corresponding to continents as Continents.</p>
-<div class="highlight"><pre><span></span><span class="c1">// Placeholder</span>
-</pre></div>
+<hr style="border-top: dotted 2px;">
 
-
+<h3>Edge Weights</h3>
 <p>Also in the previous section, we talked about a type of naive query that could not possibly work for finding countries 1 step beneath continents and cities 1 step beneath countries.  What we can do however is this: update "contains" edge in the graph to have a "containment-depth" property.  Edges where containment-depth==1 may not necessarily be countries, but this information ought to be at least heuristically useful in some other circumstance.</p>
 <div class="highlight"><pre><span></span><span class="c1">// Placeholder</span>
 </pre></div>
 
 
-<h2>Extending the Graph</h2>
+<h2>Other Ideas</h2>
+<p>It's quite tempting to see what else can be done to make the data structure more complete, perhaps by using <a href="https://github.com/opentraveldata">open travel data</a> or by enhancing the dump parser to understand the <code>##Get In</code> and <code>##Get Out</code> sections of wikivoyage pages to make a "transport-connection" relationship type.  To be continued..</p>
 <p>Placeholder</p>
 <h2>Footnotes</h2>
+<p><br></p><ol class="simple-footnotes"><li id="sf-neo4j-cypher-wikivoyage-1">That is, all nodes with the exception of pages that are linked to from somewhere but do not actually exist <a href="#sf-neo4j-cypher-wikivoyage-1-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-cypher-wikivoyage-2">which I've written about <a href="neo4j-lucene.html">here</a> <a href="#sf-neo4j-cypher-wikivoyage-2-back" class="simple-footnote-back">↩</a></li></ol>
                 <script>
                   $(document).ready(
                     function(){

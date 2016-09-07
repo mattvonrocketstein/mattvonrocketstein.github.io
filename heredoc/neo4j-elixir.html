@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Loading Wikimedia data into Neo4j with Elixir</title>
+    <title>heredoc - Loading Wikimedia into Neo4j with Elixir</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -13,18 +13,19 @@
 <link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="elixir,graphdb" />
+        <meta name="keywords" content="elixir,graphdb,data-science" />
         <meta name="description" content="Loading wikipedia into neo4j with Elixir" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Loading Wikimedia data into Neo4j with Elixir"/>
+        <meta property="og:title" content="Loading Wikimedia into Neo4j with Elixir"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html"/>
         <meta property="og:description" content="Loading wikipedia into neo4j with Elixir"/>
         <meta property="article:published_time" content="2016-08-31" />
             <meta property="article:section" content="Elixir" />
             <meta property="article:tag" content="elixir" />
             <meta property="article:tag" content="graphdb" />
+            <meta property="article:tag" content="data-science" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -146,10 +147,10 @@ heredoc            </a>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-cypher-wikivoyage.html">
-                            Exploring Wikivoyage data with Neo4j and Cypher</li>
+                            Exploring data with Neo4j and Cypher</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
-                            Loading Wikimedia data into Neo4j with Elixir</li>
+                            Loading Wikimedia into Neo4j with Elixir</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">
                             Setting up neo4j with vagrant and ansible</li>
@@ -157,8 +158,8 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">
                             IElixir Notebook in Docker</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">
-                            Python release automation</li>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">
+                            Datadog Event Publishing</li>
                         </a>
               </ul>
 
@@ -175,7 +176,7 @@ heredoc            </a>
                             boilerplate
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
                         </a>
@@ -190,7 +191,7 @@ heredoc            </a>
                             docker
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
                             elixir
                         </a>
@@ -200,12 +201,12 @@ heredoc            </a>
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-0">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">
                             python
                         </a>
@@ -240,7 +241,7 @@ heredoc            </a>
             <ol class="breadcrumb">
                 <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
                 <li><a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html" title="Elixir">Elixir</a></li>
-                <li class="active">Loading Wikimedia data into Neo4j with Elixir</li>
+                <li class="active">Loading Wikimedia into Neo4j with Elixir</li>
             </ol>
     <section id="content">
         <article>
@@ -248,8 +249,8 @@ heredoc            </a>
                 <h1>
                     <a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html"
                        rel="bookmark"
-                       title="Permalink to Loading Wikimedia data into Neo4j with Elixir">
-                        Loading Wikimedia data into Neo4j with Elixir
+                       title="Permalink to Loading Wikimedia into Neo4j with Elixir">
+                        Loading Wikimedia into Neo4j with Elixir
                     </a>
                 </h1>
             </header>
@@ -270,21 +271,24 @@ heredoc            </a>
 	<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
         /
 	<a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">graphdb</a>
+        /
+	<a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">data-science</a>
     
 </footer><!-- /.post-info -->
                     </div>
                 </div>
 
-                <h2>Intro and Motivation</h2>
-<p>This post is part 1 of 2 about a toy application that parses wikimedia dump files with <a href="http://elixir-lang.org/">elixir</a>, and throws the results into a graph database.  I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-neo4j-elixir-1-back"><a href="#sf-neo4j-elixir-1" class="simple-footnote" title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P '>1</a></sup>  <a href="neo4j-cypher-wikivoyage.html">Part 2</a></p>
-<p>Initially I intended to parse only <strong>wikipedia</strong> dump files, thinking that it would be very interesting to try and construct graph queries that could deduce stuff like "trigonometry is a prerequisite concept of calculus" based on page linkages.  I still might look into this at some point, but after I realized that more or less the same unmodified parsing code could be used with other wikimedia dumps I had another idea.</p>
-<p><a href="https://www.wikivoyage.org/">Wikivoyage</a> is a wikimedia project that constitutes an open travel guide.  Inevitably this dataset will be more tractable than using all of wikipedia.   Besides that, I am very interested in travel<sup id="sf-neo4j-elixir-2-back"><a href="#sf-neo4j-elixir-2" class="simple-footnote" title="Check out my (somewhat unfinished) travel blog here!">2</a></sup> and, being a frequent user of wikivoyage myself, I expected that the link structures embedded there might be somewhat less random than what I'd find trying to parse wikipedia.</p>
+                <h2>Part 1: Intro</h2>
+<p>This post is part 1 of 2 about a toy application that parses wikimedia dump files with <a href="http://elixir-lang.org/">elixir</a>, and throws the results into a graph database.  I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-neo4j-elixir-1-back"><a href="#sf-neo4j-elixir-1" class="simple-footnote" title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P '>1</a></sup>  If you're most interested in the resulting data structure and how it can be interrogated, you can leave this part and <a href="neo4j-cypher-wikivoyage.html">skip to part 2</a>.</p>
+<h2>Motivation</h2>
+<p>Initially I intended to parse only <strong>wikipedia</strong> dump files, thinking that it would be very interesting to try and construct graph queries that could infer stuff like "trigonometry is a prerequisite concept of calculus" based on page linkages.  I still might look into this at some point, but after I realized that more or less the same unmodified parsing code could be used with other MediaWiki data dumps I had other ideas.</p>
+<p>Maybe the best MediaWiki site to throw into a graph database is the tree of life the friendly folks at [WikiSpecies][https://species.wikimedia.org/wiki/Main_Page] are building.  This project idea is tempting but I'm setting it aside for time being.</p>
+<p>Instead for the purposes of this experiment I'll be parsing <a href="https://www.wikivoyage.org/">WikiVoyage</a> data dumps, which is perhaps not so well-known.  WikiVoyage is a MediaWiki project that is building a open travel guide, and I'm going to run with it over other stuff because this dataset should be large enough to be interesting yet quite tractable.   Besides that, I am very interested in travel<sup id="sf-neo4j-elixir-2-back"><a href="#sf-neo4j-elixir-2" class="simple-footnote" title="You can check out my (somewhat neglected) travel blog here!">2</a></sup> and geography.  Being a frequent user of WikiVoyage myself, I expected that the inter-page linking structures embedded in content there would be in a kind of information theoretical sweet spot, that is to say less random than what I'd find parsing Wikipedia, but less structured than what I'd find trying to parse WikiSpecies.  </p>
 <p><img alt="" src="img/neo-unesco.png"></p>
 <h2>The Players</h2>
 <p>There are <a href="https://en.wikipedia.org/wiki/Graph_database#List_of_graph_databases">different graph databases</a> out there, but without a lot of compare-and-contrast I decided to go with <a href="https://neo4j.com/">neo4j</a> simply because the community surrounding it is active and growing (and naturally it has all the obligatory WebScale hype). It seems like a good place to start experimenting, but I'm not yet in a position to advocate or condemn it compared with anything else.</p>
-<p>For writing GraphDB queries I'll be using Cypher, the weapon of choice of Neo4j.  <a href="http://react-etc.net/entry/graph-query-languages-graphql-opencypher-gremlin-and-sparql">Other query languages</a> are out there, and I can't condemn or condone them either.  In particular the extent to which Cypher and OpenCypher are exactly compatible is mysterious to me and knowing more about this would be really important for production use-cases.. but none of this really matters for my toy project.</p>
-<p>On the elixir side of things, communication with neo4j is done using a combination of <a href="https://github.com/CollabRx/callisto/">callisto</a> and <a href="https://github.com/florinpatrascu/neo4j_sips">neo4j_sips</a>.</p>
-<p>For parsing wikipedia dump files and XML generally, I'm using <a href="https://github.com/willemdj/erlsom">erlsom</a> which is kind of arcane.  I'm very much indebted to <a href="http://benjamintan.io/blog/2014/10/01/parsing-wikipedia-xml-dump-in-elixir-using-erlsom/">this post</a> for providing a complete working example.</p>
+<p>For writing GraphDB queries I'll be using Cypher, the standard weapon of choice of Neo4j.  <a href="http://react-etc.net/entry/graph-query-languages-graphql-opencypher-gremlin-and-sparql">Other query languages</a> are out there, and I can't condemn or condone them since I don't know enough.  In particular the extent to which Cypher and OpenCypher are truly compatible is mysterious to me and knowing more about this would be really important for production use-cases.. but none of this really matters for a toy project.</p>
+<p>On the Elixir side of things, communication with Neo4j is done using a combination of <a href="https://github.com/CollabRx/callisto/">callisto</a> and <a href="https://github.com/florinpatrascu/neo4j_sips">neo4j_sips</a>.  For parsing XML I'm using <a href="https://github.com/willemdj/erlsom">erlsom</a> which is fairly arcane and pretty awkward to use.  I'm very much indebted to <a href="http://benjamintan.io/blog/2014/10/01/parsing-wikipedia-xml-dump-in-elixir-using-erlsom/">this post</a> for providing a complete working example.  All my <a href="https://github.com/mattvonrocketstein/rapidmind">data-dump parsing code</a> itself will be used here but not discussed much, and that part is basically just a black box for the purposes of this writeup.  </p>
 <h2>Setting up Neo4j</h2>
 <p>Unless you've already got it up and running, you'll want to install neo4j.  It'll require about 2G RAM at minimum and a java installation.. this can be somewhat of a pain in the ass.  You can accomplish the installation however you like, but I opted not to clutter up my primary development environment.  There is <a href="https://neo4j.com/developer/docker/">official support for docker</a> which you might like to look into.</p>
 <p>Personally my standard development environment is an Ubuntu guest on an OSX host, using virtualbox. Only my guests run docker, since I'm fastidious about keeping the host OS as pristine as possible.   Given that I suspected that using docker in the guest for "serious data" might have similarly serious IO bottlenecks (not that I've done real benchmarks).  Thus I opted for a vagrant based approach in a second guest, but your approach may vary.</p>
@@ -301,15 +305,15 @@ heredoc            </a>
 
 <p>If you <strong>cannot</strong> connect to neo, then make sure the server is listening on 0.0.0.0 instead of 127.0.0.1  (this setting is inside <code>/etc/neo4j/neo4j-server.properties</code>).  <sup id="sf-neo4j-elixir-3-back"><a href="#sf-neo4j-elixir-3" class="simple-footnote" title=" Other modifications you might like to make: increase the ulimit in the default init script at /etc/init.d/neo4j-service. ">3</a></sup></p>
 <h2>Got Data?</h2>
-<p>A direct link to the latest XML datadump up the english wikivoyage content is always <a href="https://dumps.wikimedia.org/enwikivoyage/latest/enwikivoyage-latest-pages-meta-current.xml.bz2">here</a>.  You'll need a copy of this before proceeding to parsing in the next step</p>
+<p>A direct link to the latest XML datadump up the English WikiVoyage content is always <a href="https://dumps.wikimedia.org/enwikivoyage/latest/enwikivoyage-latest-pages-meta-current.xml.bz2">here</a>.  You'll need a copy of this before proceeding to parsing in the next step</p>
 <div class="highlight"><pre><span></span>$ wget https://dumps.wikimedia.org/enwikivoyage/latest/enwikivoyage-latest-pages-meta-current.xml.bz2
 $ bunzip2 enwikivoyage-latest-pages-meta-current.xml.bz2
 $ mv enwikivoyage-latest-pages-meta-current.xml wikivoyage.xml
 </pre></div>
 
 
-<h2>Clone and configure</h2>
-<p>This assumes of course that you already have elixir installed.  Afterwards, clone my elixir project repository and install the dependencies with mix</p>
+<h2>Clone &amp; Configure</h2>
+<p>In this writeup I won't go into depth much about the code itself.. just how to use it.  All this assumes of course that you already have <a href="http://elixir-lang.org/install.html">Elixir installed</a>.  Afterwards, clone <a href="https://github.com/mattvonrocketstein/rapidmind">my elixir project repository</a> and install the dependencies with mix</p>
 <div class="highlight"><pre><span></span>$ git clone https://github.com/mattvonrocketstein/rapidmind.git
 $ <span class="nb">cd</span> rapidmind
 $ mix deps.get
@@ -322,13 +326,13 @@ $ mix deps.compile
 </pre></div>
 
 
-<p>For me, I have two vagrant guests: one for elixir development and one for the neo4j server.  But since the neo4j guest is portforwarded back to the host, my development guest is configured to look for neo4j on the host.</p>
+<p>For me, I have two Vagrant guests: one for Elixir development and one for the Neo4j server.  But since the Neo4j guest is port-forwarded back to the host, my development guest is configured to look for Neo4j on the host.</p>
 <div class="highlight"><pre><span></span><span class="nl">url:</span> <span class="s">"http://10.0.2.2:7474"</span><span class="o">,</span>
 </pre></div>
 
 
-<h2>Parsing data</h2>
-<p>Assuming you have elixir installed and have unpacked the XML data as in the previous section, you can now run the parser against the XML dump.  In terms of what is populated in the graph DB, this will create "WikiPage" nodes and "links_to" relationships to capture<sup id="sf-neo4j-elixir-4-back"><a href="#sf-neo4j-elixir-4" class="simple-footnote" title=' Link relationships are parsed from page bodies with regexes looking for "[[" and "]]" '>4</a></sup> the inter-wiki links from page bodies.</p>
+<h2>Parsing Data</h2>
+<p>After grabbing to code and the data-dump, you should now be able to run the parser against the XML.  In terms of what is populated in the graph DB, this will create "WikiPage" nodes and "links_to" relationships to capture<sup id="sf-neo4j-elixir-4-back"><a href="#sf-neo4j-elixir-4" class="simple-footnote" title=' Link relationships are parsed from page bodies with regexes looking for "[[" and "]]" '>4</a></sup> the inter-wiki links from page bodies.</p>
 <div class="highlight"><pre><span></span>$ mix load wikivoyage.xml
 
 <span class="m">16</span> outgoing links <span class="k">for</span> Aba <span class="o">(</span>prefecture<span class="o">)</span>
@@ -343,7 +347,7 @@ extracting linked pages <span class="k">for</span> <span class="sb">`</span>Abad
 </pre></div>
 
 
-<p>Loading the entire wikidump into neo4j can take many hours, it all depends on your virtual machine resources.  Loading the inter-wiki links will work with everything from wikipedia to wiktionary, etc</p>
+<p>Loading the entire wikidump into Neo4j can take many hours, it all depends on your virtual machine resources.  Loading the inter-wiki links will work with everything from wikipedia to wiktionary, etc</p>
 <p><strong>Loading extra relationships</strong> (things other than page links) is possible.  There's the <code>mix partof [dumpfile.xml]</code> command, which will add "part_of" relationships to Neo4j.  This particular relationship is more specific to wikivoyage (as in California is part_of the UnitedStates), whereas simply extracting the link structure will work for wikipedia/wiktionary, etc.</p>
 <div class="highlight"><pre><span></span>$ mix partof wikivoyage.xml
 
@@ -358,6 +362,21 @@ Nebraska Panhandle -contains-&gt; Bayard
 
 <h2>Other Commands</h2>
 <p>Other commands interacting with the graph database in one way or another are provided for in this project via elixir's <a href="http://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html">mix tool</a>.</p>
+<p><strong>Updating just one Node</strong> is a frequent task if you want to parse it into the graph database without parsing all of the data-dump.  Use <code>mix update &lt;page_title&gt;</code> for this.  The entire data-dump still has to be scanned, which is time consuming, but only the data for page-title you specified will be sent to Neo4j so this is much, much faster than running <code>mix load</code>.  You can use this command judiciously if you want to load only small connected subsets of the wikivoyage graph.  Example output is below:</p>
+<div class="highlight"><pre><span></span>$ mix update <span class="s2">"Aachen"</span> ./wikivoyage.xml
+
+skipping 3Days 2Night Chiang Mai to Chiang Rai
+skipping <span class="m">3</span> Days in Block Island
+skipping <span class="m">4</span> Days Mae Hong Son Loop
+skipping <span class="m">4</span> June 2004
+skipping <span class="m">7</span> 2
+skipping 7+2
+skipping <span class="m">88</span> Temple Pilgrimage
+
+extracting linked pages <span class="k">for</span> <span class="sb">`</span>Aachen<span class="sb">`</span>
+</pre></div>
+
+
 <p><strong>Basic statistics</strong> about the graph database can be seen with the <code>mix stats</code> command.  Example output looks something like this:</p>
 <div class="highlight"><pre><span></span>$ mix stats
 
@@ -373,7 +392,7 @@ Top nodes by relationship-count:
 </pre></div>
 
 
-<p><strong>To purge neo</strong> without destroying the whole neo4j virtual machine you can use <code>mix wipedb</code>.  This will also (re)set neo4j integrity constraints on the empty database.</p>
+<p><strong>To purge neo</strong> without destroying the whole Neo4j virtual machine you can use <code>mix wipedb</code>.  This will also (re)set Neo4j integrity constraints on the empty database.</p>
 <div class="highlight"><pre><span></span>$ mix wipedb
 
 <span class="m">1961</span> items left in database
@@ -392,14 +411,14 @@ database is empty.  adding indexes
 
 
 <p><strong>Running cypher queries</strong> directly against the Neo4j server is also possible using the <code>mix cypher</code> command. See the example below:</p>
-<div class="highlight"><pre><span></span>$ mix cypher <span class="s2">"match n where n.title='Yosemite' return n"</span>
+<div class="highlight"><pre><span></span>$ mix cypher <span class="s2">"MATCH n WHERE n.title='Yosemite' RETURN n"</span>
 <span class="o">{</span>:ok, <span class="o">[</span>%<span class="o">{</span><span class="s2">"n"</span> <span class="o">=</span>&gt; %<span class="o">{</span><span class="s2">"page_id"</span> <span class="o">=</span>&gt; 40124, <span class="s2">"title"</span> <span class="o">=</span>&gt; <span class="s2">"Yosemite"</span><span class="o">}}]}</span>
 </pre></div>
 
 
 <h2>Exploring the data</h2>
-<p>So, what we have at this point is a simple but reasonably large graph, where nodes are Wikivoyage pages, and we have 2 kinds of inter-node relationships specified.  What the hell is this datastructure?  In short <strong>we have a good model for describing how the website connects to itself</strong>.  Because the website itself is basically trying to describe the world we have model for that too, despite the fact that it's low resoluton and second order!  So just for fun, what kinds of questions can we ask and answer with this model?  The data diving begins in <a href="neo4j-cypher-wikivoyage.html">part 2 of this series.</a></p>
-<h2>Footnotes</h2><ol class="simple-footnotes"><li id="sf-neo4j-elixir-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a href="#sf-neo4j-elixir-1-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-2">Check out my (somewhat unfinished) travel blog <a href="/travel">here</a>! <a href="#sf-neo4j-elixir-2-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a href="#sf-neo4j-elixir-3-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a href="#sf-neo4j-elixir-4-back" class="simple-footnote-back">↩</a></li></ol>
+<p>So, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages, and we have 2 kinds of inter-node relationships specified.  What the hell is this data structure?  In short <strong>we have a good model for describing how the website connects to itself</strong>.  Because the website itself is basically trying to describe the world, we sort of have model for the world too even if it's shall we say low-res and second order.  What kinds of questions can we ask and answer with this model, and how can we curate and improve its accuracy?  The data diving begins in <a href="neo4j-cypher-wikivoyage.html">part 2 of this series.</a></p>
+<h2>Footnotes</h2><ol class="simple-footnotes"><li id="sf-neo4j-elixir-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a href="#sf-neo4j-elixir-1-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-2">You can check out my (somewhat neglected) travel blog <a href="/travel">here</a>! <a href="#sf-neo4j-elixir-2-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a href="#sf-neo4j-elixir-3-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a href="#sf-neo4j-elixir-4-back" class="simple-footnote-back">↩</a></li></ol>
                 <script>
                   $(document).ready(
                     function(){
