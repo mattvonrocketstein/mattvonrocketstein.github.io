@@ -145,20 +145,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/data-science-links.html">
+                            Links for Topics in data-science</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-cypher-wikivoyage.html">
                             Exploring data with Neo4j and Cypher</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">
-                            Loading Wikimedia into Neo4j with Elixir</li>
+                            Loading MediaWiki into Neo4j with Elixir</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">
                             Setting up neo4j with vagrant and ansible</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">
                             IElixir Notebook in Docker</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">
-                            Datadog Event Publishing</li>
                         </a>
               </ul>
 
@@ -275,7 +275,9 @@ heredoc            </a>
                     </div>
                 </div>
 
-                <h2>Commit hooks</h2>
+                <h2>Intro</h2>
+<p>This write-up talks about patterns that work their way into all my Elixir projects.  If you're interested in discussion around this and are feeling cut-and-paste'y then just read on.  If you want a automation tool that actually generates this boilerplate, consider using <a href="cookiecutter.readthedocs.io">cookiecutter</a>, which can be used to make all kinds of files/directory structures from templates.  My elixir project template for cookiecutter includes everything discussed on this page, and is <a href="https://github.com/mattvonrocketstein/cookiecutter-elixir-project">on github</a>.  </p>
+<h2>Commit hooks</h2>
 <p>Regardless of programming language, I've come to believe that linting should be done strictly, constantly, and consistently across all contributing project members.  Thus, I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
 <p>Another benefit of the hooks approach is that it works better with code-bases that are large and under construction, because hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once.</p>
 <p>I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple; just make a <code>.pre-commit-config.yaml</code> file in your source root.  For elixir code my hooks normally look something like what you see below (to see my python hooks <a href="#">go here</a>).  </p>
@@ -383,8 +385,8 @@ $ git push
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">Loading MediaWiki into Neo4j with Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir.html">Loading Wikimedia into Neo4j with Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
     </ul>
 </section>
