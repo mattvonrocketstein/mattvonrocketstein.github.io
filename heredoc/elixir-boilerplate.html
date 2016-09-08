@@ -276,7 +276,9 @@ heredoc            </a>
                 </div>
 
                 <h2>Intro</h2>
-<p>This write-up talks about patterns that work their way into all my Elixir projects.  If you're interested in discussion around this and are feeling cut-and-paste'y then just read on.  If you want a automation tool that actually generates this boilerplate, consider using <a href="cookiecutter.readthedocs.io">cookiecutter</a>, which can be used to make all kinds of files/directory structures from templates.  My elixir project template for cookiecutter includes everything discussed on this page, and is <a href="https://github.com/mattvonrocketstein/cookiecutter-elixir-project">on github</a>.  </p>
+<p>This write-up talks about aspects of project skeletons that eventually end up in all my Elixir projects.  </p>
+<p>If you're interested in discussion around this and are feeling cut-and-paste'y then just read on.  </p>
+<p>If you want a automation tool that actually generates this boilerplate, consider using <a href="cookiecutter.readthedocs.io">cookiecutter</a>, which can be used to make all kinds of files/directory structures from templates.  My elixir project template for cookiecutter includes everything discussed on this page, and is <a href="https://github.com/mattvonrocketstein/cookiecutter-elixir-project">on github</a>.  </p>
 <h2>Commit hooks</h2>
 <p>Regardless of programming language, I've come to believe that linting should be done strictly, constantly, and consistently across all contributing project members.  Thus, I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
 <p>Another benefit of the hooks approach is that it works better with code-bases that are large and under construction, because hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once.</p>
