@@ -314,7 +314,7 @@ $ git push
 
 
 <h2>Extra dependencies</h2>
-<p>Several dependencies find their way into almost all my elixir projects, most of them related to static-analysis and mocking for tests.  Inside <em>mix.exs</em> modify the <code>deps</code> function as follows:</p>
+<p>Several dependencies find their way into almost all my elixir projects, most of them related to testing and static-analysis.  Inside <em>mix.exs</em> modify the <code>deps</code> function as follows:</p>
 <div class="highlight"><pre><span></span><span class="kd">defp</span> <span class="n">deps</span> <span class="k">do</span>
   <span class="p">[</span>
     <span class="c1">#... your other project dependencies ...</span>
@@ -337,6 +337,22 @@ $ git push
 </pre></div>
 
 
+<h3>Static analysis</h3>
+<p>After you've added the dependencies as above and run <code>mix deps.get</code>, you can invoke the  linter with the command line below.  See <a href="https://github.com/lpil/dogma">the dogma proejct</a> for more details.</p>
+<div class="highlight"><pre><span></span>$ mix dogma
+</pre></div>
+
+
+<p>To use <a href="https://github.com/jeremyjh/dialyxir">dialyxir</a> for the first time you have to build the <a href="https://github.com/jeremyjh/dialyxir#plt">persistent lookup table</a>, which takes a while.</p>
+<div class="highlight"><pre><span></span>$ mix dialyzer.plt
+</pre></div>
+
+
+<p>Thereafter, just run</p>
+<div class="highlight"><pre><span></span>$ mix dialyzer
+</pre></div>
+
+
 <h2>Test coverage</h2>
 <p>Coverage with <a href="https://github.com/alfert/coverex">coverex</a> requires a modification to the <code>project</code> function in <em>mix.exs</em>, as well as the coverex dependency mentioned above.</p>
 <div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">project</span> <span class="k">do</span>
@@ -351,9 +367,14 @@ $ git push
 </pre></div>
 
 
+<p>To run tests with coverage, use the commandline below:</p>
+<div class="highlight"><pre><span></span>$ mix <span class="nb">test</span> --cover
+</pre></div>
+
+
 <h2>Custom Mix Tasks</h2>
 <p>One ends up making custom mix tasks in any project that's not an escript commandline.  It's also common to that your mix task needs to invoke other mix tasks, so that's demonstrated below.  If your mix task requires the app to be started, why not do the programmatic equivalent of <code>mix app.start</code>?</p>
-<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Mix.Tasks.Load</span> <span class="k">do</span>
+<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">Mix.Tasks.MyMixTask</span> <span class="k">do</span>
   <span class="kn">use</span> <span class="nc">Mix.Task</span>
 
   <span class="kd">def</span> <span class="n">run</span><span class="p">(</span><span class="n">anything</span><span class="p">)</span> <span class="k">do</span>
