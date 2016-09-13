@@ -60,10 +60,6 @@ body {
     hyphens: auto;
 }
 
-ol.simple-footnotes:before {
-  content: "Footenoteszzzz",
-}
-
 .li-choice:before {
   content: "★";
 }
