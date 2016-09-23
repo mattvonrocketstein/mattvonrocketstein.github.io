@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - The missing "ansible-role" command</title>
+    <title>heredoc - Ambient Calculus implementation in Elixir</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,23 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/ambient-calculus-implementation-in-elixir.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="ansible,python" />
-        <meta name="description" content="Ansible-role downloads, installs, and cleans temporary ansible roles without the need for manually editing ansible playbooks" />
+        <meta name="keywords" content="elixir,math,cs,unfinished" />
+        <meta name="description" content="The Ambient Calculus implemented in Elixir" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="The missing &#34;ansible-role&#34; command"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/ansible-role.html"/>
-        <meta property="og:description" content="Ansible-role downloads, installs, and cleans temporary ansible roles without the need for manually editing ansible playbooks"/>
-        <meta property="article:published_time" content="2016-07-28" />
-            <meta property="article:section" content="misc" />
-            <meta property="article:tag" content="ansible" />
-            <meta property="article:tag" content="python" />
+        <meta property="og:title" content="Ambient Calculus implementation in Elixir"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/ambient-calculus-implementation-in-elixir.html"/>
+        <meta property="og:description" content="The Ambient Calculus implemented in Elixir"/>
+        <meta property="article:published_time" content="2016-09-11" />
+            <meta property="article:section" content="elixir" />
+            <meta property="article:tag" content="elixir" />
+            <meta property="article:tag" content="math" />
+            <meta property="article:tag" content="cs" />
+            <meta property="article:tag" content="unfinished" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -274,21 +276,33 @@ heredoc            </a>
         <div class="col-sm-8">
             <ol class="breadcrumb">
                 <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">
-                  misc
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html" title="elixir">
+                  elixir
                 </a></li>
-                <li class="active">The missing "ansible-role" command</li>
+                <li class="active">Ambient Calculus implementation in Elixir</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/ambient-calculus-implementation-in-elixir.html"
                        rel="bookmark"
-                       title="Permalink to The missing "ansible-role" command">
-                        The missing "ansible-role" command
+                       title="Permalink to Ambient Calculus implementation in Elixir">
+                        Ambient Calculus implementation in Elixir
                     </a>
                 </span>
+    <br>
+    <table>
+      <tr>
+        <td>  </td>
+        <td>
+          Part <strong>1</strong> of
+          <strong>1</strong> in
+          <strong>"Ambient Calculus in Elixir"</strong>
+        </td>
+        <td>  </td>
+      </tr>
+    </table>
             </header>
             <div class="entry-content">
 <footer class="post-info">
@@ -300,8 +314,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2016-07-28T00:00:00-04:00">
-        Thu 28 July 2016
+      <time datetime="2016-09-11T20:20:00-04:00">
+        Sun 11 September 2016
       </time>
     </span>
   </td>
@@ -312,86 +326,102 @@ heredoc            </a>
 		</span>
 	</td>
 	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">ansible</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/math.html">math</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/cs.html">cs</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">unfinished</a>
 	</td>
+</tr>
+<tr>
+  <td class=center>
+    <span class="label label-default">Draft</span>
+  </td>
+  <td>
+    <strong>
+      <small>
+        <font color="red">Warning!</font>
+        You are reading a draft; this article is marked as unfinished.
+      </small>
+    </strong>
+  </td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <h2>The Problem</h2>
-<p>Whenever I'm building a server or simple local infrastructure for testing code, I start by looking at the <a href="https://galaxy.ansible.com/explore#/">available ansible roles</a>, hoping to find one that JustWorks for my use-case right out of the box.  One thing that annoys me though is that even for roles without extra variables, a playbook is still required.  Sure it's a small file, but creating it still annoys me when I'm just testing stuff.</p>
-<p>Typically these one-off playbooks look something like this:</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-  <span class="l l-Scalar l-Scalar-Plain">become</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-  <span class="l l-Scalar l-Scalar-Plain">become_method</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">sudo</span>
-  <span class="l l-Scalar l-Scalar-Plain">roles</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nv">role</span><span class="p p-Indicator">:</span> <span class="nv">username.rolename</span><span class="p p-Indicator">}</span>
-</pre></div>
-
-
-<p>There's a regular need for "anonymous roles", ie role application without using playbooks, even if only for simple use-cases.  </p>
-<h2>Prior Art</h2>
-<p>There's <a href="https://github.com/bbrfkr/ansible-art">already</a> <a href="https://github.com/msabramo/ansible_role_apply">a few</a> <a href="http://blog.oddbit.com/2015/10/19/stupid-ansible-tricks-running-a-role-from-the-command-line/">projects</a> that work around this, but none of them fit my use-case exactly (see the spec below).  </p>
-<p>All implementations seem to agree with my conclusion on one point though: while it's very attractive to consider using the ansible API directly (if only to have a practical task in mind while you get to know the API), doing this is awkward.  The simplest approach is to just create a temporary <code>playbook.yml</code> file, then run an appropriate <code>ansible-playbook</code> command on that file and get rid of it afterwards.</p>
-<h2>The Specification</h2>
-<p>I specifically wanted the following behaviour from the missing <code>ansible-role</code> command:</p>
+                <h2>Intro</h2>
+<p>This is the first post of an on-going series.</p>
+<h3>Ambient Calculus</h3>
+<p>Briefly, the ambient calculus is a mathematical abstraction and a member of a more general family of "<a href="https://en.wikipedia.org/wiki/Process_calculus">process calculi</a>".  Surprisingly simple yet Turing-complete phenomenon are a dime a dozen these days<sup id="sf-ambient-calculus-implementation-in-elixir-1-back"><a href="#sf-ambient-calculus-implementation-in-elixir-1" class="simple-footnote" title="For instance classics like Rule 110, Conway's life, but also several video games and card games ">1</a></sup>, but even considering the vast zoo of automata and calculi known to computer scientsts, the Ambient Calculus has some properties I find particularly interesting.  </p>
+<p>Here's the <a href="http://lucacardelli.name/Papers/MobileAmbients.A4.pdf">original paper</a> if you've got time.  Alternatively, here's the summary <a href="https://en.wikipedia.org/wiki/Ambient_calculus">from wikipedia</a>:</p>
+<blockquote>
+<p>The ambient calculus is a process calculus devised by Luca Cardelli and Andrew D. Gordon in 1998, and used to describe and theorise about concurrent systems that include mobility. Here mobility means both computation carried out on mobile devices (i.e. networks that have a dynamic topology), and mobile computation (i.e. executable code that is able to move around the network). The ambient calculus provides a unified framework for modeling both kinds of mobility.  It is used to model interactions in such concurrent systems as the Internet.</p>
+</blockquote>
+<h3>Elixir</h3>
+<p>All this talk of concurrent systems and mobile code at the core of the Ambient Calculus immediately got me thinking about an implementation in <a href="http://elixir-lang.org">Elixir</a>, just for fun.  It's an intriguing prospect because Elixir, running on top of the Erlang virtual machine, already implicitly supports hot-swapping code, <a href="http://elixir-lang.org/getting-started/mix-otp/distributed-tasks-and-configuration.html">distributed computing</a>, and has lots of sophisticated primitives for expressing ideas about concurrency.  I'll cover very briefly the various concurrency primitives that will be most useful in Ambient Calculus implementation later.</p>
+<h4>Concurrency in Elixir</h4>
 <ul>
 <li>
-<p>The <code>ansible-role</code> invocation should respect data intended for the <code>ansible-playbook</code> command, i.e. <code>ANSIBLE_*</code> shell variables should be passed through, and the unparsed aspect of the <code>ansible-role</code> command line also should be passed through to <code>ansible-playbook</code>.</p>
+<p><strong>Nodes</strong> are simply an Erlang (or in our case, Elixir) runtime capable of communicating with other such runtimes. From the Erlang point of view, there is some documentation <a href="http://erlang.org/doc/reference_manual/distributed.html">here</a> and from the Elixir point of view you can read about it <a href="http://elixir-lang.org/docs/stable/elixir/Node.html">here</a>.  With Elixir you can bootstrap a node like this <code>iex --sname node_name --cookie group_name -S mix</code>.  To get a list of known nodes: <code>Node.list()</code>.  To get the name of the current Node: <code>Node.self()</code>.  Nodes don't automatically connect so you need <code>Node.connect()</code>.. we'll talk later about auto-joining clusters later.</p>
 </li>
 <li>
-<p>Despite pass-through, the <code>ansible-role</code> command should also parse and understand the <em>--module-path=FOO</em> argument if it is given, and by default look for roles inside <code>FOO/roles</code>.</p>
+<p><strong><a href="http://elixir-lang.org/docs/stable/elixir/Agent.html">Agents</a></strong>, as state-wrappers, are a lot like objects except that they are concurrency-friendly by default.</p>
 </li>
 <li>
-<p>In the event no matching role is available locally then the role should be downloaded for me automatically using the <code>ansible-galaxy</code> command.</p>
+<p><strong><a href="http://elixir-lang.org/docs/stable/elixir/Task.html">Tasks</a></strong> are processes, often short-lived and created dynamically.</p>
 </li>
 <li>
-<p>In case a galaxy download is necessary and <code>--modulepath=FOO</code> is specified, it is downloaded to <code>FOO/roles</code> and not cleaned afterwards.  <em>File-system caching makes sense here because the <code>ansible-role</code> invocation is supposed to be quick and easy, but the usage of the role itself is less experimental.</em></p>
-</li>
-<li>
-<p>In case a galaxy download is necessary and <code>--modulepath</code> is <strong>NOT</strong> given, then there is no caching.  <em>File system cleaning for the role download makes sense here because this is a one-off experiment and it's no use cluttering the file system.</em>  Thus the role will be downloaded to a temporary directory and will be deleted afterwards (regardless of whether the application of the role succeeds).</p>
-</li>
-<li>
-<p>Apart from the standard <code>ansible-playbook</code> arguments, the <code>ansible-role</code> command line understands exactly 2 other arguments: the primary positional argument <code>role_name</code> (which is required and which specifies an ansible-galaxy role), and the <code>host</code> argument (which defaults to <code>localhost</code>).  Again, <strong>everything else</strong> on the command line will be passed through to the <code>ansible-playbook</code> invocation.</p>
-</li>
-<li>
-<p>After cleanup, the <code>ansible-role</code> command should return the same exit code as the implied <code>ansible-playbook</code> invocation.</p>
-</li>
-<li>
-<p>Finally, the <code>ansible-role</code> command should be available on pypi so it can be installed with pip.</p>
+<p><strong><a href="http://elixir-lang.org/docs/stable/elixir/Supervisor.html">Supervisors</a></strong> are processes which supervise other processes.  Supervisors may be nested.</p>
 </li>
 </ul>
-<h2>Examples</h2>
-<p>Most of the requirements above are straightforward, but let's look at a few examples.  The invocation <code>ansible-role username.rolename --module-path ./ansible --become</code> will download the role if it doesn't exist, and result in the command <code>ansible-playbook --module-path ./ansible --become $random_tmp_playbook.yml</code>, and the role will not be cleaned.  The temporary playbook will be cleaned after it is used, and the contents of it are:</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
-  <span class="l l-Scalar l-Scalar-Plain">roles</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nv">role</span><span class="p p-Indicator">:</span> <span class="nv">./ansible/roles/username.rolename</span><span class="p p-Indicator">}</span>
-</pre></div>
-
-
-<p>The invocation <code>ansible-role username.rolename test_server</code> will definitely download the role, and result in the command <code>ansible-playbook  $random_tmp_playbook.yml</code>, and the role will be deleted after it is used.  The temporary playbook will also be cleaned after it is used, and the contents of the playbook are:</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">test_server</span>
-  <span class="l l-Scalar l-Scalar-Plain">roles</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nv">role</span><span class="p p-Indicator">:</span> <span class="nv">$some_tmpdir/roles/username.rolename</span><span class="p p-Indicator">}</span>
-</pre></div>
-
-
-<h2>Overrides</h2>
-<p>If you need to override variables using this approach to "anonymous" roles, then honestly it might be time to consider writing and maintaining an actual playbook file.  But if you insist, then you can always take advantage of <a href="http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable">ansible variable preference precedence</a> and pass <code>--extra-vars "var=val"</code> to your <code>ansible-role</code> command.</p>
-<h2>The Code</h2>
-<p>All this is of course available on <a href="https://github.com/mattvonrocketstein/ansible-role">github</a> and <a href="https://pypi.python.org/pypi/ansible-role">pypi</a>.</p>
+<h2>Project Scope</h2>
+<p>The goal is to make a library/system wherein one can actually experiment with building things made of Ambient primitives.  Such a system will necessarily have a working knowledge of AC <a href="http://www.cs.princeton.edu/courses/archive/spr96/cs441/notes/l9.html">reduction semantics</a>, but it's worth noting that purely symbolic manipulation of the calculus itself is not really in scope here.</p>
+<p>The point of the implementation discussed here is to <em>use</em> Ambients, and it's not supposed to be extremely rigorous<sup id="sf-ambient-calculus-implementation-in-elixir-2-back"><a href="#sf-ambient-calculus-implementation-in-elixir-2" class="simple-footnote" title="For this project, Cardelli's paper is more in the way of inspiration than something that's treated as a specification">2</a></sup> or pure.<sup id="sf-ambient-calculus-implementation-in-elixir-3-back"><a href="#sf-ambient-calculus-implementation-in-elixir-3" class="simple-footnote" title="For instance, where message-passing is used it will most often be done directly in the obvious way with Elixir.. not reimplemented from scratch using ambient in/out/open/copy operations.">3</a></sup></p>
+<h2>Definitions</h2>
+<p>To establish a working definition of an Ambient for the purposes of the implementation, here are few things about ambients that are important.</p>
+<ol>
+<li>Ambients are kinds of mobile container with unique names.</li>
+<li>Ambients may hold key/values; that's called the ambient's <strong>namespace</strong></li>
+<li>Ambients may hold programs; that's called the ambient'sambient's <strong>progspace</strong></li>
+<li>Ambients may be hold other ambients; that's called the ambient's <strong>children</strong>.  </li>
+</ol>
+<h2>Operations</h2>
+<p>Most of the core operations on ambients are implied by the simple definition above.  </p>
+<ul>
+<li>Ambients may be <strong>copied</strong>.  This operation derives a new ambient from an existing one with an identical namespace / progspace.  The new ambient becomes a sibling with the old one, under the same parent ambient.</li>
+<li>Ambients can be <strong>entered</strong> and <strong>exited</strong>.  </li>
+<li>Ambients may be <strong>opened</strong>, i.e. their membrane is dissolved and what was once their namespace/progspace then belongs to the parent ambient.</li>
+</ul>
+<h2>Relationships</h2>
+<ul>
+<li>When ambient B is inside ambient A, then A is said to be the <strong>parent</strong> of B</li>
+</ul>
+<h2>Difficulties</h2>
+<h3>Node Discovery</h3>
+<p>This whole thing is just a sideshow to working with ambients though, so I opted for a simple approach using <a href="#">openslp</a>.  It wasn't too hard to find a <a href="https://hub.docker.com/r/vcrhonek/openslp/">docker image for running the daemon</a> but you could also opt to install it locally.</p>
+<h2>Jumping in</h2>
+<h2>Caveats</h2>
+<blockquote>
+<p>Note: If you remember earlier texts, atoms can be used in a limited (though high) number. You shouldn't ever create dynamic atoms. This means naming processes should be reserved to important services unique to an instance of the VM and processes that should be there for the whole time your application runs.</p>
+</blockquote><ol class="simple-footnotes"><li id="sf-ambient-calculus-implementation-in-elixir-1">For instance classics like Rule 110, Conway's life, but also several <a href="https://en.wikipedia.org/wiki/Turing_completeness#Games">video games and card games</a>  <a href="#sf-ambient-calculus-implementation-in-elixir-1-back" class="simple-footnote-back">↩</a></li><li id="sf-ambient-calculus-implementation-in-elixir-2">For this project, Cardelli's paper is more in the way of inspiration than something that's treated as a specification <a href="#sf-ambient-calculus-implementation-in-elixir-2-back" class="simple-footnote-back">↩</a></li><li id="sf-ambient-calculus-implementation-in-elixir-3">For instance, where message-passing is used it will most often be done directly in the obvious way with Elixir.. not reimplemented from scratch using ambient in/out/open/copy operations. <a href="#sf-ambient-calculus-implementation-in-elixir-3-back" class="simple-footnote-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
+<section class="well" id="series-well">
+  Part <strong>1</strong> of
+  <strong>1</strong> in
+  <strong>"Ambient Calculus in Elixir"</strong>
+
+
+</section>
 <section class="well" id="related-posts-well">
     <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">Exploring WikiVoyage data with Neo4j and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
     </ul>
 </section>
         </article>

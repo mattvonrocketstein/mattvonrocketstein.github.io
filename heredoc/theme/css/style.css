@@ -5,6 +5,9 @@ body {
 #sidebar .list-group, #sidebar .list-group-item {
     background-color: transparent;
 }
+td.center {
+  text-align:center;
+}
 
 /* for list-groups nested within a list-group-item, reset the bottom margin */
 .list-group-item > .list-group {
@@ -141,7 +144,10 @@ figure.floatcenter, .align-center {
     /* Removes bootstrap default margin-bottom */
     margin-bottom: 0px;
 }
-
+.long-h1 {
+  font-size:25px;
+  font-weight:500%;
+}
 .highlighttable {
     /* Adds them margin-bottom to highlightable instead of <pre> */
     margin-bottom: 11px;

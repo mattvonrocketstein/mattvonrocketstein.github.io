@@ -14,13 +14,13 @@
 
         <meta name="author" content="mvr" />
         <meta name="keywords" content="docker,ansible,elixir,python" />
-        <meta name="description" content="IElixir Jupyter notebook in Docker" />
+        <meta name="description" content="How to run the IElixir Jupyter notebook with Docker." />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="IElixir Notebook in Docker"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html"/>
-        <meta property="og:description" content="IElixir Jupyter notebook in Docker"/>
+        <meta property="og:description" content="How to run the IElixir Jupyter notebook with Docker."/>
         <meta property="article:published_time" content="2016-08-03" />
             <meta property="article:section" content="misc" />
             <meta property="article:tag" content="docker" />
@@ -147,20 +147,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-ambient-calculus-1.html">
-                            Ambient Calculus in Elixir</li>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
+                            Loading MediaWiki into Neo4j with Elixir and Cypher</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
-                            Links for Elixir</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">
-                            Links for Topics in Math and CS</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-1.html">
-                            Loading MediaWiki into Neo4j with Elixir</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-2.html">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">
                             Exploring WikiVoyage data with Neo4j and Cypher</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 3</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">
+                            Elixir Examples and Patterns</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ambient-calculus-implementation-in-elixir.html">
+                            Ambient Calculus implementation in Elixir</li>
                         </a>
               </ul>
 
@@ -177,17 +177,17 @@ heredoc            </a>
                             boilerplate
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/code.html">
                             code
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/cs.html">
                             cs
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
                         </a>
@@ -202,7 +202,7 @@ heredoc            </a>
                             docker
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-0">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
                             elixir
                         </a>
@@ -212,7 +212,7 @@ heredoc            </a>
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
@@ -232,7 +232,7 @@ heredoc            </a>
                             python
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">
                             unfinished
                         </a>
@@ -264,6 +264,11 @@ heredoc            </a>
                 travel blog
             </a>
         </li>
+        <li class="li-choice">
+            <a href="http://localhost:8000/heredoc/random.html" target="_blank">
+                random article (this blog)
+            </a>
+        </li>
       </ul>
             </aside>
             </div>
@@ -279,40 +284,50 @@ heredoc            </a>
     <section id="content">
         <article>
             <header class="page-header">
-                <h1>
+                <span class=long-h1>
                     <a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html"
                        rel="bookmark"
                        title="Permalink to IElixir Notebook in Docker">
                         IElixir Notebook in Docker
                     </a>
-                </h1>
-<br/><br/>            </header>
+                </span>
+            </header>
             <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
 <footer class="post-info">
-    <span class="label label-default">Date</span>
+    <table style="border-collapse: separate;border-spacing:5px 1px;">
+<tr>
+  <td class=center>
+      <span class="label label-default">Date</span>
+  </td>
+  <td>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2016-08-03T00:00:00-04:00"> Wed 03 August 2016</time>
+      <i class="fa fa-calendar"></i>
+      <time datetime="2016-08-03T00:00:00-04:00">
+        Wed 03 August 2016
+      </time>
     </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">docker</a>
-        /
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">ansible</a>
-        /
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
-        /
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
-    
-
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <h2>The Players</h2>
+  </td>
+</tr><tr>
+	<td class=center>
+		<span class="label label-default">
+			Tags
+		</span>
+	</td>
+	<td>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">docker</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">ansible</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
+	</td>
+</tr>
+  </table>
+</footer>
+<!-- /.post-info -->                <br/>
+                <p>
+How to run the IElixir Jupyter notebook with Docker.
+<br>
+</p>
+<h2>The Players</h2>
 <p><a href="jupyter.readthedocs.io">Jupyter</a> is the latest incarnation of an interactive notebook project that grew up out IPython, and describing the all the goals and history of that project is waaay outside of the scope of this write-up.  Suffice to say that from the humble beginnings of an interactive shell, Jupyter has become an amazing tool for interactive presentations, education, and data-driven scientific computing amongst other things.  It has support for console and web-based interaction.  Most relevant to the topic presented here: Jupyter is no longer limited to python and has support for multiple language backends as well.<sup id="sf-ielixir-notebook-in-docker-1-back"><a href="#sf-ielixir-notebook-in-docker-1" class="simple-footnote" title="Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages">1</a></sup>.</p>
 <p><a href="https://github.com/pprzetacznik/IElixir">IElixir</a> is a neat piece of work that brings an <a href="elixir-lang.org">Elixir language</a> kernel to jupyter.</p>
 <h2>The Goal</h2>
@@ -322,9 +337,8 @@ heredoc            </a>
 <li>The up/down keys for history don't work for out of the box, but the <a href="https://github.com/ferd/erlang-history">standard workarounds</a> have stability issues</li>
 <li>For better history, it seems there is <a href="https://github.com/elixir-lang/elixir/issues/1516">some</a> <a href="https://github.com/ferd/erlang-history/issues/17">resistance</a> to fixing the underlying problems anywhere but inside erlang core.  </li>
 <li>The <a href="https://github.com/elixir-lang/elixir/issues/2967">situation is similar</a> for control-L, the least-surprising shortcut for clearing the screen.  </li>
-<li>Invocation is just too weird, and the whole mix/iex relationship is also perplexing <sup id="sf-ielixir-notebook-in-docker-2-back"><a href="#sf-ielixir-notebook-in-docker-2" class="simple-footnote" title="Like you're thinking iex is going to be an interactive terminal right, but then iex -S mix $CMD gives you a shell only if $CMD is set to &quot;run&quot;.  The docs say that &quot;-S&quot; is a script to run, which would imply that it uses a filename.  So in &quot;-S mix run&quot;, how does &quot;mix run&quot; count as a script? And finally, if it is a quite normal argument of the iex command, then why is the &quot;S&quot; capitalized??  Another common invocation for passing configuration flags down to erlang is something like: iex --erl &quot;-config sys.config&quot; -S mix run.  In this case it has to be done this way, because otherwise mix has no way to receive the erlang flags.  Why isn't there some pattern that can read everything from either mix.exs or my config/config.exs? ">2</a></sup></li>
 </ul>
-<p>A work-around at the Jupyter level instead fixes the history annoyance at the same time as adding all the many niceties the Jupyter team has spent a lot of time setting up.<sup id="sf-ielixir-notebook-in-docker-3-back"><a href="#sf-ielixir-notebook-in-docker-3" class="simple-footnote" title="Sane editing for multiliners without an IDE?  Yes please.">3</a></sup></p>
+<p>A work-around at the Jupyter level instead fixes the history annoyance at the same time as adding all the many niceties the Jupyter team has spent a lot of time setting up.<sup id="sf-ielixir-notebook-in-docker-2-back"><a href="#sf-ielixir-notebook-in-docker-2" class="simple-footnote" title="Sane editing for multiliners without an IDE?  Yes please.">2</a></sup></p>
 <h2>Prior Art</h2>
 <p>The Jupyter project actually has <a href="https://github.com/jupyter/docker-stacks">official docker stacks</a> in a few different flavors, and those might be more performant and minimal than what I'll be building here.  I'm not using those as a docker base image, partly because I wanted to see what it would look like to build everything from scratch with ansible.</p>
 <p>Actually, the procedure I'm going to describe here is basically just a more specific use-case for what I've described in the <a href="provisioning-docker-with-ansible.html">Provisioning Docker with Ansible</a> writeup.  That article takes things slower, but here I'll get straight to the point.  You might like to read it if you want more explanation of some of these steps.</p>
@@ -472,44 +486,25 @@ $ docker run <span class="se">\</span>
 </pre></div>
 
 
-<p>After you've run the notebook command above, try taking a look at <a href="http://localhost:8888/notebooks/example.ipynb">http://localhost:8888/notebooks/example.ipynb</a> which ought to show the interactive version of <a href="https://github.com/pprzetacznik/IElixir/blob/master/resources/example.ipynb">this example notebook</a></p><ol class="simple-footnotes"><li id="sf-ielixir-notebook-in-docker-1">Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages <a href="#sf-ielixir-notebook-in-docker-1-back" class="simple-footnote-back">↩</a></li><li id="sf-ielixir-notebook-in-docker-2">Like you're thinking <code>iex</code> is going to be an interactive terminal right, but then <code>iex -S mix $CMD</code> gives you a shell only if $CMD is set to "run".  The docs say that "-S" is a script to run, which would imply that it uses a filename.  So in "-S mix run", how does "mix run" count as a script? And finally, if it is a quite normal argument of the iex command, then why is the "S" capitalized??  Another common invocation for passing configuration flags down to erlang is something like: <code>iex --erl "-config sys.config" -S mix run</code>.  In this case it has to be done this way, because otherwise mix has no way to receive the erlang flags.  Why isn't there some pattern that can read everything from either mix.exs or my <code>config/config.exs</code>?
- <a href="#sf-ielixir-notebook-in-docker-2-back" class="simple-footnote-back">↩</a></li><li id="sf-ielixir-notebook-in-docker-3">Sane editing for multiliners without an IDE?  Yes please. <a href="#sf-ielixir-notebook-in-docker-3-back" class="simple-footnote-back">↩</a></li></ol>
+<p>After you've run the notebook command above, try taking a look at <a href="http://localhost:8888/notebooks/example.ipynb">http://localhost:8888/notebooks/example.ipynb</a> which ought to show the interactive version of <a href="https://github.com/pprzetacznik/IElixir/blob/master/resources/example.ipynb">this example notebook</a></p><ol class="simple-footnotes"><li id="sf-ielixir-notebook-in-docker-1">Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages <a href="#sf-ielixir-notebook-in-docker-1-back" class="simple-footnote-back">↩</a></li><li id="sf-ielixir-notebook-in-docker-2">Sane editing for multiliners without an IDE?  Yes please. <a href="#sf-ielixir-notebook-in-docker-2-back" class="simple-footnote-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">Provision Docker with Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-1.html">Loading MediaWiki into Neo4j with Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-ambient-calculus-1.html">Ambient Calculus in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ambient-calculus-implementation-in-elixir.html">Ambient Calculus implementation in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
     </ul>
 </section>
         </article>
     </section>
-    <script>
-$(document).ready(
-  function(){
-    $('.simple-footnotes').wrap("<section class=well id=footnotes-well></section>");
-    $('#footnotes-well').before("<h2>Footnotes</h2>");
-    $('#series-well').before("<h2>Articles in Series</h2>");
-    $('#related-posts-well').before("<h2>Related Posts</h2>");
-    $("#toc").delay(1000).tocify(
-      {
-        context: '.entry-content',
-        selectors: "h2,h3,h4",
-        showAndHide: true,
-        showAndHideOnScroll: true,
-        extendPage: false,
-      }
-    )
-  }
-);    </script>
 
         </div>
         <div class="col-sm-2" >
@@ -554,6 +549,24 @@ $(document).ready(
     <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/github.js" type="text/javascript"></script>
     <!-- End GitHub JS Code -->
 
+<script>
+$(document).ready(
+  function(){
+    $('.simple-footnotes').wrap("<section class=well id=footnotes-well></section>");
+    $('#footnotes-well').before("<h2>Footnotes</h2>");
+    $('#series-well').before("<h2>Articles in Series</h2>");
+    $('#related-posts-well').before("<h2>Related Posts</h2>");
+    $("#toc").delay(1000).tocify(
+      {
+        context: '.entry-content',
+        selectors: "h2,h3,h4",
+        showAndHide: true,
+        showAndHideOnScroll: true,
+        extendPage: false,
+      }
+    )
+  }
+);</script>
 <script>
 setTimeout(function(){
   if (""==$('#toc').html().trim()){

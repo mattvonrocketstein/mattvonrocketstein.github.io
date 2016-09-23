@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - The missing "ansible-role" command</title>
+    <title>heredoc - Exploring WikiVoyage data with Neo4j and Cypher: Part 3</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,22 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="ansible,python" />
-        <meta name="description" content="Ansible-role downloads, installs, and cleans temporary ansible roles without the need for manually editing ansible playbooks" />
+        <meta name="keywords" content="graphdb,data-science,unfinished" />
+        <meta name="description" content="Querying WikiVoyage data with Neo4j with Elixir" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="The missing &#34;ansible-role&#34; command"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/ansible-role.html"/>
-        <meta property="og:description" content="Ansible-role downloads, installs, and cleans temporary ansible roles without the need for manually editing ansible playbooks"/>
-        <meta property="article:published_time" content="2016-07-28" />
-            <meta property="article:section" content="misc" />
-            <meta property="article:tag" content="ansible" />
-            <meta property="article:tag" content="python" />
+        <meta property="og:title" content="Exploring WikiVoyage data with Neo4j and Cypher: Part 3"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html"/>
+        <meta property="og:description" content="Querying WikiVoyage data with Neo4j with Elixir"/>
+        <meta property="article:published_time" content="2016-09-20" />
+            <meta property="article:section" content="data-science" />
+            <meta property="article:tag" content="graphdb" />
+            <meta property="article:tag" content="data-science" />
+            <meta property="article:tag" content="unfinished" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -274,21 +275,39 @@ heredoc            </a>
         <div class="col-sm-8">
             <ol class="breadcrumb">
                 <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">
-                  misc
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/data-science.html" title="data-science">
+                  data-science
                 </a></li>
-                <li class="active">The missing "ansible-role" command</li>
+                <li class="active">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html"
                        rel="bookmark"
-                       title="Permalink to The missing "ansible-role" command">
-                        The missing "ansible-role" command
+                       title="Permalink to Exploring WikiVoyage data with Neo4j and Cypher: Part 3">
+                        Exploring WikiVoyage data with Neo4j and Cypher: Part 3
                     </a>
                 </span>
+    <br>
+    <table>
+      <tr>
+        <td> <small>
+    <a class="btn btn-default btn-xs" href="exploring-wikivoyage-data-with-neo4j-and-cypher.html">
+      ⇐ prev
+    </a>
+  &nbsp;
+</small>
+ </td>
+        <td>
+          Part <strong>3</strong> of
+          <strong>3</strong> in
+          <strong>"Loading MediaWiki into Neo4j using Elixir and Cypher"</strong>
+        </td>
+        <td>  </td>
+      </tr>
+    </table>
             </header>
             <div class="entry-content">
 <footer class="post-info">
@@ -300,8 +319,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2016-07-28T00:00:00-04:00">
-        Thu 28 July 2016
+      <time datetime="2016-09-20T00:00:00-04:00">
+        Tue 20 September 2016
       </time>
     </span>
   </td>
@@ -312,86 +331,126 @@ heredoc            </a>
 		</span>
 	</td>
 	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">ansible</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">graphdb</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">data-science</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">unfinished</a>
 	</td>
+</tr>
+<tr>
+  <td class=center>
+    <span class="label label-default">Draft</span>
+  </td>
+  <td>
+    <strong>
+      <small>
+        <font color="red">Warning!</font>
+        You are reading a draft; this article is marked as unfinished.
+      </small>
+    </strong>
+  </td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <h2>The Problem</h2>
-<p>Whenever I'm building a server or simple local infrastructure for testing code, I start by looking at the <a href="https://galaxy.ansible.com/explore#/">available ansible roles</a>, hoping to find one that JustWorks for my use-case right out of the box.  One thing that annoys me though is that even for roles without extra variables, a playbook is still required.  Sure it's a small file, but creating it still annoys me when I'm just testing stuff.</p>
-<p>Typically these one-off playbooks look something like this:</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
-  <span class="l l-Scalar l-Scalar-Plain">become</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-  <span class="l l-Scalar l-Scalar-Plain">become_method</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">sudo</span>
-  <span class="l l-Scalar l-Scalar-Plain">roles</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nv">role</span><span class="p p-Indicator">:</span> <span class="nv">username.rolename</span><span class="p p-Indicator">}</span>
+                <p>
+Querying WikiVoyage data with Neo4j with Elixir
+<br>
+</p>
+<p><img alt="results for UNESCO query" src="img/neo-paris.png"></p>
+<h2>Part 3: Intro</h2>
+<p>This is part three of a three part series.  </p>
+<p>In <a href="loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">part 1 of this series</a> I wrote about using Elixir to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into Neo4j.  If you want to follow along at home but you have no data locally, then you'll want to go back to that section before reading further.  If you've already seen part 1 or if you're only interested in the resulting data structure and its interrogation, then you can read on from here.</p>
+<h2>Querying the Graph</h2>
+<h3>Pathfinding</h3>
+<p>As we've seen previously in the <a href="#">curating section</a>, regional hierarchies like <strong>[continent</strong> <img height="20px" alt=":arrow_right:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/27a1.png" title=":arrow_right:" align="absmiddle" width="20px" class="emoji"> <strong>country</strong> <img height="20px" alt=":arrow_right:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/27a1.png" title=":arrow_right:" align="absmiddle" width="20px" class="emoji"> <strong>city]</strong> are already defined and accessible by the <code>:contains</code> edges. <strong>How can we query for such paths?</strong></p>
+<div class="highlight"><pre><span></span><span class="c1">// short path query</span>
+<span class="p">....</span><span class="w"></span>
 </pre></div>
 
 
-<p>There's a regular need for "anonymous roles", ie role application without using playbooks, even if only for simple use-cases.  </p>
-<h2>Prior Art</h2>
-<p>There's <a href="https://github.com/bbrfkr/ansible-art">already</a> <a href="https://github.com/msabramo/ansible_role_apply">a few</a> <a href="http://blog.oddbit.com/2015/10/19/stupid-ansible-tricks-running-a-role-from-the-command-line/">projects</a> that work around this, but none of them fit my use-case exactly (see the spec below).  </p>
-<p>All implementations seem to agree with my conclusion on one point though: while it's very attractive to consider using the ansible API directly (if only to have a practical task in mind while you get to know the API), doing this is awkward.  The simplest approach is to just create a temporary <code>playbook.yml</code> file, then run an appropriate <code>ansible-playbook</code> command on that file and get rid of it afterwards.</p>
-<h2>The Specification</h2>
-<p>I specifically wanted the following behaviour from the missing <code>ansible-role</code> command:</p>
-<ul>
-<li>
-<p>The <code>ansible-role</code> invocation should respect data intended for the <code>ansible-playbook</code> command, i.e. <code>ANSIBLE_*</code> shell variables should be passed through, and the unparsed aspect of the <code>ansible-role</code> command line also should be passed through to <code>ansible-playbook</code>.</p>
-</li>
-<li>
-<p>Despite pass-through, the <code>ansible-role</code> command should also parse and understand the <em>--module-path=FOO</em> argument if it is given, and by default look for roles inside <code>FOO/roles</code>.</p>
-</li>
-<li>
-<p>In the event no matching role is available locally then the role should be downloaded for me automatically using the <code>ansible-galaxy</code> command.</p>
-</li>
-<li>
-<p>In case a galaxy download is necessary and <code>--modulepath=FOO</code> is specified, it is downloaded to <code>FOO/roles</code> and not cleaned afterwards.  <em>File-system caching makes sense here because the <code>ansible-role</code> invocation is supposed to be quick and easy, but the usage of the role itself is less experimental.</em></p>
-</li>
-<li>
-<p>In case a galaxy download is necessary and <code>--modulepath</code> is <strong>NOT</strong> given, then there is no caching.  <em>File system cleaning for the role download makes sense here because this is a one-off experiment and it's no use cluttering the file system.</em>  Thus the role will be downloaded to a temporary directory and will be deleted afterwards (regardless of whether the application of the role succeeds).</p>
-</li>
-<li>
-<p>Apart from the standard <code>ansible-playbook</code> arguments, the <code>ansible-role</code> command line understands exactly 2 other arguments: the primary positional argument <code>role_name</code> (which is required and which specifies an ansible-galaxy role), and the <code>host</code> argument (which defaults to <code>localhost</code>).  Again, <strong>everything else</strong> on the command line will be passed through to the <code>ansible-playbook</code> invocation.</p>
-</li>
-<li>
-<p>After cleanup, the <code>ansible-role</code> command should return the same exit code as the implied <code>ansible-playbook</code> invocation.</p>
-</li>
-<li>
-<p>Finally, the <code>ansible-role</code> command should be available on pypi so it can be installed with pip.</p>
-</li>
-</ul>
-<h2>Examples</h2>
-<p>Most of the requirements above are straightforward, but let's look at a few examples.  The invocation <code>ansible-role username.rolename --module-path ./ansible --become</code> will download the role if it doesn't exist, and result in the command <code>ansible-playbook --module-path ./ansible --become $random_tmp_playbook.yml</code>, and the role will not be cleaned.  The temporary playbook will be cleaned after it is used, and the contents of it are:</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">localhost</span>
-  <span class="l l-Scalar l-Scalar-Plain">roles</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nv">role</span><span class="p p-Indicator">:</span> <span class="nv">./ansible/roles/username.rolename</span><span class="p p-Indicator">}</span>
+<h3>Innate Ambiguity</h3>
+<p><strong>How frequently does ambiguity occur in place names?</strong> This is a tricky question to answer <em>exactly</em> with the data but by counting the redirects <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-3-1-back"><a href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-3-1" class="simple-footnote" title="We already labeled redirects here">1</a></sup> and disambiguation pages we can pretty easily find information that gets us pointed in the right direction.  The basic approach is</p>
+<ol>
+<li>Find all pages labeled as redirects.  The page body will look like <code>#REDIRECT [[RedirectTarget]]</code></li>
+<li>Find the page each page redirects to, de-duplicate the resulting set and count the elements</li>
+</ol>
+<p>No doubt there's a better way to do it, but the cypher I came up with looks like what you see below.  The <code>split()</code> calls you see there are taking apart the <code>`[[link]]</code> markdown and the reference to "#" is handling a special-case where some pages redirect to <em>subsections</em> of other pages.</p>
+<div class="highlight"><pre><span></span><span class="c1">// Counts unique redirection targets</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">Redirect</span><span class="p">)</span><span class="w"></span>
+<span class="k">WITH</span><span class="w"></span>
+<span class="w">  </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">split</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="n">body</span><span class="p">,</span><span class="err">'</span><span class="o">[[</span><span class="err">'</span><span class="p">)</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="p">,</span><span class="err">'</span><span class="o">]]</span><span class="err">'</span><span class="p">)</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="p">,</span><span class="err">'#'</span><span class="p">)</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">redirect_to</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">redirect_to</span><span class="p">)</span><span class="w"></span>
+
+<span class="c1">// Counts disambiguation pages</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">Disambiguation</span><span class="p">)</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">page</span><span class="p">)</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">page</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 
 
-<p>The invocation <code>ansible-role username.rolename test_server</code> will definitely download the role, and result in the command <code>ansible-playbook  $random_tmp_playbook.yml</code>, and the role will be deleted after it is used.  The temporary playbook will also be cleaned after it is used, and the contents of the playbook are:</p>
-<div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hosts</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">test_server</span>
-  <span class="l l-Scalar l-Scalar-Plain">roles</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nv">role</span><span class="p p-Indicator">:</span> <span class="nv">$some_tmpdir/roles/username.rolename</span><span class="p p-Indicator">}</span>
+<h3>Popular Topics</h3>
+<p><strong>What can we say about nodes (pages) with large numbers of out-going links?</strong> Apriori, there are a a few obvious guesses: these pages might represent meta-pages, very large land-masses, or very well-documented (and thus popular?) travel destinations.  You can see several such nodes in the output of the cypher query below:</p>
+<div class="highlight"><pre><span></span><span class="c1">// Query for finding the top-ten nodes by link-count</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-[</span><span class="n">r</span><span class="p">:</span><span class="n">links_to</span><span class="o">]-</span><span class="p">()</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">rel_count</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">rel_count</span><span class="w"> </span><span class="k">desc</span><span class="w"></span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
 </pre></div>
 
 
-<h2>Overrides</h2>
-<p>If you need to override variables using this approach to "anonymous" roles, then honestly it might be time to consider writing and maintaining an actual playbook file.  But if you insist, then you can always take advantage of <a href="http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable">ansible variable preference precedence</a> and pass <code>--extra-vars "var=val"</code> to your <code>ansible-role</code> command.</p>
-<h2>The Code</h2>
-<p>All this is of course available on <a href="https://github.com/mattvonrocketstein/ansible-role">github</a> and <a href="https://pypi.python.org/pypi/ansible-role">pypi</a>.</p>
+<p>Taking for instance the meta-page for the <a href="https://en.wikivoyage.org/wiki/UNESCO_World_Heritage_List">UNESCO World Heritage List</a> here are some interesting queries:</p>
+<div class="highlight"><pre><span></span><span class="c1">// Query to count the out-going links of a particular node</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">rel</span><span class="p">)</span><span class="w"></span>
+
+<span class="c1">// Query to graph part of the neighborhood in the WebUI</span>
+<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
+<span class="k">RETURN</span><span class="w"> </span><span class="n">rel</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
+</pre></div>
+
+
+<hr style="border-top: dotted 2px;">
+
+<h3>Edge Weights</h3>
+<p>Also in the previous section, we talked about a type of naive query that could not possibly work for finding countries 1 step beneath continents and cities 1 step beneath countries.  What we can do however is this: update "contains" edge in the graph to have a "containment-depth" property.  Edges where containment-depth==1 may not necessarily be countries, but this information ought to be at least heuristically useful in some other circumstance.</p>
+<div class="highlight"><pre><span></span><span class="c1">// Placeholder</span>
+</pre></div>
+
+
+<h2>Other Ideas</h2>
+<p>It's quite tempting to see what else can be done to make the data structure more complete, perhaps by using <a href="https://github.com/opentraveldata">open travel data</a> or by enhancing the dump parser to understand the <code>##Get In</code> and <code>##Get Out</code> sections of wikivoyage pages to make a "transport-connection" relationship type.  To be continued..</p><ol class="simple-footnotes"><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-3-1">We already labeled redirects <a href="#">here</a> <a href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-3-1-back" class="simple-footnote-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
+<section class="well" id="series-well">
+  Part <strong>3</strong> of
+  <strong>3</strong> in
+  <strong>"Loading MediaWiki into Neo4j using Elixir and Cypher"</strong>
+
+     <h5>Previous article(s)</h5>
+     <ul>
+         <li>
+           <a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
+             Loading MediaWiki into Neo4j with Elixir and Cypher</a>
+            <small>(part 1)</small>
+       </li>
+         <li>
+           <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">
+             Exploring WikiVoyage data with Neo4j and Cypher</a>
+            <small>(part 2)</small>
+       </li>
+     </ul>
+
+</section>
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">Exploring WikiVoyage data with Neo4j and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ambient-calculus-implementation-in-elixir.html">Ambient Calculus implementation in Elixir</a></li>
     </ul>
 </section>
         </article>

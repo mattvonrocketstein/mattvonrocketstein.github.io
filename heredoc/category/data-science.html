@@ -139,6 +139,9 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 3</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">
                             Links for Topics in Math and CS</li>
                         </a>
@@ -157,17 +160,17 @@ heredoc            </a>
                             boilerplate
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/code.html">
                             code
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/cs.html">
                             cs
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
                         </a>
@@ -182,7 +185,7 @@ heredoc            </a>
                             docker
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-0">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
                             elixir
                         </a>
@@ -192,7 +195,7 @@ heredoc            </a>
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
@@ -212,7 +215,7 @@ heredoc            </a>
                             python
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">
                             unfinished
                         </a>
@@ -244,6 +247,11 @@ heredoc            </a>
                 travel blog
             </a>
         </li>
+        <li class="li-choice">
+            <a href="http://localhost:8000/heredoc/random.html" target="_blank">
+                random article (this blog)
+            </a>
+        </li>
       </ul>
             </aside>
             </div>
@@ -255,15 +263,50 @@ heredoc            </a>
         <li class="active">data-science</li>
     </ol>
             <header class="page-header">
-                <h1>Writing with category:                  <small>data-science</small>
+                <h1 class=long-h1>Writing with category:                  <small><strong>data-science</strong></small>
                 </h1>
             </header>
+            <article>
+                <h3>
+                  <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a>
+                </h3>
+
+                <div class="summary">
+                  
+Querying WikiVoyage data with Neo4j with Elixir
+<br>
+
+                    <small>
+                      <strong>
+                      Part 3
+                    </strong>
+                    in "<a href="https://mattvonrocketstein.github.io/heredoc/s/neo4j-elixir-cypher-mediawiki.html">
+                      Loading MediaWiki into Neo4j using Elixir and Cypher</a>"
+                    </small>
+                <br/>
+                    <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">read more ...</a>
+                    <div class="btn btn-default btn-xs">
+                      tagged in
+                      <small>
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">graphdb</a>
+,                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">data-science</a>
+,                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">unfinished</a>
+                      </small>
+                    </div>
+<div class="btn btn-default btn-xs">
+<strong><small><font color=red>
+  unfinished
+</font></small></strong>
+</div>                </div>
+            </article>
+            <hr/>
             <article>
                 <h3>
                   <a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a>
                 </h3>
 
-                <div class="summary"><p>Random links for topics in math, computer-science, and data science</p>
+                <div class="summary">
+                  <p>Random links for topics in math, computer-science, and data science</p>
                     <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">read more ...</a>
                     <div class="btn btn-default btn-xs">
                       tagged in
@@ -321,6 +364,13 @@ heredoc            </a>
     <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/github.js" type="text/javascript"></script>
     <!-- End GitHub JS Code -->
 
+<script>
+$(document).ready(
+  function(){
+    $('ul.nav.navbar-nav').first().append(
+      '<li><a href="https://mattvonrocketstein.github.io/heredoc/random.html">Random</a></li>');
+  }
+);</script>
 <script>
 setTimeout(function(){
   if (""==$('#toc').html().trim()){

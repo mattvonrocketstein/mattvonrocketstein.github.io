@@ -157,17 +157,17 @@ heredoc            </a>
                             boilerplate
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/code.html">
                             code
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/cs.html">
                             cs
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
                         </a>
@@ -182,7 +182,7 @@ heredoc            </a>
                             docker
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-0">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
                             elixir
                         </a>
@@ -192,7 +192,7 @@ heredoc            </a>
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
@@ -212,7 +212,7 @@ heredoc            </a>
                             python
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">
                             unfinished
                         </a>
@@ -244,6 +244,11 @@ heredoc            </a>
                 travel blog
             </a>
         </li>
+        <li class="li-choice">
+            <a href="http://localhost:8000/heredoc/random.html" target="_blank">
+                random article (this blog)
+            </a>
+        </li>
       </ul>
             </aside>
             </div>
@@ -255,7 +260,7 @@ heredoc            </a>
         <li class="active">vagrant</li>
     </ol>
             <header class="page-header">
-                <h1>Writing with tag:                  <small>vagrant</small>
+                <h1 class=long-h1>Writing with tag:                  <small><strong>vagrant</strong></small>
                 </h1>
             </header>
             <article>
@@ -263,7 +268,8 @@ heredoc            </a>
                   <a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a>
                 </h3>
 
-                <div class="summary"><p>Setting up Neo4j with Vagrant and Ansible</p>
+                <div class="summary">
+                  <p>Setting up Neo4j with Vagrant and Ansible</p>
                     <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">read more ...</a>
                     <div class="btn btn-default btn-xs">
                       tagged in
@@ -321,6 +327,13 @@ heredoc            </a>
     <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/github.js" type="text/javascript"></script>
     <!-- End GitHub JS Code -->
 
+<script>
+$(document).ready(
+  function(){
+    $('ul.nav.navbar-nav').first().append(
+      '<li><a href="https://mattvonrocketstein.github.io/heredoc/random.html">Random</a></li>');
+  }
+);</script>
 <script>
 setTimeout(function(){
   if (""==$('#toc').html().trim()){

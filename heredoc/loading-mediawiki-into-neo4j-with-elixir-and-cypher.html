@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Loading MediaWiki into Neo4j with Elixir</title>
+    <title>heredoc - Loading MediaWiki into Neo4j with Elixir and Cypher</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,18 +10,18 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-1.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
 
         <meta name="author" content="mvr" />
         <meta name="keywords" content="elixir,graphdb,data-science" />
-        <meta name="description" content="Loading MediaWiki data dump XML into Neo4j with Elixir" />
+        <meta name="description" content="Loading MediaWiki data-dump XML into Neo4j using Elixir and Cypher" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Loading MediaWiki into Neo4j with Elixir"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-1.html"/>
-        <meta property="og:description" content="Loading MediaWiki data dump XML into Neo4j with Elixir"/>
-        <meta property="article:published_time" content="2016-08-31" />
+        <meta property="og:title" content="Loading MediaWiki into Neo4j with Elixir and Cypher"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html"/>
+        <meta property="og:description" content="Loading MediaWiki data-dump XML into Neo4j using Elixir and Cypher"/>
+        <meta property="article:published_time" content="2016-09-22" />
             <meta property="article:section" content="elixir" />
             <meta property="article:tag" content="elixir" />
             <meta property="article:tag" content="graphdb" />
@@ -146,20 +146,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-ambient-calculus-1.html">
-                            Ambient Calculus in Elixir</li>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
+                            Loading MediaWiki into Neo4j with Elixir and Cypher</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
-                            Links for Elixir</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">
-                            Links for Topics in Math and CS</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-1.html">
-                            Loading MediaWiki into Neo4j with Elixir</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-2.html">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">
                             Exploring WikiVoyage data with Neo4j and Cypher</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 3</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">
+                            Elixir Examples and Patterns</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/ambient-calculus-implementation-in-elixir.html">
+                            Ambient Calculus implementation in Elixir</li>
                         </a>
               </ul>
 
@@ -176,17 +176,17 @@ heredoc            </a>
                             boilerplate
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/code.html">
                             code
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/cs.html">
                             cs
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
                         </a>
@@ -201,7 +201,7 @@ heredoc            </a>
                             docker
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-0">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
                             elixir
                         </a>
@@ -211,7 +211,7 @@ heredoc            </a>
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
@@ -231,7 +231,7 @@ heredoc            </a>
                             python
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">
                             unfinished
                         </a>
@@ -263,6 +263,11 @@ heredoc            </a>
                 travel blog
             </a>
         </li>
+        <li class="li-choice">
+            <a href="http://localhost:8000/heredoc/random.html" target="_blank">
+                random article (this blog)
+            </a>
+        </li>
       </ul>
             </aside>
             </div>
@@ -273,55 +278,78 @@ heredoc            </a>
                 <li><a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html" title="elixir">
                   elixir
                 </a></li>
-                <li class="active">Loading MediaWiki into Neo4j with Elixir</li>
+                <li class="active">Loading MediaWiki into Neo4j with Elixir and Cypher</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
-                <h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-1.html"
+                <span class=long-h1>
+                    <a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html"
                        rel="bookmark"
-                       title="Permalink to Loading MediaWiki into Neo4j with Elixir">
-                        Loading MediaWiki into Neo4j with Elixir
+                       title="Permalink to Loading MediaWiki into Neo4j with Elixir and Cypher">
+                        Loading MediaWiki into Neo4j with Elixir and Cypher
                     </a>
-                </h1>
-<br/><br/>            </header>
+                </span>
+    <br>
+    <table>
+      <tr>
+        <td>  </td>
+        <td>
+          Part <strong>1</strong> of
+          <strong>3</strong> in
+          <strong>"Loading MediaWiki into Neo4j using Elixir and Cypher"</strong>
+        </td>
+        <td> &nbsp;
+<small>
+    <a class="btn btn-default btn-xs" href="exploring-wikivoyage-data-with-neo4j-and-cypher.html">
+      next ⇒
+    </a>
+</small>
+ </td>
+      </tr>
+    </table>
+            </header>
             <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
 <footer class="post-info">
-    <span class="label label-default">Date</span>
+    <table style="border-collapse: separate;border-spacing:5px 1px;">
+<tr>
+  <td class=center>
+      <span class="label label-default">Date</span>
+  </td>
+  <td>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2016-08-31T00:00:00-04:00"> Wed 31 August 2016</time>
+      <i class="fa fa-calendar"></i>
+      <time datetime="2016-09-22T00:00:00-04:00">
+        Thu 22 September 2016
+      </time>
     </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
-        /
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">graphdb</a>
-        /
-	<a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">data-science</a>
-    
-          <br/>
-          <span class="label label-default">Series</span>
-          <small>
-            Part <strong>1</strong> of
-            <strong>2</strong> in
-            <strong>"Loading MediaWiki into Neo4j using Elixir and Cypher"</strong>
-          </small>
-
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <h2>Part 1: Intro</h2>
-<p>This post is part 1 of 2 about a toy application that parses wikimedia dump files with <a href="http://elixir-lang.org/">elixir</a>, and throws the results into a graph database.  I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-neo4j-elixir-cypher-mediawiki-1-1-back"><a href="#sf-neo4j-elixir-cypher-mediawiki-1-1" class="simple-footnote" title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P '>1</a></sup>  If you're most interested in the resulting data structure and how it can be interrogated, you can leave this part and <a href="neo4j-elixir-cypher-mediawiki-2.html">skip to part 2</a>.</p>
+  </td>
+</tr><tr>
+	<td class=center>
+		<span class="label label-default">
+			Tags
+		</span>
+	</td>
+	<td>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">graphdb</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">data-science</a>
+	</td>
+</tr>
+  </table>
+</footer>
+<!-- /.post-info -->                <br/>
+                <p>
+Loading MediaWiki data-dump XML into Neo4j using Elixir and Cypher
+<br>
+</p>
+<h2>Part 1: Intro</h2>
+<p>This is part one of a three part series.  In this part, I'll write about using <a href="http://elixir-lang.org/">Elixir</a> to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into the Neo4j graph database.
+I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-1-back"><a href="#sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-1" class="simple-footnote" title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P '>1</a></sup>  If you're most interested in the resulting data structure and how it can be interrogated, you can leave this part and <a href="exploring-wikivoyage-data-with-neo4j-and-cypher.html">move directly to part 2</a>.</p>
 <h2>Motivation</h2>
 <p>Initially I intended to parse only <strong>wikipedia</strong> dump files, thinking that it would be very interesting to try and construct graph queries that could infer stuff like "trigonometry is a prerequisite concept of calculus" based on page linkages.  I still might look into this at some point, but after I realized that more or less the same unmodified parsing code could be used with other MediaWiki data dumps I had other ideas.</p>
 <p>Maybe the best MediaWiki site to throw into a graph database is the tree of life the friendly folks at [WikiSpecies][https://species.wikimedia.org/wiki/Main_Page] are building.  This project idea is tempting but I'm setting it aside for time being.</p>
-<p>Instead for the purposes of this experiment I'll be parsing <a href="https://www.wikivoyage.org/">WikiVoyage</a> data dumps, which is perhaps not so well-known.  WikiVoyage is a MediaWiki project that is building a open travel guide, and I'm going to run with it over other stuff because this dataset should be large enough to be interesting yet quite tractable.   Besides that, I am very interested in travel<sup id="sf-neo4j-elixir-cypher-mediawiki-1-2-back"><a href="#sf-neo4j-elixir-cypher-mediawiki-1-2" class="simple-footnote" title="You can check out my (somewhat neglected) travel blog here">2</a></sup> and geography.  Being a frequent user of WikiVoyage myself, I expected that the inter-page linking structures embedded in content there would be in a kind of information theoretical sweet spot, that is to say less random than what I'd find parsing Wikipedia, but less structured than what I'd find trying to parse WikiSpecies.  </p>
+<p>Instead for the purposes of this experiment I'll be parsing <a href="https://www.wikivoyage.org/">WikiVoyage</a> data dumps, which is perhaps not so well-known.  WikiVoyage is a MediaWiki project that is building a open travel guide, and I'm going to run with it over other stuff because this dataset should be large enough to be interesting yet quite tractable.   Besides that, I am very interested in travel<sup id="sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-2-back"><a href="#sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-2" class="simple-footnote" title="You can check out my (somewhat neglected) travel blog here">2</a></sup> and geography.  Being a frequent user of WikiVoyage myself, I expected that the inter-page linking structures embedded in content there would be in a kind of information theoretical sweet spot, that is to say less random than what I'd find parsing Wikipedia, but less structured than what I'd find trying to parse WikiSpecies.  </p>
 <p><img alt="alt text" src="img/neo-unesco.png"></p>
 <h2>The Players</h2>
 <p>There are <a href="https://en.wikipedia.org/wiki/Graph_database#List_of_graph_databases">different graph databases</a> out there, but without a lot of compare-and-contrast I decided to go with <a href="https://neo4j.com/">neo4j</a> simply because the community surrounding it is active and growing (and naturally it has all the obligatory WebScale hype). It seems like a good place to start experimenting, but I'm not yet in a position to advocate or condemn it compared with anything else.</p>
@@ -341,7 +369,7 @@ heredoc            </a>
 </pre></div>
 
 
-<p>If you <strong>cannot</strong> connect to neo, then make sure the server is listening on 0.0.0.0 instead of 127.0.0.1  (this setting is inside <code>/etc/neo4j/neo4j-server.properties</code>).  <sup id="sf-neo4j-elixir-cypher-mediawiki-1-3-back"><a href="#sf-neo4j-elixir-cypher-mediawiki-1-3" class="simple-footnote" title=" Other modifications you might like to make: increase the ulimit in the default init script at /etc/init.d/neo4j-service. ">3</a></sup></p>
+<p>If you <strong>cannot</strong> connect to neo, then make sure the server is listening on 0.0.0.0 instead of 127.0.0.1  (this setting is inside <code>/etc/neo4j/neo4j-server.properties</code>).  <sup id="sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-3-back"><a href="#sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-3" class="simple-footnote" title=" Other modifications you might like to make: increase the ulimit in the default init script at /etc/init.d/neo4j-service. ">3</a></sup></p>
 <h2>Got Data?</h2>
 <p>A direct link to the latest XML datadump up the English WikiVoyage content is always <a href="https://dumps.wikimedia.org/enwikivoyage/latest/enwikivoyage-latest-pages-meta-current.xml.bz2">here</a>.  You'll need a copy of this before proceeding to parsing in the next step</p>
 <div class="highlight"><pre><span></span>$ wget https://dumps.wikimedia.org/enwikivoyage/latest/enwikivoyage-latest-pages-meta-current.xml.bz2
@@ -370,7 +398,7 @@ $ mix deps.compile
 
 
 <h2>Parsing Data</h2>
-<p>After grabbing to code and the data-dump, you should now be able to run the parser against the XML.  In terms of what is populated in the graph DB, this will create "WikiPage" nodes and "links_to" relationships to capture<sup id="sf-neo4j-elixir-cypher-mediawiki-1-4-back"><a href="#sf-neo4j-elixir-cypher-mediawiki-1-4" class="simple-footnote" title=' Link relationships are parsed from page bodies with regexes looking for "[[" and "]]" '>4</a></sup> the inter-wiki links from page bodies.</p>
+<p>After grabbing to code and the data-dump, you should now be able to run the parser against the XML.  In terms of what is populated in the graph DB, this will create "WikiPage" nodes and "links_to" relationships to capture<sup id="sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-4-back"><a href="#sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-4" class="simple-footnote" title=' Link relationships are parsed from page bodies with regexes looking for "[[" and "]]" '>4</a></sup> the inter-wiki links from page bodies.</p>
 <div class="highlight"><pre><span></span>$ mix load wikivoyage.xml
 
 <span class="m">16</span> outgoing links <span class="k">for</span> Aba <span class="o">(</span>prefecture<span class="o">)</span>
@@ -455,47 +483,48 @@ database is empty.  adding indexes
 
 
 <h2>Exploring the data</h2>
-<p>So, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages, and we have 2 kinds of inter-node relationships specified.  What the hell is this data structure?  In short <strong>we have a good model for describing how the website connects to itself</strong>.  Because the website itself is basically trying to describe the world, we sort of have model for the world too even if it's shall we say low-res and second order.  What kinds of questions can we ask and answer with this model, and how can we curate and improve its accuracy?  The data diving begins in <a href="neo4j-elixir-cypher-mediawiki-2.html">part 2 of this series.</a></p><ol class="simple-footnotes"><li id="sf-neo4j-elixir-cypher-mediawiki-1-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a href="#sf-neo4j-elixir-cypher-mediawiki-1-1-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-cypher-mediawiki-1-2">You can check out my (somewhat neglected) travel blog <a href="/travel">here</a> <a href="#sf-neo4j-elixir-cypher-mediawiki-1-2-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-cypher-mediawiki-1-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a href="#sf-neo4j-elixir-cypher-mediawiki-1-3-back" class="simple-footnote-back">↩</a></li><li id="sf-neo4j-elixir-cypher-mediawiki-1-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a href="#sf-neo4j-elixir-cypher-mediawiki-1-4-back" class="simple-footnote-back">↩</a></li></ol>
+<p>So, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages, and we have 2 kinds of inter-node relationships specified.  What the hell is this data structure?  In short <strong>we have a good model for describing how the website connects to itself</strong>.  Because the website itself is basically trying to describe the world, we sort of have model for the world too even if it's shall we say low-res and second order.  What kinds of questions can we ask and answer with this model, and how can we curate and improve its accuracy?  The data diving begins in <a href="exploring-wikivoyage-data-with-neo4j-and-cypher.html">the continuation of this series</a></p><ol class="simple-footnotes"><li id="sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a href="#sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-1-back" class="simple-footnote-back">↩</a></li><li id="sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-2">You can check out my (somewhat neglected) travel blog <a href="/travel">here</a> <a href="#sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-2-back" class="simple-footnote-back">↩</a></li><li id="sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a href="#sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-3-back" class="simple-footnote-back">↩</a></li><li id="sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a href="#sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-4-back" class="simple-footnote-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="series-well">
-  This is part <strong>1</strong> of
-  <strong>2</strong> in
-  <strong>"Loading MediaWiki into Neo4j using Elixir and Cypher"</strong>.
+  Part <strong>1</strong> of
+  <strong>3</strong> in
+  <strong>"Loading MediaWiki into Neo4j using Elixir and Cypher"</strong>
+&nbsp;
+<small>
+    <a class="btn btn-default btn-xs" href="exploring-wikivoyage-data-with-neo4j-and-cypher.html">
+      next ⇒
+    </a>
+</small>
 
-     <h5>Next articles</h5>
+     <h5>Next article(s)</h5>
      <ul>
-         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-2.html">Exploring WikiVoyage data with Neo4j and Cypher</a></li>
+         <li>
+           <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">Exploring WikiVoyage data with Neo4j and Cypher</a>
+           <small>(part 2)</small>
+         </li>
+         <li>
+           <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a>
+           <small>(part 3)</small>
+         </li>
      </ul>
-  
-  <!--
-    <h4>Part 1 of the series ""</h4>
-       <h5>Next articles</h5>
-       <ul>
-           <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-elixir-cypher-mediawiki-2.html">Exploring WikiVoyage data with Neo4j and Cypher</a></li>
-       </ul>
-  -->
+
+</section>
+<section class="well" id="related-posts-well">
+    <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">Exploring WikiVoyage data with Neo4j and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ambient-calculus-implementation-in-elixir.html">Ambient Calculus implementation in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
+    </ul>
 </section>
         </article>
     </section>
-    <script>
-$(document).ready(
-  function(){
-    $('.simple-footnotes').wrap("<section class=well id=footnotes-well></section>");
-    $('#footnotes-well').before("<h2>Footnotes</h2>");
-    $('#series-well').before("<h2>Articles in Series</h2>");
-    $('#related-posts-well').before("<h2>Related Posts</h2>");
-    $("#toc").delay(1000).tocify(
-      {
-        context: '.entry-content',
-        selectors: "h2,h3,h4",
-        showAndHide: true,
-        showAndHideOnScroll: true,
-        extendPage: false,
-      }
-    )
-  }
-);    </script>
 
         </div>
         <div class="col-sm-2" >
@@ -540,6 +569,24 @@ $(document).ready(
     <script src="https://mattvonrocketstein.github.io/heredoc/theme/js/github.js" type="text/javascript"></script>
     <!-- End GitHub JS Code -->
 
+<script>
+$(document).ready(
+  function(){
+    $('.simple-footnotes').wrap("<section class=well id=footnotes-well></section>");
+    $('#footnotes-well').before("<h2>Footnotes</h2>");
+    $('#series-well').before("<h2>Articles in Series</h2>");
+    $('#related-posts-well').before("<h2>Related Posts</h2>");
+    $("#toc").delay(1000).tocify(
+      {
+        context: '.entry-content',
+        selectors: "h2,h3,h4",
+        showAndHide: true,
+        showAndHideOnScroll: true,
+        extendPage: false,
+      }
+    )
+  }
+);</script>
 <script>
 setTimeout(function(){
   if (""==$('#toc').html().trim()){
