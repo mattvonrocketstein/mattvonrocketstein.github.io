@@ -147,6 +147,9 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">
+                            Clustering in Elixir</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
                             Loading MediaWiki into Neo4j with Elixir and Cypher</li>
                         </a>
@@ -159,25 +162,22 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">
                             Elixir Examples and Patterns</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir.html">
-                            An implementation of the Ambient Calculus in Elixir</li>
-                        </a>
               </ul>
 
 
               <a href="https://mattvonrocketstein.github.io/heredoc/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">
                             ansible
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/code.html">
                             code
                         </a>
@@ -187,37 +187,37 @@ heredoc            </a>
                             cs
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">
                             devops
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">
                             docker
                         </a>
                     </li>
-                    <li class="list-group-item tag-0">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
                             elixir
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/links.html">
                             links
                         </a>
@@ -227,7 +227,12 @@ heredoc            </a>
                             math
                         </a>
                     </li>
-                    <li class="list-group-item tag-0">
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/misc.html">
+                            misc
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">
                             python
                         </a>
@@ -323,10 +328,7 @@ heredoc            </a>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <p>
-How to run the IElixir Jupyter notebook with Docker.
-<br>
-</p>
+                <p></p>
 <h2>The Players</h2>
 <p><a href="jupyter.readthedocs.io">Jupyter</a> is the latest incarnation of an interactive notebook project that grew up out IPython, and describing the all the goals and history of that project is waaay outside of the scope of this write-up.  Suffice to say that from the humble beginnings of an interactive shell, Jupyter has become an amazing tool for interactive presentations, education, and data-driven scientific computing amongst other things.  It has support for console and web-based interaction.  Most relevant to the topic presented here: Jupyter is no longer limited to python and has support for multiple language backends as well.<sup id="sf-ielixir-notebook-in-docker-1-back"><a href="#sf-ielixir-notebook-in-docker-1" class="simple-footnote" title="Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages">1</a></sup>.</p>
 <p><a href="https://github.com/pprzetacznik/IElixir">IElixir</a> is a neat piece of work that brings an <a href="elixir-lang.org">Elixir language</a> kernel to jupyter.</p>
@@ -493,14 +495,14 @@ $ docker run <span class="se">\</span>
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir.html">An implementation of the Ambient Calculus in Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/mapping-ambient-calculus-primitives-to-elixir.html">Mapping ambient calculus primitives to Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
     </ul>
 </section>
         </article>

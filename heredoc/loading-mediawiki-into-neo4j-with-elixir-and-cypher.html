@@ -146,6 +146,9 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">
+                            Clustering in Elixir</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
                             Loading MediaWiki into Neo4j with Elixir and Cypher</li>
                         </a>
@@ -158,25 +161,22 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">
                             Elixir Examples and Patterns</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir.html">
-                            An implementation of the Ambient Calculus in Elixir</li>
-                        </a>
               </ul>
 
 
               <a href="https://mattvonrocketstein.github.io/heredoc/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group list-inline tagcloud" id="tags">
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">
                             ansible
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/boilerplate.html">
                             boilerplate
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/code.html">
                             code
                         </a>
@@ -186,37 +186,37 @@ heredoc            </a>
                             cs
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">
                             devops
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">
                             docker
                         </a>
                     </li>
-                    <li class="list-group-item tag-0">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">
                             elixir
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/fabric.html">
                             fabric
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/links.html">
                             links
                         </a>
@@ -226,7 +226,12 @@ heredoc            </a>
                             math
                         </a>
                     </li>
-                    <li class="list-group-item tag-0">
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/misc.html">
+                            misc
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">
                             python
                         </a>
@@ -339,10 +344,7 @@ heredoc            </a>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <p>
-Loading MediaWiki data-dump XML into Neo4j using Elixir and Cypher
-<br>
-</p>
+                <p></p>
 <h2>Part 1: Intro</h2>
 <p>This is part one of a three part series.  In this part, I'll write about using <a href="http://elixir-lang.org/">Elixir</a> to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into the Neo4j graph database.
 I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-1-back"><a href="#sf-loading-mediawiki-into-neo4j-with-elixir-and-cypher-1" class="simple-footnote" title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P '>1</a></sup>  If you're most interested in the resulting data structure and how it can be interrogated, you can leave this part and <a href="exploring-wikivoyage-data-with-neo4j-and-cypher.html">move directly to part 2</a>.</p>
@@ -512,15 +514,16 @@ database is empty.  adding indexes
 </section>
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">Exploring WikiVoyage data with Neo4j and Cypher</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir.html">An implementation of the Ambient Calculus in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">Exploring WikiVoyage data with Neo4j and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir.html">An implementation of the Ambient Calculus in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/mapping-ambient-calculus-primitives-to-elixir.html">Mapping ambient calculus primitives to Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
     </ul>
 </section>
         </article>

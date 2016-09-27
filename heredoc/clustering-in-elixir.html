@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Elixir Examples and Patterns</title>
+    <title>heredoc - Clustering in Elixir</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,22 +10,21 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="elixir,code,unfinished" />
-        <meta name="description" content="Scratchpad for experimental elixirisms" />
+        <meta name="keywords" content="misc,elixir" />
+        <meta name="description" content="Clustering with distributed Elixir. A survey of techniques to get nodes to connect to each other automatically." />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Elixir Examples and Patterns"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html"/>
-        <meta property="og:description" content="Scratchpad for experimental elixirisms"/>
-        <meta property="article:published_time" content="2016-09-18" />
+        <meta property="og:title" content="Clustering in Elixir"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html"/>
+        <meta property="og:description" content="Clustering with distributed Elixir. A survey of techniques to get nodes to connect to each other automatically."/>
+        <meta property="article:published_time" content="2016-09-25" />
             <meta property="article:section" content="elixir" />
+            <meta property="article:tag" content="misc" />
             <meta property="article:tag" content="elixir" />
-            <meta property="article:tag" content="code" />
-            <meta property="article:tag" content="unfinished" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -283,16 +282,16 @@ heredoc            </a>
                 <li><a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html" title="elixir">
                   elixir
                 </a></li>
-                <li class="active">Elixir Examples and Patterns</li>
+                <li class="active">Clustering in Elixir</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html"
                        rel="bookmark"
-                       title="Permalink to Elixir Examples and Patterns">
-                        Elixir Examples and Patterns
+                       title="Permalink to Clustering in Elixir">
+                        Clustering in Elixir
                     </a>
                 </span>
             </header>
@@ -306,8 +305,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2016-09-18T20:20:00-04:00">
-        Sun 18 September 2016
+      <time datetime="2016-09-25T20:20:00-04:00">
+        Sun 25 September 2016
       </time>
     </span>
   </td>
@@ -318,46 +317,164 @@ heredoc            </a>
 		</span>
 	</td>
 	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/code.html">code</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">unfinished</a>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/misc.html">misc</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
 	</td>
-</tr>
-<tr>
-  <td class=center>
-    <span class="label label-default">Draft</span>
-  </td>
-  <td>
-    <strong>
-      <small>
-        <font color="red">Warning!</font>
-        You are reading a draft; this article is marked as unfinished.
-      </small>
-    </strong>
-  </td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
                 <p></p>
-<p><strong> Process-groups with :pg2</strong></p>
-<div class="highlight"><pre><span></span><span class="ss">:pg2</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:group</span><span class="p">)</span>
-<span class="ss">:pg2</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="ss">:group</span><span class="p">)</span>
-<span class="ss">:pg2</span><span class="o">.</span><span class="n">group_members</span><span class="p">(</span><span class="ss">:group</span><span class="p">)</span>
+<h2>Intro &amp; Motivation</h2>
+<p>Most people probably already know about <strong>clustering</strong>, wherein individual Elixir <a href="#">nodes</a> can be connected.  The <a href="https://howistart.org/posts/elixir/1">portal tutorial</a> is a good reference that begins to show the possibilities for distributed elixir.  To quote a simpler, less involved demonstration <a href="http://stackoverflow.com/questions/17351882/how-to-connect-two-elixir-nodes-via-local-network">from stackoverflow</a> the basic functionality works like this:</p>
+<div class="highlight"><pre><span></span>iex --name node1@127.0.0.1 --cookie a_cookie_string
+
+<span class="c1"># In machine 2:</span>
+iex --name node2@127.0.0.1 --cookie a_cookie_string
+
+<span class="c1"># To test it, you can do something like this, on machine1:</span>
+iex<span class="o">(</span>node1<span class="o">)</span>1&gt; Node.connect :<span class="s2">&quot;node2@127.0.0.1&quot;</span>
+<span class="nb">true</span>
+
+iex<span class="o">(</span>node1<span class="o">)</span>2&gt; <span class="nv">print_node_name</span> <span class="o">=</span> fn -&gt; IO.puts Node.self end
+<span class="c1">#Function&lt;erl_eval.20.80484245&gt;</span>
+
+iex<span class="o">(</span>node1@127.0.0.1<span class="o">)</span>3&gt; Node.spawn<span class="o">(</span>:<span class="s2">&quot;node2@127.0.0.1&quot;</span>, print_node_name<span class="o">)</span>
+node2@localhost
+<span class="c1">#PID&lt;7789.49.0&gt;</span>
+</pre></div>
+
+
+<h2>Auto-Clustering</h2>
+<p>Unfortunately without some more magic, nodes don't register and connect to each other automatically.  There are quite a few ways to accomplish this, and best practice isn't clear.</p>
+<ul>
+<li><a href="https://dockyard.com/blog/2016/01/28/running-elixir-and-phoenix-projects-on-a-cluster-of-nodes">Explicit node clustering</a>, using erlang flags.  </li>
+<li>Discovery with consul, via <a href="https://github.com/undeadlabs/discovery">discovery lib</a></li>
+<li>Discovery with or without kubernetes, via <a href="https://github.com/bitwalker/swarm">swarm lib</a></li>
+<li>Discovery with openslp, via <a href="https://github.com/icanhazbroccoli/ex_slp_tk">ex_slp</a></li>
+</ul>
+<h2>Evaluation</h2>
+<p>This section describes a few conclusions based on piloting each of the approaches above.  </p>
+<ul>
+<li><strong>Explicit node clustering</strong> requires a set list of node names, and while it does have the advantage of "native" support, this isn't very dynamic for general purpose clustering.  However, this approach is <strong>perfect</strong> for apps that can be broken down into a few specific components, say "one node running a display loop, one node running an iex shell".</li>
+<li>Using <strong>discovery lib + <a href="#">consul</a></strong> is probably the most robust thing for production, but I haven't tried it.  For simple projects, adding a consul dependency is not ideal.. and similarly for <a href="#">kubernetes</a>.</li>
+<li>After a brief period of experimentation with non-kubernetes swarm, I noticed some very odd behaviour where CPU/memory usage of <a href="#">beam</a> would climb until it nearly locked up my computer.  More mysteriously, this actually consistently disrupted my internet connection, maybe because the multicasting was spiraling out of control.  Obviously I probably didn't have everything setup correctly, but it was too annoying debug so I abandoned this approach</li>
+<li>OpenSLP + ex_slp lib based discovery is also not ideal.. in particular the non-elixir moving parts are old(ish) and while it's at least stable it is not clear that the protocol/daemon is actively maintained.  I also can't vouch how well OpenSLP really deals with <a href="#">CAP challenges</a>.  Nevertheless I found this to be the simplest approach, and I'm using it in for instance <a href="elixir-ambient-calculus-1.html">the ambient calclulus project</a>.</li>
+</ul>
+<h2>Winner</h2>
+<p>I'm mostly interested in quick-and-dirty-yet-flexible clustering for experimental projects. Since the whole clustering problem is normally just a sideshow that's preventing me from getting on with the project I had in mind.. for now the <strong>the clear winner is <a href="https://github.com/icanhazbroccoli/ex_slp_tk">ex_slp</a></strong>.  </p>
+<h2>Implementation</h2>
+<p>I'd like to eventually cover implementation specifics for the other approaches if I ever dive deep into them, but for now I'll only go into details about <a href="https://github.com/icanhazbroccoli/ex_slp_tk">ex_slp</a>.</p>
+<h3>OpenSLP Setup</h3>
+<p>There's an ubuntu package for <code>slpd</code> and <code>slp-tool</code>, and there's also a <a href="https://hub.docker.com/r/vcrhonek/openslp/">docker image</a> that has both.  To install and verify installation for debian based systems use something like what you see below.</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install slpd slp-tool
+$ sudo /etc/init.d/slpd restart
+$ slptool --version
+</pre></div>
+
+
+<p>You'll want to install the command line tool regardless, but it's possible to use the daemon via docker:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Run slpd via docker and background it</span>
+$ docker run -d -p 427:427/tcp -p 427:427/udp  --name openslp vcrhonek/openslp
+</pre></div>
+
+
+<h3>Code</h3>
+<p><a href="https://gist.githubusercontent.com/mattvonrocketstein/580e04631af195edae0c9157f47758fe/raw/">View this gist on github</a></p>
+<div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># Demo usage of ex_slp_tk for OpenSLP based Elixir node clustering</span>
+<span class="c1">#   see the library at: https://github.com/icanhazbroccoli/ex_slp_tk</span>
+<span class="c1">#</span>
+<span class="c1"># To use the code below, add something like this for your application&#39;s supervisor:</span>
+<span class="c1">#</span>
+<span class="c1">#   children = children ++ [supervisor(Discovery.Supervisor, [])]</span>
+<span class="c1">#   supervise(children, opts)</span>
+<span class="c1">#</span>
+<span class="n">require</span> <span class="n">Logger</span>
+
+<span class="n">defmodule</span> <span class="n">Discovery</span><span class="o">.</span><span class="n">Supervisor</span> <span class="n">do</span>
+  <span class="n">use</span> <span class="n">Supervisor</span>
+
+  <span class="k">def</span> <span class="nf">start_link</span> <span class="n">do</span>
+      <span class="n">Supervisor</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="n">__MODULE__</span><span class="p">,</span> <span class="p">[],</span> <span class="n">name</span><span class="p">:</span> <span class="n">__MODULE__</span><span class="p">)</span>
+    <span class="n">end</span>
+
+  <span class="k">def</span> <span class="nf">init</span><span class="p">([])</span> <span class="n">do</span>
+    <span class="n">children</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="c1"># a periodic task for discovering other registered elixir nodes</span>
+      <span class="n">worker</span><span class="p">(</span>
+        <span class="n">Task</span><span class="p">,</span> <span class="p">[</span> <span class="o">&amp;</span><span class="n">Discovery</span><span class="o">.</span><span class="n">discover</span><span class="o">/</span><span class="mi">0</span> <span class="p">],</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="n">SLPNodeDiscover</span><span class="p">,</span>
+        <span class="n">restart</span><span class="p">:</span> <span class="p">:</span><span class="n">permanent</span><span class="p">,</span>
+        <span class="p">),</span>    <span class="c1"># a periodic task for (re)registering with the OpenSLP daemon</span>
+      <span class="c1"># hint: run &quot;sudo /etc/init.d/slpd start&quot;</span>
+      <span class="n">worker</span><span class="p">(</span>
+        <span class="n">Task</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">Discovery</span><span class="o">.</span><span class="n">register</span><span class="o">/</span><span class="mi">0</span><span class="p">],</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="p">:</span><span class="n">SLPNodeRegister</span><span class="p">,</span>
+        <span class="n">restart</span><span class="p">:</span> <span class="p">:</span><span class="n">permanent</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">supervise</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="p">:</span><span class="n">one_for_one</span><span class="p">)</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="n">defmodule</span> <span class="n">Discovery</span> <span class="n">do</span>
+  <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">service_string</span><span class="p">)</span> <span class="n">do</span>
+    <span class="p">{:</span><span class="n">ok</span><span class="p">,</span> <span class="n">this_hostname</span><span class="p">}</span> <span class="o">=</span> <span class="p">:</span><span class="n">inet</span><span class="o">.</span><span class="n">gethostname</span><span class="p">()</span>
+    <span class="c1"># HACK: by default service-strings are constructed with human-friendly system hostnames.</span>
+    <span class="n">normalized_string</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+      <span class="n">to_string</span><span class="p">(</span><span class="n">service_string</span><span class="p">),</span>
+      <span class="n">to_string</span><span class="p">(</span><span class="n">this_hostname</span><span class="p">),</span>
+      <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">)</span>    
+  <span class="n">end</span>
+  
+  <span class="k">def</span> <span class="nf">discover</span><span class="p">()</span> <span class="n">do</span>
+    <span class="n">slp_services</span> <span class="o">=</span> <span class="n">ExSlp</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">discover</span><span class="p">()</span>
+    <span class="n">slp_services</span>
+    <span class="o">|&gt;</span> <span class="n">Enum</span><span class="o">.</span><span class="n">map</span><span class="p">(</span> <span class="n">fn</span> <span class="n">service_string</span> <span class="o">-&gt;</span>
+      <span class="n">normalized</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">service_string</span><span class="p">)</span>
+      
+      <span class="c1">#make sure we ignore detecting ourselves</span>
+      <span class="n">should_skip</span> <span class="o">=</span> <span class="n">normalized</span> <span class="o">==</span> <span class="n">Atom</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">Node</span><span class="o">.</span><span class="n">self</span><span class="p">())</span>
+
+      <span class="n">unless</span><span class="p">(</span><span class="n">should_skip</span><span class="p">)</span> <span class="n">do</span>
+        <span class="n">case</span> <span class="n">ExSlp</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">normalized</span><span class="p">)</span> <span class="n">do</span>
+          <span class="c1"># in this case Node.connect() ignored a down host</span>
+          <span class="c1"># see http://elixir-lang.org/docs/stable/elixir/Node.html#connect/1</span>
+          <span class="p">:</span><span class="n">ignored</span> <span class="o">-&gt;</span>
+            <span class="c1">#Logger.info(&quot;Connection to #{inspect normalized_string} ignored&quot;)</span>
+            <span class="p">:</span><span class="n">noop</span>
+
+          <span class="c1"># in this case the Connection failed</span>
+          <span class="n">false</span> <span class="o">-&gt;</span>
+            <span class="c1">#Logger.info(&quot;Connection to #{inspect normalized_string} failed&quot;)</span>
+            <span class="p">:</span><span class="n">noop</span>
+
+          <span class="c1"># in this case Connection is successful (but not necessarily new)</span>
+          <span class="n">true</span> <span class="o">-&gt;</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Discovery.discover: connected&quot;</span><span class="p">)</span>
+            <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;#{inspect normalize}d&quot;</span><span class="p">)</span>
+        <span class="n">end</span> <span class="c1"># case</span>
+      <span class="n">end</span> <span class="c1"># unless</span>
+    <span class="n">end</span><span class="p">)</span>
+    <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;SLP Discovery&quot;</span><span class="p">)</span>
+  <span class="n">end</span>
+  <span class="k">def</span> <span class="nf">register</span><span class="p">()</span> <span class="n">do</span>
+    <span class="p">{:</span><span class="n">ok</span><span class="p">,</span> <span class="n">_result</span><span class="p">}</span> <span class="o">=</span> <span class="n">ExSlp</span><span class="o">.</span><span class="n">Service</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
+    <span class="n">Logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Ran registration task&quot;</span><span class="p">)</span>
+    <span class="p">:</span><span class="n">timer</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+  <span class="n">end</span>
+<span class="n">end</span>
 </pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir.html">An implementation of the Ambient Calculus in Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/mapping-ambient-calculus-primitives-to-elixir.html">Mapping ambient calculus primitives to Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">Exploring WikiVoyage data with Neo4j and Cypher</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
     </ul>
 </section>
