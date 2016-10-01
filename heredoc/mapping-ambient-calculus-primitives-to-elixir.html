@@ -147,17 +147,17 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">
-                            Clustering in Elixir</li>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 2</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 3</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
                             Loading MediaWiki into Neo4j with Elixir and Cypher</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">
-                            Exploring WikiVoyage data with Neo4j and Cypher</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">
-                            Exploring WikiVoyage data with Neo4j and Cypher: Part 3</li>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">
+                            Clustering in Elixir</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">
                             Elixir Examples and Patterns</li>
@@ -192,7 +192,7 @@ heredoc            </a>
                             data-science
                         </a>
                     </li>
-                    <li class="list-group-item tag-2">
+                    <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">
                             devops
                         </a>
@@ -217,7 +217,7 @@ heredoc            </a>
                             graphdb
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/links.html">
                             links
                         </a>
@@ -300,7 +300,7 @@ heredoc            </a>
     <table>
       <tr>
         <td> <small>
-    <a class="btn btn-default btn-xs" href="an-implementation-of-the-ambient-calculus-in-elixir.html">
+    <a class="btn btn-default btn-xs" href="an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">
       ⇐ prev
     </a>
   &nbsp;
@@ -362,7 +362,7 @@ heredoc            </a>
                 <p></p>
 <h2>Part 2: Design</h2>
 <p>This is part two of a two part series where I'll describe an implementation of the ambient calculus in Elixir.</p>
-<p>Cool diagram, right?  At the beginning of the <a href="an-implementation-of-the-ambient-calculus-in-elixir.html">last part of this series</a> I promised to explain it, so here goes.  The right hand side represents two ambients <em>n</em> and <em>m</em>, running programs <em>P</em>, <em>Q</em> and <em>R</em>.  The yield arrow just means that the left-hand side <a href="#">reduces</a> to the right-hand, and in particular this diagram shows the semantics of the "out" or "exit" operation, which basically un-nests nested ambients.</p>
+<p>Cool diagram, right?  At the beginning of the <a href="an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">last part of this series</a> I promised to explain it, so here goes.  The right hand side represents two ambients <em>n</em> and <em>m</em>, running programs <em>P</em>, <em>Q</em> and <em>R</em>.  The yield arrow just means that the left-hand side <a href="#">reduces</a> to the right-hand, and in particular this diagram shows the semantics of the "out" or "exit" operation, which basically un-nests nested ambients.</p>
 <p><img alt="image" src="img/ambient-calculus-2.png"></p>
 <p>In the rest of this part of the series, I'll get into how we'll map ambient calculus primitives on to Elixir primitives in an overview of high-level design decisions.  In <a href="">the next part of this series</a>, I'll begin to get into actual implementation-level stuff.</p>
 <h2>Distributed Elixir</h2>
@@ -428,8 +428,8 @@ heredoc            </a>
      <h5>Previous article(s)</h5>
      <ul>
          <li>
-           <a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir.html">
-             An implementation of the Ambient Calculus in Elixir</a>
+           <a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">
+             An implementation of the Ambient Calculus in Elixir: part 1</a>
             <small>(part 1)</small>
        </li>
      </ul>
@@ -437,16 +437,16 @@ heredoc            </a>
 </section>
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir.html">An implementation of the Ambient Calculus in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: part 1</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher.html">Exploring WikiVoyage data with Neo4j and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
     </ul>
 </section>
         </article>
