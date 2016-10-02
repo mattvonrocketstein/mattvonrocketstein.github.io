@@ -358,71 +358,24 @@ heredoc            </a>
 </footer>
 <!-- /.post-info -->                <br/>
                 <p></p>
-<p><img alt="graphdb snapshot" src="img/neo-paris.png"></p>
+<p><img alt="graphdb snapshot" src="img/neo-antwerp.png" /></p>
 <h2>Part 3: Intro</h2>
-<p>This is part three of a three part series.  </p>
-<p>In <a href="loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">part 1 of this series</a> I wrote about using Elixir to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into Neo4j.  If you want to follow along at home but you have no data locally, then you'll want to go back to that section before reading further.  If you've already seen part 1 or if you're only interested in the resulting data structure and its interrogation, then you can read on from here.</p>
-<h2>Querying the Graph</h2>
-<h3>Pathfinding</h3>
-<p>As we've seen previously in the <a href="#">curating section</a>, regional hierarchies like <strong>[continent</strong> <img height="20px" alt=":arrow_right:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/27a1.png" title=":arrow_right:" align="absmiddle" width="20px" class="emoji"> <strong>country</strong> <img height="20px" alt=":arrow_right:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/27a1.png" title=":arrow_right:" align="absmiddle" width="20px" class="emoji"> <strong>city]</strong> are already defined and accessible by the <code>:contains</code> edges. <strong>How can we query for such paths?</strong></p>
-<div class="highlight"><pre><span></span><span class="c1">// short path query</span>
-<span class="p">....</span><span class="w"></span>
-</pre></div>
+<p>This is part three of a three part series.</p>
+<p>In <a href="loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">part 1 of this series</a> I wrote about using Elixir to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into Neo4j.  If you want to follow along at home but you have no data locally, then you'll want to go back to that section before reading further.</p>
+<p>In <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">part 2 of this series</a> I wrote about using the data in the graph database, along with Cypher queries, to make iterative improvements to the model that's been constructed thus far.</p>
+<p>This final part of the writeup will continue where part 2 left off, showing off a few more advanced features of the Cypher query language and discussing a few ideas for future work.</p>
+<hr style="border-top: dotted 2px;" />
 
-
-<h3>Innate Ambiguity</h3>
-<p><strong>How frequently does ambiguity occur in place names?</strong> This is a tricky question to answer <em>exactly</em> with the data but by counting the redirects <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-3-1-back"><a href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-3-1" class="simple-footnote" title="We already labeled redirects here">1</a></sup> and disambiguation pages we can pretty easily find information that gets us pointed in the right direction.  The basic approach is</p>
-<ol>
-<li>Find all pages labeled as redirects.  The page body will look like <code>#REDIRECT [[RedirectTarget]]</code></li>
-<li>Find the page each page redirects to, de-duplicate the resulting set and count the elements</li>
-</ol>
-<p>No doubt there's a better way to do it, but the cypher I came up with looks like what you see below.  The <code>split()</code> calls you see there are taking apart the <code>`[[link]]</code> markdown and the reference to "#" is handling a special-case where some pages redirect to <em>subsections</em> of other pages.</p>
-<div class="highlight"><pre><span></span><span class="c1">// Counts unique redirection targets</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">Redirect</span><span class="p">)</span><span class="w"></span>
-<span class="k">WITH</span><span class="w"></span>
-<span class="w">  </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">split</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">split</span><span class="p">(</span><span class="n">page</span><span class="p">.</span><span class="n">body</span><span class="p">,</span><span class="err">'</span><span class="o">[[</span><span class="err">'</span><span class="p">)</span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="p">,</span><span class="err">'</span><span class="o">]]</span><span class="err">'</span><span class="p">)</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="p">,</span><span class="err">'#'</span><span class="p">)</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">redirect_to</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">redirect_to</span><span class="p">)</span><span class="w"></span>
-
-<span class="c1">// Counts disambiguation pages</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">Disambiguation</span><span class="p">)</span><span class="w"> </span><span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">page</span><span class="p">)</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="k">distinct</span><span class="w"> </span><span class="n">page</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
-<h3>Popular Topics</h3>
-<p><strong>What can we say about nodes (pages) with large numbers of out-going links?</strong> Apriori, there are a a few obvious guesses: these pages might represent meta-pages, very large land-masses, or very well-documented (and thus popular?) travel destinations.  You can see several such nodes in the output of the cypher query below:</p>
-<div class="highlight"><pre><span></span><span class="c1">// Query for finding the top-ten nodes by link-count</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">-[</span><span class="n">r</span><span class="p">:</span><span class="n">links_to</span><span class="o">]-</span><span class="p">()</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">rel_count</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">rel_count</span><span class="w"> </span><span class="k">desc</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
-</pre></div>
-
-
-<p>Taking for instance the meta-page for the <a href="https://en.wikivoyage.org/wiki/UNESCO_World_Heritage_List">UNESCO World Heritage List</a> here are some interesting queries:</p>
-<div class="highlight"><pre><span></span><span class="c1">// Query to count the out-going links of a particular node</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">rel</span><span class="p">)</span><span class="w"></span>
-
-<span class="c1">// Query to graph part of the neighborhood in the WebUI</span>
-<span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
-<span class="k">RETURN</span><span class="w"> </span><span class="n">rel</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
-</pre></div>
-
-
-<hr style="border-top: dotted 2px;">
-
-<h3>Edge Weights</h3>
+<h2>Edge Weights</h2>
 <p>Also in the previous section, we talked about a type of naive query that could not possibly work for finding countries 1 step beneath continents and cities 1 step beneath countries.  What we can do however is this: update "contains" edge in the graph to have a "containment-depth" property.  Edges where containment-depth==1 may not necessarily be countries, but this information ought to be at least heuristically useful in some other circumstance.</p>
 <div class="highlight"><pre><span></span><span class="c1">// Placeholder</span>
 </pre></div>
 
 
+<hr style="border-top: dotted 2px;" />
+
 <h2>Other Ideas</h2>
-<p>It's quite tempting to see what else can be done to make the data structure more complete, perhaps by using <a href="https://github.com/opentraveldata">open travel data</a> or by enhancing the dump parser to understand the <code>##Get In</code> and <code>##Get Out</code> sections of wikivoyage pages to make a "transport-connection" relationship type.  To be continued..</p><ol class="simple-footnotes"><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-3-1">We already labeled redirects <a href="#">here</a> <a href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-3-1-back" class="simple-footnote-back">↩</a></li></ol>
+<p>It's quite tempting to see what else can be done to make the data structure more complete, perhaps by using <a href="https://github.com/opentraveldata">open travel data</a> or by enhancing the dump parser to understand the <code>##Get In</code> and <code>##Get Out</code> sections of wikivoyage pages to make a "transport-connection" relationship type.  To be continued..</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="series-well">
@@ -449,10 +402,10 @@ heredoc            </a>
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: part 1</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/mapping-ambient-calculus-primitives-to-elixir.html">Mapping ambient calculus primitives to Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
     </ul>
 </section>
