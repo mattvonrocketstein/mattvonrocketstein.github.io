@@ -325,13 +325,13 @@ heredoc            </a>
 </footer>
 <!-- /.post-info -->                <br/>
                 <h2>Intro</h2>
-<p>This write-up talks about aspects of project skeletons that eventually end up in all my Elixir projects.  </p>
-<p>If you're interested in discussion around this and are feeling cut-and-paste'y then just read on.  </p>
-<p>If you want a automation tool that actually generates this boilerplate, consider using <a href="cookiecutter.readthedocs.io">cookiecutter</a>, which can be used to make all kinds of files/directory structures from templates.  My elixir project template for cookiecutter includes everything discussed on this page, and is <a href="https://github.com/mattvonrocketstein/cookiecutter-elixir-project">on github</a>.  </p>
+<p>This write-up talks about aspects of project skeletons that eventually end up in all my Elixir projects.</p>
+<p>If you're interested in discussion around this and are feeling cut-and-paste'y then just read on.</p>
+<p>If you want a automation tool that actually generates this boilerplate, consider using <a href="http://cookiecutter.readthedocs.io">cookiecutter</a>, which can be used to make all kinds of files/directory structures from templates.  My elixir project template for cookiecutter includes everything discussed on this page, and is <a href="https://github.com/mattvonrocketstein/cookiecutter-elixir-project">on github</a>.  </p>
 <h2>Commit hooks</h2>
 <p>Regardless of programming language, I've come to believe that linting should be done strictly, constantly, and consistently across all contributing project members.  Thus, I advocate moving linters out of your text editor (or whatever) and into pre-commit hooks.</p>
 <p>Another benefit of the hooks approach is that it works better with code-bases that are large and under construction, because hooks force developers to fix lint on files they are modifying anyway, whereas running lint elsewhere -- say from tox via a buildbot -- might force developers to de-lint the entire code base at once.</p>
-<p>I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple; just make a <code>.pre-commit-config.yaml</code> file in your source root.  For elixir code my hooks normally look something like what you see below (to see my python hooks <a href="#">go here</a>).  </p>
+<p>I like to use <a href="http://pre-commit.com/">yelp's pre-commit framework</a> for managing my hooks.  The setup is simple; just make a <code>.pre-commit-config.yaml</code> file in your source root.  For elixir code my hooks normally look something like what you see below (to see my python hooks <a href="#">go here</a>).</p>
 <div class="highlight"><pre><span></span><span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">repo</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">local</span>
     <span class="l l-Scalar l-Scalar-Plain">hooks</span><span class="p p-Indicator">:</span>
     <span class="p p-Indicator">-</span>   <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">mix-test</span>
@@ -437,20 +437,20 @@ $ git push
 
   <span class="kd">def</span> <span class="n">main</span><span class="p">([</span><span class="n">fname</span><span class="p">])</span> <span class="k">do</span>
     <span class="nc">IO</span><span class="o">.</span><span class="n">puts</span><span class="p">(</span><span class="s2">&quot;Given a filename </span><span class="si">#{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-  <span class="k">end</span>  
+  <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: part 1</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
     </ul>
 </section>

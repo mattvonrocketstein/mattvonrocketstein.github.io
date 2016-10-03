@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - An implementation of the Ambient Calculus in Elixir: part 1</title>
+    <title>heredoc - An implementation of the Ambient Calculus in Elixir: Part 1</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="An implementation of the Ambient Calculus in Elixir: part 1"/>
+        <meta property="og:title" content="An implementation of the Ambient Calculus in Elixir: Part 1"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html"/>
         <meta property="og:description" content="This section includes a brief introduction to the ambient calculus, discussion of project scope and some definitions. A review of concurrency primitives in Elixir."/>
         <meta property="article:published_time" content="2016-09-11" />
@@ -284,7 +284,7 @@ heredoc            </a>
                 <li><a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html" title="elixir">
                   elixir
                 </a></li>
-                <li class="active">An implementation of the Ambient Calculus in Elixir: part 1</li>
+                <li class="active">An implementation of the Ambient Calculus in Elixir: Part 1</li>
             </ol>
     <section id="content">
         <article>
@@ -292,8 +292,8 @@ heredoc            </a>
                 <span class=long-h1>
                     <a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html"
                        rel="bookmark"
-                       title="Permalink to An implementation of the Ambient Calculus in Elixir: part 1">
-                        An implementation of the Ambient Calculus in Elixir: part 1
+                       title="Permalink to An implementation of the Ambient Calculus in Elixir: Part 1">
+                        An implementation of the Ambient Calculus in Elixir: Part 1
                     </a>
                 </span>
     <br>
@@ -371,7 +371,7 @@ heredoc            </a>
 <p>The ambient calculus is a process calculus devised by Luca Cardelli and Andrew D. Gordon in 1998, and used to describe and theorise about concurrent systems that include mobility. Here mobility means both computation carried out on mobile devices (i.e. networks that have a dynamic topology), and mobile computation (i.e. executable code that is able to move around the network). The ambient calculus provides a unified framework for modeling both kinds of mobility.  It is used to model interactions in such concurrent systems as the Internet.</p>
 </blockquote>
 <h2>Elixir</h2>
-<p>All this talk of concurrent systems and mobile code at the core of the Ambient Calculus immediately got me thinking about an implementation in <a href="http://elixir-lang.org">Elixir</a>, just for fun.  It's an intriguing prospect because Elixir, running on top of the Erlang virtual machine, already implicitly supports hot-swapping code, <a href="http://elixir-lang.org/getting-started/mix-otp/distributed-tasks-and-configuration.html">distributed computing</a>, and has lots of sophisticated primitives for expressing ideas about concurrency.  </p>
+<p>All this talk of concurrent systems and mobile code at the core of the Ambient Calculus immediately got me thinking about an implementation in <a href="http://elixir-lang.org">Elixir</a>, just for fun.  It's an intriguing prospect because Elixir, running on top of the Erlang virtual machine, already implicitly supports hot-swapping code, <a href="http://elixir-lang.org/getting-started/mix-otp/distributed-tasks-and-configuration.html">distributed computing</a>, and has lots of sophisticated primitives for expressing ideas about concurrency.</p>
 <h3>Concurrency primitives</h3>
 <p>In this section I'll cover very briefly the various concurrency primitives that will be most useful in Ambient Calculus implementation later.</p>
 <ul>
@@ -391,32 +391,32 @@ heredoc            </a>
 <p><strong><a href="http://elixir-lang.org/docs/stable/elixir/Supervisor.html">Supervisors</a></strong> are processes which supervise other processes.  Supervisors may be nested.</p>
 </li>
 <li>
-<p><strong><a href="elixir-lang.org/docs/stable/elixir/GenServer.html">GenServers</a></strong> are often summarized as being the "server-side of a client-server", but that doesn't by itself really seem to fully summarize their generality.  Agents and Supervisors are both GenServers.  </p>
+<p><strong><a href="http://elixir-lang.org/docs/stable/elixir/GenServer.html">GenServers</a></strong> are often summarized as being the "server-side of a client-server", but that doesn't by itself really seem to fully summarize their generality.  Agents and Supervisors are both GenServers.</p>
 </li>
 </ul>
 <h2>Project Scope</h2>
 <p>The goal is to make a library/system wherein one can actually experiment with building things made of Ambient primitives.  Such a system will necessarily have a working knowledge of AC <a href="http://www.cs.princeton.edu/courses/archive/spr96/cs441/notes/l9.html">reduction semantics</a>, but it's worth noting that purely symbolic manipulation of the calculus itself is not really in scope here.</p>
 <p>The point of the implementation discussed here is to <em>use</em> Ambients, and it's not supposed to be extremely rigorous<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2-back"><a href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2" class="simple-footnote" title="For this project, Cardelli's paper is more in the way of inspiration than something that's treated as a specification">2</a></sup> or pure.<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3-back"><a href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3" class="simple-footnote" title="For instance, where message-passing is used it will most often be done directly in the obvious way with Elixir.. not reimplemented from scratch using ambient in/out/open/copy operations.">3</a></sup></p>
 <h2>Definitions</h2>
-<p>To establish a working definition of an Ambient for the purposes of the implementation, let's nail down a few things about ambients that are important.  </p>
+<p>To establish a working definition of an Ambient for the purposes of the implementation, let's nail down a few things about ambients that are important.</p>
 <p><img alt="image" src="img/ambient-calculus-1.png"></p>
-<p>The image above, like the teaser image for this series, is taken from Cardelli's paper. Here you can see a graphical representation of an ambient named <em>n</em>, running programs <em>P1</em>..<em>Pn</em>, with nested ambients <em>m1</em>..<em>mq</em>.  This will give you something fairly concrete to keep in mind while we get on with our working definitions for the project.   </p>
+<p>The image above, like the teaser image for this series, is taken from Cardelli's paper. Here you can see a graphical representation of an ambient named <em>n</em>, running programs <em>P1</em>..<em>Pn</em>, with nested ambients <em>m1</em>..<em>mq</em>.  This will give you something fairly concrete to keep in mind while we get on with our working definitions for the project.</p>
 <h3>Properties</h3>
 <p>By definition, ambients have these <strong>properties</strong>:</p>
 <ol>
 <li>Ambients are kinds of mobile container with unique names.</li>
 <li>Ambients may hold programs; I'll call that the ambient's ambient's <em>progspace</em></li>
 <li>Ambients may hold key/values; I'll call that the ambient's <em>namespace</em></li>
-<li>Ambients may be hold other ambients; I'll call that the ambient's <em>children</em>.  </li>
+<li>Ambients may be hold other ambients; I'll call that the ambient's <em>children</em>.</li>
 </ol>
 <h3>Operations</h3>
 <p>Ambients also have various <strong>core operations</strong>, most of which are more or less implied by the properties above.  Operations described in the original paper are captured in the <a href="https://github.com/mattvonrocketstein/ambient-calculus/blob/master/lib/ambient/algebra.ex"><code>Ambient.Algebra</code> code</a>, namely that</p>
 <ul>
 <li>Ambients may be <em>copied</em>.  This operation derives a new ambient from an existing one with an identical namespace / progspace.  The new ambient becomes a sibling with the old one, under the same parent ambient</li>
-<li>Ambients can be <em>entered</em><em> and </em>exited*  </li>
+<li>Ambients can be <em>entered</em><em> and </em>exited*</li>
 <li>Ambients may be <em>opened</em>, i.e. their membrane is dissolved and what was once their namespace/progspace then belongs to the parent ambient.</li>
 </ul>
-<p>Certain additional operations are implied for practical use and the fact that in Elixir, Ambients are implemented as <a href="#">GenServers</a>.  Those operations are captured in <a href="https://github.com/mattvonrocketstein/ambient-calculus/blob/master/lib/ambient/ambient.ex"><code>Ambient</code> code here</a>, namely that</p>
+<p>Certain additional operations are implied for practical use and the fact that in Elixir, Ambients are implemented as <a href="http://elixir-lang.org/docs/stable/elixir/GenServer.html">GenServers</a>.  Those operations are captured in <a href="https://github.com/mattvonrocketstein/ambient-calculus/blob/master/lib/ambient/ambient.ex"><code>Ambient</code> code here</a>, namely that</p>
 <ul>
 <li>Ambients may be <em>started</em>, <em>stopped</em>, <em>terminated</em>, etc</li>
 <li>Programs running inside Ambients may be started, stopped, terminated, etc</li>
@@ -457,13 +457,13 @@ heredoc            </a>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">Loading MediaWiki into Neo4j with Elixir and Cypher</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a></li>
     </ul>
 </section>
         </article>
