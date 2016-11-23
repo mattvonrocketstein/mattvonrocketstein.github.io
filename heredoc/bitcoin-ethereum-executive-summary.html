@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - An implementation of the Ambient Calculus in Elixir: Part 2</title>
+    <title>heredoc - Bitcoin & Ethereum: Executive Summary</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,23 +10,21 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="elixir,math,cs,unfinished" />
-        <meta name="description" content="System Design: mapping ambient calculus primitives to Elixir" />
+        <meta name="keywords" content="math,cs" />
+        <meta name="description" content="Bitcoin and Ethereum: a (mostly) nontechnical executive summary for focusing on exciting applications instead of implementation details." />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="An implementation of the Ambient Calculus in Elixir: Part 2"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html"/>
-        <meta property="og:description" content="System Design: mapping ambient calculus primitives to Elixir"/>
-        <meta property="article:published_time" content="2016-09-11" />
-            <meta property="article:section" content="elixir" />
-            <meta property="article:tag" content="elixir" />
+        <meta property="og:title" content="Bitcoin &amp; Ethereum: Executive Summary"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html"/>
+        <meta property="og:description" content="Bitcoin and Ethereum: a (mostly) nontechnical executive summary for focusing on exciting applications instead of implementation details."/>
+        <meta property="article:published_time" content="2016-10-28" />
+            <meta property="article:section" content="misc" />
             <meta property="article:tag" content="math" />
             <meta property="article:tag" content="cs" />
-            <meta property="article:tag" content="unfinished" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -286,39 +284,21 @@ heredoc            </a>
         <div class="col-sm-8">
             <ol class="breadcrumb">
                 <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html" title="elixir">
-                  elixir
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">
+                  misc
                 </a></li>
-                <li class="active">An implementation of the Ambient Calculus in Elixir: Part 2</li>
+                <li class="active">Bitcoin & Ethereum: Executive Summary</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html"
                        rel="bookmark"
-                       title="Permalink to An implementation of the Ambient Calculus in Elixir: Part 2">
-                        An implementation of the Ambient Calculus in Elixir: Part 2
+                       title="Permalink to Bitcoin & Ethereum: Executive Summary">
+                        Bitcoin & Ethereum: Executive Summary
                     </a>
                 </span>
-    <br>
-    <table>
-      <tr>
-        <td> <small>
-    <a class="btn btn-default btn-xs" href="an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">
-      ⇐ prev
-    </a>
-  &nbsp;
-</small>
- </td>
-        <td>
-          Part <strong>2</strong> of
-          <strong>2</strong> in
-          <strong>"Ambient Calculus in Elixir"</strong>
-        </td>
-        <td>  </td>
-      </tr>
-    </table>
             </header>
             <div class="entry-content">
 <footer class="post-info">
@@ -330,8 +310,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2016-09-11T20:20:00-04:00">
-        Sun 11 September 2016
+      <time datetime="2016-10-28T00:00:00-04:00">
+        Fri 28 October 2016
       </time>
     </span>
   </td>
@@ -342,116 +322,61 @@ heredoc            </a>
 		</span>
 	</td>
 	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/math.html">math</a>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/math.html">math</a>
 ,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/cs.html">cs</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">unfinished</a>
 	</td>
-</tr>
-<tr>
-  <td class=center>
-    <span class="label label-default">Draft</span>
-  </td>
-  <td>
-    <strong>
-      <small>
-        <font color="red">Warning!</font>
-        You are reading a draft; this article is marked as unfinished.
-      </small>
-    </strong>
-  </td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <p></p>
-<h2>Part 2: Design</h2>
-<p>This is part two of a two part series where I'll describe an implementation of the ambient calculus in Elixir.</p>
-<p>Cool diagram, right?  At the beginning of the <a href="an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">last part of this series</a> I promised to explain it, so here goes.  The right hand side represents two ambients <em>n</em> and <em>m</em>, running programs <em>P</em>, <em>Q</em> and <em>R</em>.  The yield arrow just means that the left-hand side <a href="#">reduces</a> to the right-hand, and in particular this diagram shows the semantics of the "out" or "exit" operation, which basically un-nests nested ambients.</p>
-<p><img alt="image" src="img/ambient-calculus-2.png" /></p>
-<p>In the rest of this part of the series, I'll get into how we'll map ambient calculus primitives on to Elixir primitives in an overview of high-level design decisions.  In <a href="">the next part of this series</a>, I'll begin to get into actual implementation-level stuff.</p>
-<h2>Distributed Elixir</h2>
-<p>To keep ourselves true to the "mobile computation" spirit of the Ambient Calculus (and to demonstrate some aspects of distributed Elixir) everything after this point is designed to work with multiple Elixir "nodes" (see the <a href="an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">Concurrency Primitives section</a>  for an overview of what this means if you're not familiar with the concept of nodes).</p>
-<p>But there's a challenge: Elixir nodes don't automatically get connected together and there is a need to put together some kind of discovery/registration process.  I've written elsewhere about approaches to <a href="clustering-in-elixir.html">clustering in elixir</a>, so I won't go into much detail about that here.  Without going down a CAP[ref][/ref] rabbit hole, suffice it to say cluster-membership for the ambient calculus app is done quick and dirty, in the simplest possible way with OpenSLP.</p>
-<p>:warning: <a href="https://github.com/mattvonrocketstein/ambient-calculus#installing-openslp">You'll have to set that up</a> now if you actually want to follow along at home. :warning:</p>
-<h2>Ambients</h2>
-<p>From the section discussing <a href="an-implementation-of-the-ambient-calculus-in-elixir-part-1.html#Definitions#Definitions">ambient properties</a> in our working definition, it's easily possible to sketch an elixir <a href="http://elixir-lang.org/getting-started/structs.html">Struct</a> that more or less captures the idea of all the state that makes up what an ambient is.</p>
-<div class="highlight"><pre><span></span><span class="kd">defmodule</span> <span class="nc">AmbientStruct</span> <span class="k">do</span>
-  <span class="kd">defstruct</span><span class="p">(</span>
-    <span class="ss">name</span><span class="p">:</span>      <span class="ss">:&quot;UnknownAmbient&quot;</span><span class="p">,</span> <span class="c1"># atom representing this ambient&#39;s name</span>
-    <span class="ss">node</span><span class="p">:</span>      <span class="ss">:&quot;UnknownNode&quot;</span><span class="p">,</span>    <span class="c1"># atom representing the Node this ambient resides in</span>
-    <span class="ss">pid</span><span class="p">:</span>       <span class="no">nil</span><span class="p">,</span>               <span class="c1"># ambient PID</span>
-    <span class="ss">parent</span><span class="p">:</span>    <span class="no">nil</span><span class="p">,</span>               <span class="c1"># parent ambient PID</span>
-    <span class="ss">progman</span><span class="p">:</span>     <span class="no">nil</span><span class="p">,</span>             <span class="c1"># progspace manager PID</span>
-    <span class="ss">progspace</span><span class="p">:</span> <span class="p">%{},</span>               <span class="c1"># %{ :program_name =&gt; task_function }</span>
-    <span class="ss">namespace</span><span class="p">:</span> <span class="p">%{},</span>               <span class="c1"># %{ :var =&gt; val }</span>
-    <span class="ss">children</span><span class="p">:</span>  <span class="p">%{},</span>               <span class="c1"># %{ :ambient_name =&gt; ambient_pid }</span>
-    <span class="p">)</span>
-<span class="k">end</span>
-</pre></div>
+                <h2>Intro</h2>
+<p>Talking with friends, I often find myself repeatedly giving more or less the same nontechnical-audience "executive summary" about cryptocurrency.  This write-up started as a email thread along those lines, so I decided to flesh it out into a quick essay.</p>
+<p>Obligatory disclaimer: I have a little background in math but I'm far from an expert on cryptocurrencies, and I certainly can't claim any expertise on matters of business or finance.  I'm just an interested bystander, but we won't get into implementation details here anyway.</p>
+<p>The idea is just to provide a <em>very</em> quick and introduction to some important core concepts, then get into concrete discussions about the applications that are making everyone so excited about this stuff.</p>
+<h2><i class="fa fa-btc"></i>itcoin</h2>
+<p>The block-chain is a kind of distributed, forgery-and-censorship resistant database.  "Distributed" here means that data is stored in different places, and those places might be owned by different people.  It's also important to note that there's not necessarily just one block-chain in the world, just like there's not only one database in the world.  Anyone can create and maintain a blockchain, but the strength of the forgery-proof guarantees all come from <em>many</em> people using and maintaining the same block-chain.</p>
+<p>With Bitcoin, the block-chain in the most obvious way: it tracks account balances by tracking transactions.  May as well call the blockchain what it is, so we can stop thinking of it as a "database" and call it a "ledger".  Since the ledger is maintained by a community, we call the ledger "distributed".  I'm glossing over an important and interesting concept called  <a href="https://en.wikipedia.org/wiki/Proof-of-work_system">proof-of-work</a> here, but it's possible to consider that an implementation detail.  Suffice it to say that it is part of what disincentivizes forgery and spam in the financial network.</p>
+<p>People are excited about bitcoin for a number of reasons ranging from the almost purely political all the way down to good old fashioned greed.  I won't dive deep into the politics of things.. but the possibility of having more anonymous finances could challenge existing models for income-reporting and taxation. Clearly any kind of distributed system is probably by it's very nature less hierarchical and more free from authority; such things will always be contentious insofar as they are perceived as disadvantageous for an entrenched status quo.</p>
+<p>On the strictly technical side, plenty of people are excited by the newness of the whole approach and the promise of generic, reusable software artifacts that will result from the open engineering effort even if the actual currency is just a failure or a fad.  Software engineers and cryptographers don't always necessarily know much about economics, but they do know about systems and system design.  From a systems perspective, block-chain based financial technology as a basis of commerce just seems better than the alternatives.</p>
+<h3>Will bitcoin go mainstream?</h3>
+<p>Naturally lots of people want to invest in it if it's here to stay, but of course not too early and not too late.  Sorry but I don't know an answer to this question, and anyway I mostly just want to convince you it doesn't matter much if <em>bitcoin itself</em> goes mainstream.  The fact is that <em>some cryptocurrency</em> will definitely go mainstream eventually and whatever kind of cryptocurrency "wins" will include most of the core concepts and innovations that came with bitcoin.</p>
+<p>While bitcoin-as-a-currency grows and struggles for more and more mainstream acceptance, bitcoin-as-a-technology evolves in terms of its code-base, protocols, mathematical theory, and support communities.  People find problems, make decisions, and create fixes.  The fixes, the code, and the wider culture all represent progress that will inevitably flow into some future cryptocurrency incarnation.  It's almost certain that eventually we'll land on something that will be so efficient and flexible that it will become the primary medium of exchange for the vast majority of world finance.</p>
+<p>At this point I think it's also traditional to tell a cautionary tale about a memorable bitcoin catastrophe, maybe to mention whatever the most recent hack was.. but realistically, sometimes old-fashioned banks get robbed and sometimes people lose their real-life wallets.  Accidents will happen with new technology, especially at the beginning.  It's possible that a few more accidents will wreck any chance at bitcoin's user-adoption critical mass, but that's really more of a PR or marketing consideration than a technical problem.  Good luck! :moneybag:</p>
+<h2> Ethereum <img width="42"" src=/heredoc/img/ethereum-icon.png></h2>
 
-
-<p>An ambient is not just defined by it's static state though.  All this state needs maintenance, and it has to be wrapped in such a way that it can be operated on concurrently.  So far, what is known suggests that the wrapper could be implemented with an <a href="#">Elixir Agent</a>, but exactly because of all the things  I don't know yet I'll hedge my bets, and opt for more flexibility by implementing the wrapper with a <a href="#">GenServer</a> instead.</p>
-<h2>Program Spaces</h2>
-<p>As we've seen from the explanation of the cool diagram from the formal definition, the ambient calculus is full of concurrently executing programs.  In Cardelli's notation that would be <em>P1..Pn</em> as you see below.</p>
-<p><img alt="image" src="img/ambient-calculus-1.png" /></p>
-<p>This is where Elixir really begins to shine.  Given the potentially massive number of concurrent programs, together with the fact that the ambients are often nested, implementing these concepts with  <a href="http://elixir-lang.org/docs/stable/elixir/Supervisor.html">Supervisors</a> and <a href="http://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#supervision-trees">Supervision Trees</a> is almost a no-brainer.  In other words, the <strong>program-space</strong> for any given ambient is connected to, but ultimately a separate erlang process from, the ambient itself, and the programs inside the program space are children of the supervisor.</p>
-<p>That's just the beginning of what needs to be considered, though.  Given a program, what does it mean for it to run "inside" of an ambient anyway?  Can programs "return" values?  What happens when programs finish, and what happens if they fail?  Thinking about these things, I'm adding a few criteria that will be required for an Elixir function F to be usable as an ambient "program":</p>
-<ul>
-<li>
-<ol>
-<li>The function must have an arity of 1</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>The argument to the function will always be the ambient's <strong>namespace</strong>.</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>By default the <strong>program-space</strong> will run and rerun all programs forever</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>Error conditions inside of programs should not crash the host ambient (or the program-space).  Error conditions are essentially ignored, except that for feedback purposes the ambient should at least be marked as unhealthy.</li>
-</ol>
-</li>
-</ul>
-<p>Note that since the ambient <strong>namespace</strong> is essentially shared memory and programs can modify it concurrently, programs that want to be well-behaved citizens of their ambients ought to be careful what kind of changes they make, but nothing along lines is strictly enforced.</p>
-<h2>Ambient Topology</h2>
-<p>Ambient topology is superficially very simple.  Since ambients are containers, an ambient may one or zero parent ambients and any number of child ambients.  This naturally leads to tree-like structures of nested ambients, and like with other kinds of tree structures it is meaningful to talk about "grandparents", "siblings", etc.</p>
-<p>The only thing that begins to complicate this is the potentially distributed nature of our overall Elixir environment.  Sometimes, when we issue a command to nest one ambient inside of another the new parent may well be on a different Elixir Node.  Nevertheless, this operation should be possible and should work exactly the same as if both ambients were underneath the same Elixir Node.</p>
+<p>Now for Ethereum.  Ethereum is a kind of generalization of bitcoin in that our old friend the blockchain is once again is thought of as a generic data-store instead of "merely" a ledger.  Ethereum uses the block-chain to contain not only account balances, but also adds <em>executable computer programs</em> into the mix.  </p>
+<p>But... so what?  Why should people in such diverse industries as big finance and corporate insurance care about this Ethereum thing, which is just some kind of even-more-beta version of a 'fringe' crypto-currency like bitcoin?</p>
+<p>Well, for these guys the interesting thing about all this is <strong>contracts can be considered a type of program</strong>, and the entire Ethereum network must agree on the result when these programs have executed.  Contracts-as-programs (aka "smart contracts") have several very interesting advantages over classic contracts, most especially because <strong>they require no trusted third-party for their execution.</strong></p>
+<h3>What IS Ethereum?</h3>
+<p>Nevermind the details of how it all works, but what IS Ethereum?  Even before you start to consider the applications, it all feels very fresh, almost like there really might be something new under the sun after all.  This aside has precious little to do with any financial-tech angle, but helps to explain why computer scientists are fascinated by it.</p>
+<p>From one perspective, Ethereum is nothing less than a brand new type of computing architecture.  What I mean by "architecture" here is pretty fundamental.. for instance the standard architecture for personal computing involves RAM and a CPU, and has it's <a href="https://en.wikipedia.org/wiki/Von_Neumann_architecture">conceptual roots</a> way back in the days when we barely had any decent hardware to build things on.  There are lots of practical and impractical architectures, ranging from mere mathematical curiosities to things that are used in massively parallel supercomputing.</p>
+<p>Forget bitcoin and the blockchain, and forget financial technology.  Ethereum essentially allows us to build a totally new kind of computer with a novel architecture.  This architecture is admittedly <em>ridiculously</em> slow and inefficient, but by sacrificing speed we are building something which is incredibly secure and and absurdly robust.  The entire recorded lifetime of this computer's execution history is publicly available, stretching backwards in time, forever!  Since each individual computation is done independently and then  verified and reverified by grid members, <a href="https://en.wikipedia.org/wiki/Cosmic_ray#Effect_on_electronics">an entire category of subtle errors and bugs</a> is completely ruled out by the basic design.  And finally, since we're building this new architecture on top of the existing internet (rather than wiring it together on computers in a closet or building the specification on a new kind of circuit board), we get all the guarantees that are already associated with internet, namely a battle-tested and highly decentralized architecture that we already know is robust and resilient.</p>
+<h2>Concrete examples</h2>
+<h3>Smart Escrow</h3>
+<p>Suppose you want to make a bet with your friend about something that's machine-verifiable, like whether the pound will go up or down as Brexit drama unfolds.  Exchange rates are machine-verifiable, so you could theoretically write a smart-contract, then stick it in the Ethereum block-chain.  You and your friend would "sign" agreement to the contract in a cryptographically modern unforgeable way, and then each of you would front the necessary cash into a completely machine-operated <a href="https://en.wikipedia.org/wiki/Escrow">escrow service</a>.  </p>
+<p>At the agreed time, the service simply determines the result of the bet and pays out the winner, minus a small percentage for the escrow-service operators or whatever.  Cool, right?  But it gets even more interesting because eventually, <em>everyone</em> on the Ethereum network verifies the result of your bet, and that's just the way network operates.</p>
+<p>"Escrow services for bets without trusted third-parties" actually describes a pretty generic financial instrument, and the effect on an industry like insurance is easy to see.  Insurance professionals are pretty much in the business of gambling.  If peer-to-peer money is made possible by bitcoin, and insofar as "insurance" is a fancy word for "contractually enforced wager", then Ethereum could make possible peer-to-peer insurance.</p>
+<h3>Automated Corporations</h3>
+<p>Even more interesting is the possibility of creating contracts-as-programs that embody the operational aspects of fully automatic, cryptographically modern corporations.  Example:  we want to create a corporation with a unbiased, apolitical, fully mechanized CFO.  Rules like "no motion to move more than <code>$X</code> amount of cash in corporate coffers can ever proceed without <code>Y%</code> approval from the current list of board members".  Now a proposition for moving cash is encoded as a program, and shareholders can sign their agreement.  Each board member then votes with their cryptographic signature.  Our mechanical CFO tallies votes and does whatever was agreed upon automatically, and we don't even need a meeting!  </p>
+<p>It's worth noting here that doing business this way has <strong>big</strong> implications for nonprofits and government work, since all the voting/cashflow can be made secret <em>or</em> transparent in terms of who voted for what or where money was moved from/to.</p>
+<h2>Problems</h2>
+<p>I'm not going to try to speak to all the typical objections, but there are usually a few common ones that I find interesting.  Eventually it comes to something like this:</p>
+<blockquote>
+<p>Cryptocurrency will never become popular, because a layman can never understand it.  What could possibly be the basis for any proposed value?  How can the average person ever trust this weird digital money?</p>
+</blockquote>
+<p>Whenever I hear stuff like this I start to feel a bit anxious, like maybe I'm not explaining things very well, or like maybe the system design <em>is</em> actually bad if it can't be explained properly in simple terms.  </p>
+<p>But then I remember that things like economics, Wall Street finance, and corporate bylaws are <em>already</em> so complex that most people don't understand them.  This is why we as a society need so many tax professionals, stock brokers, and lawyers- the whole thing is <em>already</em> hopelessly incomprehensible.  </p>
+<p>Yes, algorithms are weird and sometimes complicated and sometimes computers get hacked.  But algorithms are less biased than corrupt corporations and much faster than plodding bureaucrats.  Numbers systems are weird and it's true that most numbers are less shiny than gold is, but <a href="https://en.wikipedia.org/wiki/Nixon_shock">most money hasn't been gold-backed</a> for a long time. Give cryptocurrency a chance, because it's not as if we haven't already put our faith in worse ideas!</p>
+<h2>Conclusion</h2>
+<p>Maybe a few of the core concepts are more clear, and maybe all this has helped to explain a bit about the exciting applications without getting bogged down in implementation details.  We're only just beginning to scratch the surface of what types of things this weird new data structure (the blockchain) and this weird new computer (the Ethereum architecture) are good for.</p>
+<p>It seems to me that part of what is exciting today is that engineering effort is happening at the same time as more purely academic work.  But who are the people that are actually building all this stuff?  You'd expect financial technology companies both startup and established, hard-working hobbyists, some academics.  But there's surprises too, like people in other fields who are already looking at using the technology <a href="https://bitcoinmagazine.com/articles/blockchain-technology-key-secure-online-voting-1435443899">for things like  voting</a>.  My guess is that the Ethereum architecture and the block-chain data structure will eventually find <a href="https://en.wikipedia.org/wiki/Internet_of_things">many more</a> <a href="https://en.wikipedia.org/wiki/Interplanetary_Internet">diverse applications</a>.</p>
             </div>
             <!-- /.entry-content -->
-<section class="well" id="series-well">
-  Part <strong>2</strong> of
-  <strong>2</strong> in
-  <strong>"Ambient Calculus in Elixir"</strong>
-
-     <h5>Previous article(s)</h5>
-     <ul>
-         <li>
-           <a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">
-             An implementation of the Ambient Calculus in Elixir: Part 1</a>
-            <small>(part 1)</small>
-       </li>
-     </ul>
-
-</section>
 <section class="well" id="related-posts-well">
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">Bitcoin & Ethereum: Executive Summary</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
     </ul>
 </section>
         </article>
@@ -516,12 +441,6 @@ $(document).ready(
         extendPage: false,
       }
     );
-        var tprev = '⇐ prev in series'
-        var prev = series_button('an-implementation-of-the-ambient-calculus-in-elixir-part-1.html', tprev)
-        x2 = '<li id=toc-series-prev style="cursor:pointer;" class="tocify-item" data-unique="'
-        x2 = x2 + tprev + '">' +prev+ '</li>';
-        x2 = '<ul class="tocify-header nav nav-list">'+x2+'</ul>'
-        $("#toc").prepend(x2)
   }
 );
 function series_button(url,txt){

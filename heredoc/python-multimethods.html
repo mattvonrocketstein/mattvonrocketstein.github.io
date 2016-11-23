@@ -144,20 +144,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">
+                            Bitcoin & Ethereum: Executive Summary</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
                             Exploring WikiVoyage data with Neo4j and Cypher: Part 2</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">
                             Exploring WikiVoyage data with Neo4j and Cypher: Part 3</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
-                            Loading MediaWiki into Neo4j with Elixir and Cypher</li>
-                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">
                             Clustering in Elixir</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">
-                            Elixir Examples and Patterns</li>
                         </a>
               </ul>
 
@@ -212,6 +212,11 @@ heredoc            </a>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/infrastructure.html">
+                            infrastructure
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -326,152 +331,17 @@ heredoc            </a>
 <p>This post describes a fun little piece of code I wrote a few years back.  It's presented here just as a <strong>curiosity</strong> not as a good idea for production code, and more than anything else is just an experiment to demonstrate the flexibility of python as a language.  So let's play with function-call semantics.  This writeup is just some background and motivation, if you're more of a "show me the code!" kind of person, just check out the <a href="https://gist.github.com/mattvonrocketstein/76d6b96d536d2c8ef991">gist here</a>.</p>
 <h3>The Idea</h3>
 <p>We use "self" all the time in object-oriented python code as an object reference, similar to "this" in Java or Javascript.  It's important to note though that in Python, "self" is only a convention and not a keyword.  When we use "self", the reference is always unambiguous and simple.. we just mean the current instance.  But they say that "art imitates life", so what if object-oriented was inspired by how people work?  </p>
-<p>Persons always have one <strong>self</strong> but potentially many <strong>roles</strong>.  For instance, suppose someone asks you a question. It's possible you will answer differently depending on whether you are answering in your capacity as that person's colleague/boss/friend/lover/enemy/etc.  Suppose you want to implement something like a  <a href="http://www.merriam-webster.com/dictionary/frenemy">frenemy</a> class.  Anyway, the code below contains a (contrived) example. <sup id="sf-python-multimethods-1-back"><a href="#sf-python-multimethods-1" class="simple-footnote" title=" See also: http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html ">1</a></sup>.  </p>
+<p>Persons always have one <strong>self</strong> but potentially many <strong>roles</strong>.  For instance, suppose someone asks you a question. It's possible you will answer differently depending on whether you are answering in your capacity as that person's colleague/boss/friend/lover/enemy/etc.  Suppose you want to implement something like a  <a href="http://www.merriam-webster.com/dictionary/frenemy">frenemy</a> class.  Anyway, the code below contains a (contrived) example. [ref] See also: <a href="http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html">http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html</a> [/ref].  </p>
 <p>Another way of looking at the concept being demonstrated: here there is not one self but many, and what a thing <em>does</em> depends on <em>what</em> you call it, not <em>how</em> you call it.  </p>
 <h2>The Code</h2>
-<p><a href="https://gist.githubusercontent.com/mattvonrocketstein/76d6b96d536d2c8ef991/raw/">View this gist on github</a></p>
-<div class="highlight"><pre><span></span><span class="sd">"""</span>
-<span class="sd">   A curiosity for your programming zoo inspired by monty python,</span>
-<span class="sd">   famous philosophers, and GVR's multimethods demo.</span>
-
-<span class="sd">   This code demonstrates metaprogramming as well as runtime reflection</span>
-<span class="sd">   and introspection.  It also shows python's flexibility by bending language</span>
-<span class="sd">   semantics and demonstrates that python's "self" is convention (not keyword).</span>
-<span class="sd">"""</span>
-<span class="kn">import</span> <span class="nn">inspect</span>
-<span class="kn">import</span> <span class="nn">new</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="n">registry</span> <span class="o">=</span> <span class="p">{}</span>
-
-<span class="k">class</span> <span class="nc">proxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">""" master registry for methodnames,</span>
-<span class="sd">        decorators, and the proxy scope</span>
-<span class="sd">        dummy object</span>
-<span class="sd">    """</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span> <span class="nf">personalityDependant</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="sd">""" have to save func in the registry so each duplicate</span>
-<span class="sd">        function name doesnt just overwrite the previous one</span>
-
-<span class="sd">        NOTE: "which_self" is the name of the variable used where</span>
-<span class="sd">        "self" is usually found in instancemethod definitions</span>
-<span class="sd">    """</span>
-    <span class="n">which_self</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">func</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">which_self</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">registry</span><span class="p">:</span>
-        <span class="n">registry</span><span class="p">[</span><span class="n">which_self</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">registry</span><span class="p">[</span><span class="n">which_self</span><span class="p">][</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span>
-    <span class="k">return</span> <span class="n">func</span>
-
-
-<span class="k">def</span> <span class="nf">schizophrenic</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="sd">""" tag a function as schizophrenic so the</span>
-<span class="sd">        metaclass knows when to effect the scope</span>
-<span class="sd">        mangling.</span>
-<span class="sd">    """</span>
-    <span class="n">func</span><span class="o">.</span><span class="n">schizophrenic</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="n">func</span>
-
-
-<span class="k">class</span> <span class="nc">schizotypal</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-    <span class="sd">""" metaclass for all schizoids """</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">mcls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">clsdict</span><span class="p">):</span>
-        <span class="n">err1</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'expected a schizotypal object would '</span>
-                <span class="s1">'have a list of personalities.'</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">'personalities'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">clsdict</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">err1</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">personalities</span> <span class="o">=</span> <span class="n">clsdict</span><span class="p">[</span><span class="s1">'personalities'</span><span class="p">]</span>
-            <span class="n">replacement</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">pName</span> <span class="ow">in</span> <span class="n">personalities</span><span class="p">:</span>
-                <span class="n">replacement</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span> <span class="o">=</span> <span class="n">registry</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span>
-            <span class="n">personalities</span> <span class="o">=</span> <span class="n">replacement</span>
-            <span class="n">clsdict</span><span class="p">[</span><span class="s1">'personalities'</span><span class="p">]</span> <span class="o">=</span> <span class="n">personalities</span>
-            <span class="n">klassobj</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">mcls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">clsdict</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">klassobj</span>
-
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
-        <span class="n">inst</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">__call__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">inst</span><span class="p">):</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
-            <span class="n">test</span> <span class="o">=</span> <span class="n">var</span> <span class="o">!=</span> <span class="s1">'__metaclass__'</span> <span class="ow">and</span> <span class="n">var</span> <span class="o">!=</span> <span class="s1">'__class__'</span>
-            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="s1">'schizophrenic'</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">pName</span> <span class="ow">in</span> <span class="n">inst</span><span class="o">.</span><span class="n">personalities</span><span class="p">:</span>
-                    <span class="n">val</span><span class="o">.</span><span class="n">func_globals</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span> <span class="o">=</span> <span class="n">inst</span><span class="o">.</span><span class="n">_as</span><span class="p">(</span><span class="n">pName</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">inst</span>
-
-
-<span class="k">class</span> <span class="nc">schizoid</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">""" base schizoid object (inherit from this) """</span>
-
-    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">schizotypal</span>
-    <span class="n">personalities</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">def</span> <span class="nf">_as</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pName</span><span class="p">):</span>
-        <span class="sd">""" this method is used to obtain a representation</span>
-<span class="sd">             of self with respect to a specific personality</span>
-<span class="sd">        """</span>
-        <span class="n">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span>
-        <span class="n">err</span> <span class="o">=</span> <span class="s1">'illegal personality for '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="n">pName</span>
-        <span class="k">assert</span> <span class="n">pName</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">personalities</span><span class="p">,</span> <span class="n">err</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">personalities</span><span class="p">[</span><span class="n">pName</span><span class="p">]</span>
-        <span class="n">P</span> <span class="o">=</span> <span class="n">proxy</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">funcname</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
-            <span class="n">func</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="n">funcname</span><span class="p">]</span>
-            <span class="n">func</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">instancemethod</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span>
-            <span class="nb">setattr</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">funcname</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">P</span>
-
-<span class="k">class</span> <span class="nc">myschizoid</span><span class="p">(</span><span class="n">schizoid</span><span class="p">):</span>
-    <span class="sd">""" a simple demo.</span>
-
-<span class="sd">        NB: without the decorators, each status() definition below would simply</span>
-<span class="sd">        overwrite the previous one.  notice also under normal python semantics</span>
-<span class="sd">        how theres no reason the philosopher names in the run() method should</span>
-<span class="sd">        be in scope.</span>
-<span class="sd">    """</span>
-    <span class="n">personalities</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'kant'</span><span class="p">,</span> <span class="s1">'heidegger'</span><span class="p">,</span> <span class="s1">'wittgenstein'</span><span class="p">,</span> <span class="s1">'schlegel'</span><span class="p">]</span>
-
-    <span class="nd">@personalityDependant</span>
-    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">kant</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"a real pissant"</span>
-
-    <span class="nd">@personalityDependant</span>
-    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">heidegger</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"a boozy beggar"</span>
-
-    <span class="nd">@personalityDependant</span>
-    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">wittgenstein</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"beery swine"</span>
-
-    <span class="nd">@personalityDependant</span>
-    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">schlegel</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">"schloshed"</span>
-
-    <span class="nd">@schizophrenic</span>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span>
-        <span class="k">print</span> <span class="s1">'kant:</span><span class="se">\t\t\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">kant</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s1">'heidegger:</span><span class="se">\t\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">heidegger</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s1">'wittgenstein:</span><span class="se">\t\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">wittgenstein</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
-        <span class="k">print</span> <span class="s1">'schlegel:</span><span class="se">\t\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">schlegel</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
-        <span class="k">print</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">myschizoid</span><span class="p">()</span>
-    <span class="n">s</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div><ol class="simple-footnotes"><li id="sf-python-multimethods-1"> See also: <a href="http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html">http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html</a>  <a href="#sf-python-multimethods-1-back" class="simple-footnote-back">↩</a></li></ol>
+<p>[gist 76d6b96d536d2c8ef991]</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
     </ul>
@@ -482,7 +352,7 @@ heredoc            </a>
         </div>
         <div class="col-sm-2" >
           <section id=toc class="well well-sm">
-            </section>
+          </section>
         </div>
       </div>
 
@@ -537,9 +407,14 @@ $(document).ready(
         showAndHideOnScroll: true,
         extendPage: false,
       }
-    )
+    );
   }
-);</script>
+);
+function series_button(url,txt){
+  return '<a style="background:#efefef;" class="btn btn-default btn-xs" href="'+url+'">'+txt+'</a>'
+
+}
+function get_series_nav(x){}</script>
 <script>
 setTimeout(function(){
   if (""==$('#toc').html().trim()){

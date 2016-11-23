@@ -144,20 +144,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">
+                            Bitcoin & Ethereum: Executive Summary</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
                             Exploring WikiVoyage data with Neo4j and Cypher: Part 2</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">
                             Exploring WikiVoyage data with Neo4j and Cypher: Part 3</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
-                            Loading MediaWiki into Neo4j with Elixir and Cypher</li>
-                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">
                             Clustering in Elixir</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">
-                            Elixir Examples and Patterns</li>
                         </a>
               </ul>
 
@@ -212,6 +212,11 @@ heredoc            </a>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/infrastructure.html">
+                            infrastructure
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -327,11 +332,12 @@ heredoc            </a>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
     </ul>
 </section>
         </article>
@@ -340,7 +346,7 @@ heredoc            </a>
         </div>
         <div class="col-sm-2" >
           <section id=toc class="well well-sm">
-            </section>
+          </section>
         </div>
       </div>
 
@@ -395,9 +401,14 @@ $(document).ready(
         showAndHideOnScroll: true,
         extendPage: false,
       }
-    )
+    );
   }
-);</script>
+);
+function series_button(url,txt){
+  return '<a style="background:#efefef;" class="btn btn-default btn-xs" href="'+url+'">'+txt+'</a>'
+
+}
+function get_series_nav(x){}</script>
 <script>
 setTimeout(function(){
   if (""==$('#toc').html().trim()){

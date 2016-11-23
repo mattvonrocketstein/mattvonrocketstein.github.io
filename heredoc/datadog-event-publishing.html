@@ -146,20 +146,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">
+                            Bitcoin & Ethereum: Executive Summary</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
                             Exploring WikiVoyage data with Neo4j and Cypher: Part 2</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">
                             Exploring WikiVoyage data with Neo4j and Cypher: Part 3</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/loading-mediawiki-into-neo4j-with-elixir-and-cypher.html">
-                            Loading MediaWiki into Neo4j with Elixir and Cypher</li>
-                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">
                             Clustering in Elixir</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">
-                            Elixir Examples and Patterns</li>
                         </a>
               </ul>
 
@@ -214,6 +214,11 @@ heredoc            </a>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">
                             graphdb
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/infrastructure.html">
+                            infrastructure
                         </a>
                     </li>
                     <li class="list-group-item tag-2">
@@ -327,70 +332,18 @@ heredoc            </a>
 </footer>
 <!-- /.post-info -->                <br/>
                 <h2>The Code</h2>
-<p><a href="https://gist.githubusercontent.com/mattvonrocketstein/6ebfd94b06b25cc74910/raw/">View this gist on github</a></p>
-<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="sd">&quot;&quot;&quot; dd_event:</span>
-<span class="sd">      a quick utility for writing events to the Datadog events stream.</span>
-
-<span class="sd">    requires:</span>
-<span class="sd">      pip install dogapi</span>
-<span class="sd">      pip install argparse</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
-
-<span class="kn">from</span> <span class="nn">dogapi.http</span> <span class="kn">import</span> <span class="n">DogHttpApi</span> <span class="k">as</span> <span class="n">DD</span>
-
-<span class="n">API_KEY</span> <span class="o">=</span> <span class="s1">&#39;YOUR JENKINS API KEY HERE&#39;</span>
-<span class="n">APP_KEY</span> <span class="o">=</span> <span class="s1">&#39;YOU JENKINS APP KEY HERE&#39;</span>
-
-<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
-<span class="n">tag_help</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;tags to associate with this event.  &quot;</span>
-            <span class="s2">&quot;argument should be quoted and &quot;</span>
-            <span class="s2">&quot;space-separated for multiple tags&quot;</span><span class="p">)</span>
-<span class="n">title_help</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;title to associate with this event.  &quot;</span>
-              <span class="s2">&quot;argument should be quoted if it is&quot;</span>
-              <span class="s2">&quot; more than one word &quot;</span><span class="p">)</span>
-<span class="n">text_help</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;text to associate with this event.  &quot;</span>
-             <span class="s2">&quot;argument should be quoted if it is&quot;</span>
-             <span class="s2">&quot; more than one word &quot;</span><span class="p">)</span>
-
-
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--tags&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">tag_help</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--title&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">title_help</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--text&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="n">text_help</span><span class="p">)</span>
-
-<span class="n">conn_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="n">api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">,</span>
-    <span class="n">application_key</span><span class="o">=</span><span class="n">APP_KEY</span><span class="p">,</span>
-    <span class="n">api_version</span><span class="o">=</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span>
-    <span class="n">json_responses</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">conn</span> <span class="o">=</span> <span class="n">DD</span><span class="p">(</span><span class="o">**</span><span class="n">conn_args</span><span class="p">)</span>
-    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-    <span class="n">title</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">title</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">text</span>
-    <span class="n">tags</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">title</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="s2">&quot;datadog event must have title&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="s2">&quot;datadog event must have text&quot;</span><span class="p">)</span>
-    <span class="k">print</span> <span class="n">conn</span><span class="o">.</span><span class="n">event</span><span class="p">(</span>
-        <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
-        <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span>
-        <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)</span>
-</pre></div>
+<p>[gist 6ebfd94b06b25cc74910]</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
     </ul>
@@ -401,7 +354,7 @@ heredoc            </a>
         </div>
         <div class="col-sm-2" >
           <section id=toc class="well well-sm">
-            </section>
+          </section>
         </div>
       </div>
 
@@ -456,9 +409,14 @@ $(document).ready(
         showAndHideOnScroll: true,
         extendPage: false,
       }
-    )
+    );
   }
-);</script>
+);
+function series_button(url,txt){
+  return '<a style="background:#efefef;" class="btn btn-default btn-xs" href="'+url+'">'+txt+'</a>'
+
+}
+function get_series_nav(x){}</script>
 <script>
 setTimeout(function(){
   if (""==$('#toc').html().trim()){
