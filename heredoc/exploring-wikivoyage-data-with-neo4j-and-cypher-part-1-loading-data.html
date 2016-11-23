@@ -352,11 +352,11 @@ heredoc            </a>
                 <p></p>
 <h2>Part 1: Intro</h2>
 <p>This is part one of a three part series.  In this part, I'll write about using <a href="http://elixir-lang.org/">Elixir</a> to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into the Neo4j graph database.
-I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. [ref] Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P [/ref]  If you're most interested in the resulting data structure and how it can be interrogated, you can leave this part and <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">move directly to part 2</a>.</p>
+I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1-back"><a title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P ' class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1">1</a></sup>  If you're most interested in the resulting data structure and how it can be interrogated, you can leave this part and <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">move directly to part 2</a>.</p>
 <h2>Motivation</h2>
 <p>Initially I intended to parse only <strong>wikipedia</strong> dump files, thinking that it would be very interesting to try and construct graph queries that could infer stuff like "trigonometry is a prerequisite concept of calculus" based on page linkages.  I still might look into this at some point, but after I realized that more or less the same unmodified parsing code could be used with other MediaWiki data dumps I had other ideas.</p>
 <p>Maybe the best MediaWiki site to throw into a graph database is the tree of life the friendly folks at [WikiSpecies][https://species.wikimedia.org/wiki/Main_Page] are building.  This project idea is tempting but I'm setting it aside for time being.</p>
-<p>Instead for the purposes of this experiment I'll be parsing <a href="https://www.wikivoyage.org/">WikiVoyage</a> data dumps, which is perhaps not so well-known.  WikiVoyage is a MediaWiki project that is building a open travel guide, and I'm going to run with it over other stuff because this dataset should be large enough to be interesting yet quite tractable.   Besides that, I am very interested in travel[ref]You can check out my (somewhat neglected) travel blog <a href="/travel">here</a>[/ref] and geography.  Being a frequent user of WikiVoyage myself, I expected that the inter-page linking structures embedded in content there would be in a kind of information theoretical sweet spot, that is to say less random than what I'd find parsing Wikipedia, but less structured than what I'd find trying to parse WikiSpecies.</p>
+<p>Instead for the purposes of this experiment I'll be parsing <a href="https://www.wikivoyage.org/">WikiVoyage</a> data dumps, which is perhaps not so well-known.  WikiVoyage is a MediaWiki project that is building a open travel guide, and I'm going to run with it over other stuff because this dataset should be large enough to be interesting yet quite tractable.   Besides that, I am very interested in travel<sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-2-back"><a title="You can check out my (somewhat neglected) travel blog here" class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-2">2</a></sup> and geography.  Being a frequent user of WikiVoyage myself, I expected that the inter-page linking structures embedded in content there would be in a kind of information theoretical sweet spot, that is to say less random than what I'd find parsing Wikipedia, but less structured than what I'd find trying to parse WikiSpecies.</p>
 <h2>The Players</h2>
 <p>There are <a href="https://en.wikipedia.org/wiki/Graph_database#List_of_graph_databases">different graph databases</a> out there, but without a lot of compare-and-contrast I decided to go with <a href="https://neo4j.com/">neo4j</a> simply because the community surrounding it is active and growing (and naturally it has all the obligatory WebScale hype). It seems like a good place to start experimenting, but I'm not yet in a position to advocate or condemn it compared with anything else.</p>
 <p>For writing GraphDB queries I'll be using Cypher, the standard weapon of choice of Neo4j.  <a href="http://react-etc.net/entry/graph-query-languages-graphql-opencypher-gremlin-and-sparql">Other query languages</a> are out there, and I can't condemn or condone them since I don't know enough.  In particular the extent to which Cypher and OpenCypher are truly compatible is mysterious to me and knowing more about this would be really important for production use-cases.. but none of this really matters for a toy project.</p>
@@ -369,13 +369,13 @@ I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">ra
 <p>Confirm that you can connect to neo:</p>
 <div class="highlight"><pre><span></span>$ curl http://localhost:7474
 <span class="o">{</span>
-  <span class="s2">&quot;management&quot;</span> : <span class="s2">&quot;http://neo_host_ip:7474/db/manage/&quot;</span>,
-  <span class="s2">&quot;data&quot;</span> : <span class="s2">&quot;http://neo_host_ip:7474/db/data/&quot;</span>
+  <span class="s2">"management"</span> : <span class="s2">"http://neo_host_ip:7474/db/manage/"</span>,
+  <span class="s2">"data"</span> : <span class="s2">"http://neo_host_ip:7474/db/data/"</span>
 <span class="o">}</span>
 </pre></div>
 
 
-<p>If you <strong>cannot</strong> connect to neo, then make sure the server is listening on 0.0.0.0 instead of 127.0.0.1  (this setting is inside <code>/etc/neo4j/neo4j-server.properties</code>).  [ref] Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>. [/ref]</p>
+<p>If you <strong>cannot</strong> connect to neo, then make sure the server is listening on 0.0.0.0 instead of 127.0.0.1  (this setting is inside <code>/etc/neo4j/neo4j-server.properties</code>).  <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-3-back"><a title=" Other modifications you might like to make: increase the ulimit in the default init script at /etc/init.d/neo4j-service. " class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-3">3</a></sup></p>
 <h2>Got Data?</h2>
 <p>A direct link to the latest XML datadump up the English WikiVoyage content is always <a href="https://dumps.wikimedia.org/enwikivoyage/latest/enwikivoyage-latest-pages-meta-current.xml.bz2">here</a>.  You'll need a copy of this before proceeding to parsing in the next step</p>
 <div class="highlight"><pre><span></span>$ wget https://dumps.wikimedia.org/enwikivoyage/latest/enwikivoyage-latest-pages-meta-current.xml.bz2
@@ -394,22 +394,22 @@ $ mix deps.compile
 
 
 <p>Edit the connection string for the neo4j server inside <code>config/config.exs</code>, changing the URL line to match your neo4j server.</p>
-<div class="highlight"><pre><span></span><span class="nl">url:</span> <span class="s">&quot;http://neo4j_server:7474&quot;</span><span class="o">,</span>
+<div class="highlight"><pre><span></span><span class="nl">url:</span> <span class="s">"http://neo4j_server:7474"</span><span class="o">,</span>
 </pre></div>
 
 
 <p>For me, I have two Vagrant guests: one for Elixir development and one for the Neo4j server.  But since the Neo4j guest is port-forwarded back to the host, my development guest is configured to look for Neo4j on the host.</p>
-<div class="highlight"><pre><span></span><span class="nl">url:</span> <span class="s">&quot;http://10.0.2.2:7474&quot;</span><span class="o">,</span>
+<div class="highlight"><pre><span></span><span class="nl">url:</span> <span class="s">"http://10.0.2.2:7474"</span><span class="o">,</span>
 </pre></div>
 
 
 <h2>Parsing Data</h2>
-<p>After grabbing to code and the data-dump, you should now be able to run the parser against the XML.  In terms of what is populated in the graph DB, this will create "WikiPage" nodes and "links_to" relationships to capture[ref] Link relationships are parsed from page bodies with regexes looking for "[[" and "]]" [/ref] the inter-wiki links from page bodies.</p>
+<p>After grabbing to code and the data-dump, you should now be able to run the parser against the XML.  In terms of what is populated in the graph DB, this will create "WikiPage" nodes and "links_to" relationships to capture<sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-4-back"><a title=' Link relationships are parsed from page bodies with regexes looking for "[[" and "]]" ' class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-4">4</a></sup> the inter-wiki links from page bodies.</p>
 <div class="highlight"><pre><span></span>$ mix load wikivoyage.xml
 
 <span class="m">16</span> outgoing links <span class="k">for</span> Aba <span class="o">(</span>prefecture<span class="o">)</span>
-extracting linked pages <span class="k">for</span> <span class="sb">`</span>Aba as Sa<span class="s1">&#39;ud`</span>
-<span class="s1">1 outgoing links for Aba as Sa&#39;</span>ud
+extracting linked pages <span class="k">for</span> <span class="sb">`</span>Aba as Sa<span class="s1">'ud`</span>
+<span class="s1">1 outgoing links for Aba as Sa'</span>ud
 extracting linked pages <span class="k">for</span> <span class="sb">`</span>Abacos<span class="sb">`</span>
 <span class="m">3</span> outgoing links <span class="k">for</span> Abacos
 extracting linked pages <span class="k">for</span> <span class="sb">`</span>Abadan<span class="sb">`</span>
@@ -435,7 +435,7 @@ Nebraska Panhandle -contains-&gt; Bayard
 <h2>Other Commands</h2>
 <p>Other commands interacting with the graph database in one way or another are provided for in this project via elixir's <a href="http://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html">mix tool</a>.</p>
 <p><strong>Updating just one Node</strong> is a frequent task if you want to parse it into the graph database without parsing all of the data-dump.  Use <code>mix update &lt;page_title&gt;</code> for this.  The entire data-dump still has to be scanned, which is time consuming, but only the data for page-title you specified will be sent to Neo4j so this is much, much faster than running <code>mix load</code>.  You can use this command judiciously if you want to load only small connected subsets of the wikivoyage graph.  Example output is below:</p>
-<div class="highlight"><pre><span></span>$ mix update <span class="s2">&quot;Aachen&quot;</span> ./wikivoyage.xml
+<div class="highlight"><pre><span></span>$ mix update <span class="s2">"Aachen"</span> ./wikivoyage.xml
 
 skipping 3Days 2Night Chiang Mai to Chiang Rai
 skipping <span class="m">3</span> Days in Block Island
@@ -477,19 +477,19 @@ Top nodes by relationship-count:
 
 database is empty.  adding indexes
 
-<span class="o">[</span><span class="s2">&quot;CREATE CONSTRAINT ON (wp:WikiPage) ASSERT wp.title IS UNIQUE&quot;</span>, <span class="o">[]]</span>
-<span class="o">[</span><span class="s2">&quot;CREATE CONSTRAINT ON (wp:WikiPage) ASSERT wp.page_id IS UNIQUE&quot;</span>, <span class="o">[]]</span>
+<span class="o">[</span><span class="s2">"CREATE CONSTRAINT ON (wp:WikiPage) ASSERT wp.title IS UNIQUE"</span>, <span class="o">[]]</span>
+<span class="o">[</span><span class="s2">"CREATE CONSTRAINT ON (wp:WikiPage) ASSERT wp.page_id IS UNIQUE"</span>, <span class="o">[]]</span>
 </pre></div>
 
 
 <p><strong>Running cypher queries</strong> directly against the Neo4j server is also possible using the <code>mix cypher</code> command. See the example below:</p>
-<div class="highlight"><pre><span></span>$ mix cypher <span class="s2">&quot;MATCH n WHERE n.title=&#39;Yosemite&#39; RETURN n&quot;</span>
-<span class="o">{</span>:ok, <span class="o">[</span>%<span class="o">{</span><span class="s2">&quot;n&quot;</span> <span class="o">=</span>&gt; %<span class="o">{</span><span class="s2">&quot;page_id&quot;</span> <span class="o">=</span>&gt; 40124, <span class="s2">&quot;title&quot;</span> <span class="o">=</span>&gt; <span class="s2">&quot;Yosemite&quot;</span><span class="o">}}]}</span>
+<div class="highlight"><pre><span></span>$ mix cypher <span class="s2">"MATCH n WHERE n.title='Yosemite' RETURN n"</span>
+<span class="o">{</span>:ok, <span class="o">[</span>%<span class="o">{</span><span class="s2">"n"</span> <span class="o">=</span>&gt; %<span class="o">{</span><span class="s2">"page_id"</span> <span class="o">=</span>&gt; 40124, <span class="s2">"title"</span> <span class="o">=</span>&gt; <span class="s2">"Yosemite"</span><span class="o">}}]}</span>
 </pre></div>
 
 
 <h2>Exploring the data</h2>
-<p>So, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages, and we have 2 kinds of inter-node relationships specified.  What the hell is this data structure?  In short <strong>we have a good model for describing how the website connects to itself</strong>.  Because the website itself is basically trying to describe the world, we sort of have model for the world too even if it's shall we say low-res and second order.  What kinds of questions can we ask and answer with this model, and how can we curate and improve its accuracy?  The data diving begins in <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">the continuation of this series</a></p>
+<p>So, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages, and we have 2 kinds of inter-node relationships specified.  What the hell is this data structure?  In short <strong>we have a good model for describing how the website connects to itself</strong>.  Because the website itself is basically trying to describe the world, we sort of have model for the world too even if it's shall we say low-res and second order.  What kinds of questions can we ask and answer with this model, and how can we curate and improve its accuracy?  The data diving begins in <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">the continuation of this series</a></p><ol class="simple-footnotes"><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-2">You can check out my (somewhat neglected) travel blog <a href="/travel">here</a> <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-2-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-3-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-4-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="series-well">
@@ -520,13 +520,13 @@ database is empty.  adding indexes
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
     </ul>
 </section>

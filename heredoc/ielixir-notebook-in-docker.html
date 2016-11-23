@@ -335,7 +335,7 @@ heredoc            </a>
 <!-- /.post-info -->                <br/>
                 <p></p>
 <h2>The Players</h2>
-<p><a href="http://jupyter.readthedocs.io">Jupyter</a> is the latest incarnation of an interactive notebook project that grew up out IPython, and describing the all the goals and history of that project is waaay outside of the scope of this write-up.  Suffice to say that from the humble beginnings of an interactive shell, Jupyter has become an amazing tool for interactive presentations, education, and data-driven scientific computing amongst other things.  It has support for console and web-based interaction.  Most relevant to the topic presented here: Jupyter is no longer limited to python and has support for multiple language backends as well.[ref]Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages[/ref].</p>
+<p><a href="http://jupyter.readthedocs.io">Jupyter</a> is the latest incarnation of an interactive notebook project that grew up out IPython, and describing the all the goals and history of that project is waaay outside of the scope of this write-up.  Suffice to say that from the humble beginnings of an interactive shell, Jupyter has become an amazing tool for interactive presentations, education, and data-driven scientific computing amongst other things.  It has support for console and web-based interaction.  Most relevant to the topic presented here: Jupyter is no longer limited to python and has support for multiple language backends as well.<sup id="sf-ielixir-notebook-in-docker-1-back"><a title="Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages" class="simple-footnote" href="#sf-ielixir-notebook-in-docker-1">1</a></sup>.</p>
 <p><a href="https://github.com/pprzetacznik/IElixir">IElixir</a> is a neat piece of work that brings an <a href="http://elixir-lang.org">Elixir language</a> kernel to jupyter.</p>
 <h2>The Goal</h2>
 <p>Jupyter, IElixir, and Elixir itself all require significant installation and configuration, some of it at the system level.  This can be annoying to someone who just wants to try it all out.  <strong>These circumstances (or just the fact that I wanted to experiment) make IElixir a decent candidate for wrapping up inside docker.</strong></p>
@@ -345,7 +345,7 @@ heredoc            </a>
 <li>For better history, it seems there is <a href="https://github.com/elixir-lang/elixir/issues/1516">some</a> <a href="https://github.com/ferd/erlang-history/issues/17">resistance</a> to fixing the underlying problems anywhere but inside erlang core.</li>
 <li>The <a href="https://github.com/elixir-lang/elixir/issues/2967">situation is similar</a> for control-L, the least-surprising shortcut for clearing the screen.</li>
 </ul>
-<p>A work-around at the Jupyter level instead fixes the history annoyance at the same time as adding all the many niceties the Jupyter team has spent a lot of time setting up.[ref]Sane editing for multiliners without an IDE?  Yes please.[/ref]</p>
+<p>A work-around at the Jupyter level instead fixes the history annoyance at the same time as adding all the many niceties the Jupyter team has spent a lot of time setting up.<sup id="sf-ielixir-notebook-in-docker-2-back"><a title="Sane editing for multiliners without an IDE?  Yes please." class="simple-footnote" href="#sf-ielixir-notebook-in-docker-2">2</a></sup></p>
 <h2>Prior Art</h2>
 <p>The Jupyter project actually has <a href="https://github.com/jupyter/docker-stacks">official docker stacks</a> in a few different flavors, and those might be more performant and minimal than what I'll be building here.  I'm not using those as a docker base image, partly because I wanted to see what it would look like to build everything from scratch with ansible.</p>
 <p>Actually, the procedure I'm going to describe here is basically just a more specific use-case for what I've described in the <a href="provisioning-docker-with-ansible.html">Provisioning Docker with Ansible</a> writeup.  That article takes things slower, but here I'll get straight to the point.  You might like to read it if you want more explanation of some of these steps.</p>
@@ -353,7 +353,7 @@ heredoc            </a>
 <p>Create a folder for this project, and create files for your ansible <code>playbook.yml</code> and <code>Dockerfile</code> with the content you see below.</p>
 <div class="highlight"><pre><span></span><span class="c"># Dockerfile</span>
 <span class="k">FROM</span><span class="s"> phusion/baseimage:0.9.19</span>
-<span class="k">CMD</span><span class="s"> [&quot;/sbin/my_init&quot;]</span>
+<span class="k">CMD</span><span class="s"> ["/sbin/my_init"]</span>
 <span class="k">RUN</span> apt-get update
 <span class="k">RUN</span> apt-get install -y python2.7
 <span class="k">RUN</span> rm -f /etc/service/sshd/down
@@ -366,7 +366,7 @@ heredoc            </a>
 <h2>Setup docker</h2>
 <h3>Bootstrap images</h3>
 <p>Create the initial image and container with the commands below.</p>
-<div class="highlight"><pre><span></span>$ docker build -t <span class="s2">&quot;heredoc/ielixir&quot;</span> .
+<div class="highlight"><pre><span></span>$ docker build -t <span class="s2">"heredoc/ielixir"</span> .
 $ docker run --detach --name ielixir -t -i heredoc/ielixir /sbin/my_init --enable-insecure-key
 </pre></div>
 
@@ -381,9 +381,9 @@ $ docker run --detach --name ielixir -t -i heredoc/ielixir /sbin/my_init --enabl
 
 <h2>Provision with Ansible</h2>
 <p>If you don't already have ansible installed, run <code>pip install ansible</code>.  Next we need to save the container IP and provision the container with Ansible.</p>
-<div class="highlight"><pre><span></span>$ <span class="nv">CIP</span><span class="o">=</span><span class="s2">&quot;`docker inspect -f \&quot;{{.NetworkSettings.IPAddress }}\&quot; ielixir`&quot;</span>
+<div class="highlight"><pre><span></span>$ <span class="nv">CIP</span><span class="o">=</span><span class="s2">"`docker inspect -f \"{{.NetworkSettings.IPAddress }}\" ielixir`"</span>
 $ <span class="nb">echo</span> <span class="nv">$CIP</span>
-$ <span class="nb">echo</span> <span class="s2">&quot;docker ansible_host=</span><span class="nv">$CIP</span><span class="s2"> ansible_python_interpreter=/usr/bin/python2.7&quot;</span> &gt; ansible.hosts
+$ <span class="nb">echo</span> <span class="s2">"docker ansible_host=</span><span class="nv">$CIP</span><span class="s2"> ansible_python_interpreter=/usr/bin/python2.7"</span> &gt; ansible.hosts
 $ <span class="nv">ANSIBLE_HOST_KEY_CHECKING</span><span class="o">=</span>False <span class="se">\</span>
   ansible-playbook playbook.yml <span class="se">\</span>
     --inventory ansible.hosts -v <span class="se">\</span>
@@ -404,13 +404,13 @@ $ docker run <span class="se">\</span>
   --name ielixir-console <span class="se">\</span>
   -it heredoc/ielixir <span class="se">\</span>
   /root/venv/bin/jupyter-console <span class="se">\</span>
-    --kernel<span class="o">=</span><span class="s1">&#39;ielixir&#39;</span>
+    --kernel<span class="o">=</span><span class="s1">'ielixir'</span>
 </pre></div>
 
 
 <p>After you've run the console command above, you might like to confirm for yourself this is actually Elixir since it looks like the oldschool IPython console.  Try concatenating a string: <code>"This is"&lt;&gt;" Elixir code!"</code></p>
 <div class="highlight"><pre><span></span><span class="c1"># The notebook command! (runs webserver on port 8888 in foreground)</span>
-<span class="c1"># this is a demo and is NOT secure by default, jupyter&#39;s terminal</span>
+<span class="c1"># this is a demo and is NOT secure by default, jupyter's terminal</span>
 <span class="c1"># functionality can give you a rootshell inside the container.</span>
 $ docker run <span class="se">\</span>
   --rm <span class="se">\</span>
@@ -418,26 +418,26 @@ $ docker run <span class="se">\</span>
   --publish 8888:8888 <span class="se">\</span>
   -it heredoc/ielixir <span class="se">\</span>
   /root/venv/bin/jupyter-notebook <span class="se">\</span>
-    --ip<span class="o">=</span><span class="s1">&#39;*&#39;</span> --no-browser <span class="se">\</span>
-    --notebook-dir<span class="o">=</span><span class="s1">&#39;/root/IElixir/resources&#39;</span>
+    --ip<span class="o">=</span><span class="s1">'*'</span> --no-browser <span class="se">\</span>
+    --notebook-dir<span class="o">=</span><span class="s1">'/root/IElixir/resources'</span>
 </pre></div>
 
 
-<p>After you've run the notebook command above, try taking a look at <a href="http://localhost:8888/notebooks/example.ipynb">http://localhost:8888/notebooks/example.ipynb</a> which ought to show the interactive version of <a href="https://github.com/pprzetacznik/IElixir/blob/master/resources/example.ipynb">this example notebook</a></p>
+<p>After you've run the notebook command above, try taking a look at <a href="http://localhost:8888/notebooks/example.ipynb">http://localhost:8888/notebooks/example.ipynb</a> which ought to show the interactive version of <a href="https://github.com/pprzetacznik/IElixir/blob/master/resources/example.ipynb">this example notebook</a></p><ol class="simple-footnotes"><li id="sf-ielixir-notebook-in-docker-1">Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages <a class="simple-footnote-back" href="#sf-ielixir-notebook-in-docker-1-back">↩</a></li><li id="sf-ielixir-notebook-in-docker-2">Sane editing for multiliners without an IDE?  Yes please. <a class="simple-footnote-back" href="#sf-ielixir-notebook-in-docker-2-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
     </ul>
 </section>
         </article>

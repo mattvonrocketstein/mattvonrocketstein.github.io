@@ -336,14 +336,14 @@ heredoc            </a>
 <p>Of course there are other search results but many are outdated, for old ansible, old docker, or both. Did you maybe find five different blog posts where it looks like each writer is just copy/pasting more or less verbatim what is written elsewhere?  Generally speaking, despite what superficially looks like a lot of information and a lot of people already doing this, it was very frustrating to actually get this working.</p>
 <p>My own instructions will probably be quickly out of date or maybe even produce mysterious errors for someone else as I write this, but what the hell? They work for me.. at least today.  Let's throw more gasoline on the :fire: !</p>
 <p>For what it's worth it terms of future-proofing this writeup, my version information from <code>docker info</code> is here:
-<div style="margin-left:10px;width:100%;font-size:12px">
+</p><div style="margin-left:10px;width:100%;font-size:12px">
 Client:
  Version:      1.11.2
  API version:  1.23
  Go version:   go1.5.4
  Git commit:   b9f10c9
  Built:        Wed Jun  1 21:47:50 2016
- OS/Arch:      linux/amd64</p>
+ OS/Arch:      linux/amd64<p></p>
 <p>Server:
  Version:      1.11.2
  API version:  1.23
@@ -351,7 +351,7 @@ Client:
  Git commit:   b9f10c9
  Built:        Wed Jun  1 21:47:50 2016
  OS/Arch:      linux/amd64
- </div></p>
+ </p></div><p></p>
 <h2>Docker+SSH: the horror</h2>
 <p>Yeah, yeah, yeah. <a href="https://jpetazzo.github.io/2014/06/23/docker-ssh-considered-evil/">Docker+ssh considered harmful</a>.  I disagree, at least for a great many use-cases, but can't be bothered to articulate all the arguments. Other people have already <a href="https://github.com/phusion/baseimage-docker#docker_single_process">been there</a> and <a href="https://blog.phusion.nl/2015/01/20/baseimage-docker-fat-containers-treating-containers-vms/">done that</a> more expertly than I can manage anyway and at great length.  </p>
 <p>I really have nothing to add to that <strike>argument</strike> conversation, but a few things to reiterate.  Most importantly, I want my ansible stuff to JustWork™ regardless of whether it's pointed at vagrant, AWS, or docker.  I'd prefer to avoid complicating the recipes or having tons of extra dependencies to accomplish this.  Dockerfile's get annoying pretty quickly compared with a proper CM language.  Golden images have their own problems, but the alternative is often worse.</p>
@@ -364,8 +364,8 @@ Client:
 <span class="c"># a list of version numbers.</span>
 <span class="k">FROM</span><span class="s"> phusion/baseimage:0.9.19</span>
 
-<span class="c"># Use baseimage-docker&#39;s init system.</span>
-<span class="k">CMD</span><span class="s"> [&quot;/sbin/my_init&quot;]</span>
+<span class="c"># Use baseimage-docker's init system.</span>
+<span class="k">CMD</span><span class="s"> ["/sbin/my_init"]</span>
 
 <span class="c"># Ansible will require python on the container</span>
 <span class="k">RUN</span> apt-get update
@@ -384,7 +384,7 @@ Client:
 <p>From now on, just for the sake of choosing names I bet you don't already have inside your systems, we're going to the word <strong>boondoggle</strong> everywhere that we can.  More specificially <strong>boondoggle/iX</strong> will be used to refer to an image, and <strong>boondoggle-cX</strong> to refer to containers derived from the image.</p>
 <h3>Build image</h3>
 <p>Inside the folder with your Dockerfile, construct the base image:</p>
-<div class="highlight"><pre><span></span>$ docker build -t <span class="s2">&quot;boondoggle/i1&quot;</span> .
+<div class="highlight"><pre><span></span>$ docker build -t <span class="s2">"boondoggle/i1"</span> .
 </pre></div>
 
 
@@ -406,14 +406,14 @@ $ chmod <span class="m">600</span> insecure_key
 <p>At this point, things get very bash'y which I kind of hate.  The trouble is there are a lot of long commands that are hard to remember and hard to type.  These commands can also be based on variables that are potentially changing (like the container IP address).  If you leave something out, you're going to get mysterious errors.  You also might need to execute these commands repeatedly as you test things, so we're going to make some bash-functions to use as helpers.  You might want use <code>set -x</code> in your console to enable some bash debugging information.</p>
 <h3>Finding the container IP</h3>
 <p>First, make a bash function "refresh_cip" to grab the IP address for the named container.  This address will be written to the <code>`$CIP</code> env-var for use by other functions, and will be used to update the ansible inventory file (the <code>ansible.hosts</code> file will be written/refreshed in your working directory).</p>
-<div class="highlight"><pre><span></span><span class="c1"># &quot;CNAME&quot; stores the container name.  IMPORTANT:</span>
-<span class="c1"># the refresh_cip&quot; function MUST have this variable available</span>
+<div class="highlight"><pre><span></span><span class="c1"># "CNAME" stores the container name.  IMPORTANT:</span>
+<span class="c1"># the refresh_cip" function MUST have this variable available</span>
 $ <span class="nv">CNAME</span><span class="o">=</span>boondoggle-c1
 
-<span class="c1"># Bash function definition for &quot;refresh_cip&quot;</span>
+<span class="c1"># Bash function definition for "refresh_cip"</span>
 $ refresh_cip<span class="o">(){</span>
-  <span class="nb">export</span> <span class="nv">CIP</span><span class="o">=</span><span class="s2">&quot;`docker inspect -f \&quot;{{.NetworkSettings.IPAddress }}\&quot; </span><span class="nv">$CNAME</span><span class="s2">`&quot;</span><span class="p">;</span>
-  <span class="nb">echo</span> <span class="s2">&quot;docker ansible_host=</span><span class="nv">$CIP</span><span class="s2"> ansible_python_interpreter=/usr/bin/python2.7&quot;</span> &gt; ansible.hosts<span class="p">;</span>
+  <span class="nb">export</span> <span class="nv">CIP</span><span class="o">=</span><span class="s2">"`docker inspect -f \"{{.NetworkSettings.IPAddress }}\" </span><span class="nv">$CNAME</span><span class="s2">`"</span><span class="p">;</span>
+  <span class="nb">echo</span> <span class="s2">"docker ansible_host=</span><span class="nv">$CIP</span><span class="s2"> ansible_python_interpreter=/usr/bin/python2.7"</span> &gt; ansible.hosts<span class="p">;</span>
   <span class="o">}</span>
 
 <span class="c1"># Test it / Example usage</span>
@@ -425,17 +425,17 @@ $ cat ansible.hosts
 
 <h3>Connecting to the container</h3>
 <p>Make a bash function "run_ssh" to help with ssh'ing into your container.  Also works to execute individual commands.</p>
-<div class="highlight"><pre><span></span><span class="c1"># creates the &quot;run_ssh&quot; function</span>
-<span class="c1"># Bash function definition for &quot;run_ssh&quot;</span>
+<div class="highlight"><pre><span></span><span class="c1"># creates the "run_ssh" function</span>
+<span class="c1"># Bash function definition for "run_ssh"</span>
 $ run_ssh<span class="o">(){</span>
   refresh_cip<span class="p">;</span> ssh -o <span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no <span class="se">\</span>
     -o <span class="nv">UserKnownHostsFile</span><span class="o">=</span>/dev/null <span class="se">\</span>
     -i ./insecure_key <span class="se">\</span>
-    root@<span class="nv">$CIP</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span>
+    root@<span class="nv">$CIP</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="p">;</span>
   <span class="o">}</span>
 
 <span class="c1"># Test it / Example usage:</span>
-<span class="c1"># display &quot;root&quot; or drop to shell</span>
+<span class="c1"># display "root" or drop to shell</span>
 $ run_ssh whoami
 $ run_ssh
 </pre></div>
@@ -457,8 +457,8 @@ $ run_ssh
 
 
 <p>I assume you already <a href="http://docs.ansible.com/ansible/intro_installation.html">have installed ansible</a>? Great.  Now make a bash function "run_ansible" to help with running ansible ().  This function requires at least one argument (the playbook to use).  You can pass <a href="#">additional ansible arguments</a> if you like as well but ansible will complain if you pass any of the ones already mentioned below.</p>
-<div class="highlight"><pre><span></span><span class="c1"># Bash function definition for &quot;run_ansible&quot;</span>
-<span class="c1"># remove or reduce verbosity with the &quot;-vvv&quot; part</span>
+<div class="highlight"><pre><span></span><span class="c1"># Bash function definition for "run_ansible"</span>
+<span class="c1"># remove or reduce verbosity with the "-vvv" part</span>
 $ run_ansible<span class="o">(){</span>
   refresh_cip<span class="p">;</span>
   <span class="nb">export</span> <span class="nv">ANSIBLE_HOST_KEY_CHECKING</span><span class="o">=</span>False
@@ -477,12 +477,12 @@ $ run_ansible ./ping.yml
 <div class="highlight"><pre><span></span><span class="c1"># Set vars for contain/image names</span>
 $ <span class="nb">export</span> <span class="nv">CNAME</span><span class="o">=</span>boondoggle-c1<span class="p">;</span> <span class="nb">export</span> <span class="nv">INAME</span><span class="o">=</span>boondoggle/i1
 
-<span class="c1"># Remove the boondoggle container instance, even if it&#39;s running</span>
+<span class="c1"># Remove the boondoggle container instance, even if it's running</span>
 $ docker rm --force <span class="nv">$CNAME</span>
 
 <span class="c1"># Remove the boondoggle image iself, rebuilding from scratch.</span>
 $ docker rmi --force <span class="nv">$INAME</span>
-$ docker build -t <span class="s2">&quot;</span><span class="nv">$INAME</span><span class="s2">&quot;</span> .
+$ docker build -t <span class="s2">"</span><span class="nv">$INAME</span><span class="s2">"</span> .
 
 <span class="c1"># Run the container in the background this time, cuz why not</span>
 $ docker run --detach --name <span class="nv">$CNAME</span> -t -i <span class="nv">$INAME</span> /sbin/my_init --enable-insecure-key
@@ -490,14 +490,14 @@ $ docker run --detach --name <span class="nv">$CNAME</span> -t -i <span class="n
 <span class="c1"># This will succeed because the container is listening with ssh</span>
 $ run_ssh ls /usr
 
-<span class="c1"># This should fail because we didn&#39;t run ansible yet</span>
+<span class="c1"># This should fail because we didn't run ansible yet</span>
 $ run_ssh tree /usr
 
 <span class="c1"># provision to fix it</span>
 $ run_ansible ping.yml
 $ run_ssh tree /usr
 
-<span class="c1"># Save the ansible&#39;ized stuff to the derivative image &quot;boondoggle/i2&quot;</span>
+<span class="c1"># Save the ansible'ized stuff to the derivative image "boondoggle/i2"</span>
 $ docker commit boondoggle-c1 boondoggle/i2
 $ docker stop boondoggle-c1
 
@@ -508,7 +508,7 @@ $ docker run --rm --name <span class="nv">$CNAME</span> -t -i <span class="nv">$
 </pre></div>
 
 
-<p>Note that the last "docker run" invocation above differs in some important ways from the previous ones.  Before when we were using ansible, used a phusion-baseimage "/sbin/my_init" style call.  Because we did NOT use that here, ssh is not available[ref]..so the docker filesystem might be <em>fat</em>, but it's not any more insecure than usual[/ref].  Also here, the "--rm" option ensures a cleanup of the container filesystem after exit.</p>
+<p>Note that the last "docker run" invocation above differs in some important ways from the previous ones.  Before when we were using ansible, used a phusion-baseimage "/sbin/my_init" style call.  Because we did NOT use that here, ssh is not available<sup id="sf-provisioning-docker-with-ansible-1-back"><a title="..so the docker filesystem might be fat, but it's not any more insecure than usual" class="simple-footnote" href="#sf-provisioning-docker-with-ansible-1">1</a></sup>.  Also here, the "--rm" option ensures a cleanup of the container filesystem after exit.</p>
 <h2>Cleanup</h2>
 <p>Just in case you don't want your system cluttered with boondoggles.</p>
 <div class="highlight"><pre><span></span><span class="c1"># Cleanup the original image and container</span>
@@ -516,14 +516,14 @@ $ docker rmi --force boondoggle/i1
 $ docker rmi --force boondoggle/i2
 $ docker rm --force boondoggle-c1
 $ docker rm --force boondoggle-c2
-</pre></div>
+</pre></div><ol class="simple-footnotes"><li id="sf-provisioning-docker-with-ansible-1">..so the docker filesystem might be <em>fat</em>, but it's not any more insecure than usual <a class="simple-footnote-back" href="#sf-provisioning-docker-with-ansible-1-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
