@@ -342,16 +342,155 @@ heredoc            </a>
 <p>Persons always have one <strong>self</strong> but potentially many <strong>roles</strong>.  For instance, suppose someone asks you a question. It's possible you will answer differently depending on whether you are answering in your capacity as that person's colleague/boss/friend/lover/enemy/etc.  Suppose you want to implement something like a  <a href="http://www.merriam-webster.com/dictionary/frenemy">frenemy</a> class.  Anyway, the code below contains a (contrived) example. <sup id="sf-python-multimethods-1-back"><a title=" See also: http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html " class="simple-footnote" href="#sf-python-multimethods-1">1</a></sup>.  </p>
 <p>Another way of looking at the concept being demonstrated: here there is not one self but many, and what a thing <em>does</em> depends on <em>what</em> you call it, not <em>how</em> you call it.  </p>
 <h2>The Code</h2>
-<p>[gist 76d6b96d536d2c8ef991]</p><ol class="simple-footnotes"><li id="sf-python-multimethods-1"> See also: <a href="http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html">http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html</a>  <a class="simple-footnote-back" href="#sf-python-multimethods-1-back">↩</a></li></ol>
+<div class="gist">
+    <script src='https://gist.github.com/76d6b96d536d2c8ef991.js'></script>
+    <noscript>
+        <pre><code>"""
+   A curiosity for your programming zoo inspired by monty python,
+   famous philosophers, and GVR's multimethods demo.
+
+   This code demonstrates metaprogramming as well as runtime reflection
+   and introspection.  It also shows python's flexibility by bending language
+   semantics and demonstrates that python's "self" is convention (not keyword).
+"""
+import inspect
+import new
+import sys
+
+registry = {}
+
+class proxy(object):
+    """ master registry for methodnames,
+        decorators, and the proxy scope
+        dummy object
+    """
+    pass
+
+
+def personalityDependant(func):
+    """ have to save func in the registry so each duplicate
+        function name doesnt just overwrite the previous one
+
+        NOTE: "which_self" is the name of the variable used where
+        "self" is usually found in instancemethod definitions
+    """
+    which_self = inspect.getargspec(func)[0][0]
+    if which_self not in registry:
+        registry[which_self] = {}
+    registry[which_self][func.__name__] = func
+    return func
+
+
+def schizophrenic(func):
+    """ tag a function as schizophrenic so the
+        metaclass knows when to effect the scope
+        mangling.
+    """
+    func.schizophrenic = True
+    return func
+
+
+class schizotypal(type):
+    """ metaclass for all schizoids """
+
+    @staticmethod
+    def __new__(mcls, name, bases, clsdict):
+        err1 = ('expected a schizotypal object would '
+                'have a list of personalities.')
+        if 'personalities' not in clsdict:
+            raise TypeError(err1)
+        else:
+            personalities = clsdict['personalities']
+            replacement = {}
+            for pName in personalities:
+                replacement[pName] = registry[pName]
+            personalities = replacement
+            clsdict['personalities'] = personalities
+            klassobj = type.__new__(mcls, name, bases, clsdict)
+        return klassobj
+
+    def __call__(cls, *args, **kargs):
+        inst = type.__call__(cls, *args, **kargs)
+        for var in dir(inst):
+            val = getattr(inst, var)
+            test = var != '__metaclass__' and var != '__class__'
+            if hasattr(val, 'schizophrenic'):
+                for pName in inst.personalities:
+                    val.func_globals[pName] = inst._as(pName)
+        return inst
+
+
+class schizoid(object):
+    """ base schizoid object (inherit from this) """
+
+    __metaclass__ = schizotypal
+    personalities = []
+
+    def _as(self, pName):
+        """ this method is used to obtain a representation
+             of self with respect to a specific personality
+        """
+        cls = self.__class__
+        err = 'illegal personality for ' + str(cls) + ': ' + pName
+        assert pName in cls.personalities, err
+        out = cls.personalities[pName]
+        P = proxy()
+        for funcname in out:
+            func = out[funcname]
+            func = new.instancemethod(func, self, cls)
+            setattr(P, funcname, func)
+        return P
+
+class myschizoid(schizoid):
+    """ a simple demo.
+
+        NB: without the decorators, each status() definition below would simply
+        overwrite the previous one.  notice also under normal python semantics
+        how theres no reason the philosopher names in the run() method should
+        be in scope.
+    """
+    personalities = ['kant', 'heidegger', 'wittgenstein', 'schlegel']
+
+    @personalityDependant
+    def status(kant):
+        return "a real pissant"
+
+    @personalityDependant
+    def status(heidegger):
+        return "a boozy beggar"
+
+    @personalityDependant
+    def status(wittgenstein):
+        return "beery swine"
+
+    @personalityDependant
+    def status(schlegel):
+        return "schloshed"
+
+    @schizophrenic
+    def run(self):
+        print
+        print 'kant:\t\t\t', kant.status()
+        print 'heidegger:\t\t', heidegger.status()
+        print 'wittgenstein:\t\t', wittgenstein.status()
+        print 'schlegel:\t\t', schlegel.status()
+        print
+
+if __name__ == '__main__':
+    s = myschizoid()
+    s.run()
+</code></pre>
+    </noscript>
+</div><ol class="simple-footnotes"><li id="sf-python-multimethods-1"> See also: <a href="http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html">http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html</a>  <a class="simple-footnote-back" href="#sf-python-multimethods-1-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
     </ul>
 </section>
         </article>
