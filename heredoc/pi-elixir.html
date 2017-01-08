@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>essays - heredoc</title>
+    <title>heredoc - Dockerizing Elixir for Raspberry Pi / ARM</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,16 +10,24 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">
 
-    <meta name="author" content="mvr" />
-    <meta name="keywords" content="essays" />
+        <meta name="author" content="mvr" />
+        <meta name="keywords" content="elixir,devops,raspberry-pi,docker" />
+        <meta name="description" content="Dockerizing Elixir for Raspberry Pi / ARM was easier than expected. If you&#39;re looking to do the same then this quick guide can help you out." />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="heredoc" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="heredoc"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc"/>
-        <meta property="og:description" content="heredoc"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Dockerizing Elixir for Raspberry Pi / ARM"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html"/>
+        <meta property="og:description" content="Dockerizing Elixir for Raspberry Pi / ARM was easier than expected. If you&#39;re looking to do the same then this quick guide can help you out."/>
+        <meta property="article:published_time" content="2017-01-07" />
+            <meta property="article:section" content="misc" />
+            <meta property="article:tag" content="elixir" />
+            <meta property="article:tag" content="devops" />
+            <meta property="article:tag" content="raspberry-pi" />
+            <meta property="article:tag" content="docker" />
+            <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
     <!-- Bootstrap -->
@@ -142,11 +150,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">
+                            Dockerizing Elixir for Raspberry Pi / ARM</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">
                             Advocacy for Polyglot Programming</li>
                         </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">
                             Bitcoin & Ethereum: Executive Summary</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
+                            Exploring WikiVoyage data with Neo4j and Cypher: Part 2</li>
                         </a>
               </ul>
 
@@ -280,52 +297,136 @@ heredoc            </a>
             </div>
         </div>
         <div class="col-sm-8">
-    <ol class="breadcrumb">
-        <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/" title="heredoc Categories">Categories</a></li>
-        <li class="active">essays</li>
-    </ol>
+            <ol class="breadcrumb">
+                <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">
+                  misc
+                </a></li>
+                <li class="active">Dockerizing Elixir for Raspberry Pi / ARM</li>
+            </ol>
+    <section id="content">
+        <article>
             <header class="page-header">
-                <h1 class=long-h1>Writing with category:                  <small><strong>essays</strong></small>
-                </h1>
+                <span class=long-h1>
+                    <a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html"
+                       rel="bookmark"
+                       title="Permalink to Dockerizing Elixir for Raspberry Pi / ARM">
+                        Dockerizing Elixir for Raspberry Pi / ARM
+                    </a>
+                </span>
             </header>
-            <article>
-                <h3>
-                  <a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">Advocacy for Polyglot Programming</a>
-                </h3>
+            <div class="entry-content">
+<footer class="post-info">
+    <table style="border-collapse: separate;border-spacing:5px 1px;">
+<tr>
+  <td class=center>
+      <span class="label label-default">Date</span>
+  </td>
+  <td>
+    <span class="published">
+      <i class="fa fa-calendar"></i>
+      <time datetime="2017-01-07T00:00:00-05:00">
+        Sat 07 January 2017
+      </time>
+    </span>
+  </td>
+</tr><tr>
+	<td class=center>
+		<span class="label label-default">
+			Tags
+		</span>
+	</td>
+	<td>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/raspberry-pi.html">raspberry-pi</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">docker</a>
+	</td>
+</tr>
+  </table>
+</footer>
+<!-- /.post-info -->                <br/>
+                <h2>Intro</h2>
+<p>There's a bunch of stuff on the internet about creating elixir clusters on raspberry pi's, but after a quick survey I only found stuff that <a href="https://github.com/joakimk/rpi-elixir/blob/master/Dockerfile">builds from scratch</a> or uses <a href="https://github.com/JonathanTron/docker-arm-elixir">non-alpine bases</a> or requires a <a href="https://blog.hypriot.com/about/#hypriotos:6083a88ee3411b0d17ce02d738f69d47">super cool but nonstandard OS</a> on the pi itself.  I was looking for something a little bit different, but as a newcomer to docker, elixir, and raspberry pi I thought I'd be in for a difficult slog.  It was much easier than expected!</p>
+<h2>Install Docker on Pi</h2>
+<p>You need docker already installed on your Raspberry Pi.  If you're running some kind of Raspbian then the simplest thing you can do is just install it with the package manager, and chances are good it will work out of the box.  That support has been <a href="https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/">official for a while</a>.  </p>
+<p>I'll be writing another article about the Ansible that sets up my Pi's for Docker, so I won't get into that much here, but I will say for those are unfamiliar with docker that images can take up a lot of space.  Personally my preference is that docker is storing data on a NAS, because it doesn't help much to use Docker to avoid cluttering my system only to discover that the drives is filling up rapidly.</p>
+<h2>Test Docker Install</h2>
+<p>Docker images for ARM can be a bit hard to come by, but luckily there's at least a base-image for alpine linux, and from there you can use the alpine package manager to do other stuff.  First, verify your docker-installation and platform by running a command like this to test the alpine image.</p>
+<div class="highlight"><pre><span></span>sudo docker run -it --entrypoint<span class="o">=</span>/bin/sh container4armhf/armhf-alpine -c <span class="s2">&quot;echo hello world&quot;</span>
+</pre></div>
 
-                <div class="summary">
-                  <p>Using ultiple programming languages &amp; programming paradigms for fun and profit.</p>
-                    <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">read more ...</a>
-                    <div class="btn btn-default btn-xs">
-                      tagged in
-                      <small>
-                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/essays.html">essays</a>
-,                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/cs.html">cs</a>
-                      </small>
-                    </div>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h3>
-                  <a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">Bitcoin & Ethereum: Executive Summary</a>
-                </h3>
 
-                <div class="summary">
-                  <p>Bitcoin and Ethereum: a (mostly) nontechnical executive summary for focusing on exciting applications instead of implementation details.</p>
-                    <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">read more ...</a>
-                    <div class="btn btn-default btn-xs">
-                      tagged in
-                      <small>
-                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/math.html">math</a>
-,                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/cs.html">cs</a>
-,                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/essays.html">essays</a>
-                      </small>
-                    </div>
-                </div>
-            </article>
-            <hr/>
+<h3>Create Dockerfile</h3>
+<p>Save this as your Dockerfile</p>
+<div class="highlight"><pre><span></span>FROM container4armhf/armhf-alpine
+RUN echo &quot;https://nl.alpinelinux.org/alpine/edge/community&quot; &gt;&gt; /etc/apk/repositories
+RUN apk --update add elixir
+ENTRYPOINT [&quot;/usr/bin/elixir&quot;]
+</pre></div>
+
+
+<p>You can build the Dockerfile with this command:</p>
+<div class="highlight"><pre><span></span>sudo docker build -t elixir-alpine-armhf-dev .
+</pre></div>
+
+
+<h3>Voila</h3>
+<p>The build in the last section won't take long.  After it's finished, things are working as expected:</p>
+<div class="highlight"><pre><span></span>pi@nomad:~ $ sudo docker run --rm -it elixir-alpine-armhf-dev
+
+Usage: elixir [options] [.exs file] [data]
+
+  -v                          Prints version and exits
+  -e COMMAND                  Evaluates the given command (*)
+  -r FILE                     Requires the given files/patterns (*)
+  -S SCRIPT                   Finds and executes the given script in PATH
+  -pr FILE                    Requires the given files/patterns in parallel (*)
+  -pa PATH                    Prepends the given path to Erlang code path (*)
+  -pz PATH                    Appends the given path to Erlang code path (*)
+
+  --app APP                   Starts the given app and its dependencies (*)
+  --cookie COOKIE             Sets a cookie for this distributed node
+  --detached                  Starts the Erlang VM detached from console
+  --erl SWITCHES              Switches to be passed down to Erlang (*)
+  --hidden                    Makes a hidden node
+  --logger-otp-reports BOOL   Enables or disables OTP reporting
+  --logger-sasl-reports BOOL  Enables or disables SASL reporting
+  --name NAME                 Makes and assigns a name to the distributed node
+  --no-halt                   Does not halt the Erlang VM after execution
+  --sname NAME                Makes and assigns a short name to the distributed node
+  --werl                      Uses Erlang&#39;s Windows shell GUI (Windows only)
+
+** Options marked with (*) can be given more than once
+** Options given after the .exs file or -- are passed down to the executed code
+** Options can be passed to the Erlang runtime using ELIXIR_ERL_OPTIONS or --erl
+</pre></div>
+
+
+<h2>Resources</h2>
+<ul>
+<li><a href="https://hub.docker.com/r/container4armhf/armhf-alpine/">armhf-alpine</a>: a suitable base for porting other alpine-based images to work on raspberry pi</li>
+<li><a href="https://en.wikipedia.org/wiki/ARM_architecture">ARM Architecture</a>: overview from wikipedia</li>
+<li><a href="https://github.com/msaraiva/alpine-erlang">non-ARM Alpine images for elixir/erlang</a>: useful reference</li>
+</ul>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts-well">
+    <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
 
         </div>
         <div class="col-sm-2" >
@@ -373,10 +474,26 @@ heredoc            </a>
 <script>
 $(document).ready(
   function(){
-    $('ul.nav.navbar-nav').first().append(
-      '<li><a href="https://mattvonrocketstein.github.io/heredoc/random.html">Random</a></li>');
+    $('.simple-footnotes').wrap("<section class=well id=footnotes-well></section>");
+    $('#footnotes-well').before("<h2>Footnotes</h2>");
+    $('#series-well').before("<h2>Articles in Series</h2>");
+    $('#related-posts-well').before("<h2>Related Posts</h2>");
+    $("#toc").delay(1000).tocify(
+      {
+        context: '.entry-content',
+        selectors: "h2,h3,h4",
+        showAndHide: true,
+        showAndHideOnScroll: true,
+        extendPage: false,
+      }
+    );
   }
-);</script>
+);
+function series_button(url,txt){
+  return '<a style="background:#efefef;" class="btn btn-default btn-xs" href="'+url+'">'+txt+'</a>'
+
+}
+function get_series_nav(x){}</script>
 <script>
 setTimeout(function(){
   if (""==$('#toc').html().trim()){
