@@ -317,7 +317,7 @@ heredoc            </a>
     <table>
       <tr>
         <td> <small>
-    <a class="btn btn-default btn-xs" href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
+    <a class="btn btn-default btn-xs" href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">
       ⇐ prev
     </a>
   &nbsp;
@@ -380,7 +380,7 @@ heredoc            </a>
 <h2>Part 3: Intro</h2>
 <p>This is part three of a three part series.</p>
 <p>In <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">part 1 of this series</a> I wrote about using Elixir to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into Neo4j.  If you want to follow along at home but you have no data locally, then you'll want to go back to that section before reading further.</p>
-<p>In <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">part 2 of this series</a> I wrote about using the data in the graph database, along with Cypher queries, to make iterative improvements to the model that's been constructed thus far.</p>
+<p>In <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">part 2 of this series</a> I wrote about using the data in the graph database, along with Cypher queries, to make iterative improvements to the model that's been constructed thus far.</p>
 <p>This final part of the writeup will continue where part 2 left off, showing off a few more advanced features of the Cypher query language and discussing a few ideas for future work.</p>
 <hr style="border-top: dotted 2px;" />
 
@@ -409,8 +409,8 @@ heredoc            </a>
             <small>(part 1)</small>
        </li>
          <li>
-           <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
-             Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a>
+           <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">
+             Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a>
             <small>(part 2)</small>
        </li>
      </ul>
@@ -418,11 +418,11 @@ heredoc            </a>
 </section>
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
@@ -491,7 +491,7 @@ $(document).ready(
       }
     );
         var tprev = '⇐ prev in series'
-        var prev = series_button('exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html', tprev)
+        var prev = series_button('exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html', tprev)
         x2 = '<li id=toc-series-prev style="cursor:pointer;" class="tocify-item" data-unique="'
         x2 = x2 + tprev + '">' +prev+ '</li>';
         x2 = '<ul class="tocify-header nav nav-list">'+x2+'</ul>'

@@ -324,7 +324,7 @@ heredoc            </a>
         </td>
         <td> &nbsp;
 <small>
-    <a class="btn btn-default btn-xs" href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
+    <a class="btn btn-default btn-xs" href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">
       next ⇒
     </a>
 </small>
@@ -365,7 +365,7 @@ heredoc            </a>
                 <p></p>
 <h2>Part 1: Intro</h2>
 <p>This is part one of a three part series.  In this part, I'll write about using <a href="http://elixir-lang.org/">Elixir</a> to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into the Neo4j graph database.
-I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1-back"><a title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P ' class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1">1</a></sup>  If you're most interested in the resulting data structure and how it can be interrogated, you can leave this part and <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">move directly to part 2</a>.</p>
+I call this project <a href="https://github.com/mattvonrocketstein/rapidmind">rapidmind</a>. <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1-back"><a title=' Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P ' class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1">1</a></sup>  If you're most interested in the resulting data structure and how it can be interrogated, you can leave this part and <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">move directly to part 2</a>.</p>
 <h2>Motivation</h2>
 <p>Initially I intended to parse only <strong>wikipedia</strong> dump files, thinking that it would be very interesting to try and construct graph queries that could infer stuff like "trigonometry is a prerequisite concept of calculus" based on page linkages.  I still might look into this at some point, but after I realized that more or less the same unmodified parsing code could be used with other MediaWiki data dumps I had other ideas.</p>
 <p>Maybe the best MediaWiki site to throw into a graph database is the tree of life the friendly folks at [WikiSpecies][https://species.wikimedia.org/wiki/Main_Page] are building.  This project idea is tempting but I'm setting it aside for time being.</p>
@@ -502,7 +502,7 @@ database is empty.  adding indexes
 
 
 <h2>Exploring the data</h2>
-<p>So, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages, and we have 2 kinds of inter-node relationships specified.  What the hell is this data structure?  In short <strong>we have a good model for describing how the website connects to itself</strong>.  Because the website itself is basically trying to describe the world, we sort of have model for the world too even if it's shall we say low-res and second order.  What kinds of questions can we ask and answer with this model, and how can we curate and improve its accuracy?  The data diving begins in <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">the continuation of this series</a></p><ol class="simple-footnotes"><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-2">You can check out my (somewhat neglected) travel blog <a href="/travel">here</a> <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-2-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-3-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-4-back">↩</a></li></ol>
+<p>So, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages, and we have 2 kinds of inter-node relationships specified.  What the hell is this data structure?  In short <strong>we have a good model for describing how the website connects to itself</strong>.  Because the website itself is basically trying to describe the world, we sort of have model for the world too even if it's shall we say low-res and second order.  What kinds of questions can we ask and answer with this model, and how can we curate and improve its accuracy?  The data diving begins in <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">the continuation of this series</a></p><ol class="simple-footnotes"><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1"> Why "rapidmind"?  Just because whenever I search for elixir-related content on google expecting to find programming language stuff, I find some stuff about a WoW artifact called rapidmind.  Hopefully this will return the favor eventually and screw up some of the search results for those guys =P  <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-1-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-2">You can check out my (somewhat neglected) travel blog <a href="/travel">here</a> <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-2-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-3"> Other modifications you might like to make: increase the ulimit in the default init script at <code>/etc/init.d/neo4j-service</code>.  <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-3-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-4"> Link relationships are parsed from page bodies with regexes looking for "[[" and "]]"  <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data-4-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="series-well">
@@ -511,7 +511,7 @@ database is empty.  adding indexes
   <strong>"Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)"</strong>
 &nbsp;
 <small>
-    <a class="btn btn-default btn-xs" href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
+    <a class="btn btn-default btn-xs" href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">
       next ⇒
     </a>
 </small>
@@ -519,7 +519,7 @@ database is empty.  adding indexes
      <h5>Next article(s)</h5>
      <ul>
          <li>
-           <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a>
+           <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a>
            <small>(part 2)</small>
          </li>
          <li>
@@ -531,16 +531,16 @@ database is empty.  adding indexes
 </section>
 <section class="well" id="related-posts-well">
     <ul>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
     </ul>
 </section>
         </article>
@@ -606,7 +606,7 @@ $(document).ready(
       }
     );
         var tnext = 'next in series⇒'
-        var next = series_button('exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html', tnext)
+        var next = series_button('exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html', tnext)
         x1 = '<li id=toc-series-next style="cursor:pointer;" class="tocify-item" data-unique="'
         x1 = x1 + tnext + '">' + next + '</li>';
         x1 = '<ul class="tocify-header nav nav-list">'+x1+'</ul>'

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Exploring WikiVoyage data with Neo4j and Cypher: Part 2</title>
+    <title>heredoc - Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">
 
         <meta name="author" content="mvr" />
         <meta name="keywords" content="graphdb,data-science,unfinished" />
@@ -18,8 +18,8 @@
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Exploring WikiVoyage data with Neo4j and Cypher: Part 2"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html"/>
+        <meta property="og:title" content="Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html"/>
         <meta property="og:description" content="Part 2 in a series about loading MediaWiki data-dump XML into Neo4j using Elixir and Cypher. In this section, we leave our Elixir parsing code in the dust and begin the process of graph curation using Cypher."/>
         <meta property="article:published_time" content="2016-09-26" />
             <meta property="article:section" content="elixir" />
@@ -301,16 +301,16 @@ heredoc            </a>
                 <li><a href="https://mattvonrocketstein.github.io/heredoc/category/elixir.html" title="elixir">
                   elixir
                 </a></li>
-                <li class="active">Exploring WikiVoyage data with Neo4j and Cypher: Part 2</li>
+                <li class="active">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html"
                        rel="bookmark"
-                       title="Permalink to Exploring WikiVoyage data with Neo4j and Cypher: Part 2">
-                        Exploring WikiVoyage data with Neo4j and Cypher: Part 2
+                       title="Permalink to Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)">
+                        Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)
                     </a>
                 </span>
     <br>
@@ -387,7 +387,7 @@ heredoc            </a>
 <p>This is part two of a three part series.</p>
 <p>In <a href="exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">part 1 of this series</a> I wrote about using Elixir to parse <a href="http://wikivoyage.com">Wikivoyage</a> data dumps and push them into Neo4j.  If you want to follow along at home but you have no data locally, then you'll want to go back to that section before reading further.  If you've already seen part 1 or if you're only interested in the resulting data structure and its interrogation, then you can read on from here.</p>
 <h2>Exploring the Data</h2>
-<p>To review from the first part of this series, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages.  Most nodes<sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-1-back"><a title="That is, all nodes with the exception of pages that are linked to from somewhere but do not actually exist" class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-1">1</a></sup> have properties for <code>body</code> (i.e. unparsed page content), a <code>title</code> (i.e. the article title), and a <code>page_id</code>.  As far as edges, there are at this point only two kinds of relationships:</p>
+<p>To review from the first part of this series, what we have at this point is a simple but reasonably large graph, where nodes are WikiVoyage pages.  Most nodes<sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-1-back"><a title="That is, all nodes with the exception of pages that are linked to from somewhere but do not actually exist" class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-1">1</a></sup> have properties for <code>body</code> (i.e. unparsed page content), a <code>title</code> (i.e. the article title), and a <code>page_id</code>.  As far as edges, there are at this point only two kinds of relationships:</p>
 <ol>
 <li>the <strong>links_to</strong> relationship means our graph models how the webpage connects to itself</li>
 <li>the <strong>contains</strong> relationship gives some extra semantic information about geopolitical regions</li>
@@ -483,7 +483,7 @@ heredoc            </a>
 <blockquote>
 <p>It's important to note that up until now we've only been using Cypher regexes on <code>title</code> properties, but to find <strong>{{UsableCity}}</strong> macros inside <code>body</code> properties we'll essentially be repeatedly grepping like half a gigabyte of text.</p>
 </blockquote>
-<p>I'll continue to use regexes and string functions in Cypher, but in production you should probably be using the full-text lucene search capabilities <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-2-back"><a title="which I've written about here" class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-2">2</a></sup>.</p>
+<p>I'll continue to use regexes and string functions in Cypher, but in production you should probably be using the full-text lucene search capabilities <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-2-back"><a title="which I've written about here" class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-2">2</a></sup>.</p>
 <div class="highlight"><pre><span></span><span class="c1">// Label pages invoking the {{UsableCity}} macro as :City</span>
 <span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="k">WITH</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">lower</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">body</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">body</span><span class="w"></span>
@@ -522,7 +522,7 @@ heredoc            </a>
 <h3>Finding Countries</h3>
 <p>Having correct and fairly complete <code>:Country</code> labels for the graph would be really nice.  But based on <a href="https://en.wikivoyage.org/wiki/Special%3aWhatLinksHere/Template%3ausablecountry">this page</a> it seems that identifying countries with the <code>{{UsableCountry}}</code> macro in page bodies is not painting a very complete picture.</p>
 <p>To improve the model for our toy world (and to demonstrate some other neat things you can do with cypher) <em>we'll have to cheat a bit</em> by using a external  (non WikiVoyage) data source.  I opted to use <a href="https://github.com/opentraveldata/opentraveldata/blob/master/data/countries/27org/27org_iso_country_list_2007_12.sql">this country list</a>, provided via the <a href="https://github.com/opentraveldata/">OpenTravelData</a> project.  I massaged the SQL from that data source into a CSV file, then loaded it with Cypher.</p>
-<p>For completeness there's a footnote<sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-3-back"><a title="wget -O country_list.sql https://raw.githubusercontent.com/opentraveldata/opentraveldata/master/data/countries/27org/27org_iso_country_list_2007_12.sql &amp;&amp; cat country_list.sql | grep INSERT | awk -F &quot;(&quot; '{print $2}'|awk -F &quot;,'&quot; '{print substr($3,0,length($3))}'|awk -F &quot;',&quot; '{print $1}'cat country_list.sql | grep INSERT | awk -F &quot;(&quot; '{print $2}'|awk -F &quot;,'&quot; '{print substr($3,0,length($3))}'|awk -F &quot;',&quot; '{print $1}'" class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-3">3</a></sup> describing how I normalized the data, but you can also just use my normalized version <a href="https://github.com/mattvonrocketstein/rapidmind/blob/master/country_list.txt">here</a>.</p>
+<p>For completeness there's a footnote<sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-3-back"><a title="wget -O country_list.sql https://raw.githubusercontent.com/opentraveldata/opentraveldata/master/data/countries/27org/27org_iso_country_list_2007_12.sql &amp;&amp; cat country_list.sql | grep INSERT | awk -F &quot;(&quot; '{print $2}'|awk -F &quot;,'&quot; '{print substr($3,0,length($3))}'|awk -F &quot;',&quot; '{print $1}'cat country_list.sql | grep INSERT | awk -F &quot;(&quot; '{print $2}'|awk -F &quot;,'&quot; '{print substr($3,0,length($3))}'|awk -F &quot;',&quot; '{print $1}'" class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-3">3</a></sup> describing how I normalized the data, but you can also just use my normalized version <a href="https://github.com/mattvonrocketstein/rapidmind/blob/master/country_list.txt">here</a>.</p>
 <p>So the strategy is that the massaged data inside <code>country-list.txt</code> is a comma-free text file with newlines, thus it is a kind of CSV file, and Cypher happens to do <a href="http://blog.comperiosearch.com/blog/2015/02/04/csv-import-tricks-neo4j/">CSV parsing</a>.  To keep Neo4j happy, you must have the CSV file somehow available to the Neo4j server. I wanted to avoid copying a file to my virtual machine, so the code below uses a HTTP link into the rapidmind repository.</p>
 <div class="highlight"><pre><span></span><span class="c1">// Query to label country nodes as :Country</span>
 <span class="c1">WITH 'https://raw.githubusercontent.com/mattvonrocketstein/rapidmind/master/country_list.txt'</span>
@@ -576,7 +576,7 @@ Following the blue edges, the result shows that Bangkok is contained by Chao Phr
 <br></p>
 <p><img src="img/neo-bangkok.png" alt="bangkok shortest path"></p>
 <h3>Innate Ambiguity</h3>
-<p><strong>How frequently does ambiguity occur in place names?</strong> This is a tricky question to answer <em>exactly</em> with the data but by counting the redirects <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-4-back"><a title="We already labeled redirects here" class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-4">4</a></sup> and disambiguation pages we can pretty easily find information that gets us pointed in the right direction.  The basic approach is</p>
+<p><strong>How frequently does ambiguity occur in place names?</strong> This is a tricky question to answer <em>exactly</em> with the data but by counting the redirects <sup id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-4-back"><a title="We already labeled redirects here" class="simple-footnote" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-4">4</a></sup> and disambiguation pages we can pretty easily find information that gets us pointed in the right direction.  The basic approach is</p>
 <ol>
 <li>Find all pages labeled as redirects.  The page body will look like <code>#REDIRECT [[RedirectTarget]]</code></li>
 <li>Find the page each page redirects to, de-duplicate the resulting set and count the elements</li>
@@ -615,7 +615,7 @@ Following the blue edges, the result shows that Bangkok is contained by Chao Phr
 <span class="k">MATCH</span><span class="w"> </span><span class="p">(</span><span class="n">page</span><span class="p">:</span><span class="n">WikiPage</span><span class="p">)</span><span class="o">-[</span><span class="n">rel</span><span class="o">]-&gt;</span><span class="p">()</span><span class="w"></span>
 <span class="k">WHERE</span><span class="w"> </span><span class="n">page</span><span class="p">.</span><span class="n">title</span><span class="p">=</span><span class="err">'</span><span class="n">UNESCO</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Heritage</span><span class="w"> </span><span class="n">List</span><span class="err">'</span><span class="w"></span>
 <span class="k">RETURN</span><span class="w"> </span><span class="n">rel</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="m">10</span><span class="w"></span>
-</pre></div><ol class="simple-footnotes"><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-1">That is, all nodes with the exception of pages that are linked to from somewhere but do not actually exist <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-1-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-2">which I've written about <a href="neo4j-lucene.html">here</a> <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-2-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-3">wget -O country_list.sql https://raw.githubusercontent.com/opentraveldata/opentraveldata/master/data/countries/27org/27org_iso_country_list_2007_12.sql &amp;&amp; cat country_list.sql | grep INSERT | awk -F "(" '{print $2}'|awk -F ",'" '{print substr($3,0,length($3))}'|awk -F "'," '{print $1}'cat country_list.sql | grep INSERT | awk -F "(" '{print $2}'|awk -F ",'" '{print substr($3,0,length($3))}'|awk -F "'," '{print $1}' <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-3-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-4">We already labeled redirects <a href="#">here</a> <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-4-back">↩</a></li></ol>
+</pre></div><ol class="simple-footnotes"><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-1">That is, all nodes with the exception of pages that are linked to from somewhere but do not actually exist <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-1-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-2">which I've written about <a href="neo4j-lucene.html">here</a> <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-2-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-3">wget -O country_list.sql https://raw.githubusercontent.com/opentraveldata/opentraveldata/master/data/countries/27org/27org_iso_country_list_2007_12.sql &amp;&amp; cat country_list.sql | grep INSERT | awk -F "(" '{print $2}'|awk -F ",'" '{print substr($3,0,length($3))}'|awk -F "'," '{print $1}'cat country_list.sql | grep INSERT | awk -F "(" '{print $2}'|awk -F ",'" '{print substr($3,0,length($3))}'|awk -F "'," '{print $1}' <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-3-back">↩</a></li><li id="sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-4">We already labeled redirects <a href="#">here</a> <a class="simple-footnote-back" href="#sf-exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data-4-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="series-well">
