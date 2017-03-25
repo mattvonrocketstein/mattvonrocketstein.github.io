@@ -1,414 +1,256 @@
-
-/*
-Design by Free CSS Templates
-http://www.freecsstemplates.org
-Released for free under a Creative Commons Attribution 2.5 License
-*/
-@import url("pygment.css");
 body {
-	margin: 30px 0px 0px 0px;
-	padding: 0;
-	background: #7E776F url('../images/img01.jpg') repeat left top;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 13px;
-	color: #3E3B36;
+    padding-top: 70px;
 }
-.summary h2{font-size:1.6em; color:black;}
-h1, h2, h3 {
-	margin: 0;
-	padding: 0;
-	font-weight: normal;
-	color: #F0E9E9;
+div.justtable table {
+  width: 100%;
+}
+#sidebar .list-group, #sidebar .list-group-item {
+    background-color: transparent;
+}
+td.center {
+  text-align:center;
 }
 
-h1 {
-	font-size: 2em;
+/* for list-groups nested within a list-group-item, reset the bottom margin */
+.list-group-item > .list-group {
+    margin-bottom: 0px;
 }
 
-h2 {
-	font-size: 2.8em;
+/* for list-group-items nested within a list-group-item, reset the bottom
+   padding of the last item, b/c the containing item has paddimg already
+ */
+.list-group-item .list-group-item:last-child {
+    padding-bottom: 0px;
 }
 
-h3 {
-	font-size: 1.6em;
+.list-group-item {
+    border: none;
 }
 
-p, ul, ol {
-	margin-top: 0;
-	line-height: 180%;
+.tag-0 {
+    font-size: 14pt;
 }
 
-ul, ol {
+.tag-1 {
+    font-size: 15pt;
 }
 
-a {
-	text-decoration: none;
-	color: #4D8D99;
+.tag-2 {
+    font-size: 13pt;
 }
 
-a:hover {
+.tag-3 {
+    font-size: 11pt;
 }
 
-#wrapper {
-	margin: 0 auto;
-	padding: 0;
+.tag-4 {
+    font-size: 8pt;
 }
 
-/* Header */
-
-#header-wrapper {
-	height: 100px;
-	background: #3C3230;
-	border-bottom: 10px solid #4F4440;
+#aboutme {
+    padding-top: 0px;
+    padding-bottom: 5px;
+    -ms-word-break: normal;
+    word-break: normal;
 }
-
-#header {
-	width: 950px;
-	margin: 0 auto;
-	padding: 0px 0px 0px 30px;
-}
-
-/* Logo */
-
-#logo {
-	width: 280px;
-	height: 140px;
-	margin: 0;
-	padding: 0;
-	background: url('../images/img07.jpg') no-repeat left top;
-	color: #34312C;
-}
-
-#logo h1, #logo p {
-	margin: 0;
-	padding: 0;
-	letter-spacing: -2px;
-	text-align: center;
-	font-family: Georgia, "Times New Roman", Times, serif;
-}
-
-#logo h1 {
-	margin: 0px 0px -20px 0px;
-	padding: 20px 0px 0px 0px;
-	font-size: 50px;
-	color: #4D8D99;
-}
-
-#logo h1 a {
-	color: #F0E9E9;
-}
-
-#logo p {
-	margin: 0px;
-	padding: 0px;
-	font-size: 26px;
-} 
-
-#logo a {
-	border: none;
-	background: none;
-	text-decoration: none;
-	color: #34312C;
-}
-
-/* Search */
-
-#search {
-	width: 280px;
-	height: 50px;
-	padding: 20px 0px 0px 0px;
-	background: url('../images/img05.jpg') no-repeat left 15px;
-}
-
-#search form {
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
-}
-
-#search fieldset {
-	margin: 0;
-	padding: 0;
-	border: none;
-}
-
-#search-text {
-	width: 190px;
-	padding: 0px 5px 2px 10px;
-	border: none;
-	background: none;
-	text-transform: lowercase;
-	font: normal 11px Arial, Helvetica, sans-serif;
-	color: #34312C;
-}
-
-#search-submit {
-	width: 70px;
-	height: 22px;
-	border: none;
-	border: none;
-	background: none;
-	text-indent: -99999px;
-	color: #34312C;
-}
-
-/* Menu */
-
-#menu {
-	width: 280px;
-	margin: 20px auto 20px auto;
-	padding: 0;
-}
-
-#menu ul {
-	margin: 0;
-	padding: 50px 0px 0px 0px;
-	list-style: none;
-	line-height: normal;
-}
-
-#menu li {
-	border-bottom: 1px dashed #191918;
-}
-
-#menu a {
-	display: block;
-	width: 260px;
-	height: 27px;
-	margin: 4px 0px;
-	padding: 8px 0px 0px 20px;
-	text-decoration: none;
-	text-transform: capitalize;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
-	font-weight: normal;
-	color: #FFF;
-}
-
-#menu a:hover, #menu .current_page_item a {
-	background: url('../images/img06.jpg') no-repeat left top; 
-	text-decoration: none;
-}
-
-#menu .current_page_item a {
-}
-
-/* Page */
-
-#page {
-	width: 1000px;
-	margin: 0 auto;
-	background: url('../images/img04.jpg') repeat-y left top;
-}
-
-#page-bgtop {
-	background: url('../images/img02.jpg') no-repeat left top;
-}
-
-#page-bgbtm {
-	overflow: hidden;
-	width: 920px;
-	padding: 20px 40px 20px 40px;
-	background: url(images/img03.jpg) no-repeat left bottom;
-}
-/* Content */
-
-#content {
-	float: right;
-	width: 520px;
-	padding: 70px 30px 0px 60px;
-}
-
-.post {
-	margin-bottom: 40px;
-}
-
-.post .title {
-	padding: 0px 0px 0px 0px;
-	font-family: Georgia, "Times New Roman", Times, serif;
-	letter-spacing: -.5px;
-}
-
-.post .title a {
-	color: #52483E;
-	border: none;
-}
-
-.post .meta {
-	margin-bottom: 0px;
-	padding: 10px 0px 0px 0px;
-	text-align: left;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 13px;
-	font-weight: bold;
-}
-
-.post .meta .date {
-	float: left;
-}
-
-.post .meta .posted {
-	float: right;
-}
-
-.post .meta a {
-}
-
-.post .entry {
-	padding: 0px 0px 20px 0px;
-	border-bottom: 1px dotted #99938B;
-	text-align: justify;
-}
-.post .entry dt {
-        font-weight:bold ;
-}
-
-.post img {
-        margin:10px;
-        border:black;
-}
-.summary img{
-        display:none
-}
-
-.entry h2{
-        font-size: 1.6em;
-        color: #36302a;
-}
-
-.entry h3{
-        font-size: 1.2em;
-        color: #36302a;
-}
-h2.title {
-        font-size:2.8em;
-}
-
-.highlight{
-        background:black;
-        padding:2px;
-}
-
-.highlight pre{
-        color:white;
-}
-
-.highlight{
-        overflow:auto;
-}
-
-.links {
-	padding-top: 20px;
-	font-size: 12px;
-	font-weight: bold;
-}
-
-/* Sidebar */
 
 #sidebar {
-	float: left;
-	width: 280px;
-	margin: 0px;
-	padding: 0px 0px 80px 10px;
-	color: #787878;
+    padding-top: 0px;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: normal;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
 }
 
-#sidebar ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+.li-choice:before {
+  content: "★";
 }
-
-#sidebar li {
-	margin: 0;
-	padding: 0;
-}
-
-#sidebar li ul {
-	margin: 0px 0px 0px 20px;
-	padding-bottom: 30px;
-}
-
-#sidebar li li {
-	line-height: 35px;
-	border-bottom: 1px dashed #191918;
-	border-left: none;
-}
-
-#sidebar li li span {
-	display: block;
-	margin-top: -20px;
-	padding: 0;
-	font-size: 11px;
-	font-style: italic;
-}
-
-#sidebar li li a {
-	color: #787878;
-}
-
-#sidebar li li a:hover {
-	color: #F0E9E9;
-}
-
-#sidebar h2 {
-	height: 38px;
-	letter-spacing: -.5px;
-	font-size: 1.8em;
-}
-
-#sidebar p {
-	margin: 0 0px;
-	padding: 0px 20px 20px 20px;
-}
-
 #sidebar a {
-	border: none;
+    color: inherit;
 }
 
-#sidebar a:hover {
+.icon-label {
+    margin-left: 5px;
+    font-size:13px;
+    font-weight:bold;
+}
+div .sidebar {
+
 }
 
-/* Calendar */
-
-#calendar {
+/* Example for how to control spacing between icon and label in specific
+   lists in the sidebar. To change, override in your CUSTOM_CSS           */
+#sidebar #social i {
+    margin-right: 3px;
 }
 
-#calendar_wrap {
-	padding: 20px;
+a, a:hover {
+    color: inherit;
 }
 
-#calendar table {
-	width: 100%;
+.entry-content a {
+    text-decoration: none;
+    border-bottom: 1px dotted;
 }
 
-#calendar tbody td {
-	text-align: center;
+.entry-content a:hover {
+    text-decoration: none;
+    border-bottom: 1px solid;
 }
 
-#calendar #next {
-	text-align: right;
+.entry-content img {
+    max-width: 100%;
+    height: auto;
 }
 
-/* Footer */
-
-#footer {
-	width: 920px;
-	height: 80px;
-	margin: 0 auto;
-	padding: 0px 0 15px 310px;
-	font-family: Arial, Helvetica, sans-serif;
+.entry-content figcaption, .caption {
+    font-size: small;
+    margin-bottom: 2px;
 }
 
-#footer p {
-	margin: 0;
-	padding-top: 20px;
-	line-height: normal;
-	font-size: 9px;
-	text-transform: uppercase;
-	text-align: center;
-	color: #69635E;
+.summary img {
+    max-width: 100%;
+    height: auto;
 }
 
-#footer a {
-	color: #474440;
+.floatright, .align-right {
+    float: right;
+}
+
+.floatleft, .align-left {
+    float: left;
+}
+
+.floatcenter, .align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+figure.floatright, .align-right {
+    margin-left: 4px;
+}
+
+figure.floatleft, .align-left {
+    margin-right: 4px;
+}
+
+figure.floatcenter, .align-center {
+    margin-bottom: 11px;
+}
+
+.highlighttable pre {
+    /* Removes bootstrap default margin-bottom */
+    margin-bottom: 0px;
+}
+.long-h1 {
+  font-size:25px;
+  font-weight:500%;
+}
+.highlighttable {
+    /* Adds them margin-bottom to highlightable instead of <pre> */
+    margin-bottom: 11px;
+}
+
+.highlighttable {
+    width: 100%;
+}
+
+#categories ul, #tags ul {
+    list-style: none;
+    padding: 0;
+    margin-left: 0;
+}
+
+.docutils.footnote td.label {
+    display: table-cell;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    text-align: inherit;
+    white-space: inherit;
+    border-radius: inherit;
+}
+
+.categories-timestamp {
+    color: #AAAAAA;
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+
+.tagcloud li {
+    padding: 0px;
+}
+
+#banner {
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: scroll;
+    background-size: cover;
+    background-color: #C4C4C4;
+    margin: 0 0 20px;
+    padding: 70px 0; /*controls padding around inner text*/
+    position: relative;
+}
+
+#banner .copy {
+    background: none repeat scroll 0 0 #efefef);
+    display: inline;
+    float: left;
+    max-width: 600px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+#banner h1 {
+    color: #fff;
+    font-family: "HelveticaNeue-CondensedBold","Helvetica Neue CE 600 Condensed","Helvetica Neue LT Condensed","Helvetica Neue 600 Condensed","HelveticaNeue-BoldCondensed","Helvetica Neue BoldCondensed","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 60px;
+    font-stretch: condensed;
+    font-weight: 700;
+    line-height: 0.9;
+    margin: 0;
+    text-transform: uppercase;
+}
+#banner .intro {
+    color: #fff;
+    font-size: 21px;
+    line-height: 1.33;
+    opacity: 0.75;
+}
+#banner .btn, #banner .intro {
+    margin-left: 4px;
+}
+
+/* Solutions for mobile and small screens  */
+@media (max-width: 650px) {
+    #banner h1{
+       font-size: 30px; /* !important;*/
+    }
+    #banner .intro{
+        font-size: 16px;
+    }
+}
+
+:target:before {
+  content:"";
+  display:block;
+  height:50px;
+  /* fixed header height*/
+
+  margin:-50px 0 0;
+  /* negative fixed header height */
+}
+
+.gap-right {
+    margin-right: 10px;
+}
+
+.gap-left {
+  margin-left: 10px;
 }
