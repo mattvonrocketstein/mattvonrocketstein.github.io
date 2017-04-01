@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Setting up Neo4j with Vagrant and Ansible</title>
+    <title>heredoc - Ansible through a bastion host</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,24 +10,22 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/ansible-bastion.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="devops,vagrant,ansible,graphdb,infrastructure" />
-        <meta name="description" content="Setting up Neo4j with Vagrant and Ansible" />
+        <meta name="keywords" content="ansible,python,devops" />
+        <meta name="description" content="Running ansible modules or playbooks through a bastion host without ansible.cfg, ssh_config, static or dynamic inventories." />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Setting up Neo4j with Vagrant and Ansible"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html"/>
-        <meta property="og:description" content="Setting up Neo4j with Vagrant and Ansible"/>
-        <meta property="article:published_time" content="2016-08-26" />
-            <meta property="article:section" content="devops" />
-            <meta property="article:tag" content="devops" />
-            <meta property="article:tag" content="vagrant" />
+        <meta property="og:title" content="Ansible through a bastion host"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/ansible-bastion.html"/>
+        <meta property="og:description" content="Running ansible modules or playbooks through a bastion host without ansible.cfg, ssh_config, static or dynamic inventories."/>
+        <meta property="article:published_time" content="2017-04-01" />
+            <meta property="article:section" content="misc" />
             <meta property="article:tag" content="ansible" />
-            <meta property="article:tag" content="graphdb" />
-            <meta property="article:tag" content="infrastructure" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="devops" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -300,19 +298,19 @@ heredoc            </a>
         <div class="col-sm-8">
             <ol class="breadcrumb">
                 <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/devops.html" title="devops">
-                  devops
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">
+                  misc
                 </a></li>
-                <li class="active">Setting up Neo4j with Vagrant and Ansible</li>
+                <li class="active">Ansible through a bastion host</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/ansible-bastion.html"
                        rel="bookmark"
-                       title="Permalink to Setting up Neo4j with Vagrant and Ansible">
-                        Setting up Neo4j with Vagrant and Ansible
+                       title="Permalink to Ansible through a bastion host">
+                        Ansible through a bastion host
                     </a>
                 </span>
             </header>
@@ -326,8 +324,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2016-08-26T20:20:00-04:00">
-        Fri 26 August 2016
+      <time datetime="2017-04-01T00:00:00-04:00">
+        Sat 01 April 2017
       </time>
     </span>
   </td>
@@ -338,62 +336,297 @@ heredoc            </a>
 		</span>
 	</td>
 	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/vagrant.html">vagrant</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">ansible</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">graphdb</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/infrastructure.html">infrastructure</a>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">ansible</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
 	</td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <h2>Clone files</h2>
-<p>Clone <a href="https://gist.github.com/mattvonrocketstein/96670d2eb66a8ad9854b6f52a2b5339c">the gist</a> into your working directory:</p>
-<div class="highlight"><pre><span></span>git clone git@github.com:96670d2eb66a8ad9854b6f52a2b5339c.git vagrant-ansible-neo
-cd vagrant-ansible-neo
+                <h2>The Problem</h2>
+<p>The pattern on the bastion/gateway host will probably be familiar to anyone working with servers, but getting ansible to "just work", with or without a bastion between you and the target, is surprisingly esoteric.  You'd think this would be possible with one simple flag or something, but it's a little more involved than that.</p>
+<h2>Prior Art</h2>
+<p><a href="http://blog.scottlowe.org/2015/12/24/running-ansible-through-ssh-bastion-host/">This guide</a> was extremely helpful, but still didn't completely solve my use-case.  The issue is that it involves modifications to static files for <code>ansible.cfg</code>, <code>ssh_config</code>, and possibly inventories.  Especially if you're just getting started with infrastructure as code, VPCs, bastions, and hosts behind the bastion tend to come and go.  It's not ideal to have to keep track of these things or keep different versions of these files for different environments (prod/stage/test).  </p>
+<h2>The Solution</h2>
+<p>What is discussed here is basically a method for running ansible playbooks or ansible modules, against a host that either is, or is not behind a bastion, by generating the files, environment variables, and command-line arguments that you need in such a way that they are available just in time, and need not be tracked in version control.</p>
+<p>All this is done with a wrapper script for invoking ansible, which uses <a href="http://docs.fabfile.org">fabric</a>.  I'm using <code>ansible==2.4.0</code> and <code>fabric==1.13.1</code>.  </p>
+<p>The code for everything is <a href="https://gist.github.com/mattvonrocketstein/c9241f934766417e277f6ae77cd4f170">available for download here</a>, feel free to leave comments there.</p>
+<h2>Example Usage</h2>
+<div class="highlight"><pre><span></span># List available commands:
+$ fab -l
+
+# SSH to a host behind a bastion:
+$ fab select.host:&quot;privateIP&quot; select.bastion:&quot;publicIP&quot; ssh
+
+# Run ansible ping against a host behind a bastion:
+$ fab select.host:&quot;privateIP&quot; select.bastion:&quot;publicIP&quot; ansible.ping
+
+# Run ansible playbook against a host behind a bastion:
+$ fab select.host:&quot;privateIP&quot; select.bastion:&quot;publicIP&quot; ansible.playbook:&quot;path/to/playbook&quot;,&quot;extra_vars=for_playbook&quot;
+
+# Ad-hoc ansible module execution on a host behind a bastion:
+$ fab select.host:&quot;privateIP&quot; select.bastion:&quot;publicIP&quot; ansible.exec-module:shell,&quot;whoami&quot;
 </pre></div>
 
 
-<h2>Ansible setup</h2>
-<p>Install the neo4j role into the working directory</p>
-<div class="highlight"><pre><span></span>ansible-galaxy install julienroubieu.neo4j -p .
+<h2>Example Output</h2>
+<p>A command like <code>fab select.host:"privateIP" select.bastion:"publicIP" ansible.playbook:"playbook.yml"</code> gives:</p>
+<div class="highlight"><pre><span></span>automation: selecting host: privateIP
+automation: selecting bastion: publicIP
+automation: testing ansible connection to privateIP
+automation: creating control-file: ~/gists/ansible-bastion/ansible/ssh_config
+automation: using shell env:
+  <span class="nv">ANSIBLE_SSH_CONTROL_PATH</span><span class="o">=</span>./ansible/.ssh/ansible-%%r@%%h:%%p
+  <span class="nv">ANSIBLE_REMOTE_USER</span><span class="o">=</span>ubuntu
+  <span class="nv">ANSIBLE_SSH_ARGS</span><span class="o">=</span>-F ~/gists/ansible-bastion/ansible/ssh_config -o <span class="nv">ControlMaster</span><span class="o">=</span>auto -o <span class="nv">ControlPersist</span><span class="o">=</span>30m
+  <span class="nv">ANSIBLE_RETRY_FILES_ENABLED</span><span class="o">=</span>False
+  <span class="nv">ANSIBLE_CONFIG</span><span class="o">=</span>~/gists/ansible-bastion/ansible/ansible.cfg
+  <span class="nv">ANSIBLE_HASH_BEHAVIOUR</span><span class="o">=</span>merge
+  <span class="nv">ANSIBLE_TRANSPORT</span><span class="o">=</span>ssh
+  <span class="nv">ANSIBLE_HOST_KEY_CHECKING</span><span class="o">=</span>False
+  <span class="nv">ANSIBLE_SSH_PIPELINING</span><span class="o">=</span>True
+automation: invoking ansible
+
+<span class="o">[</span>localhost<span class="o">]</span> local: <span class="nv">ANSIBLE_CONFIG</span><span class="o">=</span>~/gists/ansible-bastion/ansible/ansible.cfg ansible privateIP --private-key ~/.ssh/id_rsa -i privateIP, -m ping
+privateIP <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&quot;changed&quot;</span>: false,
+    <span class="s2">&quot;ping&quot;</span>: <span class="s2">&quot;pong&quot;</span>
+<span class="o">}</span>
 </pre></div>
 
 
-<h2>Vagrant setup</h2>
-<p>Bring up the vagrant box</p>
-<div class="highlight"><pre><span></span>vagrant up --no-provision
-</pre></div>
+<h2>The Code</h2>
+<p>The code embedded below is <a href="https://gist.github.com/mattvonrocketstein/c9241f934766417e277f6ae77cd4f170">gisted here</a>, so feel free to leave any comments/questions.</p>
+<div class="gist">
+    <script src='https://gist.github.com/c9241f934766417e277f6ae77cd4f170.js'></script>
+    <noscript>
+        <pre><code>"""
+"""
+import os
+import new
+import json
+import functools
+
+import fabric
+from fabric import api
+
+__directory__ = os.path.dirname(__file__)
+api.env.bastion = None
+blue = fabric.colors.blue
+
+ANSIBLE_LIBRARY = os.environ.get(
+    'ANSIBLE_LIBRARY', './ansible')
+ANSIBLE_REMOTE_USER = os.environ.get(
+    'ANSIBLE_REMOTE_USER', 'ubuntu')
+
+SSH_CONFIG = [
+    "Host *.*.*.*",
+    "ProxyCommand ssh {shopts} -W %h:%p {bastion} -i {key} -l {user}",
+    "",
+    "Host {bastion}",
+    "User {user}",
+    "IdentityFile {key}",
+    "ControlMaster auto",
+    "StrictHostKeyChecking no",
+    "ControlPath {control_path}",
+    "ControlPersist 5m",]
+SSH_CONFIG = '\n'.join(SSH_CONFIG)
+SSH_OPTS = (
+    "-o UserKnownHostsFile=/dev/null "
+    "-o StrictHostKeyChecking=no")
+SSH_KEY = os.path.expanduser(
+    os.environ.get('SSH_KEY', '~/.ssh/id_rsa'))
+
+ANSIBLE_ROOT = os.path.join(__directory__, "ansible")
+ANSIBLE_CONFIG = os.environ.get(
+    'ANSIBLE_CONFIG',
+    os.path.join(ANSIBLE_ROOT, "ansible.cfg"))
+PLAYBOOK_DEFAULT = os.path.join(ANSIBLE_ROOT, "playbook.yml")
+
+def show(*args):
+    """ dumb helper for output """
+    args = args[0] if len(args) == 1 else args
+    print blue("automation: ") + str(args)
 
 
-<p>Provision neo4j and it's pre-reqs (java etc)</p>
-<div class="highlight"><pre><span></span>vagrant provision
-</pre></div>
+def command_namespace(kls_name, bases, namespace):
+    """
+    this is basically a metaclass that turns a class definition
+    into the equivalent module definition.  it's motivated by
+    the fact that fabric only dives into modules recursively
+    to discover tasks, when it sets up "foo.bar" style task
+    names.  don't worry if you don't understand this, just look
+    at how it's used.
+    """
+    new_module = new.module(kls_name)
+    for k, v in namespace.items():
+        if v == command_namespace:
+            continue
+        if callable(v):
+            task_name = k.replace('_', '-')
+            get_task = api.task(name=task_name)
+            new_fxn = v if k.startswith('_') else get_task(v)
+            setattr(new_module, k, new_fxn)
+        else:
+            setattr(new_module, k, v)
+    return new_module
 
 
-<p>Confirm that neo4j is listening on the guest. It shouldn't be necessary, but do it anyway. Sometimes vagrant doesn't seem to honor the 7474:7474 guest/host port-forwarding rule until after "vagrant ssh" has been invoked once.</p>
-<div class="highlight"><pre><span></span>vagrant ssh -c &quot;curl localhost:7474&quot;
-</pre></div>
+@api.task(name='ssh')
+def ssh(cmd=''):
+    """ ssh to selected host (respects bastion if selected) """
+    err = "use select.host before using ssh"
+    assert api.env.host_string, err
+    host = api.env.host_string
+    ssh_cmd = 'ssh -A -t {shopts} -i {key} -l {user} {host} {cmd}'
+    if not api.env.bastion:
+        cmd = ssh_cmd.format(
+            shopts=SSH_OPTS,
+            key=SSH_KEY,
+            cmd=cmd,
+            user=ANSIBLE_REMOTE_USER,
+            host=host)
+    else:
+        cmd = ssh_cmd.format(
+            shopts=SSH_OPTS,
+            key=SSH_KEY,
+            user=ANSIBLE_REMOTE_USER,
+            host=api.env.bastion,
+            cmd='"ssh {shopts} {user}@{host}"'.format(
+                shopts=SSH_OPTS,
+                user=ANSIBLE_REMOTE_USER,
+                host=host))
+    api.local(cmd)
 
 
-<p>Confirm the host can connect to the guest's neo server. If you still can't connect, wait a while or try issuing the "vagrant reload" command and try again</p>
-<div class="highlight"><pre><span></span>curl localhost:7474
-</pre></div>
+class select(object):
+
+    __metaclass__ = command_namespace
+
+    def bastion(host):
+        """ select a bastion host to use for ssh or ansible """
+        show("selecting bastion: {0}".format(
+            blue(host)))
+        api.env.bastion = host
+
+    def host(ip_addr):
+        """ select a target host for use with ssh or ansible """
+        show("selecting host: {0}".format(
+            blue(ip_addr)))
+        api.env.host_string = ip_addr
+
+
+class ansible(object):
+
+    __metaclass__ = command_namespace
+
+    def _ctx():
+        """ a helper that seamlessly runs ansible
+            stuff through any bastion without adding new
+            static ssh_config files for every use-case
+        """
+        def _rewrite_ssh_cfg():
+            control_dir = os.path.join(ANSIBLE_LIBRARY, '.ssh')
+            if not os.path.exists(control_dir):
+                show("creating ssh control dir: {0}".format(
+                    blue(control_dir)))
+                api.local('mkdir -p {0}'.format(control_dir))
+            control_path = os.path.join(
+                control_dir, "ansible-%r@%h:%p")
+            config = SSH_CONFIG.format(
+                control_path=control_path,
+                bastion=api.env.bastion,
+                shopts=SSH_OPTS,
+                key=SSH_KEY, user=ANSIBLE_REMOTE_USER,
+            )
+            fname = os.path.join(ANSIBLE_ROOT, 'ssh_config')
+            show("creating control-file: {0}".format(
+                blue(fname)))
+            with open(fname, 'w') as fhandle:
+                fhandle.write(config)
+        data = dict(
+            ANSIBLE_TRANSPORT='ssh',
+            ANSIBLE_HOST_KEY_CHECKING="False",
+            ANSIBLE_RETRY_FILES_ENABLED="False",
+            ANSIBLE_HASH_BEHAVIOUR="merge",
+            ANSIBLE_SSH_PIPELINING="True",
+            ANSIBLE_REMOTE_USER=ANSIBLE_REMOTE_USER,
+            ANSIBLE_CONFIG=ANSIBLE_CONFIG,)
+        if api.env.bastion:
+            data.update(
+                ANSIBLE_SSH_CONTROL_PATH="~/.ssh/ansible-%%r@%%h:%%p",
+                ANSIBLE_SSH_ARGS=(
+                    "-F {root}/ssh_config "
+                    "-o ControlMaster=auto "
+                    "-o ControlPersist=30m").format(
+                        root=ANSIBLE_ROOT),)
+            _rewrite_ssh_cfg()
+        return api.shell_env(**data)
+
+    def provision(playbook=PLAYBOOK_DEFAULT, ping=True, **extra_variables):
+        """ provision selected host with ansible playbook """
+        ip_addr = api.env.host_string
+        if ping:
+            ansible.ping()
+        ansible_cmd = (
+            "ansible-playbook {playbook} "
+            "--module-path {library} "
+            "--private-key {key} "
+            "-i {host}, {extras}")
+
+        # propagate extra variables into ansible
+        extras = "-e '{0}'".format(json.dumps(extra_variables))
+
+        msg = "provisioning host {0} with playbook {1}"
+        show(msg.format(
+            blue(ip_addr),
+            blue(playbook),))
+        with ansible._ctx():
+            api.local(ansible_cmd.format(
+                key=SSH_KEY,
+                playbook=playbook,
+                library=ANSIBLE_LIBRARY,
+                host=ip_addr,
+                extras=extras))
+
+    def exec_module(mod_name):
+        """ execute ansible module against selected host """
+        ip_addr = api.env.host_string
+        cmd = (
+            "ANSIBLE_CONFIG={cfg} ansible {host} "
+            "--private-key {key} "
+            "-i {host}, -m {module}")
+        with ansible._ctx():
+            api.local(cmd.format(
+                cfg=ANSIBLE_CONFIG,
+                key=SSH_KEY,
+                user=ANSIBLE_REMOTE_USER,
+                module='ping',
+                host=ip_addr))
+
+    def ping():
+        """ test ansible connection against selected host """
+        ip_addr = api.env.host_string
+        show("testing ansible connection to {0}".format(blue(ip_addr)))
+        ansible.exec_module('ping')
+</code></pre>
+    </noscript>
+</div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-bastion.html">Ansible through a bastion host</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">Python Class as Module</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
     </ul>
 </section>
         </article>
