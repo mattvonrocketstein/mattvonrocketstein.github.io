@@ -346,8 +346,10 @@ heredoc            </a>
 <!-- /.post-info -->                <br/>
                 <h2>Docker and Ansible (Again)</h2>
 <p>So you want to provision docker with ansible, and you want to invoke ansible from the docker host (not from inside the container).  Nice, the <a href="https://www.ansible.com/docker">the number one result</a> searching for ansible/docker just gives you a "request more info" button!  Welcome to the dark side of hype.</p>
-<p>Of course there are other search results but many are outdated, for old ansible, old docker, or both. Did you maybe find five different blog posts where it looks like each writer is just copy/pasting more or less verbatim what is written elsewhere?  Generally speaking, despite what superficially looks like a lot of information and a lot of people already doing this, it was very frustrating to actually get this working.</p>
-<p>My own instructions will probably be quickly out of date or maybe even produce mysterious errors for someone else as I write this, but what the hell? They work for me.. at least today.  Let's throw more gasoline on the :fire: !</p>
+<p>Of course there are other search results but many are outdated, for old ansible, old docker, or both. Did you maybe find five different blog posts where it looks like each writer is just copy/pasting more or less verbatim what is written elsewhere?  </p>
+<p>Generally speaking, despite what superficially looks like a lot of information and a lot of people already doing this, it was very frustrating to actually get this working.  </p>
+<p>There's the <a href="http://blog.oddbit.com/2015/10/13/ansible-20-the-docker-connection-driver/">docker connection</a> driver which works great for simple things, but inevitably breaks down for large playbooks that are using many modules.  The <a href="http://docs.ansible.com/ansible/docker_module.html">docker module</a> is officially deprecated.  The <a href="http://docs.ansible.com/ansible/docker_container_module.html">docker_container module</a> is more like something that does all the things you'd do with docker-compose, and doesn't help to <em>provision</em> containers.</p>
+<p>My own approach will probably be quickly out of date or maybe even produce mysterious errors for someone else as I write this, but what the hell? They work for me.. at least today.  Let's throw more gasoline on the fire !</p>
 <p>For what it's worth it terms of future-proofing this writeup, my version information from <code>docker info</code> is here:
 </p><div style="margin-left:10px;width:100%;font-size:12px">
 Client:
@@ -534,14 +536,14 @@ $ docker rm --force boondoggle-c2
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-bastion.html">Ansible through a bastion host</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
     </ul>
 </section>
         </article>
