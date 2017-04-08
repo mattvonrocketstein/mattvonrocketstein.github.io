@@ -76,7 +76,7 @@
 <ul>
 <li>10+ years experience with Python (expert)</li>
 <li>10+ years experience with shell (expert)</li>
-<li>3 years experience with  Chef / Ansible / Puppet (varies)</li>
+<li>3 years experience with  Terraform / Chef / Ansible / Puppet (varies)</li>
 <li>5 years experience with Javascript (middling)</li>
 <li>4 years experience with Java &amp; C (very rusty now)</li>
 <li>Several months now learning Elixir (amateur)</li>
@@ -84,11 +84,11 @@
 </ul>
 <h4>DevOps, Automation, Etc</h4>
 <ul>
-<li>Buildbots: Jenkins &amp; Hudson</li>
-<li>VMs and containers: Vagrant &amp; Docker</li>
+<li>Buildbots: Jenkins, Gitlab native CI</li>
+<li>VMs, container technology, etc: VSphere, Kubernetes, Vagrant &amp; Docker</li>
 <li>CM or infrastructure-as-code: Puppet, Ansible, Terraform</li>
 <li>Python automation/cloud libraries: Fabric, Boto</li>
-<li>AWS: SQS, EC2, S3, &amp; Elastic beanstalk</li>
+<li>AWS: SQS, ECS, EC2, S3, &amp; Elastic beanstalk</li>
 <li>Monitoring &amp; Metrics: Nagios, Graphite, &amp; Cabot</li>
 <li>ELK stack: Elasticsearch, Logstash, Kibana</li>
 <li>APM vendors: Datadog &amp; Newrelic</li>
@@ -128,6 +128,16 @@
 </ul>
 <h4>Work experience</h4>
 <ul>
+<li>
+<p>Datapipe, Inc</p>
+<ul>
+<li>(Platform / Devops engineer; full time; 6 months)</li>
+<li>Assisted with day to day design and implementation of a next-generation PaaS built on top of AWS and Kubernetes</li>
+<li>Assigned to CI/CD team, where we created and managed pipelines-as-a-service to facilitate our work internally, and to eventually expose to customers</li>
+<li>Our pipeline intended, amongst other things, to abstract away the difference between Jenkins-based and Gitlab-native CI backends while also allowing developers to run their pipelines locally.</li>
+<li>Worked extensively with Gitlab integrations and docker-based workflows in CI/CD</li>
+</ul>
+</li>
 <li>
 <p>Gannet Media</p>
 <ul>
@@ -210,7 +220,7 @@
 <li>Team: Given a choice, prefer agile with small teams</li>
 <li>Infrastructure: configured programmatically and deployed from images</li>
 <li>Development: prefer API-first or docs-first approach, sometimes TDD</li>
-<li>OS: Linux (user since age 12!); lately Ubuntu as Vagrant / Virtualbox guest in OSX host</li>
+<li>OS: Linux (user since I was 12); lately Ubuntu as Vagrant / Virtualbox guest inside OSX host</li>
 <li>WM / Editor / VCS: XMonad, Atom &amp; git (feature-branching and rebasing workflow)</li>
 </ul>
 <h4>About Me</h4>
@@ -233,30 +243,41 @@
 <h2>Detailed Work History</h2>
 <hr style="border:0;height: 1px;background: #333;background-image: linear-gradient(to right, #ccc, #333, #ccc);">
 
-<h4>Gannett Media, Telecommuter</h4>
-<p><em>Devops and Automation Engineer // 2015 - 2016</em></p>
-<p>For most of this engagement, I acted in both a planning and execution role to migrate existing applications, infrastructure, and data from Rackspace to AWS.  During this migration, I converted all ad-hoc infrastructure to more formal infrastructure-as-code and outfitted all services with monitoring (cabot) and metrics (grafana+collectd).  I consider this a major achievement since it was instrumental in helping both developers and product owners sleep better, knowing that any problems in their applications would be discovered immediately and result in the appropriate people being notified.  I also created and deploying a mechanism for central logging via the ELK stack, so that should problems occur the average time spent debugging production issues would be drastically reduced.  Applications involved in the data center migration were written in several languages and platforms (golang, node+meteor, python+flask, and php amongst others).  <strong>The bottom line?  Safer and smoother operations and infrastructure, which ultimately save more than $200k a year on hosting costs alone.</strong></p>
-<h4>Cerner Corp, Kansas City</h4>
-<p><em>Consulting Software Engineer // 2015 - 2016</em></p>
-<p>I worked on a truly massive software system as part of a DoD contract to replace existing patient care and communication platforms used in all Veterans Affairs offices, nationwide.  Since this effort was simultaneously a health care project and a government project, one can imagine that it was strictly regulated.  I had to learn to navigate a bewildering variety of compliance considerations.  While getting work done in such a morass is not easy, we nevertheless were able to finish ahead of schedule.  Apart from adding various features to the doctor/patient communication platform, our main task was evaluating and preparing the existing system for deployment outside standard Cerner data-centers and into the government cloud.</p>
-<h4>Naxos Inc, Telecommuter</h4>
-<p><em>C2H Infrastructure Architect / Automation Engineer; 2015 - 2016</em></p>
-<p>As part of a try-out for a full-time architect job, I designed and implemented key parts of a cloud-based music services stack in AWS.  This system implements one-time downloads with mailinglist integration, using cloudfront as a CDN, written in python using the Django CMS, designed to be deployed to Elasticbeanstalk.  I delivered programmatic infrastructure (puppet + fabric) for reusable microservices that do caching, configuration, scheduling, task queue workers, etc.</p>
+<h4><strong>Datapipe Inc</strong> (2016 - 2017)</h4>
+<p><em>Telecommuter</em></p>
+<p><em>Platform engineer</em></p>
+<p>At Datapipe I was a Platform engineer, working with about 50 other people to build a next-generation PaaS offering called Trebuchet.  The platform aimed to provide a cloud-agnostic set of tools that enabled customers to "just do development", without the time-consuming and costly process of struggling to get up to speed on modern microservice architectures, and devops in general.  This job involved a huge number of technologies, and integrated various services written in Java, node, golang, python, and elixir, and deploying them using tools like terraform, kubernetes, helm, docker, and docker-compose.  </p>
+<p>As a member of the CI/CD team, I found myself at the intersection of all this action and working to enable and facilitate it all.  Major achievements during my tenure were a migration from the corporate data-center into AWS, a transition from github enterprise to gitlab, and a transition from vanilla Jenkins to a resilient, robust, and highly-availabile Jenkins with elastic slaves.  </p>
+<h4><strong>Gannett Media</strong> (2015 - 2016)</h4>
+<p><em>Telecommuter</em></p>
+<p><em>Devops and Automation Engineer</em></p>
+<p>For most of this engagement, I acted in both a planning and execution role to migrate existing applications, infrastructure, and data from Rackspace to AWS.  During this migration, I converted all ad-hoc infrastructure to more formal infrastructure-as-code and outfitted all services with monitoring (cabot) and metrics (grafana+collectd).  I consider this a major achievement because it was instrumental in helping both developers and product owners sleep better, knowing that any problems in their applications would be discovered immediately and result in the appropriate people being notified.  I also created and deploying a mechanism for central logging via the ELK stack, so that should problems occur the average time spent debugging production issues would be drastically reduced.  Applications involved in the data center migration were written in several languages and frameworks (golang, node+meteor, python+flask, and php amongst others).  <strong>The bottom line?  Safer and smoother operations and infrastructure, which ultimately save more than $200k a year on hosting costs alone.</strong></p>
+<h4><strong>Cerner Corp</strong> (2015 - 2016)</h4>
+<p><em>Kansas City</em></p>
+<p><em>Consulting Software Engineer</em></p>
+<p>At Cerner I worked on a truly massive software system as part of a DoD contract to replace existing patient care and communication platforms used in all Veterans Affairs offices, nationwide.  Since this effort was simultaneously a health care project and a government project, one can imagine that it was strictly regulated.  I had to learn to navigate a bewildering variety of compliance considerations.  While getting work done in such a morass is not easy, <strong>we nevertheless were able to finish ahead of schedule.</strong>  Apart from adding various features to the doctor/patient communication platform, our main task was evaluating and preparing the existing system for deployment outside standard Cerner data-centers and into the government cloud.</p>
+<h4><strong>Naxos Inc</strong> (2015 - 2016)</h4>
+<p><em>Telecommuter</em></p>
+<p><em>C2H Infrastructure Architect / Automation Engineer</em></p>
+<p>As part of a try-out for a full-time architect job, I designed and implemented key parts of a cloud-based music services stack in AWS.  The system provided one-time downloads with mailinglist integration, using cloudfront as a CDN, written in python using the Django CMS, designed to be deployed with elastic beanstalk.  I delivered programmatic infrastructure (puppet + fabric) for reusable microservices that do caching, configuration, scheduling, task queue workers, etc.</p>
 <p>I also defined from scratch continuous integration work-flows and procedures for a team of about 20 developers, focusing on enabling iterative improvements without disrupting current developer throughput. I setup Jenkins with build jobs to execute the new work-flows.  I learned how to use a new APM utility (datadog), and implemented various new monitors and alerts with it.  I assisted with proof-of-concept migrations of existing applications out of legacy data-centers and into AWS, and addressed problems with existing manual data export tasks by creating automation for a more parallel ETL pipeline.  The old approach was a tangle of bash scripts, whereas my new approach used multiprocessing and Amazon SQS for message queueing.  Finally, I gained experience working with Redis both as a developer and an administrator.</p>
-<h4><strong>Cox Media Group</strong></h4>
-<p><em>Software Developer; Senior software developer; Platform engineer</em>
-<em>On-site in Atlanta 2010; Telecommuter 2011-2015</em></p>
-<p>As a developer for the parent company of the Atlanta Journal constitution, I was responsible for day to day feature implementation on one of the largest multi-site Django installations in the world.  Our Django installation had about 50 models, hundreds of views, heavy ajax, and complex template inheritance.  I participated in code review, requirement generation, design discussions, debugged production problems, and assisted with hot-fixes.  I worked on document classification using OpenCalais and nltk, created internal and customer-facing APIs for everything from our "breaking news" alerts to metadata search features used by mobile apps.  I also created highly customized, responsive interfaces for the Django admin panel.
-   I was promoted to senior developer and moved to the new "platform team" as the department grew from 10 to 50+ developers, and we were tasked with ensuring that sites could scale smoothly (both in terms our application performance in terms of growing teams ability to collaborate and maintain velocity).  As a member of the platform team I worked closely with all kind of infrastructure and pilot programs for test-driving new infrastructure, including multiple versions of Solr for site search (using Pysolr and Haystack), Celery and Rabbitmq for application tasks outside of application request/response cycle.  I helped to identify architectural problems and our technical debt, suggesting or implementing solutions.  I also championed our "eat your own dogfood" approach to internal APIs, which helped us to break down a monolithic design into distinct services that could be deployed separately.  I helped to define release procedure standards including load tests, integration tests, and infrastructure tests.
-  One achievement I'm most proud of was a complete overhaul of our testing approach, because prior to my work there it was a major bottleneck in our CI and a huge source of pain for QA.  Our unit-tests included many dozens of in-house libraries, third-party libraries and forks, and feedback on whether we'd be able to release took hours after merges.  By adding more Jenkins slaves and running the tests in parallel I was able to reduce the runtime to only 15 minutes while collecting more coverage data (including coverage data from integration tests).</p>
-<h4><strong>Freelance Software Developer, San Francisco</strong></h4>
-<p><em>Software Developer, 2008 - 2011</em></p>
+<h4><strong>Cox Media Group</strong> (2011 - 2015)</h4>
+<p><em>On-site in Atlanta // Telecommuter</em></p>
+<p><em>Software Developer // Senior software developer // Platform engineer</em></p>
+<p>As a developer for the parent company of the Atlanta Journal constitution, I was responsible for day to day feature implementation on one of the largest multi-site Django installations in the world.  Our Django installation had about hundreds of models, hundreds of views, heavy ajax, and complex template inheritance.  I participated in code review, requirement generation, design discussions, debugged production problems, and assisted with hot-fixes.  I worked on document classification using OpenCalais and nltk, created internal and customer-facing APIs for everything from our "breaking news" alerts to metadata search features used by mobile apps.  I also created highly customized, responsive interfaces for the Django admin panel.</p>
+<p>I was promoted to senior developer and moved to the new "platform team" as the department grew from 10 to 50+ developers, and we were tasked with ensuring that sites could scale smoothly (both in terms our application performance in terms of growing teams ability to collaborate and maintain velocity).  As a member of the platform team I worked closely with all kind of infrastructure and pilot programs for test-driving new infrastructure, including multiple versions of Solr for site search (using Pysolr and Haystack), Celery and Rabbitmq for application tasks outside of application request/response cycle.  I helped to identify architectural problems and our technical debt, suggesting or implementing solutions.  I also championed our "eat your own dogfood" approach to internal APIs, which helped us to break down a monolithic design into distinct services that could be deployed separately.  I helped to define release procedure standards including load tests, integration tests, and infrastructure tests.</p>
+<p>One achievement I'm most proud of was a complete overhaul of our testing approach, because prior to my work there it was a major bottleneck in our CI and a huge source of pain for QA.  Our unit-tests included many dozens of in-house libraries, third-party libraries and forks, and feedback on whether we'd be able to release took hours after merges.  By adding more Jenkins slaves and running the tests in parallel I was able to reduce the runtime to only 15 minutes while collecting more coverage data (including coverage data from integration tests).</p>
+<h4><strong>Freelance Software Developer</strong> (2008 - 2011)</h4>
+<p><em>San Francisco, CA</em></p>
+<p><em>Software Developer</em></p>
 <p>Lots of random web development, including several small e-commerce sites, social networking applications, and customizations for VOIP apps.  One of the more interesting projects: I designed and created a fleet-tracking solution for a tour company with a custom web app and a hardware device, using real-time GPS data.  I was responsible for everything from hardware selection to software.  The hardware platform was a vehicle-powered embedded Linux device with a cellular data connection.  This device was used to announce shuttle stops and broadcast information about hotel/airport ETAs.</p>
-<h4><strong>Learning Laboratory, Vanderbilt University, Nashville</strong></h4>
-<p><em>Software developer, 2008</em></p>
+<h4><strong>Learning Laboratory, Vanderbilt University, Nashville</strong> (2008)</h4>
+<p><em>Nashville, TN</em></p>
+<p><em>Software developer</em></p>
 <p>I was a summer intern in the Educational Technology Group, where we developed software for distance learning.  The product was highly interactive web application for online quizzes and other courseware using Java, Spring, and Tomcat.</p>
-<h4><strong>Ubiquitous Computing Laboratory, College of Computing, GaTech, Atlanta</strong></h4>
-<p><em>Undergraduate Researcher, 2004 - 2007</em></p>
+<h4><strong>Ubiquitous Computing Laboratory, College of Computing, GaTech</strong> (2004 - 2007)</h4>
+<p><em>Atlanta, GA</em></p>
+<p><em>Undergraduate Researcher</em></p>
 <p>For all of my undergraduate career I was involved in DARPA-funded research, mostly on gesture recognition, but also just picking up slack for PhD candidates who didn't have time to prototype their ideas.  I designed and prototyped low-power wireless infrared electronics for tracking hand and finger movements, and evaluated AI algorithms for rogue object detection in streaming data with different kinds of sensors.  I coauthored a <a href="http://www.cc.gatech.edu/~thad/p/031_30_Gesture/iswc04-freedigiter.pdf">technical paper</a>, and much later these results would find real-world usage in google glass!  Here I learned to work with budget requirements and manage time.  I also learned to love skunk-works, rapid prototyping, and feasibility studies.</p>
 <p><a name=projects></a>
 <hr style="border:0;height: 1px;background: #333;background-image: linear-gradient(to right, #ccc, #333, #ccc);"></p>
