@@ -347,10 +347,11 @@ heredoc            </a>
                 <h2>The Problem</h2>
 <p>The pattern of the bastion/gateway host will probably be familiar to anyone working with servers, but getting ansible to "just work", with or without a bastion between you and the target, is surprisingly esoteric.  You'd think this would be possible with one simple flag or something, but it's a little more involved than that.</p>
 <h2>Prior Art</h2>
-<p><a href="http://blog.scottlowe.org/2015/12/24/running-ansible-through-ssh-bastion-host/">This guide</a> was extremely helpful for me, but didn't completely solve my use-case.  The issue is that it involves modifications to static files for <code>ansible.cfg</code>, <code>ssh_config</code>, and possibly inventories.  Especially if you're just getting started with infrastructure as code, VPCs, bastions, and hosts behind the bastion tend to come and go.  It's not ideal to have to keep track of these things or keep different versions of these files for different environments (prod/stage/test) during any phase of work where the machines involved are intrinsically ephemeral.  </p>
+<p><a href="http://blog.scottlowe.org/2015/12/24/running-ansible-through-ssh-bastion-host/">This guide</a> was extremely helpful for me, but didn't completely solve my use-case.  The issue is that it involves modifications to static files for <code>ansible.cfg</code>, <code>ssh_config</code>, and possibly inventories.  I want neither global files for these things (because I work on multiple projects in multiple accounts) nor project-local files for these things (because the ansible repo is intended to remain generic).  </p>
+<p>Especially if you're experimenting with an idea or just getting started with infrastructure as code then VPCs, bastions, and hosts behind the bastion all tend to come and go.  It's just not ideal to have to keep track of these things or keep different versions of these files for different environments (prod/stage/test) during any phase of work where the resources involved are intrinsically ephemeral.  The ssh_config is also a bit complicated, and when it's not setup exactly right the errors are mysterious.  I wanted a general way of solving the problem rather than cargo-coding around a ssh_config from project to project with small modifications.</p>
 <h2>The Solution</h2>
 <p>What is discussed here is basically a method for running ansible playbooks or ansible modules, against a host that either is, or is not behind a bastion, by generating the files, environment variables, and command-line arguments that you need in such a way that they are available just in time, and need not be tracked in version control.</p>
-<p>All this is done with a wrapper script for invoking ansible, which uses <a href="http://docs.fabfile.org">fabric</a>.  I'm using <code>ansible==2.4.0</code> and <code>fabric==1.13.1</code>.  </p>
+<p>All this is done with a wrapper script for invoking ansible, which uses <a href="http://docs.fabfile.org">fabric</a>.  I'm using <code>ansible==2.4.0</code> and <code>fabric==1.13.1</code>, but the solution presented here should work with pretty much any recent version of either library.</p>
 <p>The code for everything is <a href="https://gist.github.com/mattvonrocketstein/c9241f934766417e277f6ae77cd4f170">available for download here</a> (any comments are welcome).  To use this wrapper script without a bastion host, simply leave out the bastion arguments in the commands below.</p>
 <h2>Example Usage</h2>
 <div class="highlight"><pre><span></span># List available commands:
@@ -410,9 +411,9 @@ privateIP <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">Python Class as Module</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
     </ul>
 </section>
         </article>
