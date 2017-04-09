@@ -399,20 +399,282 @@ privateIP <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="
 
 <h2>The Code</h2>
 <p>The code embedded below is <a href="https://gist.github.com/mattvonrocketstein/c9241f934766417e277f6ae77cd4f170">gisted here</a>, so feel free to leave any comments/questions.</p>
-<p>[gist:id=c9241f934766417e277f6ae77cd4f170]</p>
+<div class="gist">
+    <script src='https://gist.github.com/c9241f934766417e277f6ae77cd4f170.js'></script>
+    <noscript>
+        <pre><code>"""
+USAGE:
+
+List available commands:
+  $ fab -l
+
+SSH to a host behind a bastion:
+  $ fab select.host:"privateIP" select.bastion:"publicIP" ssh
+
+Run ansible ping against a host behind a bastion:
+  $ fab select.host:"privateIP" select.bastion:"publicIP" ansible.ping
+
+Run ansible playbook against a host behind a bastion:
+  $ fab select.host:"privateIP" select.bastion:"publicIP" ansible.playbook:"path/to/playbook","extra_vars=for_playbook"
+
+Ad-hoc ansible module execution on a host behind a bastion:
+  $ fab select.host:"privateIP" select.bastion:"publicIP" ansible.exec-module:shell,"whoami"
+
+Simply leave off the `select.bastion` command to work with hosts you can access directly.
+"""
+#
+# This demo uses `ansible==2.4.0` and `fabric==1.13.1`,
+# but should work fine with many other versions.
+
+# This file demonstrates a method for running ansible playbooks or
+# ansible modules, against a host that either is, or is not behind
+# a bastion, by generating the files, environment variables, and
+# command-line arguments that you need in such a way that they
+# are available just in time, and need not be tracked in version
+# control.
+
+# Works great for experimenting, especially circumstances where
+# bastions hosts, private hosts behind bastions, and the VPCs that
+# contain them all are in a state of flux and neither static nor
+# dynamic inventories are practical.
+
+# For more discussion see the blog post here:
+#
+#   https://mattvonrocketstein.github.io/heredoc/ansible-bastion.html
+#
+import os
+import new
+import json
+import functools
+
+import fabric
+from fabric import api
+
+__directory__ = os.path.dirname(__file__)
+api.env.bastion = None
+blue = fabric.colors.blue
+
+ANSIBLE_LIBRARY = os.environ.get(
+    'ANSIBLE_LIBRARY', './ansible')
+ANSIBLE_REMOTE_USER = os.environ.get(
+    'ANSIBLE_REMOTE_USER', 'ubuntu')
+
+SSH_CONFIG = [
+    "Host *.*.*.*",
+    "ProxyCommand ssh {shopts} -W %h:%p {bastion} -i {key} -l {user}",
+    "",
+    "Host {bastion}",
+    "User {user}",
+    "IdentityFile {key}",
+    "ControlMaster auto",
+    "StrictHostKeyChecking no",
+    "ControlPath {control_path}",
+    "ControlPersist 5m",]
+SSH_CONFIG = '\n'.join(SSH_CONFIG)
+SSH_OPTS = (
+    "-o UserKnownHostsFile=/dev/null "
+    "-o StrictHostKeyChecking=no")
+SSH_KEY = os.path.expanduser(
+    os.environ.get('SSH_KEY', '~/.ssh/id_rsa'))
+
+ANSIBLE_ROOT = os.path.join(__directory__, "ansible")
+ANSIBLE_CONFIG = os.environ.get(
+    'ANSIBLE_CONFIG',
+    os.path.join(ANSIBLE_ROOT, "ansible.cfg"))
+PLAYBOOK_DEFAULT = os.path.join(ANSIBLE_ROOT, "playbook.yml")
+
+def show(*args):
+    """ dumb helper for output """
+    args = args[0] if len(args) == 1 else args
+    print blue("automation: ") + str(args)
+
+
+def command_namespace(kls_name, bases, namespace):
+    """
+    this is basically a metaclass that turns a class definition
+    into the equivalent module definition.  it's motivated by
+    the fact that fabric only dives into modules recursively
+    to discover tasks, when it sets up "foo.bar" style task
+    names.  don't worry if you don't understand this, just look
+    at how it's used.
+    """
+    new_module = new.module(kls_name)
+    for k, v in namespace.items():
+        if v == command_namespace:
+            continue
+        if callable(v):
+            task_name = k.replace('_', '-')
+            get_task = api.task(name=task_name)
+            new_fxn = v if k.startswith('_') else get_task(v)
+            setattr(new_module, k, new_fxn)
+        else:
+            setattr(new_module, k, v)
+    return new_module
+
+
+@api.task(name='ssh')
+def ssh(cmd=''):
+    """ ssh to selected host (respects bastion if selected) """
+    err = "use select.host before using ssh"
+    assert api.env.host_string, err
+    host = api.env.host_string
+    ssh_cmd = 'ssh -A -t {shopts} -i {key} -l {user} {host} {cmd}'
+    if not api.env.bastion:
+        cmd = ssh_cmd.format(
+            shopts=SSH_OPTS,
+            key=SSH_KEY,
+            cmd=cmd,
+            user=ANSIBLE_REMOTE_USER,
+            host=host)
+    else:
+        cmd = ssh_cmd.format(
+            shopts=SSH_OPTS,
+            key=SSH_KEY,
+            user=ANSIBLE_REMOTE_USER,
+            host=api.env.bastion,
+            cmd='"ssh {shopts} {user}@{host}"'.format(
+                shopts=SSH_OPTS,
+                user=ANSIBLE_REMOTE_USER,
+                host=host))
+    api.local(cmd)
+
+
+class select(object):
+
+    __metaclass__ = command_namespace
+
+    def bastion(host):
+        """ select a bastion host to use for ssh or ansible """
+        show("selecting bastion: {0}".format(
+            blue(host)))
+        api.env.bastion = host
+
+    def host(ip_addr):
+        """ select a target host for use with ssh or ansible """
+        show("selecting host: {0}".format(
+            blue(ip_addr)))
+        api.env.host_string = ip_addr
+
+
+class ansible(object):
+
+    __metaclass__ = command_namespace
+
+    def _ctx():
+        """ a helper that seamlessly runs ansible
+            stuff through any bastion without adding new
+            static ssh_config files for every use-case
+        """
+        def _rewrite_ssh_cfg():
+            if not os.path.exists(control_dir):
+                show("creating ssh control dir: {0}".format(
+                    blue(control_dir)))
+                api.local('mkdir -p {0}'.format(control_dir))
+            config = SSH_CONFIG.format(
+                control_path=control_path,
+                bastion=api.env.bastion,
+                shopts=SSH_OPTS,
+                key=SSH_KEY, user=ANSIBLE_REMOTE_USER,
+            )
+            fname = os.path.join(ANSIBLE_ROOT, 'ssh_config')
+            show("creating control-file: {0}".format(
+                blue(fname)))
+            with open(fname, 'w') as fhandle:
+                fhandle.write(config)
+            return fname
+        control_dir = os.path.join(ANSIBLE_LIBRARY, '.ssh')
+        control_path = os.path.join(
+            control_dir, "ansible-%%r@%%h:%%p")
+        data = dict(
+            ANSIBLE_TRANSPORT='ssh',
+            ANSIBLE_HOST_KEY_CHECKING="False",
+            ANSIBLE_RETRY_FILES_ENABLED="False",
+            ANSIBLE_HASH_BEHAVIOUR="merge",
+            ANSIBLE_SSH_PIPELINING="True",
+            ANSIBLE_REMOTE_USER=ANSIBLE_REMOTE_USER,
+            ANSIBLE_CONFIG=ANSIBLE_CONFIG,)
+        if api.env.bastion:
+            fname = _rewrite_ssh_cfg()
+            data.update(
+                ANSIBLE_SSH_CONTROL_PATH=control_path,
+                ANSIBLE_SSH_ARGS=(
+                    "-F {0} "
+                    "-o ControlMaster=auto "
+                    "-o ControlPersist=30m").format(
+                        fname))
+        show("using shell env:\n{0}".format(
+            '\n'.join(
+                [ '  {0}={1}'.format(k,v) \
+                  for k,v in data.items()])))
+        return api.shell_env(**data)
+
+    def provision(playbook=PLAYBOOK_DEFAULT, ping=True, **extra_variables):
+        """ provision selected host with ansible playbook """
+        ip_addr = api.env.host_string
+        if ping:
+            ansible.ping()
+        ansible_cmd = (
+            "ansible-playbook {playbook} "
+            "--module-path {library} "
+            "--private-key {key} "
+            "-i {host}, {extras}")
+
+        # propagate extra variables into ansible
+        extras = "-e '{0}'".format(json.dumps(extra_variables))
+
+        msg = "provisioning host {0} with playbook {1}"
+        show(msg.format(
+            blue(ip_addr),
+            blue(playbook),))
+        with ansible._ctx():
+            show("invoking ansible")
+            api.local(ansible_cmd.format(
+                key=SSH_KEY,
+                playbook=playbook,
+                library=ANSIBLE_LIBRARY,
+                host=ip_addr,
+                extras=extras))
+    playbook = provision
+
+    def exec_module(mod_name,mod_args=None):
+        """ execute ansible module against selected host """
+        ip_addr = api.env.host_string
+        cmd = (
+            "ANSIBLE_CONFIG={cfg} ansible {host} "
+            "--private-key {key} "
+            "-i {host}, -m {module} {args}")
+        args = '' if not mod_args else '-a "{0}"'.format(mod_args)
+        with ansible._ctx():
+            show("invoking ansible")
+            api.local(cmd.format(
+                args=args,
+                cfg=ANSIBLE_CONFIG,
+                key=SSH_KEY,
+                user=ANSIBLE_REMOTE_USER,
+                module=mod_name,
+                host=ip_addr))
+
+    def ping():
+        """ test ansible connection against selected host """
+        ip_addr = api.env.host_string
+        show("testing ansible connection to {0}".format(blue(ip_addr)))
+        ansible.exec_module('ping')
+</code></pre>
+    </noscript>
+</div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">Python Class as Module</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
     </ul>
 </section>
