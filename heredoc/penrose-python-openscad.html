@@ -13,7 +13,7 @@
 <link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="data-science,math,cs,python,unfinished" />
+        <meta name="keywords" content="data-science,math,cs,python,projects" />
         <meta name="description" content="Using Python to generate OpenSCAD code for plane tilings and solid geometry" />
 
         <meta property="og:site_name" content="heredoc" />
@@ -27,7 +27,7 @@
             <meta property="article:tag" content="math" />
             <meta property="article:tag" content="cs" />
             <meta property="article:tag" content="python" />
-            <meta property="article:tag" content="unfinished" />
+            <meta property="article:tag" content="projects" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -68,6 +68,9 @@ heredoc            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
+                    <li>
+                      <a href="/heredoc/tag/projects.html">Projects</a>
+                    </li>
                     <li>
                       <a href="/heredoc/tag/python.html">Python</a>
                     </li>
@@ -151,20 +154,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">
+                            Links for Topics in Math and CS</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">
+                            Links for Topics in Devops</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
+                            Links for Elixir</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">
+                            Elixir Module Extension</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">
                             Python Class as Module</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">
-                            Penrose Tilings & Solid Geometry</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">
-                            How to Dockerize Elixir for Raspberry Pi / ARM</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">
-                            Advocacy for Polyglot Programming</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">
-                            Bitcoin & Ethereum: Executive Summary</li>
                         </a>
               </ul>
 
@@ -244,6 +247,16 @@ heredoc            </a>
                     <li class="list-group-item tag-4">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/misc.html">
                             misc
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/proglangs.html">
+                            proglangs
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/projects.html">
+                            projects
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -342,45 +355,32 @@ heredoc            </a>
 ,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/math.html">math</a>
 ,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/cs.html">cs</a>
 ,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/unfinished.html">unfinished</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/projects.html">projects</a>
 	</td>
-</tr>
-<tr>
-  <td class=center>
-    <span class="label label-default">Draft</span>
-  </td>
-  <td>
-    <strong>
-      <small>
-        <font color="red">Warning!</font>
-        You are reading a draft; this article is marked as unfinished.
-      </small>
-    </strong>
-  </td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <p><img width="800px" src="https://raw.githubusercontent.com/mattvonrocketstein/penrose/master/img/screenshot2.png"></p>
-<h2>Intro</h2>
-<p>This write-up describes experiments where <a href="https://www.python.org/">Python</a> is used to generate <a href="https://en.wikipedia.org/wiki/Penrose_tiling">Penrose tilings</a><sup id="sf-penrose-python-openscad-1-back"><a title="Penrose tilings are one of many ways you can go about tiling the plane.  These tilings are particularly interesting because they are self-similar and aperiodic, and minimal in the sense that they are constructed with only two kinds of shapes. " class="simple-footnote" href="#sf-penrose-python-openscad-1">1</a></sup> and render the results to a 2D backend (cairo) and a 3D backend (OpenSCAD<sup id="sf-penrose-python-openscad-2-back"><a title="OpenSCAD is an environment and a description language for defining and rendering 3D CAD objects." class="simple-footnote" href="#sf-penrose-python-openscad-2">2</a></sup>, via code-generation with <a href="https://github.com/SolidCode/SolidPython">SolidPython</a>) in a few different ways.  You can download OpenSCAD <a href="https://en.wikipedia.org/wiki/OpenSCAD">here</a>.  The recursive algorithm for generating triangle vertices in tilings is adapted from the original code <a href="http://preshing.com/20110831/penrose-tiling-explained/">here</a>.  My code is <a href="https://github.com/mattvonrocketstein/penrose">here</a>.</p>
-<h2>Running the Code</h2>
-<p>To run the code, make sure you already have python installed, and use <code>pip install requirements.txt</code> to grab the dependencies.  </p><ol class="simple-footnotes"><li id="sf-penrose-python-openscad-1">Penrose tilings are one of many ways you can go about <a href="https://en.wikipedia.org/wiki/Tessellation">tiling the plane</a>.  These tilings are particularly interesting because they are self-similar and aperiodic, and minimal in the sense that they are constructed with only two kinds of shapes.
- <a class="simple-footnote-back" href="#sf-penrose-python-openscad-1-back">↩</a></li><li id="sf-penrose-python-openscad-2">OpenSCAD is an environment and a description language for defining and rendering 3D CAD objects. <a class="simple-footnote-back" href="#sf-penrose-python-openscad-2-back">↩</a></li></ol>
+                <h2>Screenshots</h2>
+<p><a href="https://raw.githubusercontent.com/mattvonrocketstein/penrose/master/img/screenshot2.png">
+<img src="https://raw.githubusercontent.com/mattvonrocketstein/penrose/master/img/screenshot2.png" width="95%"></a></p>
+<h2>Project</h2>
+<p><a href="https://github.com/mattvonrocketstein/penrose">This repo</a> describes experiments where <a href="https://www.python.org/">Python</a> is used to generate <a href="https://en.wikipedia.org/wiki/Penrose_tiling">Penrose tilings</a><sup id="sf-penrose-python-openscad-1-back"><a title="Penrose tilings are one of many ways you can go about tiling the plane.  These tilings are particularly interesting because they are self-similar and aperiodic, and minimal in the sense that they are constructed with only two kinds of shapes. " href="#sf-penrose-python-openscad-1" class="simple-footnote">1</a></sup> and render the results to a 2D backend (cairo) and a 3D backend (OpenSCAD<sup id="sf-penrose-python-openscad-2-back"><a title="OpenSCAD is an environment and a description language for defining and rendering 3D CAD objects." href="#sf-penrose-python-openscad-2" class="simple-footnote">2</a></sup>, via code-generation with <a href="https://github.com/SolidCode/SolidPython">SolidPython</a>) in a few different ways.  You can download OpenSCAD <a href="https://en.wikipedia.org/wiki/OpenSCAD">here</a>.  The recursive algorithm for generating triangle vertices is adapted from the original code <a href="http://preshing.com/20110831/penrose-tiling-explained/">here</a>.</p><ol class="simple-footnotes"><li id="sf-penrose-python-openscad-1">Penrose tilings are one of many ways you can go about <a href="https://en.wikipedia.org/wiki/Tessellation">tiling the plane</a>.  These tilings are particularly interesting because they are self-similar and aperiodic, and minimal in the sense that they are constructed with only two kinds of shapes.
+ <a href="#sf-penrose-python-openscad-1-back" class="simple-footnote-back">↩</a></li><li id="sf-penrose-python-openscad-2">OpenSCAD is an environment and a description language for defining and rendering 3D CAD objects. <a href="#sf-penrose-python-openscad-2-back" class="simple-footnote-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">Bitcoin & Ethereum: Executive Summary</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">Advocacy for Polyglot Programming</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
     </ul>
 </section>
         </article>
@@ -399,7 +399,7 @@ heredoc            </a>
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2017 mvr
+         <div class="col-xs-10">&copy; 2020 mvr
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

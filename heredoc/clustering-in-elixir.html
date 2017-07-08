@@ -66,6 +66,9 @@ heredoc            </a>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li>
+                      <a href="/heredoc/tag/projects.html">Projects</a>
+                    </li>
+                    <li>
                       <a href="/heredoc/tag/python.html">Python</a>
                     </li>
                     <li>
@@ -148,20 +151,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">
+                            Links for Topics in Math and CS</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">
+                            Links for Topics in Devops</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
+                            Links for Elixir</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">
+                            Elixir Module Extension</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">
                             Python Class as Module</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">
-                            Penrose Tilings & Solid Geometry</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">
-                            How to Dockerize Elixir for Raspberry Pi / ARM</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">
-                            Advocacy for Polyglot Programming</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">
-                            Bitcoin & Ethereum: Executive Summary</li>
                         </a>
               </ul>
 
@@ -241,6 +244,16 @@ heredoc            </a>
                     <li class="list-group-item tag-4">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/misc.html">
                             misc
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/proglangs.html">
+                            proglangs
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/projects.html">
+                            projects
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -376,11 +389,11 @@ node2@localhost
 <ul>
 <li><strong>Explicit node clustering</strong> requires a set list of node names, and while it does have the advantage of "native" support, this isn't very dynamic for general purpose clustering.  However, this approach is <strong>perfect</strong> for apps that can be broken down into a few specific components, say "one node running a display loop, one node running an iex shell".</li>
 <li>Using <strong>discovery lib + <a href="#">consul</a></strong> is probably the most robust thing for production, but I haven't tried it.  For simple projects, adding a consul dependency is not ideal.. and similarly for <a href="http://kubernetes.io/">kubernetes</a>.</li>
-<li>After a brief period of experimentation with non-kubernetes swarm, I noticed some very odd behaviour where CPU/memory usage of beam<sup id="sf-clustering-in-elixir-1-back"><a title="the erlang VM" class="simple-footnote" href="#sf-clustering-in-elixir-1">1</a></sup> would climb until it nearly locked up my computer.  More mysteriously, this actually consistently disrupted my internet connection, perhaps because the multicasting was spiraling out of control.  Obviously I probably didn't have everything setup correctly, but it was annoying debug and I abandoned this approach.</li>
+<li>After a brief period of experimentation with non-kubernetes swarm, I noticed some very odd behaviour where CPU/memory usage of beam<sup id="sf-clustering-in-elixir-1-back"><a title="the erlang VM" href="#sf-clustering-in-elixir-1" class="simple-footnote">1</a></sup> would climb until it nearly locked up my computer.  More mysteriously, this actually consistently disrupted my internet connection, perhaps because the multicasting was spiraling out of control.  Obviously I probably didn't have everything setup correctly, but it was annoying debug and I abandoned this approach.</li>
 <li>OpenSLP + ex_slp lib based discovery is also not ideal.. in particular the non-elixir moving parts are old(ish) and while it's at least stable it is not clear that the protocol/daemon is actively maintained.  I also can't vouch how well OpenSLP really deals with <a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP challenges</a>, whereas things like consul have explicit multi-datacenter support and are known to work well in the face of partitioning.  Nevertheless I found OpenSLP to be the simplest approach</li>
 </ul>
 <h2>Winner</h2>
-<p>I'm mostly interested in quick-and-dirty-yet-flexible clustering for experimental projects. Since the whole clustering problem is normally just a sideshow that's preventing me from getting on with the project I had in mind.. for now the <strong>the clear winner is <a href="https://github.com/icanhazbroccoli/ex_slp_tk">ex_slp</a></strong>, and I've used OpenSLP based discovery for instance in my side projects I've written about elsewhere. <sup id="sf-clustering-in-elixir-2-back"><a title=" see for example the ambient calclulus project" class="simple-footnote" href="#sf-clustering-in-elixir-2">2</a></sup></p>
+<p>I'm mostly interested in quick-and-dirty-yet-flexible clustering for experimental projects. Since the whole clustering problem is normally just a sideshow that's preventing me from getting on with the project I had in mind.. for now the <strong>the clear winner is <a href="https://github.com/icanhazbroccoli/ex_slp_tk">ex_slp</a></strong>, and I've used OpenSLP based discovery for instance in my side projects I've written about elsewhere. <sup id="sf-clustering-in-elixir-2-back"><a title=" see for example the ambient calclulus project" href="#sf-clustering-in-elixir-2" class="simple-footnote">2</a></sup></p>
 <h2>Implementation</h2>
 <p>I'd like to eventually cover implementation specifics for the other approaches if I ever dive deep into them, but for now I'll only go into details about <a href="https://github.com/icanhazbroccoli/ex_slp_tk">ex_slp</a>.</p>
 <h3>OpenSLP Setup</h3>
@@ -398,19 +411,20 @@ $ docker run -d -p 427:427/tcp -p 427:427/udp  --name openslp vcrhonek/openslp
 
 
 <h3>Code</h3>
-<p>[gist 580e04631af195edae0c9157f47758fe]</p><ol class="simple-footnotes"><li id="sf-clustering-in-elixir-1">the erlang VM <a class="simple-footnote-back" href="#sf-clustering-in-elixir-1-back">↩</a></li><li id="sf-clustering-in-elixir-2"> see for example <a href="elixir-ambient-calculus-1.html">the ambient calclulus project</a> <a class="simple-footnote-back" href="#sf-clustering-in-elixir-2-back">↩</a></li></ol>
+<p>[gist 580e04631af195edae0c9157f47758fe]</p><ol class="simple-footnotes"><li id="sf-clustering-in-elixir-1">the erlang VM <a href="#sf-clustering-in-elixir-1-back" class="simple-footnote-back">↩</a></li><li id="sf-clustering-in-elixir-2"> see for example <a href="elixir-ambient-calculus-1.html">the ambient calclulus project</a> <a href="#sf-clustering-in-elixir-2-back" class="simple-footnote-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">Elixir Module Extension</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
     </ul>
 </section>
         </article>
@@ -429,7 +443,7 @@ $ docker run -d -p 427:427/tcp -p 427:427/udp  --name openslp vcrhonek/openslp
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2017 mvr
+         <div class="col-xs-10">&copy; 2020 mvr
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

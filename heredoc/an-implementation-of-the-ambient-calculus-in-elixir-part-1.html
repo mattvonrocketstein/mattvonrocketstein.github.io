@@ -68,6 +68,9 @@ heredoc            </a>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li>
+                      <a href="/heredoc/tag/projects.html">Projects</a>
+                    </li>
+                    <li>
                       <a href="/heredoc/tag/python.html">Python</a>
                     </li>
                     <li>
@@ -150,20 +153,20 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">
+                            Links for Topics in Math and CS</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">
+                            Links for Topics in Devops</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
+                            Links for Elixir</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">
+                            Elixir Module Extension</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">
                             Python Class as Module</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">
-                            Penrose Tilings & Solid Geometry</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">
-                            How to Dockerize Elixir for Raspberry Pi / ARM</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">
-                            Advocacy for Polyglot Programming</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">
-                            Bitcoin & Ethereum: Executive Summary</li>
                         </a>
               </ul>
 
@@ -243,6 +246,16 @@ heredoc            </a>
                     <li class="list-group-item tag-4">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/misc.html">
                             misc
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/proglangs.html">
+                            proglangs
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/projects.html">
+                            projects
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -381,23 +394,23 @@ heredoc            </a>
 <h2>Part 1: Intro</h2>
 <p>This is part one of a two part series where I'll describe an implementation of the ambient calculus in Elixir.</p>
 <p>Cool diagram, right?  I'll explain this is more detail soon.</p>
-<p><img src="img/ambient-calculus-2.png" alt="image"></p>
+<p><img alt="image" src="img/ambient-calculus-2.png"></p>
 <h2>Ambient Calculus</h2>
-<p>Briefly, the ambient calculus is a mathematical abstraction and a member of a more general family of "<a href="https://en.wikipedia.org/wiki/Process_calculus">process calculi</a>".  Surprisingly simple yet Turing-complete phenomenon are a dime a dozen these days<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-1-back"><a title="For instance classics like Rule 110, Conway's life, but also several video games and card games " class="simple-footnote" href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-1">1</a></sup>, but even considering the vast zoo of automata and calculi known to computer scientsts, the Ambient Calculus has some properties that make it particularly interesting.</p>
-<p>Here's the <a href="http://lucacardelli.name/Papers/MobileAmbients.A4.pdf">original paper</a> if you've got time.  Alternatively, here's the summary <a href="https://en.wikipedia.org/wiki/Ambient_calculus">from wikipedia</a>:</p>
+<p>Briefly, the ambient calculus is a mathematical abstraction and a member of a more general family of "<a href="https://en.wikipedia.org/wiki/Process_calculus">process calculi</a>".  Surprisingly simple yet Turing-complete phenomenon are a dime a dozen these days<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-1-back"><a title="For instance classics like Rule 110, Conway's life, but also several video games and card games " href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-1" class="simple-footnote">1</a></sup>, but even considering the vast zoo of automata and calculi familiar to computer scientsts, the Ambient Calculus has some properties that make it particularly interesting.</p>
+<p>Here's the <a href="http://lucacardelli.name/Papers/MobileAmbients.A4.pdf">original paper</a> if you've got time.  Alternatively, the summary <a href="https://en.wikipedia.org/wiki/Ambient_calculus">from wikipedia</a> is inlined below:</p>
 <blockquote>
 <p>The ambient calculus is a process calculus devised by Luca Cardelli and Andrew D. Gordon in 1998, and used to describe and theorise about concurrent systems that include mobility. Here mobility means both computation carried out on mobile devices (i.e. networks that have a dynamic topology), and mobile computation (i.e. executable code that is able to move around the network). The ambient calculus provides a unified framework for modeling both kinds of mobility.  It is used to model interactions in such concurrent systems as the Internet.</p>
 </blockquote>
 <h2>Elixir</h2>
 <p>All this talk of concurrent systems and mobile code at the core of the Ambient Calculus immediately got me thinking about an implementation in <a href="http://elixir-lang.org">Elixir</a>, just for fun.  It's an intriguing prospect because Elixir, running on top of the Erlang virtual machine, already implicitly supports hot-swapping code, <a href="http://elixir-lang.org/getting-started/mix-otp/distributed-tasks-and-configuration.html">distributed computing</a>, and has lots of sophisticated primitives for expressing ideas about concurrency.</p>
 <h3>Concurrency primitives</h3>
-<p>In this section I'll cover very briefly the various concurrency primitives that will be most useful in Ambient Calculus implementation later.</p>
+<p>In this section I'll cover very briefly various elixir concurrency concepts that will be most useful in Ambient Calculus implementation later.</p>
 <ul>
 <li>
 <p><strong>Nodes</strong> are simply an Erlang (or in our case, Elixir) runtime capable of communicating with other such runtimes. From the Erlang point of view, there is some documentation <a href="http://erlang.org/doc/reference_manual/distributed.html">here</a> and from the Elixir point of view you can read about it <a href="http://elixir-lang.org/docs/stable/elixir/Node.html">here</a>.  With Elixir you can bootstrap a node like this <code>iex --sname node_name --cookie group_name -S mix</code>.  To get a list of known nodes: <code>Node.list()</code>.  To get the name of the current Node: <code>Node.self()</code>.  Nodes don't automatically connect so you need <code>Node.connect()</code>.. we'll talk later about auto-joining clusters later.</p>
 </li>
 <li>
-<p><strong><a href="http://elixir-lang.org/getting-started/processes.html">Processes</a></strong> are actors that run on nodes, basically concurrent functions with message-passing capabilities.  In practice these are not used directly very often, rather you use one of the things below.</p>
+<p><strong><a href="http://elixir-lang.org/getting-started/processes.html">Processes</a></strong> are actors that run on nodes, basically concurrent functions with message-passing capabilities.  In practice these are often not directly used, rather you use one of the things below.</p>
 </li>
 <li>
 <p><strong><a href="http://elixir-lang.org/docs/stable/elixir/Task.html">Tasks</a></strong> are processes, often short-lived and created dynamically.</p>
@@ -413,41 +426,40 @@ heredoc            </a>
 </li>
 </ul>
 <h2>Project Scope</h2>
-<p>The goal is to make a library/system wherein one can actually experiment with building things made of Ambient primitives.  Such a system will necessarily have a working knowledge of AC <a href="http://www.cs.princeton.edu/courses/archive/spr96/cs441/notes/l9.html">reduction semantics</a>, but it's worth noting that purely symbolic manipulation of the calculus itself is not really in scope here.</p>
-<p>The point of the implementation discussed here is to <em>use</em> Ambients, and it's not supposed to be extremely rigorous<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2-back"><a title="For this project, Cardelli's paper is more in the way of inspiration than something that's treated as a specification" class="simple-footnote" href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2">2</a></sup> or pure.<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3-back"><a title="For instance, where message-passing is used it will most often be done directly in the obvious way with Elixir.. not reimplemented from scratch using ambient in/out/open/copy operations." class="simple-footnote" href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3">3</a></sup></p>
+<p>Using the elixir primitives above, the goal is to make a library/system wherein one can actually experiment with building things made of ambient calculus  primitives.  Such a system will necessarily have a working knowledge of AC <a href="http://www.cs.princeton.edu/courses/archive/spr96/cs441/notes/l9.html">reduction semantics</a>, but it's worth noting that purely symbolic manipulation of the calculus itself is not really in scope here.</p>
+<p>The point of the implementation discussed here is to <em>use</em> Ambients, not (symbolically) prove theorems about them, and it's not supposed to be extremely rigorous<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2-back"><a title="For this project, Cardelli's paper is more in the way of inspiration than something that's treated as a specification." href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2" class="simple-footnote">2</a></sup> or pure.<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3-back"><a title="For instance, where message-passing is used it will most often be done directly in the obvious way with Elixir.. not reimplemented from scratch using ambient in/out/open/copy operations." href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3" class="simple-footnote">3</a></sup></p>
 <h2>Definitions</h2>
-<p>To establish a working definition of an Ambient for the purposes of the implementation, let's nail down a few things about ambients that are important.</p>
-<p><img src="img/ambient-calculus-1.png" alt="image"></p>
+<p>To establish a working definition of an Ambient for the purposes of this implementation, let's nail down a few things about ambients that are important.</p>
+<p><img alt="image" src="img/ambient-calculus-1.png"></p>
 <p>The image above, like the teaser image for this series, is taken from Cardelli's paper. Here you can see a graphical representation of an ambient named <em>n</em>, running programs <em>P1</em>..<em>Pn</em>, with nested ambients <em>m1</em>..<em>mq</em>.  This will give you something fairly concrete to keep in mind while we get on with our working definitions for the project.</p>
 <h3>Properties</h3>
 <p>By definition, ambients have these <strong>properties</strong>:</p>
 <ol>
-<li>Ambients are kinds of mobile container with unique names.</li>
-<li>Ambients may hold programs; I'll call that the ambient's ambient's <em>progspace</em></li>
-<li>Ambients may hold key/values; I'll call that the ambient's <em>namespace</em></li>
-<li>Ambients may be hold other ambients; I'll call that the ambient's <em>children</em>.</li>
+<li>Ambients are kinds of mobile container; they have unique names.</li>
+<li>Ambients may hold named "programs"; we'll call that ambient's <em>progspace</em></li>
+<li>Ambients may hold arbitrary key/values; we'll call that the ambient's <em>namespace</em></li>
+<li>Ambients may hold other ambients; we'll call the container a <em>parent</em> and constituents <em>children</em>.</li>
 </ol>
 <h3>Operations</h3>
 <p>Ambients also have various <strong>core operations</strong>, most of which are more or less implied by the properties above.  Operations described in the original paper are captured in the <a href="https://github.com/mattvonrocketstein/ambient-calculus/blob/master/lib/ambient/algebra.ex"><code>Ambient.Algebra</code> code</a>, namely that</p>
 <ul>
 <li>Ambients may be <em>copied</em>.  This operation derives a new ambient from an existing one with an identical namespace / progspace.  The new ambient becomes a sibling with the old one, under the same parent ambient</li>
-<li>Ambients can be <em>entered</em><em> and </em>exited*</li>
+<li>Ambients can be <em>entered</em> and <em>exited</em> (operations which change parent/child relationships)</li>
 <li>Ambients may be <em>opened</em>, i.e. their membrane is dissolved and what was once their namespace/progspace then belongs to the parent ambient.</li>
 </ul>
 <p>Certain additional operations are implied for practical use and the fact that in Elixir, Ambients are implemented as <a href="http://elixir-lang.org/docs/stable/elixir/GenServer.html">GenServers</a>.  Those operations are captured in <a href="https://github.com/mattvonrocketstein/ambient-calculus/blob/master/lib/ambient/ambient.ex"><code>Ambient</code> code here</a>, namely that</p>
 <ul>
 <li>Ambients may be <em>started</em>, <em>stopped</em>, <em>terminated</em>, etc</li>
 <li>Programs running inside Ambients may be started, stopped, terminated, etc</li>
-<li>Ambients may be healthy or unhealthy (depending on whether the processes beneath them are healthy or unhealthy)
-*</li>
+<li>Ambients may be healthy or unhealthy (depending on whether the processes beneath them are healthy or unhealthy)</li>
 </ul>
 <h2>Limitations</h2>
-<p>As discussed in the <a href="#">Project Scope</a> section, the formalisms are treated as inspiration and not as specification.  Where the tires meet the road, there are several things I've compromised on.</p>
+<p>As discussed in the <a href="#ProjectScope">Project Scope</a> section, the formalisms are treated as inspiration and not as specification.  Where the tires meet the road, there are several things I've compromised on.</p>
 <ul>
-<li>For simplicity's sake I'll be ignoring what Cardelli's papers call "capabilities".  In the original model, capabilities are published as part of ambient names, and indeed this aspect of ambients is interesting and important for many applications.  However, it complicates the model somewhat and it isn't critical for showcasing interesting features of Elixir.</li>
-<li>Also regarding ambient names, this is mostly implemented with Elixir <a href="#">atoms</a>.  There's support for a high, but limited number of atoms, in the Erlang runtime.. and really atoms should not be generated dynamically.  Nevertheless, the approach here is good enough for the purposes of our experiment.</li>
-<li>Lots of undefined behaviour is possible, in many cases this behaviour is already present and acknowledged in the original formal models. For instance suppose you have a program running inside an Ambient and then use the open operation on that ambient.  In an 1 atomic step, the program finds itself inside the <em>progspace</em> of a new ambient with a potentially very different <em>namespace</em>.</li>
-</ul><ol class="simple-footnotes"><li id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-1">For instance classics like Rule 110, Conway's life, but also several <a href="https://en.wikipedia.org/wiki/Turing_completeness#Games">video games and card games</a>  <a class="simple-footnote-back" href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-1-back">↩</a></li><li id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2">For this project, Cardelli's paper is more in the way of inspiration than something that's treated as a specification <a class="simple-footnote-back" href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2-back">↩</a></li><li id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3">For instance, where message-passing is used it will most often be done directly in the obvious way with Elixir.. not reimplemented from scratch using ambient in/out/open/copy operations. <a class="simple-footnote-back" href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3-back">↩</a></li></ol>
+<li>For simplicity's sake I'll be ignoring for now what Cardelli's papers call "capabilities".  In the original model, capabilities are published as part of ambient names, and indeed this aspect of ambients is interesting and important for many applications.  However, it complicates the model somewhat and it isn't critical for showcasing interesting features of Elixir.  An extension that suggests itself though is an API that provides access to <em>progspace</em>, which could be added later.</li>
+<li>Also regarding ambient names, this is implemented with Elixir <a href="https://elixir-lang.org/getting-started/basic-types.html#atoms">atoms</a>.  There's support for a large, but limited, number of atoms in the Erlang runtime.. and really atoms should not be generated dynamically.  Dealing directly with erlang pids could fix this, but then mapping names to pids requires treatment of registration.  Anyway, the naive approach here is good enough for the purposes of the experiment.</li>
+<li>Lots of undefined behaviour is possible, in many cases this behaviour is already present and acknowledged in the original formal models. For instance suppose you have a program running inside an Ambient and then the open operation is used on that ambient.  In an 1 atomic step, the program finds itself inside the <em>progspace</em> of a new ambient with a potentially very different <em>namespace</em>.  The calculus doesn't seem specific about such errors, and thanks to Elixir's approach to crash isolation.. maybe this model can gloss over it as well.</li>
+</ul><ol class="simple-footnotes"><li id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-1">For instance classics like Rule 110, Conway's life, but also several <a href="https://en.wikipedia.org/wiki/Turing_completeness#Games">video games and card games</a>  <a href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-1-back" class="simple-footnote-back">↩</a></li><li id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2">For this project, Cardelli's paper is more in the way of inspiration than something that's treated as a specification. <a href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-2-back" class="simple-footnote-back">↩</a></li><li id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3">For instance, where message-passing is used it will most often be done directly in the obvious way with Elixir.. not reimplemented from scratch using ambient in/out/open/copy operations. <a href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-1-3-back" class="simple-footnote-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="series-well">
@@ -473,15 +485,15 @@ heredoc            </a>
 <section class="well" id="related-posts-well">
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">Bitcoin & Ethereum: Executive Summary</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">Advocacy for Polyglot Programming</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">Advocacy for Polyglot Programming</a></li>
     </ul>
 </section>
         </article>
@@ -500,7 +512,7 @@ heredoc            </a>
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2017 mvr
+         <div class="col-xs-10">&copy; 2020 mvr
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Setting up Neo4j with Vagrant and Ansible</title>
+    <title>proglangs - heredoc</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,25 +10,16 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">
 
-        <meta name="author" content="mvr" />
-        <meta name="keywords" content="devops,vagrant,ansible,graphdb,infrastructure" />
-        <meta name="description" content="Setting up Neo4j with Vagrant and Ansible" />
+    <meta name="author" content="mvr" />
+    <meta name="keywords" content="proglangs" />
 
+    <!-- Open Graph tags -->
         <meta property="og:site_name" content="heredoc" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Setting up Neo4j with Vagrant and Ansible"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html"/>
-        <meta property="og:description" content="Setting up Neo4j with Vagrant and Ansible"/>
-        <meta property="article:published_time" content="2016-08-26" />
-            <meta property="article:section" content="devops" />
-            <meta property="article:tag" content="devops" />
-            <meta property="article:tag" content="vagrant" />
-            <meta property="article:tag" content="ansible" />
-            <meta property="article:tag" content="graphdb" />
-            <meta property="article:tag" content="infrastructure" />
-            <meta property="article:author" content="mvr" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="heredoc"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc"/>
+        <meta property="og:description" content="heredoc"/>
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
     <!-- Bootstrap -->
@@ -154,20 +145,8 @@ heredoc            </a>
   <i class="fa fa-home fa-lg"></i>
   <span class="icon-label">Recent</span></h4>
             <ul style="margin-left: 5px;padding:0px; list-style: none;">
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">
-                            Links for Topics in Math and CS</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">
-                            Links for Topics in Devops</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
-                            Links for Elixir</li>
-                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">
                             Elixir Module Extension</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">
-                            Python Class as Module</li>
                         </a>
               </ul>
 
@@ -311,106 +290,35 @@ heredoc            </a>
             </div>
         </div>
         <div class="col-sm-8">
-            <ol class="breadcrumb">
-                <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/devops.html" title="devops">
-                  devops
-                </a></li>
-                <li class="active">Setting up Neo4j with Vagrant and Ansible</li>
-            </ol>
-    <section id="content">
-        <article>
+    <ol class="breadcrumb">
+        <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/" title="Tags">Tags</a></li>
+        <li class="active">proglangs</li>
+    </ol>
             <header class="page-header">
-                <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html"
-                       rel="bookmark"
-                       title="Permalink to Setting up Neo4j with Vagrant and Ansible">
-                        Setting up Neo4j with Vagrant and Ansible
-                    </a>
-                </span>
+                <h1 class=long-h1>Writing with tag:                  <small><strong>proglangs</strong></small>
+                </h1>
             </header>
-            <div class="entry-content">
-<footer class="post-info">
-    <table style="border-collapse: separate;border-spacing:5px 1px;">
-<tr>
-  <td class=center>
-      <span class="label label-default">Date</span>
-  </td>
-  <td>
-    <span class="published">
-      <i class="fa fa-calendar"></i>
-      <time datetime="2016-08-26T20:20:00-04:00">
-        Fri 26 August 2016
-      </time>
-    </span>
-  </td>
-</tr><tr>
-	<td class=center>
-		<span class="label label-default">
-			Tags
-		</span>
-	</td>
-	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/vagrant.html">vagrant</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">ansible</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/graphdb.html">graphdb</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/infrastructure.html">infrastructure</a>
-	</td>
-</tr>
-  </table>
-</footer>
-<!-- /.post-info -->                <br/>
-                <h2>Clone files</h2>
-<p>Clone <a href="https://gist.github.com/mattvonrocketstein/96670d2eb66a8ad9854b6f52a2b5339c">the gist</a> into your working directory:</p>
-<div class="highlight"><pre><span></span>git clone git@github.com:96670d2eb66a8ad9854b6f52a2b5339c.git vagrant-ansible-neo
-cd vagrant-ansible-neo
-</pre></div>
+            <article>
+                <h3>
+                  <a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">Elixir Module Extension</a>
+                </h3>
 
+                <div class="summary">
+                  
+Discussion of module extension / inheritance in Elixir
 
-<h2>Ansible setup</h2>
-<p>Install the neo4j role into the working directory</p>
-<div class="highlight"><pre><span></span>ansible-galaxy install julienroubieu.neo4j -p .
-</pre></div>
-
-
-<h2>Vagrant setup</h2>
-<p>Bring up the vagrant box</p>
-<div class="highlight"><pre><span></span>vagrant up --no-provision
-</pre></div>
-
-
-<p>Provision neo4j and it's pre-reqs (java etc)</p>
-<div class="highlight"><pre><span></span>vagrant provision
-</pre></div>
-
-
-<p>Confirm that neo4j is listening on the guest. It shouldn't be necessary, but do it anyway. Sometimes vagrant doesn't seem to honor the 7474:7474 guest/host port-forwarding rule until after "vagrant ssh" has been invoked once.</p>
-<div class="highlight"><pre><span></span>vagrant ssh -c &quot;curl localhost:7474&quot;
-</pre></div>
-
-
-<p>Confirm the host can connect to the guest's neo server. If you still can't connect, wait a while or try issuing the "vagrant reload" command and try again</p>
-<div class="highlight"><pre><span></span>curl localhost:7474
-</pre></div>
-            </div>
-            <!-- /.entry-content -->
-<section class="well" id="related-posts-well">
-    <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-    </ul>
-</section>
-        </article>
-    </section>
+                    <a class="btn btn-default btn-xs" href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">read more ...</a>
+                    <div class="btn btn-default btn-xs">
+                      tagged in
+                      <small>
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
+,                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/proglangs.html">proglangs</a>
+                      </small>
+                    </div>
+                </div>
+            </article>
+            <hr/>
 
         </div>
         <div class="col-sm-2" >
@@ -425,7 +333,7 @@ cd vagrant-ansible-neo
    <div class="container-fluid">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 mvr
+         <div class="col-xs-10">&copy; 2017 mvr
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
@@ -458,26 +366,10 @@ cd vagrant-ansible-neo
 <script>
 $(document).ready(
   function(){
-    $('.simple-footnotes').wrap("<section class=well id=footnotes-well></section>");
-    $('#footnotes-well').before("<h2>Footnotes</h2>");
-    $('#series-well').before("<h2>Articles in Series</h2>");
-    $('#related-posts-well').before("<h2>Related Posts</h2>");
-    $("#toc").delay(1000).tocify(
-      {
-        context: '.entry-content',
-        selectors: "h2,h3,h4",
-        showAndHide: true,
-        showAndHideOnScroll: true,
-        extendPage: false,
-      }
-    );
+    $('ul.nav.navbar-nav').first().append(
+      '<li><a href="https://mattvonrocketstein.github.io/heredoc/random.html">Random</a></li>');
   }
-);
-function series_button(url,txt){
-  return '<a style="background:#efefef;" class="btn btn-default btn-xs" href="'+url+'">'+txt+'</a>'
-
-}
-function get_series_nav(x){}</script>
+);</script>
 <script>
 setTimeout(function(){
   if (""==$('#toc').html().trim()){
