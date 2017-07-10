@@ -14,14 +14,14 @@
 
         <meta name="author" content="mvr" />
         <meta name="keywords" content="data-science,math,cs,python,projects" />
-        <meta name="description" content="Using Python to generate OpenSCAD code for plane tilings and solid geometry" />
+        <meta name="description" content="This is a mirror of a github project page. The actual project, complete with issue tracking, etc, is here" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Penrose Tilings &amp; Solid Geometry"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html"/>
-        <meta property="og:description" content="Using Python to generate OpenSCAD code for plane tilings and solid geometry"/>
-        <meta property="article:published_time" content="2017-01-29" />
+        <meta property="og:description" content="This is a mirror of a github project page. The actual project, complete with issue tracking, etc, is here"/>
+        <meta property="article:published_time" content="2017-01-20" />
             <meta property="article:section" content="python" />
             <meta property="article:tag" content="data-science" />
             <meta property="article:tag" content="math" />
@@ -163,11 +163,11 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
                             Links for Elixir</li>
                         </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">
+                            An Elixir Microservice Architecture</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">
                             Elixir Module Extension</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">
-                            Python Class as Module</li>
                         </a>
               </ul>
 
@@ -339,8 +339,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2017-01-29T20:20:00-05:00">
-        Sun 29 January 2017
+      <time datetime="2017-01-20T00:00:00-05:00">
+        Fri 20 January 2017
       </time>
     </span>
   </td>
@@ -361,25 +361,70 @@ heredoc            </a>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <h2>Screenshots</h2>
-<p><a href="https://raw.githubusercontent.com/mattvonrocketstein/penrose/master/img/screenshot2.png">
-<img src="https://raw.githubusercontent.com/mattvonrocketstein/penrose/master/img/screenshot2.png" width="95%"></a></p>
-<h2>Project</h2>
-<p><a href="https://github.com/mattvonrocketstein/penrose">This repo</a> describes experiments where <a href="https://www.python.org/">Python</a> is used to generate <a href="https://en.wikipedia.org/wiki/Penrose_tiling">Penrose tilings</a><sup id="sf-penrose-python-openscad-1-back"><a title="Penrose tilings are one of many ways you can go about tiling the plane.  These tilings are particularly interesting because they are self-similar and aperiodic, and minimal in the sense that they are constructed with only two kinds of shapes. " href="#sf-penrose-python-openscad-1" class="simple-footnote">1</a></sup> and render the results to a 2D backend (cairo) and a 3D backend (OpenSCAD<sup id="sf-penrose-python-openscad-2-back"><a title="OpenSCAD is an environment and a description language for defining and rendering 3D CAD objects." href="#sf-penrose-python-openscad-2" class="simple-footnote">2</a></sup>, via code-generation with <a href="https://github.com/SolidCode/SolidPython">SolidPython</a>) in a few different ways.  You can download OpenSCAD <a href="https://en.wikipedia.org/wiki/OpenSCAD">here</a>.  The recursive algorithm for generating triangle vertices is adapted from the original code <a href="http://preshing.com/20110831/penrose-tiling-explained/">here</a>.</p><ol class="simple-footnotes"><li id="sf-penrose-python-openscad-1">Penrose tilings are one of many ways you can go about <a href="https://en.wikipedia.org/wiki/Tessellation">tiling the plane</a>.  These tilings are particularly interesting because they are self-similar and aperiodic, and minimal in the sense that they are constructed with only two kinds of shapes.
- <a href="#sf-penrose-python-openscad-1-back" class="simple-footnote-back">↩</a></li><li id="sf-penrose-python-openscad-2">OpenSCAD is an environment and a description language for defining and rendering 3D CAD objects. <a href="#sf-penrose-python-openscad-2-back" class="simple-footnote-back">↩</a></li></ol>
+                <p></p>
+<p><hr/>
+<small>
+This is a mirror of a github project page.  The actual project, complete with issue tracking, etc, is <strong><a href="https://github.com/mattvonrocketstein/penrose">here</a></strong>
+</small>
+<hr/>
+<table border="1">
+<tr>
+<td colspan="2"><strong>Penrose</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#Screenshots">Screenshots</a> |
+    <a href="#Features">Features</a> |
+    <a href="#Resources">Resources</a> |
+    <a href="#RunningTheCode">Running the Code</a>
+</td>
+</tr>
+<tr>
+<td width="15%"><img src="https://github.com/mattvonrocketstein/penrose/raw/master/img/openscad.png" style="width:50px" /></td>
+<td>Experiments and demonstrations involving plane tilings, 3d solid geometry, Python and OpenSCAD</td>
+</tr>
+</table>
+<a name="Screenshots"></a></p>
+<h2>Screenshots</h2>
+<p><strong>3D tiling:</strong></p>
+<p><img src="https://github.com/mattvonrocketstein/penrose/raw/master/img/screenshot2.png" /></p>
+<p><strong>3D top view detail:</strong></p>
+<p><img src="https://github.com/mattvonrocketstein/penrose/raw/master/img/screenshot1.png" /></p>
+<p><strong>2D control</strong></p>
+<p><img src="https://github.com/mattvonrocketstein/penrose/raw/master/img/cairo.png" />
+<a name="Features"></a></p>
+<h2>Features</h2>
+<ul>
+<li>Code generation of 3D scad instructions (via <a href="https://github.com/SolidCode/SolidPython">solid</a> backend)</li>
+<li>Generation of triangle vertices corresponding to penrose tilings (in python)</li>
+<li>2D rendering with <a href="https://pypi.python.org/pypi/cairocffi">cairo backend</a></li>
+</ul>
+<p><a name="Resources"></a></p>
+<h2>Resources</h2>
+<ul>
+<li><a href="https://www.python.org/downloads/">Installing Python</a></li>
+<li><a href="http://www.openscad.org/downloads.html">Installing OpenSCAD</a></li>
+<li><a href="http://preshing.com/20110831/penrose-tiling-explained/">Penrose tiling algorithm explanation</a></li>
+<li><a href="http://www.openscad.org/cheatsheet/">OpenSCAD cheatsheet</a></li>
+<li><a href="https://github.com/SolidCode/SolidPython">Solid docs</a></li>
+</ul>
+<p><a name="RunningTheCode"></a></p>
+<h2>Running the Code</h2>
+<p>Running the <code>penrose.py</code> script refreshes <code>penrose.scad</code> (3d backend) and <code>penrose.png</code> (2d backend).  More specifically:</p>
+<div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">openscad</span><span class="o">=</span><span class="s2">&quot;/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD&quot;</span> <span class="c1"># for osx</span>
+python penrose.py
+openscad penrose.scad
+</pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">Bitcoin & Ethereum: Executive Summary</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">Python Class as Module</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
     </ul>
 </section>
