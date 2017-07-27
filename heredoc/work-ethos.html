@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - How to Dockerize Elixir for Raspberry Pi / ARM</title>
+    <title>heredoc - Ethos</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,23 +10,20 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/work-ethos.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="elixir,devops,raspberry-pi,docker" />
-        <meta name="description" content="Dockerizing Elixir for Raspberry Pi / ARM was easier than expected. If you&#39;re looking to do the same then this quick guide might help." />
+        <meta name="keywords" content="essays" />
+        <meta name="description" content="Rules of thumb for architecture, design, and work in general" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="How to Dockerize Elixir for Raspberry Pi / ARM"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html"/>
-        <meta property="og:description" content="Dockerizing Elixir for Raspberry Pi / ARM was easier than expected. If you&#39;re looking to do the same then this quick guide might help."/>
-        <meta property="article:published_time" content="2017-01-07" />
-            <meta property="article:section" content="misc" />
-            <meta property="article:tag" content="elixir" />
-            <meta property="article:tag" content="devops" />
-            <meta property="article:tag" content="raspberry-pi" />
-            <meta property="article:tag" content="docker" />
+        <meta property="og:title" content="Ethos"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/work-ethos.html"/>
+        <meta property="og:description" content="Rules of thumb for architecture, design, and work in general"/>
+        <meta property="article:published_time" content="2017-07-11" />
+            <meta property="article:section" content="data-science" />
+            <meta property="article:tag" content="essays" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -317,19 +314,19 @@ heredoc            </a>
         <div class="col-sm-8">
             <ol class="breadcrumb">
                 <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">
-                  misc
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/data-science.html" title="data-science">
+                  data-science
                 </a></li>
-                <li class="active">How to Dockerize Elixir for Raspberry Pi / ARM</li>
+                <li class="active">Ethos</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/work-ethos.html"
                        rel="bookmark"
-                       title="Permalink to How to Dockerize Elixir for Raspberry Pi / ARM">
-                        How to Dockerize Elixir for Raspberry Pi / ARM
+                       title="Permalink to Ethos">
+                        Ethos
                     </a>
                 </span>
             </header>
@@ -343,8 +340,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2017-01-07T00:00:00-05:00">
-        Sat 07 January 2017
+      <time datetime="2017-07-11T20:20:00-04:00">
+        Tue 11 July 2017
       </time>
     </span>
   </td>
@@ -355,92 +352,85 @@ heredoc            </a>
 		</span>
 	</td>
 	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/raspberry-pi.html">raspberry-pi</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/docker.html">docker</a>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/essays.html">essays</a>
 	</td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
                 <h2>Intro</h2>
-<p>There's a bunch of stuff on the internet about creating elixir clusters on raspberry pi's, but after a quick survey I only found stuff that <a href="https://github.com/joakimk/rpi-elixir/blob/master/Dockerfile">builds from scratch</a> or uses <a href="https://github.com/JonathanTron/docker-arm-elixir">non-alpine bases</a> or requires a <a href="https://blog.hypriot.com/about/#hypriotos:6083a88ee3411b0d17ce02d738f69d47">super cool but nonstandard OS</a> on the pi itself.  I was looking for something a little bit different, but as a newcomer to docker, elixir, and raspberry pi I thought I'd be in for a difficult slog.  It was much easier than expected!</p>
-<h2>Install Docker on Pi</h2>
-<p>You need docker already installed on your Raspberry Pi.  If you're running some kind of Raspbian then the simplest thing you can do is just install it with the package manager, and chances are good it will work out of the box.  That support has been <a href="https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/">official for a while</a>.  </p>
-<p>I'll be writing another article about the Ansible that sets up my Pi's for Docker, so I won't get into that much here, but I will say for those are unfamiliar with docker that images can take up a lot of space.  Personally my preference is that docker is storing data on a NAS, because it doesn't help much to use Docker to avoid cluttering my system only to discover that the drives is filling up rapidly.</p>
-<h2>Test Docker Install</h2>
-<p>Docker images for ARM can be a bit hard to come by, but luckily there's at least a base-image for alpine linux, and from there you can use the alpine package manager to do other stuff.  First, verify your docker-installation and platform by running a command like this to test the alpine image.</p>
-<div class="highlight"><pre><span></span>sudo docker run -it --entrypoint<span class="o">=</span>/bin/sh container4armhf/armhf-alpine -c <span class="s2">&quot;echo hello world&quot;</span>
-</pre></div>
-
-
-<h3>Create Dockerfile</h3>
-<p>Save this as your Dockerfile</p>
-<div class="highlight"><pre><span></span>FROM container4armhf/armhf-alpine
-RUN echo &quot;https://nl.alpinelinux.org/alpine/edge/community&quot; &gt;&gt; /etc/apk/repositories
-RUN apk --update add elixir
-ENTRYPOINT [&quot;/usr/bin/elixir&quot;]
-</pre></div>
-
-
-<p>You can build the Dockerfile with this command:</p>
-<div class="highlight"><pre><span></span>sudo docker build -t elixir-alpine-armhf-dev .
-</pre></div>
-
-
-<h3>Voila</h3>
-<p>The build in the last section won't take long.  After it's finished, things are working as expected:</p>
-<div class="highlight"><pre><span></span>pi@nomad:~ $ sudo docker run --rm -it elixir-alpine-armhf-dev
-
-Usage: elixir [options] [.exs file] [data]
-
-  -v                          Prints version and exits
-  -e COMMAND                  Evaluates the given command (*)
-  -r FILE                     Requires the given files/patterns (*)
-  -S SCRIPT                   Finds and executes the given script in PATH
-  -pr FILE                    Requires the given files/patterns in parallel (*)
-  -pa PATH                    Prepends the given path to Erlang code path (*)
-  -pz PATH                    Appends the given path to Erlang code path (*)
-
-  --app APP                   Starts the given app and its dependencies (*)
-  --cookie COOKIE             Sets a cookie for this distributed node
-  --detached                  Starts the Erlang VM detached from console
-  --erl SWITCHES              Switches to be passed down to Erlang (*)
-  --hidden                    Makes a hidden node
-  --logger-otp-reports BOOL   Enables or disables OTP reporting
-  --logger-sasl-reports BOOL  Enables or disables SASL reporting
-  --name NAME                 Makes and assigns a name to the distributed node
-  --no-halt                   Does not halt the Erlang VM after execution
-  --sname NAME                Makes and assigns a short name to the distributed node
-  --werl                      Uses Erlang&#39;s Windows shell GUI (Windows only)
-
-** Options marked with (*) can be given more than once
-** Options given after the .exs file or -- are passed down to the executed code
-** Options can be passed to the Erlang runtime using ELIXIR_ERL_OPTIONS or --erl
-</pre></div>
-
-
-<h2>Resources</h2>
+<p>What follows is various rules of axioms for architecture, design, and work in general.  I don't claim to have discovered or even written down most of this stuff, it's just a collection of things for reference.</p>
+<h2>12 Factor</h2>
+<p>From architecture to operations, you can't go wrong with <a href="https://12factor.net/">12 factor approach</a>.</p>
 <ul>
-<li><a href="https://hub.docker.com/r/container4armhf/armhf-alpine/">armhf-alpine</a>: a suitable base for porting other alpine-based images to work on raspberry pi</li>
-<li><a href="https://en.wikipedia.org/wiki/ARM_architecture">ARM Architecture</a>: overview from wikipedia</li>
-<li><a href="https://github.com/msaraiva/alpine-erlang">non-ARM Alpine images for elixir/erlang</a>: useful reference</li>
+<li>Codebase: One codebase tracked in revision control, many deploys</li>
+<li>Dependencies: Explicitly declare and isolate dependencies</li>
+<li>Config: Store config in the environment</li>
+<li>Backing services: Treat backing services as attached resources</li>
+<li>Build, release, run: Strictly separate build and run stages</li>
+<li>Processes: Execute the app as one or more stateless processes</li>
+<li>Port binding: Export services via port binding</li>
+<li>Concurrency: Scale out via the process model</li>
+<li>Disposability: Maximize robustness with fast startup and graceful shutdown</li>
+<li>Dev/prod parity: Keep development, staging, and production as similar as possible</li>
+<li>Logs: Treat logs as event streams</li>
+<li>Admin processes: Run admin/management tasks as one-off processes</li>
 </ul>
+<h2>Resilience</h2>
+<ul>
+<li>When you have to choose, optimize <a href="http://blog.fosketts.net/2011/07/06/defining-failure-mttr-mttf-mtbf/">mean time-to-repair instead ofmean time between failures</a></li>
+</ul>
+<h2>Unix Philosophy</h2>
+<ul>
+<li>
+<p>The <a href="https://en.wikipedia.org/wiki/Unix_philosophy">unix philosophy</a> is different things to different people, but probably everyone can agree on the shortest version:</p>
+<ul>
+<li>Small and simple is beautiful.</li>
+<li>Write programs that do one thing and do it well.</li>
+<li>Write programs to work together.</li>
+<li>Write programs to handle text streams, because that is a universal interface.</li>
+</ul>
+</li>
+</ul>
+<p>What follows is other, more tangential or controversial guidelines in greater detail.</p>
+<h3>Rule of Modularity</h3>
+<p>Developers should build a program out of simple parts connected by well defined interfaces, so problems are local, and parts of the program can be replaced in future versions to support new features. This rule aims to save time on debugging code that is complex, long, and unreadable.</p>
+<h3>Rule of Extensibility</h3>
+<p>Developers should design for the future by making their protocols extensible, allowing for easy plugins without modification to the program's architecture by other developers, noting the version of the program, and more. This rule aims to extend the lifespan and enhance the utility of the code the developer writes. ```</p>
+<h3>Rule of Clarity</h3>
+<p>Developers should write programs as if the most important communication is to the developer who will read and maintain the program, rather than the computer. This rule aims to make code as readable and comprehensible as possible for whoever works on the code in the future.</p>
+<h3>Rule of Composition</h3>
+<p>Developers should write programs that can communicate easily with other programs. This rule aims to allow developers to break down projects into small, simple programs rather than overly complex monolithic programs. Rule of Separation Developers should separate the mechanisms of the programs from the policies of the programs; one method is to divide a program into a front-end interface and a back-end engine with which that interface communicates. This rule aims to prevent bug introduction by allowing policies to be changed with minimum likelihood of destabilizing operational mechanisms.</p>
+<h3>Rule of Simplicity</h3>
+<p>Developers should design for simplicity by looking for ways to break up program systems into small, straightforward cooperating pieces. This rule aims to discourage developers' affection for writing "intricate and beautiful complexities" that are in reality bug prone programs.</p>
+<h3>Rule of Parsimony</h3>
+<p>Developers should avoid writing big programs. This rule aims to prevent overinvestment of development time in failed or suboptimal approaches caused by the owners of the program's reluctance to throw away visibly large pieces of work. Smaller programs are not only easier to write, optimize, and maintain; they are easier to delete when deprecated.</p>
+<h3>Rule of Transparency</h3>
+<p>Developers should design for visibility and discoverability by writing in a way that their thought process can lucidly be seen by future developers working on the project and using input and output formats that make it easy to identify valid input and correct output. This rule aims to reduce debugging time and extend the lifespan of programs.</p>
+<h3>Rule of Robustness</h3>
+<p>Developers should design robust programs by designing for transparency and discoverability, because code that is easy to understand is easier to stress test for unexpected conditions that may not be foreseeable in complex programs. This rule aims to help developers build robust, reliable products.</p>
+<h3>Rule of Representation</h3>
+<p>Developers should choose to make data more complicated rather than the procedural logic of the program when faced with the choice, because it is easier for humans to understand complex data compared with complex logic. This rule aims to make programs more readable for any developer working on the project, which allows the program to be maintained.</p>
+<h3>Rule of Least Surprise</h3>
+<p>Developers should design programs that build on top of the potential users' expected knowledge; for example, '+' in a calculator program should always mean 'addition'. This rule aims to encourage developers to build intuitive products that are easy to use.</p>
+<h3>Rule of Silence</h3>
+<p>Developers should design programs so that they do not print unnecessary output. This rule aims to allow other programs and developers to pick out the information they need from a program's output without having to parse verbosity.</p>
+<h3>Rule of Repair</h3>
+<p>Developers should design programs that fail in a manner that is easy to localize and diagnose or in other words "fail noisily". This rule aims to prevent incorrect output from a program from becoming an input and corrupting the output of other code undetected.</p>
+<h3>Rule of Economy</h3>
+<p>Developers should value developer time over machine time, because machine cycles today are relatively inexpensive compared to prices in the 1970s. This rule aims to reduce development costs of projects.</p>
+<h3>Rule of Generation</h3>
+<p>Developers should avoid writing code by hand and instead write abstract high-level programs that generate code. This rule aims to reduce human errors and save time.</p>
+<h3>Rule of Optimization</h3>
+<p>Developers should prototype software before polishing it. This rule aims to prevent developers from spending too much time for marginal gains.</p>
+<h3>Rule of Diversity</h3>
+<p>Developers should design their programs to be flexible and open. This rule aims to make programs flexible, allowing them to be used in ways other than those their developers intended.</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">An Elixir Microservice Architecture</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/data-science-stack.html">A allspark-based stack for data science projects</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">Elixir Module Extension</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">Advocacy for Polyglot Programming</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">Bitcoin & Ethereum: Executive Summary</a></li>
     </ul>
 </section>
         </article>

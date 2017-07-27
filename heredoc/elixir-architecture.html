@@ -13,17 +13,20 @@
 <link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="elixir,projects" />
-        <meta name="description" content="This is a mirror of a github project page. The actual project, complete with issue tracking, etc, is here" />
+        <meta name="keywords" content="elixir,infrastructure,devops,architecture,projects" />
+        <meta name="description" content="This is a mirror of a github project page. The actual project, complete with clone URLs, issue tracking, etc, is hosted here" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="An Elixir Microservice Architecture"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html"/>
-        <meta property="og:description" content="This is a mirror of a github project page. The actual project, complete with issue tracking, etc, is here"/>
+        <meta property="og:description" content="This is a mirror of a github project page. The actual project, complete with clone URLs, issue tracking, etc, is hosted here"/>
         <meta property="article:published_time" content="2017-07-10" />
             <meta property="article:section" content="elixir" />
             <meta property="article:tag" content="elixir" />
+            <meta property="article:tag" content="infrastructure" />
+            <meta property="article:tag" content="devops" />
+            <meta property="article:tag" content="architecture" />
             <meta property="article:tag" content="projects" />
             <meta property="article:author" content="mvr" />
 
@@ -160,11 +163,11 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
                             Links for Elixir</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">
-                            An Elixir Microservice Architecture</li>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/data-science-stack.html">
+                            A allspark-based stack for data science projects</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">
-                            Elixir Module Extension</li>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/work-ethos.html">
+                            Ethos</li>
                         </a>
               </ul>
 
@@ -174,6 +177,11 @@ heredoc            </a>
                     <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">
                             ansible
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/architecture.html">
+                            architecture
                         </a>
                     </li>
                     <li class="list-group-item tag-3">
@@ -211,7 +219,7 @@ heredoc            </a>
                             elixir
                         </a>
                     </li>
-                    <li class="list-group-item tag-3">
+                    <li class="list-group-item tag-2">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/essays.html">
                             essays
                         </a>
@@ -226,7 +234,7 @@ heredoc            </a>
                             graphdb
                         </a>
                     </li>
-                    <li class="list-group-item tag-4">
+                    <li class="list-group-item tag-3">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/infrastructure.html">
                             infrastructure
                         </a>
@@ -349,6 +357,9 @@ heredoc            </a>
 	</td>
 	<td>
 			<a href="https://mattvonrocketstein.github.io/heredoc/tag/elixir.html">elixir</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/infrastructure.html">infrastructure</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/architecture.html">architecture</a>
 ,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/projects.html">projects</a>
 	</td>
 </tr>
@@ -358,7 +369,7 @@ heredoc            </a>
                 <p></p>
 <p><hr/>
 <small>
-This is a mirror of a github project page.  The actual project, complete with issue tracking, etc, is <strong><a href="https://github.com/mattvonrocketstein/elixir-microservice-architecture">here</a></strong>
+This is a mirror of a github project page.  The actual project, complete with clone URLs, issue tracking, etc, is hosted <strong><a href="https://github.com/mattvonrocketstein/elixir-microservice-architecture">here</a></strong>
 </small>
 <hr/></p>
 <h2>About</h2>
@@ -477,31 +488,31 @@ $ curl -X GET http://localhost/api/v1/work/ACBD18DB4CC2F85CEDEF654FCCC4A4D8
 <p>At the architecture layer, the cluster registration ledger should really be separate from the work-tracking K/V store.  In this case for simplicity, we use the same Redis instance for both.</p>
 <p>At the application layer, there is only a naive hashing algorithm to generate keys, little to no treatment of duplicate work submissions, retries, etc.  </p>
 <h2>Ideas for Extension</h2>
-<ol>
-<li>Add integration/infrastructure tests</li>
-<li>Just for fun, split registration/work tracking persistence among redis and cassandra instead of using 1 data store</li>
-<li>Add some treatment for retries/failures</li>
-<li>Add a brief guide for production(ish) deployments</li>
-<li>Testing with <code>ecs-cli compose</code> for AWS and <code>kompose</code> for kubernetes translations</li>
-<li>Add demo for polyglot workers, maybe using <a href="http://erlport.org/docs/python.html">erlport</a></li>
-<li>Add demo for <a href="https://github.com/whatyouhide/redix_pubsub">pubsub</a></li>
-<li>Find a way to use <a href="https://www.packtpub.com/mapt/book/application_development/9781784397517/1/ch01lvl1sec15/inspecting-your-system-with-observer">observer</a> with docker-compose (probably requires X11 on guest and XQuartz on OSX host)</li>
-<li>Add more worker types and message types, exploring the line between plain queue-workers and <a href="https://en.wikipedia.org/wiki/Agent-oriented_programming">AOP</a> with <a href="https://en.wikipedia.org/wiki/Agent_Communications_Language">ACLs</a></li>
-</ol>
+<ul>
+<li>[ ] Add integration/infrastructure tests</li>
+<li>[ ] Just for fun, split registration/work tracking persistence among redis and cassandra instead of using 1 data store</li>
+<li>[ ] Add some treatment for retries/failures</li>
+<li>[ ] Add a brief guide for production(ish) deployments</li>
+<li>[ ] Testing with <code>ecs-cli compose</code> for AWS and <code>kompose</code> for kubernetes translations</li>
+<li>[ ] Add demo for polyglot workers, maybe using <a href="http://erlport.org/docs/python.html">erlport</a></li>
+<li>[ ] Add demo for <a href="https://github.com/whatyouhide/redix_pubsub">pubsub</a></li>
+<li>[ ] Find a way to use <a href="https://www.packtpub.com/mapt/book/application_development/9781784397517/1/ch01lvl1sec15/inspecting-your-system-with-observer">observer</a> with docker-compose (probably requires X11 on guest and XQuartz on OSX host)</li>
+<li>[ ] Add more worker types and message types, exploring the line between plain queue-workers and <a href="https://en.wikipedia.org/wiki/Agent-oriented_programming">AOP</a> with <a href="https://en.wikipedia.org/wiki/Agent_Communications_Language">ACLs</a></li>
+</ul>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-module-extension.html">Elixir Module Extension</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/data-science-stack.html">A allspark-based stack for data science projects</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
     </ul>
 </section>
         </article>
