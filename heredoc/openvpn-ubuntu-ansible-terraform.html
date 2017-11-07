@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Links for Topics in Devops</title>
+    <title>heredoc - OpenVPN Setup with ansible and terraform on EC2</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,24 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="devops,links" />
-        <meta name="description" content="Links for topics in devops" />
+        <meta name="keywords" content="vpn,devops,ansible,terraform,projects" />
+        <meta name="description" content="This is a mirror of a github project page. The actual project, complete with clone URLs, issue tracking, etc, is hosted here" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Links for Topics in Devops"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/devops-links.html"/>
-        <meta property="og:description" content="Links for topics in devops"/>
-        <meta property="article:published_time" content="2020-09-02" />
+        <meta property="og:title" content="OpenVPN Setup with ansible and terraform on EC2"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html"/>
+        <meta property="og:description" content="This is a mirror of a github project page. The actual project, complete with clone URLs, issue tracking, etc, is hosted here"/>
+        <meta property="article:published_time" content="2017-11-06" />
             <meta property="article:section" content="devops" />
+            <meta property="article:tag" content="vpn" />
             <meta property="article:tag" content="devops" />
-            <meta property="article:tag" content="links" />
+            <meta property="article:tag" content="ansible" />
+            <meta property="article:tag" content="terraform" />
+            <meta property="article:tag" content="projects" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -343,16 +346,16 @@ heredoc            </a>
                 <li><a href="https://mattvonrocketstein.github.io/heredoc/category/devops.html" title="devops">
                   devops
                 </a></li>
-                <li class="active">Links for Topics in Devops</li>
+                <li class="active">OpenVPN Setup with ansible and terraform on EC2</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html"
                        rel="bookmark"
-                       title="Permalink to Links for Topics in Devops">
-                        Links for Topics in Devops
+                       title="Permalink to OpenVPN Setup with ansible and terraform on EC2">
+                        OpenVPN Setup with ansible and terraform on EC2
                     </a>
                 </span>
             </header>
@@ -366,8 +369,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2020-09-02T20:20:00-04:00">
-        Wed 02 September 2020
+      <time datetime="2017-11-06T00:00:00-05:00">
+        Mon 06 November 2017
       </time>
     </span>
   </td>
@@ -378,37 +381,112 @@ heredoc            </a>
 		</span>
 	</td>
 	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/links.html">links</a>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/vpn.html">vpn</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/ansible.html">ansible</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/terraform.html">terraform</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/projects.html">projects</a>
 	</td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
                 <p></p>
-<h2>CAPS things</h2>
+<p><hr/>
+<small>
+This is a mirror of a github project page.  The actual project, complete with clone URLs, issue tracking, etc, is hosted <strong><a href="https://github.com/mattvonrocketstein/openvpn-ubuntu-ansible-terraform">here</a></strong>
+</small>
+<hr/></p>
+<h2>About</h2>
+<p>This project is a top-to-bottom <a href="https://openvpn.net/">OpenVPN</a> setup for Ubuntu on AWS, using Terraform to create the EC2 resources and security groups, and Ansible to setup VPN users.</p>
+<p>In terms of server configuration, the heavy lifting for this project is mostly courtesy of the excellent <a href="https://github.com/Stouts/Stouts.openvpn">Stouts.openvpn</a> ansible role.  What this repository does on top of that is:</p>
 <ul>
-<li><a href="http://codeheaven.io/15-things-you-should-know-about-ansible/">15 things you should know about ansible ansible</a></li>
+<li>Pins both the Ansible role and the Ubuntu AMI at known-working versions (currently Ubuntu Trusty)</li>
+<li>Adds extra Ansible to forward <em>everything</em> from clients through the VPN</li>
+<li>Provides modular Terraform that sets up the AWS server/security groups to work with OpenVPN</li>
+<li>Provides a Makefile to help to execute both the Terraform and the Ansible and simplify injecting parameters from environment variables</li>
 </ul>
-<h2>Containers, virtualization etc</h2>
-<ul>
-<li><a href="https://docs.docker.com/machine/install-machine/">docker machine</a></li>
-<li><a href="https://muehe.org/posts/switching-docker-from-aufs-to-devicemapper/">switching docker from aufs to devicemapper</a></li>
-</ul>
+<h2>Prerequisites</h2>
+<p>Valid named AWS profiles should already be setup in your <code>~/.aws/credentials</code> file.  We'll assume in the rest of this guide that the profile you want to use is called <code>MY_PROFILE</code>.</p>
+<p>You'll also need local copies of <code>terraform</code>, <code>ansible</code>, and <code>jq</code>.  My (confirmed working) version info follows:</p>
+<div class="highlight"><pre><span></span>$ terraform --version
+Terraform v0.9.11
+
+$ ansible --version
+ansible 2.3.2.0
+
+$ jq --version
+jq-1.5
+</pre></div>
+
+
+<p><strong>Terraform</strong> builds infrastructure resources on clouds like AWS.  It can be downloaded <a href="https://www.terraform.io/downloads.html">here</a> or you could <a href="https://hub.docker.com/r/hashicorp/terraform/">use docker</a>.  If you prefer docker, just set an appropriate bash alias before using the Makefile.</p>
+<p><strong>Ansible</strong> configures resources on clouds with certain system packages, files, etc.  Installation is described in detail  <a href="http://docs.ansible.com/ansible/latest/intro_installation.html">here</a>, but for platforms that already have a python stack you can probably just run <code>pip install -r requirements.txt</code> in this directory.</p>
+<p><strong><a href="https://stedolan.github.io/jq/">Jq</a></strong> is a sed-like tool for parsing JSON from the command line.  On OSX it can be installed with <code>brew install jq</code></p>
+<h2>Quick Start</h2>
+<ol>
+<li>
+<p>Edit the <a href="Makefile">Makefile</a> directly to change the primary VPN user's default username/password. Edit the ansible file <a href="openvpn.yml">openvpn.yml</a> to add additional VPN users.</p>
+</li>
+<li>
+<p>Afterwards, run <code>make vpn</code> and answer when it asks for the named AWS profile to use.  When this finishes an OpenVPN server will be setup and ready to go, so you just need to configure a client.  </p>
+</li>
+<li>
+<p>As a VPN client, I recommend <a href="https://tunnelblick.net">tunnelblick</a>, where setup is especially easy.  When step 2 above finished, you are left with several new files in the working directory which can be used to configure the client.  Assuming you didn't change the <code>VPN_NAME</code>, one of these files is <code>default.ovpn</code>.  Simply drag the new <code>default.ovpn</code> file onto the tunnelblick icon in the menubar and connect with the user/password you set in the Makefile.  Done!  You can verify your configuration by visiting a place like <a href="http://www.whatsmyip.org/">http://www.whatsmyip.org/</a>.</p>
+</li>
+</ol>
+<h2>Step by Step</h2>
+<p>This section is just a walk through of the individual steps you can run that <code>make vpn</code> would do magically for you.  Follow this instead of the quickstart above if you want to understand more about what's going on.</p>
+<ol>
+<li>
+<p>Generate a new ssh-key for EC2/terraform:</p>
+<p>$ make keypair</p>
+</li>
+<li>
+<p>Set an environment variable that terraform will use for your AWS profile, and run <code>terraform plan</code> via the Makefile.  Inspect the plan and make sure it's what you expected.</p>
+<p>$ TF_VAR_aws_profile=MY_PROFILE make plan</p>
+</li>
+<li>
+<p>Set an environment variable that terraform will use for your AWS profile, and run <code>terraform apply</code> via the Makefile.  This will create an EC2 server on AWS, together with the security groups and rules you'll need to use OpenVPN.</p>
+<p>$ TF_VAR_aws_profile=MY_PROFILE make apply</p>
+</li>
+<li>
+<p>Edit the <a href="Makefile">Makefile</a> directly to change the primary VPN user's default username/password. Edit the ansible file <a href="openvpn.yml">openvpn.yml</a> to add additional VPN users. You can safely rerun the ansible provisioner as many times as you like to add/edit/remove VPN users (see the next step).</p>
+</li>
+<li>
+<p>To reprovision the VPN server, use the command below.  (The IP address of the host is determined automatically for you with the results of <code>terraform output</code>)</p>
+<p>$ make reprovision</p>
+</li>
+<li>
+<p>If you need to connect to the OpenVPN server itself, there's a make target for that which will use the correct ssh user/keys.  (The IP address of the host is determined automatically for you with the results of <code>terraform output</code>)</p>
+<p>$ make ssh</p>
+</li>
+<li>
+<p>If you want to tear things down again, you can use <code>make plan-destroy</code> to show the plan, and <code>make destroy</code> to actually clean up.</p>
+</li>
+</ol>
+<h2>Discussion, Limitations, Etc</h2>
+<p>A Makefile is provided in this project to call Terraform and Ansible consistently, and with consistent environment variables.  Not everyone who reads/writes terraform can read/write Ansible and vice versa, so as a compromise I'm mostly trying to use the Makefile to get information into both systems rather than using Ansible to drive Terraform or Terraform to drive Ansible.</p>
+<p>I've also chosen to do a "two stage" setup with resource creation/provision handled separately, rather than using ansible via terraform's <a href="https://www.terraform.io/docs/provisioners/local-exec.html">local-exec provisioner</a>.  Reprovisioning in terraform is awkward at best, black magic at worst.  See <a href="https://github.com/hashicorp/terraform/issues/3193">this discussion</a> for some workarounds if this is intolerable for your use-case.</p>
+<p>Terraform resources are also arranged as modules, partly just to demonstrate modules.  Nevertheless this might be useful if you want to, for instance, eliminate bastions for multiple VPCs by instantiating multiple OpenVPN servers.  Note that individual OpenVPN servers can also support multiple VPNs, but we use one by default.</p>
+<p>There are a variety of ways to override things at the Terraform layer (i.e. AWS region etc) which can be potentially confusing.  There's the <a href="vars.tf">vars.tf</a> file where you can modify things directly by changing/adding defaults.  There's also the  <a href="https://www.terraform.io/docs/configuration/environment-variables.html#tf_var_name">TF_VAR_name</a> trick, if you want to set values using environment variables.  There's also the <code>openvpn</code> terraform module instantiation in <a href="main.tf">main.tf</a> which allows for overrides.</p>
+<p>For overriding things at the OpenVPN configuration layer, things are simpler.  Go have a close reading of the documentation for the <a href="https://github.com/Stouts/Stouts.openvpn">Stouts.openvpn</a> role, which does almost all the real work here anyway.  Consider adding variables that it understands/supports.  Otherwise, you can always just pile new Ansible into the <a href="openvpn.yml">openvpn.yml</a> file to override cert files with your own uploads, etc.</p>
+<h2>Pull Requests</h2>
+<p>Are welcome.</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">An Elixir Microservice Architecture</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/jenkins-backups.html">Jenkins backups</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
     </ul>
 </section>
         </article>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Links for Topics in Devops</title>
+    <title>heredoc - Jenkins backups</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,23 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/jenkins-backups.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="devops,links" />
-        <meta name="description" content="Links for topics in devops" />
+        <meta name="keywords" content="jenkins,devops,groovy,infrastructure" />
+        <meta name="description" content="A simple, lightweight Jenkinsfile-based approach to backing up Jenkins" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Links for Topics in Devops"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/devops-links.html"/>
-        <meta property="og:description" content="Links for topics in devops"/>
-        <meta property="article:published_time" content="2020-09-02" />
+        <meta property="og:title" content="Jenkins backups"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/jenkins-backups.html"/>
+        <meta property="og:description" content="A simple, lightweight Jenkinsfile-based approach to backing up Jenkins"/>
+        <meta property="article:published_time" content="2017-08-27" />
             <meta property="article:section" content="devops" />
+            <meta property="article:tag" content="jenkins" />
             <meta property="article:tag" content="devops" />
-            <meta property="article:tag" content="links" />
+            <meta property="article:tag" content="groovy" />
+            <meta property="article:tag" content="infrastructure" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -343,16 +345,16 @@ heredoc            </a>
                 <li><a href="https://mattvonrocketstein.github.io/heredoc/category/devops.html" title="devops">
                   devops
                 </a></li>
-                <li class="active">Links for Topics in Devops</li>
+                <li class="active">Jenkins backups</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/jenkins-backups.html"
                        rel="bookmark"
-                       title="Permalink to Links for Topics in Devops">
-                        Links for Topics in Devops
+                       title="Permalink to Jenkins backups">
+                        Jenkins backups
                     </a>
                 </span>
             </header>
@@ -366,8 +368,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2020-09-02T20:20:00-04:00">
-        Wed 02 September 2020
+      <time datetime="2017-08-27T00:00:00-04:00">
+        Sun 27 August 2017
       </time>
     </span>
   </td>
@@ -378,37 +380,110 @@ heredoc            </a>
 		</span>
 	</td>
 	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/links.html">links</a>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/jenkins.html">jenkins</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/groovy.html">groovy</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/infrastructure.html">infrastructure</a>
 	</td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
                 <p></p>
-<h2>CAPS things</h2>
-<ul>
-<li><a href="http://codeheaven.io/15-things-you-should-know-about-ansible/">15 things you should know about ansible ansible</a></li>
-</ul>
-<h2>Containers, virtualization etc</h2>
-<ul>
-<li><a href="https://docs.docker.com/machine/install-machine/">docker machine</a></li>
-<li><a href="https://muehe.org/posts/switching-docker-from-aufs-to-devicemapper/">switching docker from aufs to devicemapper</a></li>
-</ul>
+<div class="gist">
+    <script src='https://gist.github.com/dbda17d5e0733d9b366cac995fbacf80.js'></script>
+    <noscript>
+        <pre><code>//
+// This is a Jenkinsfile that backs up (parts of) Jenkins.
+//
+// So why not use the SCM-sync plugin?  I've found it's just not configurable 
+// enough, and if something goes wrong it's a lot more opaque than this technique 
+// which uses standard shell and git commands. 
+//
+// By default this approach covers users, credentials, and job and plugin configs, 
+// but not full builds/workspaces.  Obviously you want to send this stuff only to
+// a private repository!  If you want to change the files that are included to 
+// add or remove files from consideration with the backup, edit the shell script
+// section below.  Make sure this job is pinned to your Jenkins master using your
+// preferred technique for that.
+//
+// The job that executes this Jenkinsfile should describe three parameters:
+//
+//  * BACKUP_REPO:
+//      a string representing the repo you want your backup's pushed to
+//
+//  * BACKUP_BRANCH:
+//      a string representing where you want backup's pushed to
+//
+//  * GIT_CREDENTIAL_ID:
+//      a string representing the Jenkins credential id for
+//      i.e. your github deploy key SSH.  See the /credentials
+//      URL on your Jenkins server to add a new SSH key, and make
+//      sure that the username is `git`.  Add github deployment keys
+//      at i.e. https://github.com/$user/$project/settings/keys.  Make
+//      sure your key allows push and isn't read-only.
+//
+pipeline { agent any; stages {
+  stage("INIT"){ steps{
+    checkout([
+      $class: 'GitSCM',
+      branches: [[name: '*/${BACKUP_BRANCH}']],
+      doGenerateSubmoduleConfigurations: false,
+      extensions: [[
+        $class: 'RelativeTargetDirectory',
+        relativeTargetDir: 'jenkins-backup']],
+      submoduleCfg: [],
+      userRemoteConfigs: [
+        [ credentialsId: "$GIT_CREDENTIAL_ID",
+          url: "$BACKUP_REPO"]
+      ],
+    ]);
+  }} //steps // stage
+
+  stage("BACKUP"){ steps{
+    sh """#!/bin/bash
+    pushd jenkins-backup
+    git config --local user.email "jenkins@example.com"
+    git config --global user.name "Jenkins"
+    find .|xargs git rm
+    popd
+    cp -v $JENKINS_HOME/*xml $WORKSPACE/jenkins-backup
+    pushd $JENKINS_HOME/
+    for i in \$( find jobs|grep config.xml ); do
+      mkdir -p $WORKSPACE/jenkins-backup/`dirname \$i`
+      cp \$i $WORKSPACE/jenkins-backup/`dirname \$i`
+    done
+    popd
+    cp -rfv $JENKINS_HOME/secret* $WORKSPACE/jenkins-backup/
+    cp -rfv $JENKINS_HOME/user* $WORKSPACE/jenkins-backup/
+    pushd jenkins-backup
+    find .|xargs git add
+    git commit -a -m"Jenkins Backup Job"
+    """
+  }} //steps // stage
+
+  stage("PUSH"){ steps{
+    sshagent(["$GIT_CREDENTIAL_ID"]) {
+      sh "cd jenkins-backup && git push origin HEAD:$BACKUP_BRANCH"
+    } // sshagent
+  }} //steps // stage
+}} //stages // pipeline</code></pre>
+    </noscript>
+</div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">An Elixir Microservice Architecture</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">An Elixir Microservice Architecture</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/jenkins-backups.html">Jenkins backups</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">Notes for SaltStack</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">OpenVPN Setup with ansible and terraform on EC2</a></li>
     </ul>
 </section>
         </article>

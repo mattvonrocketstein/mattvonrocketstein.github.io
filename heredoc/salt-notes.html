@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>heredoc - Links for Topics in Devops</title>
+    <title>heredoc - Notes for SaltStack</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,22 @@
 
     <link href="https://mattvonrocketstein.github.io/heredoc/img/favicon.ico" rel="icon">
 
-<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">
+<link rel="canonical" href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">
 
         <meta name="author" content="mvr" />
-        <meta name="keywords" content="devops,links" />
-        <meta name="description" content="Links for topics in devops" />
+        <meta name="keywords" content="salt,devops,python" />
+        <meta name="description" content="Notes for learning SaltStack" />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Links for Topics in Devops"/>
-        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/devops-links.html"/>
-        <meta property="og:description" content="Links for topics in devops"/>
-        <meta property="article:published_time" content="2020-09-02" />
-            <meta property="article:section" content="devops" />
+        <meta property="og:title" content="Notes for SaltStack"/>
+        <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/salt-notes.html"/>
+        <meta property="og:description" content="Notes for learning SaltStack"/>
+        <meta property="article:published_time" content="2017-11-09" />
+            <meta property="article:section" content="misc" />
+            <meta property="article:tag" content="salt" />
             <meta property="article:tag" content="devops" />
-            <meta property="article:tag" content="links" />
+            <meta property="article:tag" content="python" />
             <meta property="article:author" content="mvr" />
 
     <link type="text/css" rel="stylesheet" href="https://mattvonrocketstein.github.io/heredoc/theme/css/jquery.tocify.css" />
@@ -340,19 +341,19 @@ heredoc            </a>
         <div class="col-sm-8">
             <ol class="breadcrumb">
                 <li><a href="https://mattvonrocketstein.github.io/heredoc" title="heredoc"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/devops.html" title="devops">
-                  devops
+                <li><a href="https://mattvonrocketstein.github.io/heredoc/category/misc.html" title="misc">
+                  misc
                 </a></li>
-                <li class="active">Links for Topics in Devops</li>
+                <li class="active">Notes for SaltStack</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <span class=long-h1>
-                    <a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html"
+                    <a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html"
                        rel="bookmark"
-                       title="Permalink to Links for Topics in Devops">
-                        Links for Topics in Devops
+                       title="Permalink to Notes for SaltStack">
+                        Notes for SaltStack
                     </a>
                 </span>
             </header>
@@ -366,8 +367,8 @@ heredoc            </a>
   <td>
     <span class="published">
       <i class="fa fa-calendar"></i>
-      <time datetime="2020-09-02T20:20:00-04:00">
-        Wed 02 September 2020
+      <time datetime="2017-11-09T00:00:00-05:00">
+        Thu 09 November 2017
       </time>
     </span>
   </td>
@@ -378,37 +379,62 @@ heredoc            </a>
 		</span>
 	</td>
 	<td>
-			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
-,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/links.html">links</a>
+			<a href="https://mattvonrocketstein.github.io/heredoc/tag/salt.html">salt</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/devops.html">devops</a>
+,			<a href="https://mattvonrocketstein.github.io/heredoc/tag/python.html">python</a>
 	</td>
 </tr>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <p></p>
-<h2>CAPS things</h2>
+                <h2>Quick Links</h2>
+<p><a href="https://github.com/JustinCarmony/vagrant-salt-example">minimal (masterless) demo with vagrant</a>
+<a href="https://www.tutorialspoint.com/saltstack/images/salt_diskusage.jpg">architectural overview</a></p>
+<h2>Site Questions</h2>
 <ul>
-<li><a href="http://codeheaven.io/15-things-you-should-know-about-ansible/">15 things you should know about ansible ansible</a></li>
+<li>Using master or masterless?<ul>
+<li>If master, where is the master, how does it deal with inside/outside the VPN or VPC?</li>
 </ul>
-<h2>Containers, virtualization etc</h2>
+</li>
+<li>Default transport (zeromq)?</li>
+</ul>
+<h2>General Questions</h2>
+<p>Masters and minions require bootstrapping with <a href="https://docs.saltstack.com/en/latest/topics/tutorials/salt_bootstrap.html">the standard shell script</a>.  I very quickly hit a <code>ERROR: End of life distributions are not supported</code> message using an older version of Ubuntu that was used by a stale github project.  <a href="https://github.com/saltstack/salt-bootstrap/issues/1162">Here</a> is a similar issue against the project.  Since I'd want to use configuration management to fix this kind of situation, this seems like a deal breaker.. what's the protocol here?</p>
+<p>What is the situation in the trenches for boots-on-the-ground ops who will expect reusable patterns for common infrastructure components?  This needs a case study. Are there patterns for things like Zookeeper, Hashicorp vault, LAMP stack, Cassandra?  Are the patterns solid, are they fairly OS-agnostic?</p>
+<p>Is there a push mode?  Pull mode means minions must be able to access the master publisher port.  </p>
+<p>No option for intelligent routing?  <a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#job-flow">The job flow docs</a> state that all minions receive all commands from master, then check whether the command is intended for them.  (Questions of routing aside, encryption here does ensure we don't leak secrets to evil minions)</p>
+<h2>Compare and Contrast</h2>
+<p>The architecture of Salt is well-thought out, and actually rather beautiful.  But "using a distributed system to solve a problem means you now have 2 problems".  This additional complexity is really only justified for "enterprise" bigness, but should we draw the line for enterprise size at a dozen servers, 100 servers, or 1000?</p>
+<p>Event-driven means speed.  Salt will be orders of magnitude faster than ansible by default, assuming you're running ansible in the standard/naive way.</p>
+<h2>Primitives</h2>
 <ul>
-<li><a href="https://docs.docker.com/machine/install-machine/">docker machine</a></li>
-<li><a href="https://muehe.org/posts/switching-docker-from-aufs-to-devicemapper/">switching docker from aufs to devicemapper</a></li>
+<li><a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#salt-minion">minions</a>: salt clients, aka hosts / provision targets.  (not to be confused with the salt command-line client <code>salt</code>)</li>
+<li><a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#salt-master">master</a>: the salt server, drives the provisioning of minions.  the <code>salt</code> cli client runs on the master.  the master is an ensemble of several services and worker processes.</li>
+<li>Publisher (port 4505): which minions must be able to access for pull-mode</li>
+<li>EventPublisher (IPC only):</li>
+<li>MWorker: one or more "master workers", which handle salt operations concurrently  </li>
+<li>
+<p>ReqServer (port 4506): pop work and push to MWorker, plus receiving replies so MWorker doesn't have to block</p>
+</li>
+<li>
+<p><a href="https://docs.saltstack.com/en/latest/topics/grains/">grains</a>: aka facts in ansible/puppet</p>
+</li>
+<li><a href="https://docs.saltstack.com/en/latest/topics/pillar/">pillar</a>: global value/config storage, compiled on the master. this is basically yaml which is layed out in folder hierarchies, which maps to environment config. it's minion-specific and invisible to others, so useful for secrets.</li>
 </ul>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">Python Class as Module</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">An Elixir Microservice Architecture</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/jenkins-backups.html">Jenkins backups</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
     </ul>
 </section>
         </article>
