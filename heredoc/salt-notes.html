@@ -14,13 +14,13 @@
 
         <meta name="author" content="mvr" />
         <meta name="keywords" content="salt,devops,python" />
-        <meta name="description" content="Notes for learning SaltStack" />
+        <meta name="description" content="Some notes on learnings for salt stack from the perspective of an Ansible user." />
 
         <meta property="og:site_name" content="heredoc" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Notes for SaltStack"/>
         <meta property="og:url" content="https://mattvonrocketstein.github.io/heredoc/salt-notes.html"/>
-        <meta property="og:description" content="Notes for learning SaltStack"/>
+        <meta property="og:description" content="Some notes on learnings for salt stack from the perspective of an Ansible user."/>
         <meta property="article:published_time" content="2017-11-09" />
             <meta property="article:section" content="misc" />
             <meta property="article:tag" content="salt" />
@@ -387,10 +387,30 @@ heredoc            </a>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <h2>Quick Links</h2>
-<p><a href="https://github.com/JustinCarmony/vagrant-salt-example">minimal (masterless) demo with vagrant</a>
-<a href="https://www.tutorialspoint.com/saltstack/images/salt_diskusage.jpg">architectural overview</a></p>
+                <p></p>
+<h2>Primitives</h2>
+<h3>Minions</h3>
+<p><a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#salt-minion">Minions</a>: salt "clients", aka hosts / provision targets.  (not to be confused with the salt command-line client <code>salt</code>)</p>
+<h3>Master</h3>
+<p><a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#salt-master">master</a>: the salt server, drives the provisioning of minions.  the <code>salt</code> cli client runs on the master.  The master is an ensemble of several services and worker processes.</p>
+<ul>
+<li>Publisher (port 4505): which minions must be able to access for pull-mode</li>
+<li>EventPublisher (IPC only):</li>
+<li>MWorker: one or more "master workers", which handle salt operations concurrently  </li>
+<li>ReqServer (port 4506): pop work and push to MWorker, plus receiving replies so MWorker doesn't have to block</li>
+<li>File Server (?): transfers files to minions on demand from the state tree</li>
+</ul>
+<h3>Grains</h3>
+<p><a href="https://docs.saltstack.com/en/latest/topics/grains/">Grains</a> are basically facts in the ansible/puppet world.</p>
+<h3>Pillar</h3>
+<p><a href="https://docs.saltstack.com/en/latest/topics/pillar/">Pillar</a> is a global value/config storage, spelled out on the master. This is basically YAML which is layed out in folder hierarchies, which maps to environment config. It's minion-specific and invisible to others, so useful for secrets.</p>
+<h3>State</h3>
+<p>References to <a href="https://docs.saltstack.com/en/latest/topics/tutorials/starting_states.html">state, state trees, and .sls</a> refer to YAML arranged in a folder hierarchy, similar to the Pillar layout.  These files are stored on the Salt master.  Basically <code>.sls</code> files are the core of actual configuration management, similar to ansible playbooks.  The state tree may also contain raw files to be provisioned to hosts, etc.  As in Ansible, raw YAML (a data structure) becomes program-like using inclusion/extension, and as in Ansible, Jinja is used under the hood to render templated data.</p>
+<h2>Advanced</h2>
+<h3>Eventing</h3>
+<p>.. placeholder re: the <a href="https://docs.saltstack.com/en/2015.8/topics/event/index.html">event system</a> ..</p>
 <h2>Site Questions</h2>
+<p>Short list of intro questions that ought to be relevant for most site-specific installations/use-cases.</p>
 <ul>
 <li>Using master or masterless?<ul>
 <li>If master, where is the master, how does it deal with inside/outside the VPN or VPC?</li>
@@ -399,27 +419,45 @@ heredoc            </a>
 <li>Default transport (zeromq)?</li>
 </ul>
 <h2>General Questions</h2>
-<p>Masters and minions require bootstrapping with <a href="https://docs.saltstack.com/en/latest/topics/tutorials/salt_bootstrap.html">the standard shell script</a>.  I very quickly hit a <code>ERROR: End of life distributions are not supported</code> message using an older version of Ubuntu that was used by a stale github project.  <a href="https://github.com/saltstack/salt-bootstrap/issues/1162">Here</a> is a similar issue against the project.  Since I'd want to use configuration management to fix this kind of situation, this seems like a deal breaker.. what's the protocol here?</p>
-<p>What is the situation in the trenches for boots-on-the-ground ops who will expect reusable patterns for common infrastructure components?  This needs a case study. Are there patterns for things like Zookeeper, Hashicorp vault, LAMP stack, Cassandra?  Are the patterns solid, are they fairly OS-agnostic?</p>
-<p>Is there a push mode?  Pull mode means minions must be able to access the master publisher port.  </p>
-<p>No option for intelligent routing?  <a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#job-flow">The job flow docs</a> state that all minions receive all commands from master, then check whether the command is intended for them.  (Questions of routing aside, encryption here does ensure we don't leak secrets to evil minions)</p>
-<h2>Compare and Contrast</h2>
-<p>The architecture of Salt is well-thought out, and actually rather beautiful.  But "using a distributed system to solve a problem means you now have 2 problems".  This additional complexity is really only justified for "enterprise" bigness, but should we draw the line for enterprise size at a dozen servers, 100 servers, or 1000?</p>
-<p>Event-driven means speed.  Salt will be orders of magnitude faster than ansible by default, assuming you're running ansible in the standard/naive way.</p>
-<h2>Primitives</h2>
+<p>Unanswered Salt-specific questions on design, architecture, and implementation.</p>
 <ul>
-<li><a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#salt-minion">minions</a>: salt clients, aka hosts / provision targets.  (not to be confused with the salt command-line client <code>salt</code>)</li>
-<li><a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#salt-master">master</a>: the salt server, drives the provisioning of minions.  the <code>salt</code> cli client runs on the master.  the master is an ensemble of several services and worker processes.</li>
-<li>Publisher (port 4505): which minions must be able to access for pull-mode</li>
-<li>EventPublisher (IPC only):</li>
-<li>MWorker: one or more "master workers", which handle salt operations concurrently  </li>
 <li>
-<p>ReqServer (port 4506): pop work and push to MWorker, plus receiving replies so MWorker doesn't have to block</p>
+<p>The difference between Pillar and the state tree seems to simply be just that Pillar is for config storage, and state tree refers to file storage.  Is there anything more subtle about this situation?</p>
 </li>
 <li>
-<p><a href="https://docs.saltstack.com/en/latest/topics/grains/">grains</a>: aka facts in ansible/puppet</p>
+<p>Masters and minions require bootstrapping with <a href="https://docs.saltstack.com/en/latest/topics/tutorials/salt_bootstrap.html">the standard shell script</a>.  I very quickly hit a <code>ERROR: End of life distributions are not supported</code> message using an older version of Ubuntu that was used by a stale github project.  <a href="https://github.com/saltstack/salt-bootstrap/issues/1162">Here</a> is a similar issue against the project.  Since I'd want to use configuration management to fix this kind of situation, this seems like a deal breaker.. what's the protocol here?</p>
 </li>
-<li><a href="https://docs.saltstack.com/en/latest/topics/pillar/">pillar</a>: global value/config storage, compiled on the master. this is basically yaml which is layed out in folder hierarchies, which maps to environment config. it's minion-specific and invisible to others, so useful for secrets.</li>
+<li>
+<p>What is the situation in the trenches for boots-on-the-ground ops who will expect reusable patterns for common infrastructure components?  This needs a case study. Are there patterns for things like Zookeeper, Hashicorp vault, LAMP stack, Cassandra?  Are the patterns solid, are they fairly OS-agnostic?</p>
+</li>
+<li>
+<p>What are the possibilities for push mode?  Pull mode means minions must be able to access ports on the master, etc, which is potentially painful given the endless variations of firewalls, VPNs, VPCs, and bastion setups out there in the wild.</p>
+</li>
+<li>
+<p>Are there possibilities for agent-free usage?  Compared with agent-free interaction, agent-based could be painful in some circumstances, for instance with multimachine setups on non-customized AMIs.  </p>
+</li>
+<li>
+<p>No option for intelligent routing?  <a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#job-flow">The job flow docs</a> state that all minions receive all commands from master, then check whether the command is intended for them.  (Questions of routing aside, encryption here does ensure we don't leak secrets to evil minions)</p>
+</li>
+</ul>
+<h2>Compare and Contrast</h2>
+<h3>Architecture</h3>
+<p>SaltStack architecture is well-thought out, and really very beautiful.  But "using a distributed system to solve a problem means you now have 2 problems".  This additional complexity may really only be justified for "enterprise" bigness, and do we think that starts at a dozen servers, 100 servers, or 1000?  Without lots of servers, an Ansible user accustomed to agent-free, server-free decentralized-by-default interaction with CM will probably be left wondering.. what is all this SaltStack architecture actually <em>for</em>?</p>
+<p>Ansible is mostly a CM language, and only very slightly a CM driver, a value store, or a server.  For most use-cases there is zero architecture to learn, but then again there is zero to leverage.  (<a href="https://www.ansible.com/tower">Ansible Tower</a> is probably beginning to change some of this).  Turning Ansible into something more scalable/distributed is mostly a matter of having many workers, and that can be done by leveraging an existing system for work distribution (like Jenkins slaves).</p>
+<h3>Speed, Eventing &amp; Pull-mode</h3>
+<p>This section is partially answering "what is the SaltStack architecture <em>for</em>?", a question that was posed in the last section.  </p>
+<p>A primary aspect of SaltStack architecture is the queue, and the simplest consequence is having workers out-of-the-box, which also immediately implies speed.  Presumably server/agent interaction also offers huge speed increases over ansible's use of ssh as a ubiquitous transport mechanism.</p>
+<p>The eventing mechanism</p>
+<p>..placeholder..</p>
+<h3>CM as process of templating, inclusion, extension</h3>
+<p>Jinja as a templating engine is all that ansible supports, whereas in salt this aspect is pluggable, for better or worse.  As a result of supporting <a href="https://docs.saltstack.com/en/latest/topics/tutorials/starting_states.html#introducing-the-python-pydsl-and-the-pyobjects-renderers">pydsl etc</a> there's no upper limit on how gnarly <code>.sls</code> files can get, and no guarantee about their portability between separate Salt installations.</p>
+<h2>Conclusion</h2>
+<p>..placeholder..</p>
+<h2>References</h2>
+<p>Quick links and further reading:</p>
+<ul>
+<li><a href="https://github.com/JustinCarmony/vagrant-salt-example">minimal (masterless) demo with vagrant</a></li>
+<li><a href="https://www.tutorialspoint.com/saltstack/images/salt_diskusage.jpg">architectural overview</a></li>
 </ul>
             </div>
             <!-- /.entry-content -->
@@ -428,13 +466,13 @@ heredoc            </a>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">Python Class as Module</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">An Elixir Microservice Architecture</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
     </ul>
 </section>
         </article>
