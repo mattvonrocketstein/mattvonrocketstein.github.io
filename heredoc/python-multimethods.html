@@ -159,11 +159,11 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
                             Links for Elixir</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/cicd-series.html">
-                            CI/CD Series</li>
-                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">
                             Notes for SaltStack</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">
+                            OpenVPN Setup with ansible and terraform on EC2</li>
                         </a>
               </ul>
 
@@ -392,11 +392,11 @@ heredoc            </a>
 <p>This post describes a fun little piece of code I wrote a few years back.  It's presented here just as a <strong>curiosity</strong> not as a good idea for production code, and more than anything else is just an experiment to demonstrate the flexibility of python as a language.  So let's play with function-call semantics.  This writeup is just some background and motivation, if you're more of a "show me the code!" kind of person, just check out the <a href="https://gist.github.com/mattvonrocketstein/76d6b96d536d2c8ef991">gist here</a>.</p>
 <h3>The Idea</h3>
 <p>We use "self" all the time in object-oriented python code as an object reference, similar to "this" in Java or Javascript.  It's important to note though that in Python, "self" is only a convention and not a keyword.  When we use "self", the reference is always unambiguous and simple.. we just mean the current instance.  But they say that "art imitates life", so what if object-oriented was inspired by how people work?  </p>
-<p>Persons always have one <strong>self</strong> but potentially many <strong>roles</strong>.  For instance, suppose someone asks you a question. It's possible you will answer differently depending on whether you are answering in your capacity as that person's colleague / boss / friend / lover / enemy / etc.  Anyway, the code below contains a (contrived) example. <sup id="sf-python-multimethods-1-back"><a title=" See also: http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html " href="#sf-python-multimethods-1" class="simple-footnote">1</a></sup>.  </p>
+<p>Persons always have one <strong>self</strong> but potentially many <strong>roles</strong>.  For instance, suppose someone asks you a question. It's possible you will answer differently depending on whether you are answering in your capacity as that person's colleague / boss / friend / lover / enemy / etc.  Anyway, the code below contains a (contrived) example. <sup id="sf-python-multimethods-1-back"><a title=" See also: http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html " class="simple-footnote" href="#sf-python-multimethods-1">1</a></sup>.  </p>
 <p>Another way of looking at the concept being demonstrated: here there is not one self but many, and what a thing <em>does</em> depends on <em>what</em> you call it, not <em>how</em> you call it.  </p>
 <h2>The Code</h2>
 <div class="gist">
-    <script src="https://gist.github.com/76d6b96d536d2c8ef991.js"></script>
+    <script src='https://gist.github.com/76d6b96d536d2c8ef991.js'></script>
     <noscript>
         <pre><code>"""
    A curiosity for your programming zoo inspired by monty python,
@@ -534,20 +534,20 @@ if __name__ == '__main__':
     s.run()
 </code></pre>
     </noscript>
-</div><ol class="simple-footnotes"><li id="sf-python-multimethods-1"> See also: <a href="http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html">http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html</a>  <a href="#sf-python-multimethods-1-back" class="simple-footnote-back">↩</a></li></ol>
+</div><ol class="simple-footnotes"><li id="sf-python-multimethods-1"> See also: <a href="http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html">http://www.metrolyrics.com/the-philosophers-song-lyrics-monty-python.html</a>  <a class="simple-footnote-back" href="#sf-python-multimethods-1-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">Notes for SaltStack</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/data-science-stack.html">A allspark-based stack for data science projects</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/data-science-stack.html">A allspark-based stack for data science projects</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">Python Class as Module</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">Notes for SaltStack</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
     </ul>
 </section>
         </article>

@@ -162,11 +162,11 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
                             Links for Elixir</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/cicd-series.html">
-                            CI/CD Series</li>
-                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">
                             Notes for SaltStack</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">
+                            OpenVPN Setup with ansible and terraform on EC2</li>
                         </a>
               </ul>
 
@@ -456,8 +456,8 @@ $ git push
 
 <p>Now you just have to browbeat your coworkers until they use this thing, and afterwards everything is wonderful. :thumbsup:</p>
 <h2>Generic automation</h2>
-<p>There are a lot of pythonic approaches <sup id="sf-python-release-automation-1-back"><a title="It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb.. " href="#sf-python-release-automation-1" class="simple-footnote">1</a></sup> to generic automation.  Lots of people use <a href="https://github.com/paver/paver">paver</a> for instance, but my weapon of choice is <a href="http://www.fabfile.org">fabric</a>.</p>
-<p>Fabric simplifies command-line option-parsing and between the shell invocation/ssh-helpers it is very suitable for automating both local and remote work<sup id="sf-python-release-automation-2-back"><a title="Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible." href="#sf-python-release-automation-2" class="simple-footnote">2</a></sup>.  Fabric definitely has some problems, most notably a lack of py3 compatibility and the fact that the paramiko requirement means fairly long installations on fresh virtualenvs, but it still saves me far more time than it costs me.</p>
+<p>There are a lot of pythonic approaches <sup id="sf-python-release-automation-1-back"><a title="It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb.. " class="simple-footnote" href="#sf-python-release-automation-1">1</a></sup> to generic automation.  Lots of people use <a href="https://github.com/paver/paver">paver</a> for instance, but my weapon of choice is <a href="http://www.fabfile.org">fabric</a>.</p>
+<p>Fabric simplifies command-line option-parsing and between the shell invocation/ssh-helpers it is very suitable for automating both local and remote work<sup id="sf-python-release-automation-2-back"><a title="Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible." class="simple-footnote" href="#sf-python-release-automation-2">2</a></sup>.  Fabric definitely has some problems, most notably a lack of py3 compatibility and the fact that the paramiko requirement means fairly long installations on fresh virtualenvs, but it still saves me far more time than it costs me.</p>
 <p>In this section you'll often find a few descriptions of little automation problems and the corresponding solutions will often be presented as fabric commands.</p>
 <h3>Detect dead code</h3>
 <p>Dead code paths are tricky to find.  A strong integration test suite is really the best thing to use, but many projects are unlikely to have this luxury (especially projects that are libraries rather than applications).  Meanwhile.. your unit tests suite can help you or hide the truth from you, it just depends.  Realistically, the best approach one can hope for is often just approximate.  </p>
@@ -467,10 +467,10 @@ $ git push
 </pre></div>
 
 
-<p>Eventually tracking your project's known false positives mentally and typing them out becomes work, and you'll just want a script.  Another reason to fabric'ize this work is that the <code>fab</code> tool works the way you'd expect even after you're deep inside subdirectories of your project<sup id="sf-python-release-automation-3-back"><a title="Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile" href="#sf-python-release-automation-3" class="simple-footnote">3</a></sup>.</p>
+<p>Eventually tracking your project's known false positives mentally and typing them out becomes work, and you'll just want a script.  Another reason to fabric'ize this work is that the <code>fab</code> tool works the way you'd expect even after you're deep inside subdirectories of your project<sup id="sf-python-release-automation-3-back"><a title="Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile" class="simple-footnote" href="#sf-python-release-automation-3">3</a></sup>.</p>
 <p>Without further ado, you can find a simple fabric task below.  Change PKG_NAME and the VULTURE_* variables to match your project, and invoke the task using <code>fab vulture</code>.</p>
 <div class="gist">
-    <script src="https://gist.github.com/3e3e881a183fd30bf641b9f6afbdb445.js"></script>
+    <script src='https://gist.github.com/3e3e881a183fd30bf641b9f6afbdb445.js'></script>
     <noscript>
         <pre><code>#!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -534,7 +534,7 @@ def vulture():
 <p>If you want a do-everything release helper consider using the <a href="http://zestreleaser.readthedocs.io/en/latest/overview.html">zest.releaser</a>.  I don't use zestreleaser much because project-to-project releases are likely to be a ticklish subject, what with idiosyncratic pre/post actions and conditions.  My approach below quite limited in that it's designed for git and github, but for easy customization later, I nevertheless prefer to start with a fabric task.</p>
 <p>I had just a few goals for my release automation in the abstract.  Most importantly, I don't want to accidentally run a release from any place except master.  Obviously the setup.py sdist commands should be automated, and I wanted consistent tagging to happen without doing it manually.  It looks like a lot of code, but it's mostly sanity-checking and user feedback.  Check it out:</p>
 <div class="gist">
-    <script src="https://gist.github.com/c4c46d0f3753f3dbb77018c21ec0e767.js"></script>
+    <script src='https://gist.github.com/c4c46d0f3753f3dbb77018c21ec0e767.js'></script>
     <noscript>
         <pre><code># -*- coding: utf-8 -*-
 
@@ -637,7 +637,7 @@ def _release(force=False):
             api.local('git stash pop')
 </code></pre>
     </noscript>
-</div><ol class="simple-footnotes"><li id="sf-python-release-automation-1">It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb..  <a href="#sf-python-release-automation-1-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-2">Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible. <a href="#sf-python-release-automation-2-back" class="simple-footnote-back">↩</a></li><li id="sf-python-release-automation-3">Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile <a href="#sf-python-release-automation-3-back" class="simple-footnote-back">↩</a></li></ol>
+</div><ol class="simple-footnotes"><li id="sf-python-release-automation-1">It's $current_year! Use rake or gulp if you must but shell-scripts and Makefiles are starting to seem kind of dumb..  <a class="simple-footnote-back" href="#sf-python-release-automation-1-back">↩</a></li><li id="sf-python-release-automation-2">Automating remote stuff via fabric's ssh tools might be a bit controversial. Nevertheless, fabric is lightweight and very friendly to the less devops-inclined because the learning curve is small compared to ansible. <a class="simple-footnote-back" href="#sf-python-release-automation-2-back">↩</a></li><li id="sf-python-release-automation-3">Like git looking for .git folders, fabric ascends parent directories until it finds a fabfile <a class="simple-footnote-back" href="#sf-python-release-automation-3-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">

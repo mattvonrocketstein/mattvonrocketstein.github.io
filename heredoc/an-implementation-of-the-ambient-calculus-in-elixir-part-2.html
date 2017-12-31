@@ -163,11 +163,11 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
                             Links for Elixir</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/cicd-series.html">
-                            CI/CD Series</li>
-                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">
                             Notes for SaltStack</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">
+                            OpenVPN Setup with ansible and terraform on EC2</li>
                         </a>
               </ul>
 
@@ -431,11 +431,11 @@ heredoc            </a>
 <h2>Part 2: Design</h2>
 <p>This is part two of a two part series where I'll describe an implementation of the ambient calculus in Elixir.</p>
 <p>Cool diagram, right?  At the beginning of the <a href="an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">last part of this series</a> I promised to explain it, so here goes.  The right hand side represents two ambients <em>n</em> and <em>m</em>, running programs <em>P</em>, <em>Q</em> and <em>R</em>.  The yield arrow just means that the left-hand side <a href="#">reduces</a> to the right-hand, and in particular this diagram shows the semantics of the "out" or "exit" operation, which basically un-nests nested ambients.</p>
-<p><img alt="image" src="img/ambient-calculus-2.png"></p>
+<p><img src="img/ambient-calculus-2.png" alt="image"></p>
 <p>In the rest of this part of the series, I'll get into how we'll map ambient calculus primitives on to Elixir primitives in an overview of high-level design decisions.  In <a href="">the next part of this series</a>, I'll begin to get into actual implementation-level stuff.</p>
 <h2>Distributed Elixir</h2>
 <p>To keep ourselves true to the "mobile computation" spirit of the Ambient Calculus (and to demonstrate some aspects of distributed Elixir) everything after this point is designed to work with multiple Elixir "nodes" (see the <a href="an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">Concurrency Primitives section</a>  for an overview of what this means if you're not familiar with the concept of nodes).</p>
-<p>But there's a challenge: Elixir nodes don't automatically get connected together and there is a need to put together some kind of discovery/registration process.  I've written elsewhere about approaches to <a href="clustering-in-elixir.html">clustering in elixir</a>, so I won't go into much detail about that here.  Without going down a CAP<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-2-1-back"><a title="" href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-2-1" class="simple-footnote">1</a></sup> rabbit hole, suffice it to say cluster-membership for the ambient calculus app is done quick and dirty, in the simplest possible way with OpenSLP.</p>
+<p>But there's a challenge: Elixir nodes don't automatically get connected together and there is a need to put together some kind of discovery/registration process.  I've written elsewhere about approaches to <a href="clustering-in-elixir.html">clustering in elixir</a>, so I won't go into much detail about that here.  Without going down a CAP<sup id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-2-1-back"><a title="" class="simple-footnote" href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-2-1">1</a></sup> rabbit hole, suffice it to say cluster-membership for the ambient calculus app is done quick and dirty, in the simplest possible way with OpenSLP.</p>
 <p>:warning: <a href="https://github.com/mattvonrocketstein/ambient-calculus#installing-openslp">You'll have to set that up</a> now if you actually want to follow along at home. :warning:</p>
 <h2>Ambients</h2>
 <p>From the section discussing <a href="an-implementation-of-the-ambient-calculus-in-elixir-part-1.html#Definitions#Definitions">ambient properties</a> in our working definition, it's easily possible to sketch an elixir <a href="http://elixir-lang.org/getting-started/structs.html">Struct</a> that more or less captures the idea of all the state that makes up what an ambient is.</p>
@@ -459,7 +459,7 @@ heredoc            </a>
 <p>An ambient is not just defined by it's static state though.  All this state needs maintenance, and it has to be wrapped in such a way that it can be operated on concurrently.  So far, what is known suggests that the wrapper could be implemented with an <a href="#">Elixir Agent</a>, but exactly because of all the things  I don't know yet I'll hedge my bets, and opt for more flexibility by implementing the wrapper with a <a href="#">GenServer</a> instead.</p>
 <h2>Program Spaces</h2>
 <p>As we've seen from the explanation of the cool diagram from the formal definition, the ambient calculus is full of concurrently executing programs.  In Cardelli's notation that would be <em>P1..Pn</em> as you see below.</p>
-<p><img alt="image" src="img/ambient-calculus-1.png"></p>
+<p><img src="img/ambient-calculus-1.png" alt="image"></p>
 <p>This is where Elixir really begins to shine.  Given the potentially massive number of concurrent programs, together with the fact that the ambients are often nested, implementing these concepts with  <a href="http://elixir-lang.org/docs/stable/elixir/Supervisor.html">Supervisors</a> and <a href="http://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#supervision-trees">Supervision Trees</a> is almost a no-brainer.  In other words, the <strong>program-space</strong> for any given ambient is connected to, but ultimately a separate erlang process from, the ambient itself, and the programs inside the program space are children of the supervisor.</p>
 <p>That's just the beginning of what needs to be considered, though.  Given a program, what does it mean for it to run "inside" of an ambient anyway?  Can programs "return" values?  What happens when programs finish, and what happens if they fail?  Thinking about these things, I'm adding a few criteria that will be required for an Elixir function F to be usable as an ambient "program":</p>
 <ul>
@@ -471,7 +471,7 @@ heredoc            </a>
 <p>Note that since the ambient <strong>namespace</strong> is essentially shared memory and programs can modify it concurrently, programs that want to be well-behaved citizens of their ambients ought to be careful what kind of changes they make, but nothing along lines is strictly enforced.</p>
 <h2>Ambient Topology</h2>
 <p>Ambient topology is superficially very simple.  Since ambients are containers, an ambient may have one or zero parent ambients and any number of child ambients.  This naturally leads to tree-like structures of nested ambients, and like with other kinds of tree structures it is meaningful to talk about "grandparents", "siblings", etc.</p>
-<p>The only thing that begins to complicate this is the potentially distributed nature of our overall Elixir environment.  Sometimes, when we issue a command to nest one ambient inside of another the new parent may well be on a different Elixir Node.  Nevertheless, this operation should be possible and should work exactly the same as if both ambients were underneath the same Elixir Node.</p><ol class="simple-footnotes"><li id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-2-1"> <a href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-2-1-back" class="simple-footnote-back">↩</a></li></ol>
+<p>The only thing that begins to complicate this is the potentially distributed nature of our overall Elixir environment.  Sometimes, when we issue a command to nest one ambient inside of another the new parent may well be on a different Elixir Node.  Nevertheless, this operation should be possible and should work exactly the same as if both ambients were underneath the same Elixir Node.</p><ol class="simple-footnotes"><li id="sf-an-implementation-of-the-ambient-calculus-in-elixir-part-2-1"> <a class="simple-footnote-back" href="#sf-an-implementation-of-the-ambient-calculus-in-elixir-part-2-1-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="series-well">
@@ -495,12 +495,12 @@ heredoc            </a>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">Bitcoin & Ethereum: Executive Summary</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">An Elixir Microservice Architecture</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/math-cs-ds-links.html">Links for Topics in Math and CS</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
     </ul>
 </section>
         </article>

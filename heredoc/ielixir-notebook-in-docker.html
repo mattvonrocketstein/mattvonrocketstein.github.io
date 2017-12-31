@@ -162,11 +162,11 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
                             Links for Elixir</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/cicd-series.html">
-                            CI/CD Series</li>
-                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">
                             Notes for SaltStack</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">
+                            OpenVPN Setup with ansible and terraform on EC2</li>
                         </a>
               </ul>
 
@@ -396,7 +396,7 @@ heredoc            </a>
 <!-- /.post-info -->                <br/>
                 <p></p>
 <h2>The Players</h2>
-<p><a href="http://jupyter.readthedocs.io">Jupyter</a> is the latest incarnation of an interactive notebook project that grew up out IPython, and describing the all the goals and history of that project is waaay outside of the scope of this write-up.  Suffice to say that from the humble beginnings of an interactive shell, Jupyter has become an amazing tool for interactive presentations, education, and data-driven scientific computing amongst other things.  It has support for console and web-based interaction.  Most relevant to the topic presented here: Jupyter is no longer limited to python and has support for multiple language backends as well.<sup id="sf-ielixir-notebook-in-docker-1-back"><a title="Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages" href="#sf-ielixir-notebook-in-docker-1" class="simple-footnote">1</a></sup>.</p>
+<p><a href="http://jupyter.readthedocs.io">Jupyter</a> is the latest incarnation of an interactive notebook project that grew up out IPython, and describing the all the goals and history of that project is waaay outside of the scope of this write-up.  Suffice to say that from the humble beginnings of an interactive shell, Jupyter has become an amazing tool for interactive presentations, education, and data-driven scientific computing amongst other things.  It has support for console and web-based interaction.  Most relevant to the topic presented here: Jupyter is no longer limited to python and has support for multiple language backends as well.<sup id="sf-ielixir-notebook-in-docker-1-back"><a title="Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages" class="simple-footnote" href="#sf-ielixir-notebook-in-docker-1">1</a></sup>.</p>
 <p><a href="https://github.com/pprzetacznik/IElixir">IElixir</a> is a neat piece of work that brings an <a href="http://elixir-lang.org">Elixir language</a> kernel to jupyter.</p>
 <h2>The Goal</h2>
 <p>Jupyter, IElixir, and Elixir itself all require significant installation and configuration, some of it at the system level.  This can be annoying to someone who just wants to try it all out.  <strong>These circumstances (or just the fact that I wanted to experiment) make IElixir a decent candidate for wrapping up inside docker.</strong></p>
@@ -406,7 +406,7 @@ heredoc            </a>
 <li>For better history, it seems there is <a href="https://github.com/elixir-lang/elixir/issues/1516">some</a> <a href="https://github.com/ferd/erlang-history/issues/17">resistance</a> to fixing the underlying problems anywhere but inside erlang core.</li>
 <li>The <a href="https://github.com/elixir-lang/elixir/issues/2967">situation is similar</a> for control-L, the least-surprising shortcut for clearing the screen.</li>
 </ul>
-<p>A work-around at the Jupyter level instead fixes the history annoyance at the same time as adding all the many niceties the Jupyter team has spent a lot of time setting up.<sup id="sf-ielixir-notebook-in-docker-2-back"><a title="Sane editing for multiliners without an IDE?  Yes please." href="#sf-ielixir-notebook-in-docker-2" class="simple-footnote">2</a></sup></p>
+<p>A work-around at the Jupyter level instead fixes the history annoyance at the same time as adding all the many niceties the Jupyter team has spent a lot of time setting up.<sup id="sf-ielixir-notebook-in-docker-2-back"><a title="Sane editing for multiliners without an IDE?  Yes please." class="simple-footnote" href="#sf-ielixir-notebook-in-docker-2">2</a></sup></p>
 <h2>Prior Art</h2>
 <p>The Jupyter project actually has <a href="https://github.com/jupyter/docker-stacks">official docker stacks</a> in a few different flavors, and those might be more performant and minimal than what I'll be building here.  I'm not using those as a docker base image, partly because I wanted to see what it would look like to build everything from scratch with ansible.</p>
 <p>Actually, the procedure I'm going to describe here is basically just a more specific use-case for what I've described in the <a href="provisioning-docker-with-ansible.html">Provisioning Docker with Ansible</a> writeup.  That article takes things slower, but here I'll get straight to the point.  You might like to read it if you want more explanation of some of these steps.</p>
@@ -484,21 +484,21 @@ $ docker run <span class="se">\</span>
 </pre></div>
 
 
-<p>After you've run the notebook command above, try taking a look at <a href="http://localhost:8888/notebooks/example.ipynb">http://localhost:8888/notebooks/example.ipynb</a> which ought to show the interactive version of <a href="https://github.com/pprzetacznik/IElixir/blob/master/resources/example.ipynb">this example notebook</a></p><ol class="simple-footnotes"><li id="sf-ielixir-notebook-in-docker-1">Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages <a href="#sf-ielixir-notebook-in-docker-1-back" class="simple-footnote-back">↩</a></li><li id="sf-ielixir-notebook-in-docker-2">Sane editing for multiliners without an IDE?  Yes please. <a href="#sf-ielixir-notebook-in-docker-2-back" class="simple-footnote-back">↩</a></li></ol>
+<p>After you've run the notebook command above, try taking a look at <a href="http://localhost:8888/notebooks/example.ipynb">http://localhost:8888/notebooks/example.ipynb</a> which ought to show the interactive version of <a href="https://github.com/pprzetacznik/IElixir/blob/master/resources/example.ipynb">this example notebook</a></p><ol class="simple-footnotes"><li id="sf-ielixir-notebook-in-docker-1">Many language backends are implemented, but few are official.  See https://github.com/ipython/ipython/wiki/IPython-kernels-for-other-languages <a class="simple-footnote-back" href="#sf-ielixir-notebook-in-docker-1-back">↩</a></li><li id="sf-ielixir-notebook-in-docker-2">Sane editing for multiliners without an IDE?  Yes please. <a class="simple-footnote-back" href="#sf-ielixir-notebook-in-docker-2-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/data-science-stack.html">A allspark-based stack for data science projects</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/clustering-in-elixir.html">Clustering in Elixir</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-boilerplate.html">Elixir boilerplate</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">Notes for SaltStack</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-examples-and-patterns.html">Elixir Examples and Patterns</a></li>
     </ul>
 </section>
         </article>

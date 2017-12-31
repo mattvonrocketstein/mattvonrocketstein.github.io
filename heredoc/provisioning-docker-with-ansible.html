@@ -162,11 +162,11 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
                             Links for Elixir</li>
                         </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/cicd-series.html">
-                            CI/CD Series</li>
-                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">
                             Notes for SaltStack</li>
+                        </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">
+                            OpenVPN Setup with ansible and terraform on EC2</li>
                         </a>
               </ul>
 
@@ -573,7 +573,7 @@ $ docker run --rm --name <span class="nv">$CNAME</span> -t -i <span class="nv">$
 </pre></div>
 
 
-<p>Note that the last "docker run" invocation above differs in some important ways from the previous ones.  Before when we were using ansible, used a phusion-baseimage "/sbin/my_init" style call.  Because we did NOT use that here, ssh is not available<sup id="sf-provisioning-docker-with-ansible-1-back"><a title="..so the docker filesystem might be fat, but it's not any more insecure than usual" href="#sf-provisioning-docker-with-ansible-1" class="simple-footnote">1</a></sup>.  Also here, the "--rm" option ensures a cleanup of the container filesystem after exit.</p>
+<p>Note that the last "docker run" invocation above differs in some important ways from the previous ones.  Before when we were using ansible, used a phusion-baseimage "/sbin/my_init" style call.  Because we did NOT use that here, ssh is not available<sup id="sf-provisioning-docker-with-ansible-1-back"><a title="..so the docker filesystem might be fat, but it's not any more insecure than usual" class="simple-footnote" href="#sf-provisioning-docker-with-ansible-1">1</a></sup>.  Also here, the "--rm" option ensures a cleanup of the container filesystem after exit.</p>
 <h2>Cleanup</h2>
 <p>Just in case you don't want your system cluttered with boondoggles.</p>
 <div class="highlight"><pre><span></span><span class="c1"># Cleanup the original image and container</span>
@@ -581,21 +581,21 @@ $ docker rmi --force boondoggle/i1
 $ docker rmi --force boondoggle/i2
 $ docker rm --force boondoggle-c1
 $ docker rm --force boondoggle-c2
-</pre></div><ol class="simple-footnotes"><li id="sf-provisioning-docker-with-ansible-1">..so the docker filesystem might be <em>fat</em>, but it's not any more insecure than usual <a href="#sf-provisioning-docker-with-ansible-1-back" class="simple-footnote-back">↩</a></li></ol>
+</pre></div><ol class="simple-footnotes"><li id="sf-provisioning-docker-with-ansible-1">..so the docker filesystem might be <em>fat</em>, but it's not any more insecure than usual <a class="simple-footnote-back" href="#sf-provisioning-docker-with-ansible-1-back">↩</a></li></ol>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">OpenVPN Setup with ansible and terraform on EC2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/pi-elixir.html">How to Dockerize Elixir for Raspberry Pi / ARM</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">Notes for SaltStack</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">OpenVPN Setup with ansible and terraform on EC2</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/jenkins-backups.html">Jenkins backups</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/data-science-stack.html">A allspark-based stack for data science projects</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
     </ul>
 </section>
         </article>
