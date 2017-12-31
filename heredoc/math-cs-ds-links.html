@@ -162,11 +162,11 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
                             Links for Elixir</li>
                         </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/cicd-series.html">
+                            CI/CD Series</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">
                             Notes for SaltStack</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">
-                            OpenVPN Setup with ansible and terraform on EC2</li>
                         </a>
               </ul>
 
@@ -201,6 +201,11 @@ heredoc            </a>
                     <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/deprecated.html">
+                            deprecated
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -389,8 +394,10 @@ heredoc            </a>
   </table>
 </footer>
 <!-- /.post-info -->                <br/>
-                <h3>Computer Science &amp; Software Engineering</h3>
-<h3>Networking</h3>
+                <h2>Unsorted</h2>
+<p>naivecoin: https://lhartikk.github.io/
+http://www.onurguzel.com/supervisord-restarting-and-reloading/</p>
+<h2>Networking</h2>
 <ul>
 <li><a href="https://blog.cloudflare.com/a-brief-anycast-primer/">anycast primer</a></li>
 <li><a href="https://github.com/Stouts/Stouts.openvpn">server side openvpn</a> for ubuntu, with ansible</li>
@@ -398,7 +405,7 @@ heredoc            </a>
 <li><a href="https://openvpn.net/index.php/open-source/documentation/howto.html#redirect">redirecting all traffic through openvpn</a></li>
 <li><a href="https://blog.ambar.cloud/tutorial-set-up-openvpn-with-docker-compose/">openvpn with docker</a></li>
 </ul>
-<h3>AI &amp; Proglangs</h3>
+<h2>AI &amp; Proglangs</h2>
 <ul>
 <li><a href="http://homepages.inf.ed.ac.uk/mic/Skeletons/">algorithmic skeletons mailing list</a></li>
 <li><a href="https://lists.cs.umbc.edu/mailman/listinfo/agents">agents mailing list</a></li>
@@ -409,7 +416,7 @@ heredoc            </a>
 <li><a href="https://moalquraishi.wordpress.com/2015/03/29/the-state-of-probabilistic-programming/">overview of probablistic programming</a></li>
 <li><a href="https://docs.python.org/3/library/typing.html">typing in python 3</a></li>
 </ul>
-<h3>Architecture, Microservices &amp; Distributed Architectures</h3>
+<h2>Architecture, Infrastructure, Microservices</h2>
 <ul>
 <li><a href="https://sookocheff.com/post/kafka/kafka-in-a-nutshell/">kafka architecture in a nutshell</a>, covering basics of offsets, producers, consumers, leaders, replication, etc</li>
 <li><a href="https://github.com/zoidbergwill/docker-compose-kafka">kafka ensemble in docker-compose</a></li>
@@ -418,22 +425,37 @@ heredoc            </a>
 <li><a href="https://github.com/TheNewNormal/kube-solo-osx">kube-solo</a> kubernetes for your osx laptop with minimal setup (alternative to  <a href="https://kubernetes.io/docs/getting-started-guides/minikube/">minikube</a>)</li>
 <li><a href="https://platform9.com/blog/kubernetes-vs-mesos-marathon/">kubernetes vs meson/marathon</a></li>
 </ul>
-<h3>DevOps</h3>
+<h2>DevOps</h2>
 <ul>
+<li><a href="http://terraforming.dtan4.net/">terraforming gem</a> imports existing resources into terraform</li>
+<li><a href="https://medium.com/@petey5000/petes-terraform-tips-694a3c4c5169">terraform tips</a>: large and practical collection of expert advice for terraforming in anger</li>
 <li><a href="https://github.com/ansible/ansible/blob/devel/lib/ansible/config/data/config.yml">ansible parameters</a>, straight from the horses mouth</li>
+<li><a href="https://molecule.readthedocs.io/en/latest/">molecule</a> ansible testing to help verify OS agnostic playbooks</li>
+<li><a href="http://kitchen.ci/index.html">kitchen</a> infrastructure testing for terraform and other things</li>
+<li><a href="https://github.com/ietf-wg-acme/acme/">acme</a>: automatic certificate management environment</li>
+<li><a href="https://github.com/prometheus/prometheus/">prometheus</a> monitoring system</li>
 </ul>
-<h3>Ethics</h3>
+<p><em>CAPS things</em></p>
+<ul>
+<li><a href="http://codeheaven.io/15-things-you-should-know-about-ansible/">15 things you should know about ansible ansible</a></li>
+</ul>
+<p><em>Containers, virtualization etc</em></p>
+<ul>
+<li><a href="https://docs.docker.com/machine/install-machine/">docker machine</a></li>
+<li><a href="https://muehe.org/posts/switching-docker-from-aufs-to-devicemapper/">switching docker from aufs to devicemapper</a></li>
+</ul>
+<h2>Ethics</h2>
 <ul>
 <li><a href="http://www.businessinsider.com/programmers-confess-unethical-illegal-tasks-asked-of-them-2016-11">one</a></li>
 <li><a href="https://www.fsf.org/campaigns/priority-projects/priority-projects/?set_language=de">high priority free software projects</a></li>
 </ul>
-<h3>Papers</h3>
+<h2>Papers</h2>
 <ul>
 <li><a href="https://llvm.org/pubs/2009-06-MansinghkaThesis.html">natively probablistic computation</a></li>
 <li><a href="http://lucacardelli.name/Papers/MobileAmbients.A4.pdf">mobile computational ambients</a></li>
 <li><a href="https://bitcoin.org/bitcoin.pdf">original bitcoin paper</a></li>
 </ul>
-<h3>Data Science</h3>
+<h2>Data Science</h2>
 <ul>
 <li>the <a href="https://github.com/jupyter/docker-stacks/tree/master/all-spark-notebook">all spark notebook</a>, a jupyter/docker-compose setup for data science, including support for spark/scala/R</li>
 <li>a <a href="https://cookiecutter.readthedocs.io/">cookie-cutter</a> based <a href="http://drivendata.github.io/cookiecutter-data-science/#directory-structure">template</a> for data science projects</li>
@@ -447,8 +469,7 @@ heredoc            </a>
 <li><a href="https://en.wikipedia.org/wiki/Free_will_theorem">conway's free will theorem</a></li>
 <li><a href="https://arxiv.org/abs/1608.08225">a physical basis for the success of deep learning</a></li>
 </ul>
-<h2>Math</h2>
-<h3>General</h3>
+<h2>Math-General</h2>
 <ul>
 <li><a href="http://www.scottaaronson.com/writings/bignumbers.html">aaronson on big numbers</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Kolmogorov%27s_zero%E2%80%93one_law">Kolmogorov zero one law</a></li>
@@ -457,11 +478,11 @@ heredoc            </a>
 </ul>
 </li>
 </ul>
-<h3>Philosophy of Math</h3>
+<h2>Math (Philosophy of)</h2>
 <ul>
 <li><a href="http://www.ams.org/journals/bull/0000-000-00/S0273-0979-2016-01556-4/S0273-0979-2016-01556-4.pdf">constructive mathematics</a></li>
 </ul>
-<h3>Fun</h3>
+<h2>Math (Fun)</h2>
 <ul>
 <li><a href="https://www.reddit.com/r/math/comments/59o84v/do_you_know_any_good_mathematics_fiction_stories/">thread about math in fiction</a></li>
 <li>the amazing self-referential <a href="http://en.wikipedia.org/wiki/Kolakoski_sequence">kolakoski sequence</a></li>
@@ -471,14 +492,14 @@ heredoc            </a>
 <section class="well" id="related-posts-well">
     <ul>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/bitcoin-ethereum-executive-summary.html">Bitcoin & Ethereum: Executive Summary</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-3.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 3</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-2.html">An implementation of the Ambient Calculus in Elixir: Part 2</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/an-implementation-of-the-ambient-calculus-in-elixir-part-1.html">An implementation of the Ambient Calculus in Elixir: Part 1</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/data-science-stack.html">A allspark-based stack for data science projects</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-2-exploring-the-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 2 (Exploring the Data)</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">Advocacy for Polyglot Programming</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">Links for Elixir</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/exploring-wikivoyage-data-with-neo4j-and-cypher-part-1-loading-data.html">Exploring WikiVoyage data with Neo4j and Cypher: Part 1 (Loading Data)</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/polyglot-advocacy.html">Advocacy for Polyglot Programming</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/devops-links.html">Links for Topics in Devops</a></li>
     </ul>
 </section>

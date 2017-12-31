@@ -161,11 +161,11 @@ heredoc            </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/elixir-links.html">
                             Links for Elixir</li>
                         </a>
+                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/cicd-series.html">
+                            CI/CD Series</li>
+                        </a>
                         <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/salt-notes.html">
                             Notes for SaltStack</li>
-                        </a>
-                        <li class=li-choice><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">
-                            OpenVPN Setup with ansible and terraform on EC2</li>
                         </a>
               </ul>
 
@@ -200,6 +200,11 @@ heredoc            </a>
                     <li class="list-group-item tag-1">
                         <a href="https://mattvonrocketstein.github.io/heredoc/tag/data-science.html">
                             data-science
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
+                        <a href="https://mattvonrocketstein.github.io/heredoc/tag/deprecated.html">
+                            deprecated
                         </a>
                     </li>
                     <li class="list-group-item tag-1">
@@ -407,19 +412,11 @@ heredoc            </a>
 <h3>State</h3>
 <p>References to <a href="https://docs.saltstack.com/en/latest/topics/tutorials/starting_states.html">state, state trees, and .sls</a> refer to YAML arranged in a folder hierarchy, similar to the Pillar layout.  These files are stored on the Salt master.  Basically <code>.sls</code> files are the core of actual configuration management, similar to ansible playbooks.  The state tree may also contain raw files to be provisioned to hosts, etc.  As in Ansible, raw YAML (a data structure) becomes program-like using inclusion/extension, and as in Ansible, Jinja is used under the hood to render templated data.</p>
 <h2>Advanced</h2>
+<p>.. placeholder ..</p>
 <h3>Eventing</h3>
 <p>.. placeholder re: the <a href="https://docs.saltstack.com/en/2015.8/topics/event/index.html">event system</a> ..</p>
-<h2>Site Questions</h2>
-<p>Short list of intro questions that ought to be relevant for most site-specific installations/use-cases.</p>
-<ul>
-<li>Using master or masterless?<ul>
-<li>If master, where is the master, how does it deal with inside/outside the VPN or VPC?</li>
-</ul>
-</li>
-<li>Default transport (zeromq)?</li>
-</ul>
 <h2>General Questions</h2>
-<p>Unanswered Salt-specific questions on design, architecture, and implementation.</p>
+<p>Unanswered Salt-specific questions on design, architecture, and implementation. Site-specific questions are in the next section.</p>
 <ul>
 <li>
 <p>The difference between Pillar and the state tree seems to simply be just that Pillar is for config storage, and state tree refers to file storage.  Is there anything more subtle about this situation?</p>
@@ -439,6 +436,15 @@ heredoc            </a>
 <li>
 <p>No option for intelligent routing?  <a href="https://docs.saltstack.com/en/latest/topics/development/architecture.html#job-flow">The job flow docs</a> state that all minions receive all commands from master, then check whether the command is intended for them.  (Questions of routing aside, encryption here does ensure we don't leak secrets to evil minions)</p>
 </li>
+</ul>
+<h2>Site Questions</h2>
+<p>Short list of intro questions that ought to be relevant for most site-specific installations/use-cases.</p>
+<ul>
+<li>Using master or masterless?<ul>
+<li>If master, where is the master, how does it deal with inside/outside the VPN or VPC?</li>
+</ul>
+</li>
+<li>Default transport (zeromq)?</li>
 </ul>
 <h2>Compare and Contrast</h2>
 <h3>Architecture</h3>
@@ -463,16 +469,16 @@ heredoc            </a>
             <!-- /.entry-content -->
 <section class="well" id="related-posts-well">
     <ul>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/datadog-event-publishing.html">Datadog event publishing</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-release-automation.html">Python release automation</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/ansible-role.html">The missing "ansible-role" command</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-class-as-module.html">Python Class as Module</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-dry-versioning.html">DRY versioning for Python packages</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/penrose-python-openscad.html">Penrose Tilings & Solid Geometry</a></li>
-        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">An Elixir Microservice Architecture</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/python-multimethods.html">Python method semantics</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/openvpn-ubuntu-ansible-terraform.html">OpenVPN Setup with ansible and terraform on EC2</a></li>
         <li><a href="https://mattvonrocketstein.github.io/heredoc/neo4j-vagrant-ansible.html">Setting up Neo4j with Vagrant and Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/elixir-architecture.html">An Elixir Microservice Architecture</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/ielixir-notebook-in-docker.html">IElixir Notebook in Docker</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/provisioning-docker-with-ansible.html">How to provision Docker with Ansible</a></li>
+        <li><a href="https://mattvonrocketstein.github.io/heredoc/zoo-cm.html">Zoo: configuration management for the random hardware I own and experiment with</a></li>
     </ul>
 </section>
         </article>
